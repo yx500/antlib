@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value=".\antlib_gdp.lib"/>
+    <OBJFILES value="..\tmp\Col.obj ..\tmp\Common.obj ..\tmp\Comp.obj ..\tmp\Elem.obj 
+      ..\tmp\F.obj ..\tmp\Gorl.obj ..\tmp\Line.obj ..\tmp\Polig.obj 
+      ..\tmp\Scrin.obj ..\tmp\SIZE.obj ..\tmp\Stan.obj ..\tmp\Static.obj 
+      ..\tmp\Str_fun.obj ..\tmp\Strel.obj ..\tmp\Vatempl.obj ..\tmp\uExtElem.obj 
+      ..\tmp\YchParams.obj ..\tmp\actools.obj ..\tmp\ACom_V.obj 
+      ..\tmp\Y_STREL.obj ..\tmp\uEXD.obj ..\tmp\DataBaza.obj ..\tmp\out_num.obj 
+      ..\tmp\Ways.obj ..\tmp\Svet.obj ..\tmp\Lamps.obj ..\tmp\propmap.obj 
+      ..\tmp\BD_Comp.obj ..\tmp\BD_Svet.obj ..\tmp\Impuls.obj 
+      ..\tmp\BD_Strel.obj ..\tmp\BD_Way.obj ..\tmp\BD_Blok.obj 
+      ..\tmp\BD_SPECEL.obj ..\tmp\BD_Static.obj ..\tmp\Marshrut.obj 
+      ..\tmp\uParString.obj ..\tmp\LampExtDraw.obj ..\tmp\EnergUnit.obj"/>
+    <RESFILES value=""/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES)"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value=""/>
+    <PACKAGES value=""/>
+    <PATHCPP value=".;Comp;Ext"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <LINKER value="TLib"/>
+    <USERDEFINES value="_DEBUG;USING_ANT_EXTENSION_LIB;STRICT;_USE_WINGDIPLUS;"/>
+    <SYSDEFINES value="NO_STRICT;_RTLDLL"/>
+    <MAINSOURCE value="antlib_gdp.bpf"/>
+    <INCLUDEPATH value="&quot;D:\Program Files\Borland\CBuilder6\Projects&quot;;Bgi;.;Ext;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl;..\vlib"/>
+    <LIBPATH value="&quot;D:\Program Files\Borland\CBuilder6\Projects&quot;;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par"/>
+    <LISTFILE value=""/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I&quot;D:\Program Files\Borland\CBuilder6\Projects&quot; -IBgi -I. -IExt -ISPY 
+      -IComp -I$(BCB)\include -I$(BCB)\include\vcl -I..\vlib -src_suffix cpp 
+      -D_DEBUG -DUSING_ANT_EXTENSION_LIB -DSTRICT -D_USE_WINGDIPLUS -boa"/>
+    <CFLAG1 value="-Od -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 -5 -b- -k -y -v -vi- 
+      -c -tW -tWM"/>
+    <PFLAGS value="-N2..\tmp -N0..\tmp -$Y+ -$W -$O- -$A8 -v -JPHNE -M"/>
+    <AFLAGS value="/mx /w2 /zi"/>
+    <LFLAGS value="/P128"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="$(OBJFILES)"/>
+    <ALLLIB value=""/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="antlib_gdp.bpf" FORMNAME="" UNITNAME="antlib_gdp" CONTAINERID="BPF" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\Col.cpp" FORMNAME="" UNITNAME="Col" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\Common.cpp" FORMNAME="" UNITNAME="Common" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\Comp.cpp" FORMNAME="" UNITNAME="Comp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\Elem.cpp" FORMNAME="" UNITNAME="Elem" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\F.cpp" FORMNAME="" UNITNAME="F" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\Gorl.cpp" FORMNAME="" UNITNAME="Gorl" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\Line.cpp" FORMNAME="" UNITNAME="Line" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\Polig.cpp" FORMNAME="" UNITNAME="Polig" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\Scrin.cpp" FORMNAME="" UNITNAME="Scrin" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\SIZE.cpp" FORMNAME="" UNITNAME="SIZE" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\Stan.cpp" FORMNAME="" UNITNAME="Stan" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\Static.cpp" FORMNAME="" UNITNAME="Static" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\Str_fun.cpp" FORMNAME="" UNITNAME="Str_fun" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\Strel.cpp" FORMNAME="" UNITNAME="Strel" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\Vatempl.cpp" FORMNAME="" UNITNAME="Vatempl" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\uExtElem.cpp" FORMNAME="" UNITNAME="uExtElem" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\YchParams.cpp" FORMNAME="" UNITNAME="YchParams" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Ext\actools.cpp" FORMNAME="" UNITNAME="actools" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\ACom_V.cpp" FORMNAME="" UNITNAME="ACom_V" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\Y_STREL.cpp" FORMNAME="" UNITNAME="Y_STREL" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Ext\uEXD.cpp" FORMNAME="" UNITNAME="uEXD" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\DataBaza.cpp" FORMNAME="" UNITNAME="DataBaza" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\out_num.cpp" FORMNAME="" UNITNAME="out_num" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\Ways.cpp" FORMNAME="" UNITNAME="Ways" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\Svet.cpp" FORMNAME="" UNITNAME="Svet" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\Lamps.cpp" FORMNAME="" UNITNAME="Lamps" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Ext\propmap.cpp" FORMNAME="" UNITNAME="propmap" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\BD_Comp.cpp" FORMNAME="" UNITNAME="BD_Comp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\BD_Svet.cpp" FORMNAME="" UNITNAME="BD_Svet" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\Impuls.cpp" FORMNAME="" UNITNAME="Impuls" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\BD_Strel.cpp" FORMNAME="" UNITNAME="BD_Strel" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\BD_Way.cpp" FORMNAME="" UNITNAME="BD_Way" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\BD_Blok.cpp" FORMNAME="" UNITNAME="BD_Blok" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\BD_SPECEL.cpp" FORMNAME="" UNITNAME="BD_SPECEL" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\BD_Static.cpp" FORMNAME="" UNITNAME="BD_Static" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\Marshrut.cpp" FORMNAME="" UNITNAME="Marshrut" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Ext\uParString.cpp" FORMNAME="" UNITNAME="uParString" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\LampExtDraw.cpp" FORMNAME="" UNITNAME="LampExtDraw" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Comp\EnergUnit.cpp" FORMNAME="" UNITNAME="EnergUnit" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=0
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=1049
+CodePage=1251
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=6
+Item0=D:\Program Files\Borland\CBuilder6\Projects;Bgi;.;Ext;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl;..\vlib
+Item1=Bgi;.;Ext;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl;..\vlib
+Item2=.;Ext;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl;..\vlib;
+Item3=Ext;..\vlib;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl
+Item4=..\vlib;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl
+Item5=VladSrc;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=7
+Item0=D:\Program Files\Borland\CBuilder6\Projects;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item1=Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item2=D:\Program Files\Borland\CBuilder6\Projects;Bgi;Ext;SPY;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item3=Bgi;Ext;SPY;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item4=Ext;SPY;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item5=SPY;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item6=VladSrc;SPY;Comp;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=8
+Item0=_DEBUG;USING_ANT_EXTENSION_LIB;STRICT;_USE_WINGDIPLUS;
+Item1=_DEBUG;USING_ANT_EXTENSION_LIB;STRICT;
+Item2=_DEBUG;USING_ANT_EXTENSION_LIB;
+Item3=_DEBUG;USING_ANT_EXTENSION_LIB;USE_BOOST;
+Item4=_DEBUG
+Item5=_DEBUG;
+Item6=_DEBUG;ACOMPDLLMAKE;
+Item7=BGIPALETTE;YU_COORD;_DEBUG
+
+[HistoryLists\hlIntOutputDir]
+Count=2
+Item0=..\tmp
+Item1=../tmp
+
+[HistoryLists\hlFinalOutputDir]
+Count=3
+Item0=.
+Item1=./\
+Item2=./
+
+[HistoryLists\hlTlibPageSize]
+Count=7
+Item0=0x0080
+Item1=0x0040
+Item2=128
+Item3=64
+Item4=0x0020
+Item5=32
+Item6=0x0010
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+  </IDEOPTIONS>
+</PROJECT>

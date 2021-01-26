@@ -1,0 +1,97 @@
+/****************************************************************************
+
+produced by Borland Resource Workshop
+*****************************************************************************/
+
+1     EMF EMF\1_l1.emf
+2     EMF EMF\2_l2.emf
+//3     EMF EMF\3_LampH_On.emf
+//4     EMF EMF\4_LampV_On.emf
+3     EMF EMF\1_l1.emf
+4     EMF EMF\2_l2.emf
+
+
+5     EMF EMF\5_l3.emf
+6     EMF EMF\6_l4.emf
+//7     EMF EMF\7_LampH_On_B.emf
+//8     EMF EMF\8_LampV_On_B.emf
+7     EMF EMF\5_l3.emf
+8     EMF EMF\6_l4.emf
+
+9     EMF EMF\9_LampH_33.emf
+10    EMF EMF\10_LampV_33.emf
+11    EMF EMF\11_LampH_0.emf
+12    EMF EMF\12_LampV_0.emf
+13    EMF EMF\13_LampH_KL.emf
+14    EMF EMF\14_LampV_KL.emf
+
+21    EMF EMF\21_LampBox1.emf
+22    EMF EMF\22_LampBox2.emf
+23    EMF EMF\23_LampBox3.emf
+
+31    EMF EMF\31_LampSH1.emf
+32    EMF EMF\32_LampSH2.emf
+33    EMF EMF\33_LampSH3.emf
+34    EMF EMF\34_LampSH4.emf
+35    EMF EMF\35_LampSH5.emf
+36    EMF EMF\36_LampSH6.emf
+
+41    EMF EMF\41_LampWarn1.emf
+42    EMF EMF\42_Warn_People.emf
+43    EMF EMF\43_Warn_ZEMLA.emf
+
+50    EMF EMF\50_LampR1.emf
+51    EMF EMF\51_LampR.emf
+52    EMF EMF\52_LampR5.emf
+55    EMF EMF\50_LampR1.emf
+56    EMF EMF\56_LampR3.emf
+57    EMF EMF\52_LampR5.emf
+60    EMF EMF\50_LampR1.emf
+61    EMF EMF\61_LampR4.emf
+62    EMF EMF\52_LampR5.emf
+
+65    EMF EMF\65_Lamp3r.emf
+66    EMF EMF\66_Lamp3r1.emf
+67    EMF EMF\67_Lamp3r1.emf
+
+90    EMF EMF\90_Зам0.emf
+91    EMF EMF\91_Зам1.emf
+92    EMF EMF\92_Зам2.emf
+93    EMF EMF\93_Зам3.emf
+
+101   EMF EMF\101_LampTU.emf
+102   EMF EMF\102_Selected.emf
+
+111   EMF EMF\111_ПЗ.emf
+112   EMF EMF\112_ЭЦ.emf
+
+121   EMF EMF\121_Ф.emf
+122   EMF EMF\122_Ф.emf
+123   EMF EMF\123_Ф.emf
+124   EMF EMF\124_Ф.emf
+125   EMF EMF\125_Ф.emf
+
+131   EMF EMF\131_TPL0.emf
+132   EMF EMF\132_TPL1.emf
+133   EMF EMF\133_TPL2.emf
+134   EMF EMF\134_TPL3.emf
+135   EMF EMF\135_TPL4.emf
+
+
+136   EMF EMF\136_TPL1.emf
+137   EMF EMF\137_TPL2.emf
+138   EMF EMF\138_TPL3.emf
+139   EMF EMF\139_TPL4.emf
+
+
+1001   BMP EMF\B_8x8_1.bmp
+
+
+IMCH    EMF EMF\IMCH.emf
+IMLH    EMF EMF\IMLH.emf
+IMRH    EMF EMF\IMRH.emf
+
+IMCH_1    EMF EMF\IMCH_1.emf
+IMLH_1    EMF EMF\IMLH_1.emf
+IMRH_1    EMF EMF\IMRH_1.emf
+

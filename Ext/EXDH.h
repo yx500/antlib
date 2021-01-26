@@ -1,0 +1,136 @@
+//---------------------------------------------------------------------------
+
+#ifndef EXDHH
+#define EXDHH
+//---------------------------------------------------------------------------
+
+#include <pshpack1.h>
+
+/*
+struct tTNCell{
+  __int16 T;
+  __int16 Sig;
+  __int16 NS;
+  __int16 NF;
+  __int16 xESR;
+};
+
+struct TTNData{
+  __int16 ID_OBJ;
+  __int16 IMPULS;
+  __int16 ID_CHAIN;
+  __int16 NUMBER;
+  __int16 ESR;
+};
+*/
+struct TIUTrainPriznak {
+    unsigned  Razr: 1;                 //разрядный
+    unsigned  Oversize: 1;             //негабаритный
+    unsigned  Theavy: 1;               //тяжеловесный
+    unsigned  Long: 1;                 //длинносоставный
+    unsigned  United: 1;               //соединенный
+    unsigned  SpeedLimit: 1;           //с ограничением скорости
+    unsigned  WithTolkach: 1;          //с толкачем
+    unsigned  ALSN_RS_Error: 1;        //неисправные АЛСН или РС
+};
+
+struct TTrainInfo  {
+    unsigned __int16 TrainNumber;             // 2 байта - номер поезда в ГИД.
+    unsigned __int8  TrainColor;              // 1 байт  - цвет, которым отображается в ГИД нитка поезда с этим номером.
+    TIUTrainPriznak TrainPriznak;    // 1 байт - спец. признаки поезда
+    unsigned __int8  TrainLength;             // 1 байт - условная длина поезда
+    unsigned __int16 TrainWeight;             // 2 байта - вес поезда (с тарой)
+    unsigned __int16 TrainIndex[3];           // 6 байт - индекс поезда (ст. формирования - 2 байта,номер состава - 2 байта , ст. назначения - 2 байта)
+    unsigned __int16 LocomSeries;             // 2 байта - серия головного локомотива
+    unsigned __int8  LocomNumber[3];          // 3 байта - номер головной секции локомотива
+    unsigned __int8  Reserv2[7];              // 7 байт - резерв
+};
+
+struct TKroshTrainInfo  {
+    int offsetimp;
+    char channame[12];
+    TTrainInfo TrainInfo;
+};
+const KrPackCnt = 499 / sizeof(TKroshTrainInfo);
+struct TKrPack {
+    TKroshTrainInfo KTI[KrPackCnt];
+};
+
+
+
+struct TMKMarshItem {
+    unsigned __int32 id_mar;  // идентификатор маршрута в БД APilot (marsh_nsi)
+    unsigned __int32 numcom;
+    __int32          state_mk;      // состояние маршрута ()
+    __int32          state_mk_ex;   // состояние маршрута ()
+};
+
+const MKMarshPackCnt = 480 / sizeof(TMKMarshItem);
+struct TMKMarshAll {
+    unsigned __int32 esr;
+    int              cnt;
+    TMKMarshItem     M[MKMarshPackCnt];
+};
+
+enum state_mk {
+    mk_state_Ready = 1, //    Готов к установке   Маршрут не занят, враждебного маршрута нет (не устанавливается)
+    mk_state_Done =  2, //    Установлен  Установлен,  замкнут, не занят, светофор открыт
+    mk_state_Busy = -1, //    Занят для установки Маршрут занят или установлен (устанавливается) враждебный маршрут
+    mk_state_Close = -2  //    Закрыт  В "marsh_nsi" поле Close=1
+};
+enum state_mk_ex {
+    mk_state_ex_Nothing = 0, //    Ничего
+    mk_state_ex_Unknown = 1, //    Не определено   Отсутствуют (сбой) сигналы ТС, потеря контроля стрелки
+    mk_state_ex_Making = 2, //    Устанавливается Поймана команда ТУ для установки
+    mk_state_ex_AUmode = 3, //   Активен сигнал РУ или СУ
+    mk_state_ex_DirBusy = 4 //   Занят перегон  Для маршрута отправления замкнуто встречное направление
+};
+
+
+
+
+struct TAVMarshItem {
+    unsigned __int32 id;      // идентификатор маршрута в БД APilot (marsh_nsi)
+    unsigned __int32 id_zak;  // идентификатор маршрута в БД APilot (marsh_nsi)
+    unsigned __int32 id_mar;  // идентификатор маршрута в БД APilot (marsh_nsi)
+    unsigned __int32 numcom;
+    __int32          state_av;      // состояние маршрута ()
+    __int32          state_av_ex;   // состояние маршрута ()
+    TDateTime           time_op;
+    TDateTime           time_tu;
+    unsigned __int32 num_train;
+
+};
+
+const AVMarshPackCnt = 420 / sizeof(TAVMarshItem);
+
+const izNO = 0; // Нечетное отправление    < . . .
+const izCP = 1; // четное прием            . > . .
+const izNP = 2; // Нечетное прием          . . < .
+const izCO = 3; // четное отправление      . . . >
+
+struct TAVStanInfo {
+    unsigned __int32 esr;
+    unsigned __int32 AV_DU;
+    char     dnc_guid[40];
+    unsigned __int16 z_cnt[4];
+    unsigned __int16 cnt;
+    TAVMarshItem     M[AVMarshPackCnt];
+};
+
+
+struct TElemCheckState {
+    unsigned __int16 id_obj;
+    __int8 id_check;
+    __int8 state;
+};
+const ElemStatePackCnt = 480 / sizeof(TElemCheckState);
+struct TEIPack {
+    TElemCheckState ES[ElemStatePackCnt];
+};
+
+
+
+#include <poppack.h>
+
+#endif
