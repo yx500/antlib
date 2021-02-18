@@ -7,6 +7,7 @@
 double TPVal(unsigned __int16 w);
 
 struct t_Descr;
+struct t_NewDescr;
 bool  GetZamData(int AddrLKSlot,
                  int addr,
                  int &V,       //Скорость
@@ -35,6 +36,9 @@ t_Descr*  GetDescr_imp(int *start,       // Местоположение Головы / жопы отцепа
 t_Descr*  GetDescr_imp1(int start,       // Местоположение Головы / жопы отцепа
                        int se,          // start=0/end=1
                        bool end_slg_inc
+                      );
+t_NewDescr*  GetDescr_imp1_all(int start,       // Местоположение Головы / жопы отцепа
+                       int &cnt
                       );
 
 

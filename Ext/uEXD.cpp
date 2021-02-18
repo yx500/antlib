@@ -71,14 +71,17 @@ TTrainInfo * __fastcall  MakeTrainInfo(void * TNdata, int Ver)
         }
 
         if (Ver == 3) {
-            t_Descr * DD;
-            DD = (t_Descr *)TNdata;
+            t_NewDescr * DD;
+            DD = (t_NewDescr *)TNdata;
 
-            _TRINF.TrainNumber = DD->num;
-            _TRINF.TrainWeight = DD->ves;
+            _TRINF.TrainNumber = DD->D.num;
+            _TRINF.TrainWeight = DD->D.ves;
             _TRINF.TrainColor = 15;
-            if (DD->err)
+            if (DD->D.err)
                 _TRINF.TrainColor = 246;
+            if (DD->E.sz_struct>=sizeof(DD->E)) {
+                _TRINF.Reserv2[0]=DD->E.STATE_D_ORDER_RC;
+            }
             return &_TRINF;
         }
 

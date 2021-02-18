@@ -42,7 +42,7 @@ public:
     tGRC0();
 };
 
-enum tG_Strel_Y_Imp_Pr {i_prp = 0, i_prm = 1, i_sk = 2, i_m = 3, i_ipd = 4, i_ped1 = 5, i_ped2 = 6};
+enum tG_Strel_Y_Imp_Pr {i_prp = 0, i_prm = 1, i_sk = 2, i_m = 3, i_ipd = 4, i_ped1 = 5, i_ped2 = 6, i_uvk_block = 7};
 
 class tG_Strel_Y : public tGRC0
 {
@@ -56,8 +56,8 @@ protected:
     TPoint Mr[3];
     TPoint NP[2];
     int rr;
-    int clrp[7];
-    int clrb[7];
+    int clrp[8];
+    int clrb[8];
 
     void CalcPRRTDS();
     void ShowPR();
@@ -65,10 +65,10 @@ protected:
     bool CheckNegabarit();
 public:
 
-    int impuls_pr[7];
+    int impuls_pr[8];
     int TU_pr[2];
 
-    int fimpuls_pr[7];
+    int fimpuls_pr[8];
     int StrelPrizak[2];
 
     TvFormulaElement frm_blok;
@@ -503,6 +503,7 @@ protected:
     t_KvKzp KvKzp;
     t_KzpInf KzpInf;
     uint16 Emask;
+    int kolvo_otc;
 
     int clr_podl;  // цвет подложки
     int clr_Z;  // цвет занятости
@@ -540,6 +541,8 @@ public:
         return gorZAMI;
     };
     virtual int getospolyline(TPoint * PK,int Psz);
+    void GetNumberPosition(int &X, int &Y, int Width, int Height, int direct);
+    void ShowTrainNumber();
 };
 
 

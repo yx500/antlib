@@ -347,14 +347,14 @@ void tG_Strel_Y::UpdateState()
     tGRC0::UpdateState();
     //StateChanged=Y_Strel_2.StateChanged;
     int rimpuls_pr[7];
-    for (int i = 0; i < 7; i++) rimpuls_pr[i] = f(impuls_pr[i]);
-    for (int i = 0; i < 7; i++) StateChanged = StateChanged | (rimpuls_pr[i] != fimpuls_pr[i]);
-    for (int i = 0; i < 7; i++) fimpuls_pr[i] = rimpuls_pr[i];
+    for (int i = 0; i < 8; i++) rimpuls_pr[i] = f(impuls_pr[i]);
+    for (int i = 0; i < 8; i++) StateChanged = StateChanged | (rimpuls_pr[i] != fimpuls_pr[i]);
+    for (int i = 0; i < 8; i++) fimpuls_pr[i] = rimpuls_pr[i];
 
 
 
     // ðàññòàâëÿåì öâåòà ðó÷êè
-    for (int i = 0; i < 7; i++) {
+    for (int i = 0; i < 8; i++) {
         clrp[i] = FON; clrb[i] = FON;
         if (fimpuls_pr[i] == 33) {
             clrp[i] = C_D; clrb[i] = BIRUZOVIJ;
@@ -370,6 +370,9 @@ void tG_Strel_Y::UpdateState()
         clrp[i_sk] = C_D; clrb[i_sk] = GELT;
         if (CheckNegabarit() == true)
             clrb[i_sk] = RED;
+        if ((impuls_pr[i_uvk_block] != 0) && (fimpuls_pr[i_uvk_block] == 1))
+                clrb[i_sk] = RED;
+
     }
     if ((impuls_pr[i_prp] != 0) && (fimpuls_pr[i_prp] == 1)) {
         clrp[i_prp] = GELT; clrb[i_prp] = RED;/*clrp[i_sk]=clrp[i_prp];*/
@@ -390,6 +393,9 @@ void tG_Strel_Y::UpdateState()
     if ((impuls_pr[i_ped2] != 0) && (fimpuls_pr[i_ped2] == 1)) {
         clrp[i_ipd] = GELT; clrb[i_ipd] = RED;/*clrp[i_sk]=clrp[i_prp];*/
     }
+    if ((impuls_pr[i_uvk_block] != 0) && (fimpuls_pr[i_uvk_block] == 1)) {
+        clrp[i_uvk_block] = RED; clrb[i_uvk_block] = RED;
+    }
 
     fevFormulaSetR(this, frm_blokP);
     ffrm_blok = feFormulaResultP(frm_blokP);
@@ -406,17 +412,18 @@ static String _G_Strel_YPropName[] = {
     "òñ_ÈÏÄ",     // 6
     "òñ_ÏÅÄ1",     // 7
     "òñ_ÏÅÄ2",     // 8
-    "öô_ÒÓ_ÏÐÏ",   // 9
-    "öô_ÒÓ_ÏÐÌ",   // 10
-    "ñìÈìÿ_ñòðåëêè",     // 11
-    "öôÍîìåðÏëþñX",     // 12
-    "öôÍîìåðÏëþñY",     // 13
-    "öôÍîìåðÌèíóñX",    // 14
-    "öôÍîìåðÌèíóñY",    // 15
-    "ëãÍåãàáàðèò",    // 16
-    "ôñÁëîêèðîâêà",    // 17
-    "öôÏðèçíàêÏëþñ",     // 18
-    "öôÏðèçíàêÌèíóñ"     // 19
+    "òñ_ÓÂÊ_ÁËÎÊ",    // 9
+    "öô_ÒÓ_ÏÐÏ",   // 10
+    "öô_ÒÓ_ÏÐÌ",   // 11
+    "ñìÈìÿ_ñòðåëêè",     // 12
+    "öôÍîìåðÏëþñX",     // 13
+    "öôÍîìåðÏëþñY",     // 14
+    "öôÍîìåðÌèíóñX",    // 15
+    "öôÍîìåðÌèíóñY",    // 16
+    "ëãÍåãàáàðèò",    // 17
+    "ôñÁëîêèðîâêà",    // 18
+    "öôÏðèçíàêÏëþñ",     // 19
+    "öôÏðèçíàêÌèíóñ"     // 20
 };
 
 void tG_Strel_Y::SetPropMap(TPropMap &m)
@@ -429,30 +436,30 @@ void tG_Strel_Y::SetPropMap(TPropMap &m)
     N = "$" + N;
     if ((nn != 0) && (nomer == 0)) nomer = nn;
     strncpy(name, N.c_str(), sizeof(name) - 1);
-    N = m.get(_G_Strel_YPropName[11]);
+    N = m.get(_G_Strel_YPropName[12]);
     strncpy(StrelName, N.c_str(), 14);
 
     //impuls_plus = NewStrToOldImp(m.get(_G_Strel_YPropName[0]).c_str());
     //impuls_mnus = NewStrToOldImp(m.get(_G_Strel_YPropName[1]).c_str());
 
-    for (int i = 0; i < 7; i++)
+    for (int i = 0; i < 8; i++)
         impuls_pr[i] = NewStrToOldImp(m.get(_G_Strel_YPropName[i+2]).c_str());
     for (int i = 0; i < 2; i++)
-        TU_pr[i] = m.geti(_G_Strel_YPropName[i+9]);
+        TU_pr[i] = m.geti(_G_Strel_YPropName[i+10]);
 
 
-    NP[0].x = m.geti(_G_Strel_YPropName[12]);
-    NP[0].y = m.geti(_G_Strel_YPropName[13]);
-    NP[1].x = m.geti(_G_Strel_YPropName[14]);
-    NP[1].y = m.geti(_G_Strel_YPropName[15]);
+    NP[0].x = m.geti(_G_Strel_YPropName[13]);
+    NP[0].y = m.geti(_G_Strel_YPropName[14]);
+    NP[1].x = m.geti(_G_Strel_YPropName[15]);
+    NP[1].y = m.geti(_G_Strel_YPropName[16]);
 
-    bNegabarit = m.geti(_G_Strel_YPropName[16]);
+    bNegabarit = m.geti(_G_Strel_YPropName[17]);
 
-    feSt2vFormula(m.get(_G_Strel_YPropName[17]).c_str(), frm_blok);
+    feSt2vFormula(m.get(_G_Strel_YPropName[18]).c_str(), frm_blok);
     fevFormulaElement2PolskaNota(frm_blok, frm_blokP);
 
-    StrelPrizak[0] = m.geti(_G_Strel_YPropName[18]);
-    StrelPrizak[1] = m.geti(_G_Strel_YPropName[19]);
+    StrelPrizak[0] = m.geti(_G_Strel_YPropName[19]);
+    StrelPrizak[1] = m.geti(_G_Strel_YPropName[20]);
 
 }
 
@@ -462,21 +469,21 @@ void tG_Strel_Y::GetPropMap(TPropMap &m)
     tGRC0::GetPropMap(m);
     m.putEx(_G_Strel_YPropName[0], OldImpToNewStr(impuls_plus, this), (void*)GetRealImp(impuls_plus), OldImpToNewStr(0, this));
     m.putEx(_G_Strel_YPropName[1], OldImpToNewStr(impuls_mnus, this), (void*)GetRealImp(impuls_mnus), OldImpToNewStr(0, this));
-    for (int i = 0; i < 7; i++)
+    for (int i = 0; i < 8; i++)
         m.putEx(_G_Strel_YPropName[i+2], OldImpToNewStr(impuls_pr[i], this), (void*)GetRealImp(impuls_pr[i]), OldImpToNewStr(0, this));
     for (int i = 0; i < 2; i++)
-        m.put(_G_Strel_YPropName[i+9], TU_pr[i], 0);
+        m.put(_G_Strel_YPropName[i+10], TU_pr[i], 0);
 
-    m.put(_G_Strel_YPropName[11], StrelName);
+    m.put(_G_Strel_YPropName[12], StrelName);
 
-    m.put(_G_Strel_YPropName[12], NP[0].x, 0);
-    m.put(_G_Strel_YPropName[13], NP[0].y, 0);
-    m.put(_G_Strel_YPropName[14], NP[1].x, 0);
-    m.put(_G_Strel_YPropName[15], NP[1].y, 0);
-    m.put(_G_Strel_YPropName[16], bNegabarit, 0);
-    m.put(_G_Strel_YPropName[17], fevFormula2St(frm_blok), "");
-    m.put(_G_Strel_YPropName[18], StrelPrizak[0], 0);
-    m.put(_G_Strel_YPropName[19], StrelPrizak[1], 0);
+    m.put(_G_Strel_YPropName[13], NP[0].x, 0);
+    m.put(_G_Strel_YPropName[14], NP[0].y, 0);
+    m.put(_G_Strel_YPropName[15], NP[1].x, 0);
+    m.put(_G_Strel_YPropName[16], NP[1].y, 0);
+    m.put(_G_Strel_YPropName[17], bNegabarit, 0);
+    m.put(_G_Strel_YPropName[18], fevFormula2St(frm_blok), "");
+    m.put(_G_Strel_YPropName[19], StrelPrizak[0], 0);
+    m.put(_G_Strel_YPropName[20], StrelPrizak[1], 0);
 
 
 }
@@ -2942,7 +2949,8 @@ static String _G_KZP2_PropName[] = {
     "òñíï_impuls_minus",
     "òñíï_impuls_kzm",
     "ëãÏîäñâÎòö",
-    "öôEmask"
+    "öôEmask",
+    "öôÊîëÎòö"
 
 
 };
@@ -2972,6 +2980,7 @@ tG_KZP2::tG_KZP2()
     bOtcMig=false;
     Lmp.pVisibleArray=pVisibleArray;
     Emask=0;
+    kolvo_otc=0;
 }
 
 void tG_KZP2::GetPropMap(TPropMap &m)
@@ -3014,6 +3023,7 @@ void tG_KZP2::GetPropMap(TPropMap &m)
 
     m.put(_G_KZP2_PropName[ii++], bOtcMig);
     m.put(_G_KZP2_PropName[ii++], Emask);
+    m.put(_G_KZP2_PropName[ii++], kolvo_otc);
 }
 void tG_KZP2::SetPropMap(TPropMap &m)
 {
@@ -3056,11 +3066,14 @@ void tG_KZP2::SetPropMap(TPropMap &m)
 
     bOtcMig=   m.geti(_G_KZP2_PropName[ii++]);
     Emask = m.geti(_G_KZP2_PropName[ii++]);
+    kolvo_otc = m.geti(_G_KZP2_PropName[ii++]);
 
 }
 
 void tG_KZP2::UpdateState()
 {
+    tG_RC::UpdateState();
+    
     t_KvKzp * pKvKzp = NULL;
     t_KzpInf * pKzpInf = NULL;
     String stPacketName;
@@ -3158,7 +3171,21 @@ double GetVkzp(t_KzpInf *KzpInf, int dxV)
     if ((dtim != 0) && (dl >= dxV)) v = (1.*dl / dtim * 1000) * 36.;
     return v;
 }
-
+extern int ShowTrainNumbers_nn;
+void tG_KZP2::GetNumberPosition(int &X, int &Y, int Width, int Height, int direct)
+{
+    int xx = this->X * MUL_X + _X_;
+    int yy = this->Y * MUL_Y + _Y_;
+    xx=xx+NP.x * MUL_X/10;
+    yy=yy+NP.y * MUL_Y/10;
+    int len = szAll.cx;
+    int xdv=0;
+    int nn=ShowTrainNumbers_nn;
+    if (nn>kolvo_otc) nn=kolvo_otc;
+    if (kolvo_otc>1) xdv=szAll.cx/kolvo_otc*ShowTrainNumbers_nn;
+    if (direct == 0) X = xx+xdv  ; else X = xx -xdv;
+    Y = yy - Height / 2 ;
+}
 
 void FlipPx(TPoint *P,int cnt,int X,int DX=0);
 void tG_KZP2::Show()
@@ -3185,6 +3212,11 @@ void tG_KZP2::Show()
         ZV = 200;
         stS = IntToStr(D);
         stZ = IntToStr(Len);
+        if (bShowNumberPosition) {
+            int xn, yn;
+            setcolor(GELT); _SetText(F_LITT, LEFT_TEXT, TOP_TEXT);
+            GetNumberPosition(xn, yn, 0, 0, 0); OutTextXY(xn, yn, "N"); fillellipse(xn, yn, 2, 2);
+        }
     } else {
         if (KvKzp.mar == 0) {
             clr_S = clr_podl;
@@ -3430,6 +3462,13 @@ void tG_KZP2::Show()
     settextstyle(DEFAULT_FONT, HORIZ_DIR, 1);
 
 }
+
+void tG_KZP2::ShowTrainNumber()
+{
+    EXD_ShowTrainNumbers(this, fimpuls_busi );
+}
+
+
 
 int tG_KZP2::getospolyline(TPoint * PK,int Psz)
 {

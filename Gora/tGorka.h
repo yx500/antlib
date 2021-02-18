@@ -104,6 +104,7 @@ struct t_Descr {//51+2
      uint16        V_zad2_S ; // Скорость заданная 2TP
 };
 
+
 struct t_Descr_ext{
     int  sz_struct;
 
@@ -111,8 +112,11 @@ struct t_Descr_ext{
     long long  STATE_ID_RCS;
     long long STATE_ID_RCF;
     uint8 STATE_ERROR_TRACK;
+    uint8 STATE_IS_CURRENT;
 
     uint8 STATE_GAC_ACTIVE;
+    uint8 STATE_GAC_W_STRA;
+    uint8 STATE_GAC_W_STRB;
     uint8 STATE_ARS_ACTIVE;
     uint8 STATE_SL_BAZA;
     uint8 STATE_SL_UR;
@@ -128,6 +132,7 @@ struct t_Descr_ext{
     uint16 STATE_V_DISO;
     uint16 STATE_D_RCS_XOFFSET;
     uint16 STATE_D_RCF_XOFFSET;
+    uint8 STATE_D_ORDER_RC;
     uint16 STATE_TICK;
 
 

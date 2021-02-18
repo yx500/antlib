@@ -11,6 +11,8 @@
 #include "Ways.h"
 
 #include "uEXD.h"
+#include "Gor_Logic.h"
+#include "tGorka.h"
 
 #define LEFT_        1
 #define _RIGHT       2
@@ -228,6 +230,7 @@ void CheckUslDraw(AComp *AC, bool &bs, bool &bdbl)
     case G_STREL_1:
     case G_ZAMP:
     case G_STREL_2:
+    case G_KZP2:
 
     case GORL:   bdbl=true; break;
     default:bs=false;
@@ -350,6 +353,9 @@ void EXD_ShowTrainNumber(AComp *AC, int rimpb)
         memcpy(&wAC->TrainInfo, TI, sizeof(TTrainInfo));
 
         GetNumberRct(wAC, X, Y, Width, Height, direct);
+        if ((TI->Reserv2[0]>0)&& (TI->Reserv2[0]<10)){
+                if (direct==0) X=X+Width; else  X=X-Width;
+        }
         _MakePoints(X, Y, Width, Height, direct);
         int clr = GetTNBrushClr(&wAC->TrainInfo);
         if (rimpb == 1) {
@@ -365,6 +371,57 @@ void EXD_ShowTrainNumber(AComp *AC, int rimpb)
         DrawText(X + xx, Y - 1, Width + 100, Height, ST.c_str());
     }
 }
+TTrainInfo * __fastcall  MakeTrainInfo(void * TNdata, int Ver);
+int ShowTrainNumbers_nn;
+void EXD_ShowTrainNumbers(AComp *AC, int rimpb)
+{
+    bool bs = true;
+    bool bdbl = false;
+
+    Ways * wAC = dynamic_cast<Ways*>(AC);
+    if (wAC == NULL)
+        return;
+
+    CheckUslDraw(wAC, bs, bdbl);
+    if (!bs) return;
+    if (((AC->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) ||
+                                ((AC->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT))) return;
+
+    int X, Y, Width, Height, direct;
+    int cnt=0;
+    t_NewDescr*  DD=GetDescr_imp1_all(AC->impuls_busi,cnt);
+
+    for (int i=0;i<cnt;i++){
+        TTrainInfo * TI= MakeTrainInfo(&DD[i].D, 3) ;
+        if (TI==NULL) break;
+        String ST;
+        direct = GetTNDirect(1, wAC->AO->TRAINNUM_INVERS);
+        ST = GetNumStr(TI);
+        _SetText(F_DEFAULT, LEFT_TEXT, TOP_TEXT);
+        Width = 2 * xx + textwidth(ST.c_str());
+        Height = textheight(ST.c_str()) + 1;
+        memcpy(&wAC->TrainInfo, TI, sizeof(TTrainInfo));
+        ShowTrainNumbers_nn=i;
+        GetNumberRct(wAC, X, Y, Width, Height, direct);
+        //int xdv=-(cnt-i-1)*Width;
+        //X=X+xdv;
+
+        _MakePoints(X, Y, Width, Height, direct);
+        int clr = GetTNBrushClr(&wAC->TrainInfo);
+        if (rimpb == 1) {
+            setfillstyle(SOLID_FILL, clr);
+            PolyColor(clr, _points, _clr, 6);
+        } else {
+            setfillstyle(EMPTY_FILL, clr);
+            memset(&_clr2, clr, sizeof(&_clr2));
+            PolyColor(clr, _points, _clr2, 6);
+        }
+        clr = GetTNPenClr(&wAC->TrainInfo);
+        setcolor(clr);
+        DrawText(X + xx, Y - 1, Width + 100, Height, ST.c_str());
+    }
+}
+
 
 bool GetNumberRct(AComp *AC, int &X, int &Y, int Width, int Height, int direct)
 {

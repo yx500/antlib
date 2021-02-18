@@ -175,6 +175,34 @@ t_Descr*  GetDescr_imp1(int start,       // Местоположение Головы / жопы отцепа
     return NULL;
 }
 
+t_NewDescr*  GetDescr_imp1_all(int start,       // Местоположение Головы / жопы отцепа
+                       int &cnt
+                      )
+{
+    cnt=0;
+    static t_NewDescr _descr10[10];
+    if (GetDatagramData_Func == NULL) return _descr10;
+//>
+
+    memset(_descr10,0,sizeof(_descr10));
+
+    t_Descr*  Descr;
+    //ищем те у которых голова
+    if (start == 0) return _descr10;
+    for (int i = MaxDescrPacketCount-1; i >=0 ; i--) {
+        Descr = Descr_x[i];
+        if (Descr == NULL) continue;
+        if (Descr->end_slg == 0) {
+                if ((Descr->start + 1000 - 1 == start)) {
+                        memcpy(&_descr10[cnt],Descr,sizeof(t_NewDescr));
+                        cnt++;
+                        if (cnt>=10) break;
+                }
+        }
+    }
+    return _descr10;
+}
+
 t_Descr*  GetDescr_ARS(int tp,
                        int Slot,
                        int Addr
