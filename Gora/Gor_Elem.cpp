@@ -3183,7 +3183,7 @@ void tG_KZP2::GetNumberPosition(int &X, int &Y, int Width, int Height, int direc
     int nn=ShowTrainNumbers_nn;
     if (nn>kolvo_otc) nn=kolvo_otc;
     if (kolvo_otc>1) xdv=szAll.cx/kolvo_otc*ShowTrainNumbers_nn;
-    if (direct == 0) X = xx+xdv  ; else X = xx -xdv;
+    if (direct == 0) X = xx-xdv  ; else X = xx +xdv;
     Y = yy - Height / 2 ;
 }
 
