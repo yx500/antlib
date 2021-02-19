@@ -3181,10 +3181,11 @@ void tG_KZP2::GetNumberPosition(int &X, int &Y, int Width, int Height, int direc
     int len = szAll.cx;
     int xdv=0;
     int nn=ShowTrainNumbers_nn;
-    if (nn>kolvo_otc) nn=kolvo_otc;
-    if (kolvo_otc>1) xdv=szAll.cx/kolvo_otc*ShowTrainNumbers_nn;
-    if (direct == 0) X = xx-xdv  ; else X = xx +xdv;
-    Y = yy - Height / 2 ;
+    if (nn<kolvo_otc) {
+        if (kolvo_otc>1) xdv=szAll.cx/kolvo_otc*nn;
+        if (direct == 0) X = xx-xdv  ; else X = xx +xdv;
+        Y = yy - Height / 2 ;
+    } else Y=10000;
 }
 
 void FlipPx(TPoint *P,int cnt,int X,int DX=0);

@@ -403,6 +403,7 @@ void EXD_ShowTrainNumbers(AComp *AC, int rimpb)
         memcpy(&wAC->TrainInfo, TI, sizeof(TTrainInfo));
         ShowTrainNumbers_nn=i;
         GetNumberRct(wAC, X, Y, Width, Height, direct);
+        if (Y>=10000) continue;
         //int xdv=-(cnt-i-1)*Width;
         //X=X+xdv;
 
