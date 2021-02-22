@@ -8,6 +8,7 @@ double TPVal(unsigned __int16 w);
 
 struct t_Descr;
 struct t_NewDescr;
+struct t_OsyCell_21;
 bool  GetZamData(int AddrLKSlot,
                  int addr,
                  int &V,       //Скорость
@@ -20,9 +21,10 @@ bool  GetZamData(int AddrLKSlot,
 bool  GetOsyData(int tip,
                  int addr,
                  int &V,
-                 int &E,
-                 String &PacketName_21
+                 int &E
                 );
+
+t_OsyCell_21* GetOsyData21(int tip,int addr,String &PacketName_21 ) ;
 
 
 

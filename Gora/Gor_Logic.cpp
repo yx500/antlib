@@ -73,8 +73,7 @@ bool  GetZamData(int AddrLKSlot,
 
 bool  GetOsyData(int tip,int addr,
                  int &V,
-                 int &E,
-                 String &PacketName_21
+                 int &E
                 )
 {
     V = 0; E = 0;
@@ -95,16 +94,23 @@ bool  GetOsyData(int tip,int addr,
         V = OsyCellsPacket->Cells[addr].V;
         return true;
     }
+    return false;
+
+}
+t_OsyCell_21*  GetOsyData21(int tip,int addr,
+                 String &PacketName_21
+                )
+{
+    if (addr < 0) return NULL;
+    if (GetDatagramData_Func == NULL) return NULL;
+
     if (tip==21){
-        if (addr >= (480 / sizeof(t_OsyCell_21))) return false;
+        if (addr >= (480 / sizeof(t_OsyCell_21))) return NULL;
 
         t_OsyCellsPacket_21 *OsyCellsPacket_21 = (t_OsyCellsPacket_21 *) GetDatagramData_Func(17, PacketName_21.c_str());
-        if (OsyCellsPacket_21 == NULL) return false;
-        V = OsyCellsPacket_21->Cells[addr].V;
-        E = OsyCellsPacket_21->Cells[addr].E;
-        return true;
+        if (OsyCellsPacket_21!=NULL) return &OsyCellsPacket_21->Cells[addr];
     }
-    return false;
+    return NULL;
 
 }
 

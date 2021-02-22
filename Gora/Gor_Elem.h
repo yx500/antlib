@@ -453,8 +453,10 @@ public:
     int imp_osy;
     int tip;
     bool bShowOs;
+    int outParam;
     String PacketName_21;
     String  stNext[2];
+    t_OsyCell_21 OsyCell_21;
 
 
     tG_OSY();

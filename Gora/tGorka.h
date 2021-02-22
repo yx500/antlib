@@ -173,7 +173,8 @@ struct  t_OsyCell_21 {
     int32 V;   // Значение
     int8 D;   // посл. напр.
     int8 E;   // сбой
-    int32 EV;   // кол-во сбоев
+    int16 EV;   // кол-во сбоев
+    int16 Vel; // скорость*10
 };
 
 struct  t_OsyCellsPacket_21 {

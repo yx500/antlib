@@ -2757,6 +2757,7 @@ static String _G_OSY_PropName[] = {
     "тсќси",
     "цф“ип",
     "лг¬ыводќси",
+    "цфѕараметр",
     "PacketName_21",
     "см—ледующий",
     "смѕредидующий"
@@ -2768,9 +2769,11 @@ tG_OSY::tG_OSY()
     imp_osy=0;
     tip=0;
     bShowOs=true;
+    outParam=0;
     PacketName_21="";
     stNext[0]="";
     stNext[1]="";
+    memset(&OsyCell_21,0,sizeof(OsyCell_21));
 }
 void tG_OSY::GetPropMap(TPropMap &m)
 {
@@ -2780,6 +2783,7 @@ void tG_OSY::GetPropMap(TPropMap &m)
     m.putEx(_G_OSY_PropName[ii++], OldImpToNewStr(imp_osy, this), (void*)GetRealImp(imp_osy),       OldImpToNewStr(0, this));
     m.put(_G_OSY_PropName[ii++], tip);
     m.put(_G_OSY_PropName[ii++], bShowOs);
+    m.put(_G_OSY_PropName[ii++], outParam);
     m.put(_G_OSY_PropName[ii++], PacketName_21);
     for (int d = 0; d < 2; d++)
             m.put(_G_OSY_PropName[ii++], stNext[d]);
@@ -2792,6 +2796,7 @@ void tG_OSY::SetPropMap(TPropMap &m)
     imp_osy = NewStrToOldImp(m.get(_G_OSY_PropName[ii++]).c_str());
     tip = m.geti(_G_OSY_PropName[ii++]);
     bShowOs=m.geti(_G_OSY_PropName[ii++]);
+    outParam=m.geti(_G_OSY_PropName[ii++]);
     PacketName_21 = m.get(_G_OSY_PropName[ii++]);
     for (int d = 0; d < 2; d++)
             stNext[d] = m.get(_G_OSY_PropName[ii++]);
@@ -2871,14 +2876,29 @@ void tG_OSY::Show()
                 settextjustify(LEFT_TEXT, TOP_TEXT);
                 settextstyle(DEFAULT_FONT, HORIZ_DIR, 1);
         } else {
-             if ((osi!=0)&&(bShowOs))      {
+             if ((bShowOs))      {
                 settextstyle(DEFAULT_FONT, HORIZ_DIR, 1);
                 settextjustify(CENTER_TEXT, CENTER_TEXT);
                 _SetTextSize(-1.5 * sh_y);
-
-                itoa(osi, bf, 10);
-                OutTextXY(x, yt, bf);
+                memset(bf,0,sizeof(bf));
+                if (tip==21){
+                        String stV;
+                        if (outParam==0) stV= IntToStr(OsyCell_21.V);
+                        if (outParam==1) stV= IntToStr(OsyCell_21.D);
+                        if (outParam==2) stV= IntToStr(OsyCell_21.E);
+                        if (outParam==3) stV= IntToStr(OsyCell_21.EV);
+                        if (outParam==4) stV.printf("%2.1f", 1.*OsyCell_21.Vel/10.); 
+                        if (OsyCell_21.V!=0) {
+                            OutTextXY(x, yt, stV.c_str());
+                        }
+                }  else {
+                        if (osi!=0){
+                                itoa(osi, bf, 10);
+                                OutTextXY(x, yt, bf);
+                        }
+                }
                 _SetTextSize(1);
+
                 settextjustify(LEFT_TEXT, TOP_TEXT);
                 settextstyle(DEFAULT_FONT, HORIZ_DIR, 1);
              }
@@ -2901,13 +2921,21 @@ void tG_OSY::UpdateState()
 
     int fV   = V;
     int fE   = E;
-    if (tip!=0){
+    if ((tip>=1)&& (tip<=3)){
         if (!GetOsyData(tip,AddrLK,
                     V,       //
-                    E,
-                    PacketName_21)
-       );
+                    E)
+       ) V=0;
     };
+    if (tip==21){
+         t_OsyCell_21 *osp=GetOsyData21(tip,AddrLK,PacketName_21);
+         if (osp!=NULL){
+                if (memcmp(&OsyCell_21,osp,sizeof(OsyCell_21))!=0){
+                   memcpy(&OsyCell_21,osp,sizeof(OsyCell_21));
+                   StateChanged =true;
+                }
+         }
+    }
 
     StateChanged = StateChanged | (V != fV) | (E != fE);
 
