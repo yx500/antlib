@@ -2934,6 +2934,8 @@ void tG_OSY::UpdateState()
                    memcpy(&OsyCell_21,osp,sizeof(OsyCell_21));
                    StateChanged =true;
                 }
+                E=OsyCell_21.E;
+                V=OsyCell_21.V;
          }
     }
 
