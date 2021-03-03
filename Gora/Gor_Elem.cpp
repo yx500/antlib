@@ -2369,11 +2369,11 @@ void tG_TPLABEL::UpdateState()
         GetZamData(AddrLK2Slot, addr2, V2, Voleg2, RC2, RRC,ErrCS);
 
         if (rc_busy>0){
-                tGRC0 * RC =  dynamic_cast<tGRC0 *>(this->pNext[1][0]);
+                tGRC0 * RC =  G_ZAMI;
                 bool bsh=false;
                 for (int i=0;i<rc_busy;i++){
                         if (RC==NULL) break;
-                        if (RC->fimpuls_busi==1) {bsh=true; break;}
+                        if ((RC->impuls_busi!=0)&&(RC->fimpuls_busi==1)) {bsh=true; break;}
                         RC =  dynamic_cast<tGRC0 *>(RC->pNext[1][0]);
                 }
                 if (!bsh){V1=0;V2=0;}
