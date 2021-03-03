@@ -200,6 +200,8 @@ tG_Strel_Y::tG_Strel_Y()
     StrelPrizak[0] = 0;
     StrelPrizak[1] = 0;
     prSTIK[0] = 11; prSTIK[1] = 11; prSTIK[2] = 11;
+    impuls_uvk_gac=0;
+    impuls_uvk_str=0;
 }
 
 void tG_Strel_Y::ShowFON()
@@ -423,7 +425,10 @@ static String _G_Strel_YPropName[] = {
     "ëãÍåãàáàðèò",    // 17
     "ôñÁëîêèðîâêà",    // 18
     "öôÏðèçíàêÏëþñ",     // 19
-    "öôÏðèçíàêÌèíóñ"     // 20
+    "öôÏðèçíàêÌèíóñ",     // 20
+    "òñ_ÓÂÊ_ÃÀÖ",    // 21
+    "òñ_ÓÂÊ_ÑÒÐ"    // 22
+
 };
 
 void tG_Strel_Y::SetPropMap(TPropMap &m)
@@ -460,6 +465,8 @@ void tG_Strel_Y::SetPropMap(TPropMap &m)
 
     StrelPrizak[0] = m.geti(_G_Strel_YPropName[19]);
     StrelPrizak[1] = m.geti(_G_Strel_YPropName[20]);
+    impuls_uvk_gac=NewStrToOldImp(m.get(_G_Strel_YPropName[21]).c_str());
+    impuls_uvk_str=NewStrToOldImp(m.get(_G_Strel_YPropName[22]).c_str());
 
 }
 
@@ -484,6 +491,8 @@ void tG_Strel_Y::GetPropMap(TPropMap &m)
     m.put(_G_Strel_YPropName[18], fevFormula2St(frm_blok), "");
     m.put(_G_Strel_YPropName[19], StrelPrizak[0], 0);
     m.put(_G_Strel_YPropName[20], StrelPrizak[1], 0);
+    m.putEx(_G_Strel_YPropName[21], OldImpToNewStr(impuls_uvk_gac, this), (void*)GetRealImp(impuls_uvk_gac), OldImpToNewStr(0, this));
+    m.putEx(_G_Strel_YPropName[22], OldImpToNewStr(impuls_uvk_str, this), (void*)GetRealImp(impuls_uvk_str), OldImpToNewStr(0, this));
 
 
 }
@@ -1458,7 +1467,8 @@ static String _GZAM_StrelPropName[] = {
     "öômasy_V",   //  23
     "ëãNomkErrCS",   //24
     "ëãÍåòÑêÂûõ",     // 25
-    "öôÏðîâVâûõ"
+    "öôÏðîâVâûõ",
+    "öôÐÖçàí"
 
 
 };
@@ -1489,6 +1499,7 @@ void tG_ZAMI::GetPropMap(TPropMap &m)
     m.put(_GZAM_StrelPropName[i++],  bNomkErrCS);
     m.put(_GZAM_StrelPropName[i++],  G_TPLABEL.NoShowVout);
     m.put(_GZAM_StrelPropName[i++],  G_TPLABEL.provV);
+    m.put(_GZAM_StrelPropName[i++],  G_TPLABEL.rc_busy);
 
 
 }
@@ -1518,6 +1529,7 @@ void tG_ZAMI::SetPropMap(TPropMap &m)
     bNomkErrCS= m.geti(_GZAM_StrelPropName[i++]);
     G_TPLABEL.NoShowVout = m.geti(_GZAM_StrelPropName[i++]);
     G_TPLABEL.provV = m.geti(_GZAM_StrelPropName[i++]);
+    G_TPLABEL.rc_busy = m.geti(_GZAM_StrelPropName[i++]);
 
 
 
@@ -2011,7 +2023,9 @@ static String _G_TPLABEL_PropName[] = {
     "ñòADAM",
     "öôADK3",
     "ëãVíàäâèã",
-    "öôÏðîâVâûõ"
+    "öôÏðîâVâûõ",
+    "öôÐÖçàí"
+
 };
 
 tG_TPLABEL::tG_TPLABEL()
@@ -2028,7 +2042,8 @@ tG_TPLABEL::tG_TPLABEL()
     ADK3="";
     bShowVnadv=false;
     provV=0;
-}
+    rc_busy=0;
+}        
 void tG_TPLABEL::GetPropMap(TPropMap &m)
 {
     tG_OTCLABEL::GetPropMap(m);
@@ -2043,6 +2058,7 @@ void tG_TPLABEL::GetPropMap(TPropMap &m)
     m.put(_G_TPLABEL_PropName[i++], ADK3,"");
     m.put(_G_TPLABEL_PropName[i++], bShowVnadv,0);
     m.put(_G_TPLABEL_PropName[i++], provV,0);
+    m.put(_G_TPLABEL_PropName[i++], rc_busy,0);
 
 
 
@@ -2060,6 +2076,7 @@ void tG_TPLABEL::SetPropMap(TPropMap &m)
     ADK3=           m.get(_G_TPLABEL_PropName[i++]);
     bShowVnadv=     m.geti(_G_TPLABEL_PropName[i++]);
     provV =         m.geti(_G_TPLABEL_PropName[i++]);
+    rc_busy =       m.geti(_G_TPLABEL_PropName[i++]);
 
 }
 
@@ -2350,6 +2367,17 @@ void tG_TPLABEL::UpdateState()
     if (AddrLK1Slot+addr1+AddrLK2Slot+addr2>0){
         GetZamData(AddrLK1Slot, addr1, V1, Voleg1, RC1, RRC,ErrCS);
         GetZamData(AddrLK2Slot, addr2, V2, Voleg2, RC2, RRC,ErrCS);
+
+        if (rc_busy>0){
+                tGRC0 * RC =  dynamic_cast<tGRC0 *>(this->pNext[1][0]);
+                bool bsh=false;
+                for (int i=0;i<rc_busy;i++){
+                        if (RC==NULL) break;
+                        if (RC->fimpuls_busi==1) {bsh=true; break;}
+                        RC =  dynamic_cast<tGRC0 *>(RC->pNext[1][0]);
+                }
+                if (!bsh){V1=0;V2=0;}
+        }
 
         int rimp_krasn = f(imp_krasn);
         int rimp_krasn_mig = f(imp_krasn_mig);

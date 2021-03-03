@@ -75,6 +75,9 @@ public:
     TvFormulaElement frm_blokP;
     int              ffrm_blok;
 
+    int impuls_uvk_gac;
+    int impuls_uvk_str;
+
 
 
     tG_Strel_Y();
@@ -272,6 +275,7 @@ public:
     int fves_osi;
     bool NoShowVout;
     int provV;
+    int rc_busy;
 
     tG_ZAMI * G_ZAMI; 
 
