@@ -148,6 +148,8 @@ public:
     int fr;
     int Clr2;
     bool bByteChecking;
+    int str_n;
+    char rzd;
 
     DtgLmp();
     ~DtgLmp();

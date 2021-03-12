@@ -1244,6 +1244,8 @@ DtgLmp::DtgLmp()
     PacketType = 0; ByteOffset = 0; NumberBit = 0;
     Prz[0] = 22;
     bByteChecking = false;
+    str_n=0;
+    rzd='\r';
 }
 DtgLmp::~DtgLmp()
 {
@@ -1267,6 +1269,34 @@ int GetPacketByte(String PacketName, int PacketType, int ByteOffset)
     int r = DtgData->byte[ByteOffset];
     return r;
 }
+
+char * GetPacketStr(String PacketName, int PacketType, int str_n,char rzd)
+{
+    static char ss[490];
+    memset(ss,0,sizeof(ss));
+    if (GetDatagramData_Func == NULL) return ss;
+    TPacketData *DtgData = (TPacketData *) GetDatagramData_Func(PacketType, PacketName.c_str());
+    if (DtgData == NULL) return ss;
+    int ib=0;
+    int ie=0;
+    int n=0;
+    for (int i=0;i<sizeof(DtgData->byte)-1;i++){
+
+        if (DtgData->byte[i]==0) break;
+        if (DtgData->byte[i]==rzd){
+                if (n+1==str_n) break;
+                ib=i+1;
+                ie=ib;
+                continue;
+        }
+        ie=i;
+    }
+    if (ie-ib>=64) ie=ib+63;
+    if (ib<ie){
+        memcpy(ss,&DtgData->byte[ib],ie-ib);
+    }
+    return ss;
+}
 void DtgLmp::UpdateState()
 {
     try {
@@ -1274,6 +1304,9 @@ void DtgLmp::UpdateState()
             clr = TXT;
         } else {
             if (bByteChecking) {
+
+            }
+            if (str_n>0){
 
             }
             int r = GetPacketBit(PacketName, PacketType, ByteOffset, NumberBit);
@@ -1305,7 +1338,9 @@ static String _DtgLmpPropName[] = {
     "ByteOffset",          // 2
     "NumberBit",           // 3
     "ëãByteChecking",      // 4
-    "öôÖâåò2"              // 5
+    "öôÖâåò2",              // 5
+    "öôÑòğÍ",               //
+    "ñòĞçä"                //
 
 
 
