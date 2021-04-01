@@ -371,6 +371,22 @@ typedef struct   {
 
 
 
+#define IpxNameToUkVag "toukvag"
+#define IpxNameFromUkVag "fromukvag"
+#define IpxTypeUkVag 6
+
+
+struct ukv {
+        uint8    D;   // 0..19 , 38 > , 45 --, 32 пробел, 255- брать из D8
+	uint8    M;
+	uint8    D8[8]; // с платы в плату
+	uint8    status; // 0 - ok, не ноль -  ош связи
+};
+
+struct UkVag {
+       ukv  data[3];
+};
+
 #pragma pack(pop)
 
 

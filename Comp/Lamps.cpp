@@ -17,6 +17,7 @@
 #include "propmap.h"
 #include "Y_STREL.h"
 #include "dmpacket2.h"
+#include "tGorka.h"
 //---------------------------------------------------------------------------
 
 #pragma package(smart_init)
@@ -1245,7 +1246,8 @@ DtgLmp::DtgLmp()
     Prz[0] = 22;
     bByteChecking = false;
     str_n=0;
-    rzd='\r';
+    rzd=';';
+    ukvag=0;
 }
 DtgLmp::~DtgLmp()
 {
@@ -1281,15 +1283,16 @@ char * GetPacketStr(String PacketName, int PacketType, int str_n,char rzd)
     int ie=0;
     int n=0;
     for (int i=0;i<sizeof(DtgData->byte)-1;i++){
-
+        ie=i;
         if (DtgData->byte[i]==0) break;
         if (DtgData->byte[i]==rzd){
-                if (n+1==str_n) break;
+                n++;
+                if (n==str_n) break;
                 ib=i+1;
                 ie=ib;
                 continue;
         }
-        ie=i;
+
     }
     if (ie-ib>=64) ie=ib+63;
     if (ib<ie){
@@ -1297,26 +1300,55 @@ char * GetPacketStr(String PacketName, int PacketType, int str_n,char rzd)
     }
     return ss;
 }
+
+String GetUkVag(String PacketName, int PacketType, int ukvag,int &M)
+{
+     M=0;
+    if (GetDatagramData_Func == NULL) return "E";
+    UkVag *u = (UkVag *) GetDatagramData_Func(PacketType, PacketName.c_str());
+    if (u == NULL) return "E";
+    if (u->data[ukvag-1].status!=0)  return "E";
+    M=u->data[ukvag-1].M;
+    uint8 D=u->data[ukvag-1].D;
+    if (D<=9)  return " "+IntToStr(D) ;
+    if (D<=19) return IntToStr(D) ;
+    if (D==60) return "> ";
+    if (D==45) return "--";
+    if (D==32) return "  ";
+    return IntToStr(D) ;
+}
+
 void DtgLmp::UpdateState()
 {
     try {
         if (MOD == ED) {
             clr = TXT;
         } else {
+             if (masy < 0)  clr = -masy; else clr = FON;
+
             if (bByteChecking) {
 
-            }
+            } else
             if (str_n>0){
+                char *ss=GetPacketStr(PacketName,PacketType, str_n, rzd);
+                strncpy(name,ss,sizeof(name)-1);
+            }  else
+            if (ukvag>0){
+                int M;
+                String ss= GetUkVag(PacketName, PacketType, ukvag,M)  ;
+                strncpy(name,ss.c_str(),sizeof(name)-1);
+                if  (M==1) clr=BEL_SER;
+            }  else {
+                int r = GetPacketBit(PacketName, PacketType, ByteOffset, NumberBit);
+                if (r != fr) StateChanged = true;
+                fr = r;
+                clr = FON1;
+                 if (r == 1) {
+                        if (this->nomer == 0) clr = RED; else clr = nomer;
+                }
+                if (r == 33) clr = BIRUZOVIJ;
+            }
 
-            }
-            int r = GetPacketBit(PacketName, PacketType, ByteOffset, NumberBit);
-            if (r != fr) StateChanged = true;
-            fr = r;
-            clr = FON1;
-            if (r == 1) {
-                if (this->nomer == 0) clr = RED; else clr = nomer;
-            }
-            if (r == 33) clr = BIRUZOVIJ;
             // если мигающий цвет превентивно рисуем ! (что такое 'превентивно' ?)
             if (IsClrMig(clr)) StateChanged = true;
         }
@@ -1340,7 +1372,8 @@ static String _DtgLmpPropName[] = {
     "лгByteChecking",      // 4
     "цф÷вет2",              // 5
     "цф—трЌ",               //
-    "ст–зд"                //
+    "ст–зд",                //
+    "цф”к¬аг"                //
 
 
 
@@ -1366,6 +1399,10 @@ void DtgLmp::SetPropMap(TPropMap &m)
     NumberBit  = m.geti(_DtgLmpPropName[_n++]);
     bByteChecking  = m.geti(_DtgLmpPropName[_n++]);
     Clr2  = m.geti(_DtgLmpPropName[_n++]);
+    str_n =m.geti(_DtgLmpPropName[_n++]);
+    String srzd=m.get(_DtgLmpPropName[_n++]);
+    if (srzd.Length()>0)  rzd = srzd[1];
+    ukvag =m.geti(_DtgLmpPropName[_n++]);
 }
 void DtgLmp::GetPropMap(TPropMap &m)
 {
@@ -1378,6 +1415,9 @@ void DtgLmp::GetPropMap(TPropMap &m)
 
     m.put(_DtgLmpPropName[_n++], bByteChecking);
     m.put(_DtgLmpPropName[_n++], Clr2, 0);
+    m.put(_DtgLmpPropName[_n++], str_n );
+    m.put(_DtgLmpPropName[_n++], String(rzd));
+    m.put(_DtgLmpPropName[_n++], ukvag, 0);
 }
 
 

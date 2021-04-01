@@ -150,6 +150,7 @@ public:
     bool bByteChecking;
     int str_n;
     char rzd;
+    int ukvag;
 
     DtgLmp();
     ~DtgLmp();
