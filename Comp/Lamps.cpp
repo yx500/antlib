@@ -1312,7 +1312,7 @@ String GetUkVag(String PacketName, int PacketType, int ukvag,int &M)
     uint8 D=u->data[ukvag-1].D;
     if (D<=9)  return " "+IntToStr(D) ;
     if (D<=19) return IntToStr(D) ;
-    if (D==60) return "> ";
+    if (D==62) return "> ";
     if (D==45) return "--";
     if (D==32) return "  ";
     return IntToStr(D) ;
