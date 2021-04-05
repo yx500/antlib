@@ -78,9 +78,9 @@ TTrainInfo * __fastcall  MakeTrainInfo(void * TNdata, int Ver)
             _TRINF.TrainWeight = DD->D.ves;
             _TRINF.TrainColor = 15;
 
-            if (DD->E.sz_struct>=0/*sizeof(DD->E)*/) {
+            if (DD->E.sz_struct>0/*sizeof(DD->E)*/) {
                 _TRINF.Reserv2[0]=DD->E.STATE_D_ORDER_RC;
-                //if (DD->E.STATE_EXTNUM!=0) _TRINF.TrainNumber=DD->E.STATE_EXTNUM;
+                if (DD->E.STATE_EXTNUM!=0) _TRINF.TrainNumber=DD->E.STATE_EXTNUM;
                 if (DD->E.STATE_GAC_ACTIVE==0) _TRINF.TrainColor = 7;
 
             }
