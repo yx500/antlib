@@ -226,7 +226,7 @@ t_Descr*  GetDescr_ARS(int tp,
 
     }
     t_Descr*  Descr;
-    for (int i = 0; i < MaxDescrPacketCount; i++) {
+    for (int i = MaxDescrPacketCount-1; i >= 0; i--) {
             Descr = Descr_x[i];
             if (Descr == NULL) continue;
             int a = (Slot - 1) * 100 + Addr;
