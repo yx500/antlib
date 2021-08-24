@@ -2401,6 +2401,10 @@ void tG_TPLABEL::UpdateState()
                        addr2
                       );
 
+        if (_Descr!=NULL) {
+                // проверяем что не сдох
+            if (_Descr->end_slg==1) _Descr=NULL;
+        }
 
         // мы будем жить теперь по новому
         if (G_ZAMI!=NULL){

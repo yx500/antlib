@@ -684,6 +684,8 @@ void  TY_Strel_1::Show()
     /*  НЕТ СИГН */
     if (_is == D) {
         setfillstyle(_styll3, clBP);
+        if (_styll1>1)setfillstyle(_styll1, clBP);
+        if (_styll2>1)setfillstyle(_styll2, clBP);
         int clr1[4] = {clPP, clPP, clPP, clS1};
         if (YP.M[1].y==YP.M[0].y){
            TPoint P1[4] = {T[0], T[1], T[12], T[13]};
@@ -698,10 +700,15 @@ void  TY_Strel_1::Show()
         TPoint P2[4] = {T[8], T[9], T[10], T[11]};
         int clr2[4] = {   clPP, clS2, clPP, clPP};
 
+        setfillstyle(_styll3, clBP);if (_styll2>1) setfillstyle(_styll2, clBP);
         PolyColor(clBP, P3, clr3, 6);
         if (L2 > 0) {
+          //if (styll1>1)    {
+            setfillstyle(_styll3, clBP);if (_styll1>1) setfillstyle(_styll1, clBP);
             PolyColor(clBP, P2, clr2, 4);
+          //}
         }
+
     }
 
     /*  неопр */

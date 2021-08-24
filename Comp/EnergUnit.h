@@ -77,6 +77,10 @@ public:
 
     int impulsTU;
 
+    std::string stTI_1;
+    std::string stTI_2;
+    std::string stTI_3;
+
 
     TE_OBJ();
 

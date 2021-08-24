@@ -761,6 +761,7 @@ void  Strel0::Show2()
 
     }
     SetGradientFactor(1);
+    setfillstyle(1, FON);
 }
 
 

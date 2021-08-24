@@ -203,6 +203,9 @@ TE_OBJ::TE_OBJ()
     memset(fWimp, 0, sizeof(fWimp));
     TO = 0;
     impulsTU=0;
+    stTI_1.clear();
+    stTI_2.clear();
+    stTI_3.clear();
 }
 
 
@@ -224,7 +227,10 @@ static String _E_OBJPropName[] = {
     "цфNOb"             ,
     "лг“у“олько¬кл"     ,
     "цф“ќ"    ,
-    "тс—игнал“”"
+    "тс—игнал“”",
+    "смTI_1",
+    "смTI_2",
+    "смTI_3"
 
 };
 
@@ -254,6 +260,10 @@ void TE_OBJ::GetPropMap(TPropMap &m)
     m.put(_E_OBJPropName[ i++],                bTUOnlyVkl, 0);
     m.put(_E_OBJPropName[ i++],                TO, 0);
     m.putEx(_E_OBJPropName[ i++], OldImpToNewStr(impulsTU  , this), (void*)GetRealImp(impulsTU), OldImpToNewStr(0  , this));
+    m.put(_E_OBJPropName[ i++], stTI_1.c_str());
+    m.put(_E_OBJPropName[ i++], stTI_2.c_str());
+    m.put(_E_OBJPropName[ i++], stTI_3.c_str());
+
     std::string PropName;
     char ss[4];
 
@@ -316,6 +326,11 @@ void TE_OBJ::SetPropMap(TPropMap &m)
     bTUOnlyVkl                  = m.geti(_E_OBJPropName[ i++]);
     TO                          = m.geti(_E_OBJPropName[ i++]);
     impulsTU  = NewStrToOldImp(m.get(_E_OBJPropName[ i++]).c_str());
+
+    stTI_1 =                  m.get(_E_OBJPropName[ i++]).c_str();
+    stTI_2 =                  m.get(_E_OBJPropName[ i++]).c_str();
+    stTI_3 =                  m.get(_E_OBJPropName[ i++]).c_str();
+
     std::string PropName;
     char ss[4];
 
