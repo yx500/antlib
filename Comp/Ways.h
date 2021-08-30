@@ -67,6 +67,7 @@ public:
     virtual void GetNumberPosition(int &X, int &Y, int Width, int Height, int direct);
     TYP  GetType();
     UNIT GetUnit();
+    int  GetSubType();
 
 
 };

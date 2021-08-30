@@ -900,10 +900,12 @@ void  ShowAUM(const char *name,int x, int y,  int i1,int i1m,int i2,int i2m)
     TPoint FP1[3];
     TPoint FP2[3];
     int clr3[3] = {   colp, colp, colp};
-    int tw=MUL_X*0.8;
-    int th=MUL_Y-1;
-    int dx=MUL_X/4;
-    int dy=MUL_Y/4;
+    int MM=MUL_X;
+    if (MUL_Y>MM) MM=MUL_Y;
+    int tw=MM*0.8;
+    int th=MM-1;
+    int dx=MM/4;
+    int dy=MM/4;
 
     if (b){
           if (i1==1) setfillstyle(SOLID_FILL,LIN); else setfillstyle(SOLID_FILL,FON1);

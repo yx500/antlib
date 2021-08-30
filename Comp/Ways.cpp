@@ -320,7 +320,60 @@ void SetPlotNeisprClrs(int &pclr, int &bclr, bool bNewNeisprPer)
     }
     if ((pclr == bclr) && (bclr == FON)) pclr = C_D;
 }
-void Plot::UpdateState()                                                                   
+void SetABTCColors(     int masy,
+                        int  imp1, int  imp2, int  imp3, int  imp4,int  imp5,
+                        int  fimp1, int  fimp2, int  fimp3, int  fimp4,int  fimp5,
+                        int &clr, int &clrpen)
+{
+    clr = LIN;
+    clrpen = BLUE_m;
+    if (MOD == RD) {
+      int sost=0;
+      if (masy==11){
+        //1-Рельсовая цепь свободна "С"
+        //2-Рельсовая цепь ложно занята "Л3" *
+        //3-Рельсовая цепь логически занята "Л”, блокирована
+        //4-Рельсовая цепь правильно занята "ПЗ" *
+        //5-Рельсовая цепь занята с признаком головы "П3Г" *
+        clr = FON1;
+        if ((imp1)&&(fimp1==1)) sost=1;
+        if ((imp2)&&(fimp2==1)) sost=2;
+        if ((imp3)&&(fimp3==1)) sost=3;
+        if ((imp4)&&(fimp4==1)) sost=4;
+        if ((imp5)&&(fimp5==1)) sost=5;
+      }
+      if (masy==12){
+        //0: резерв
+        //1: «С» свободна
+        //2: «ЛЗ» ложно занята
+        //3: «Л» логически занята
+        //4: «ПЗ» правильно занята
+        //5: «ПЗГ» правильно занята с признаком головы поезда
+        sost=fimp1+fimp2*2+fimp3*4;
+      }
+
+      clr = FON1;
+      if (sost==1) {
+                clrpen = BLUE_m;
+                clr = LIN;
+      }
+      if ((sost==3)) {
+                clrpen = COLOR_B;
+                clr = LIN;
+      }
+      if ((sost==2)||(sost==4)||(sost==5)){
+                clrpen = BLUE_m;
+                clr = COLOR_B;
+                if (sost==2) clrpen =   249;
+      }
+      if ((fimp1 == 33) || (fimp2 == 33) || (fimp3 == 33) || (fimp4 == 33) || (fimp5 == 33)) clr = BIRUZOVIJ;
+    }
+    if (MOD == ED) {
+        if (imp4==0) clr = FON;
+    }
+
+}
+void Plot::UpdateState()
 {
     Ways::UpdateState();
     int rimpuls_kzm0=f(impuls_kzm0);
@@ -368,7 +421,7 @@ void Plot::UpdateState()
                 )
             clr = COLOR_B; else clr = COLOR_F_P;
         if ((fimp1 == 33) || (fimp2 == 33) || (fimp3 == 33)) clr = BIRUZOVIJ;
-    } else
+    }
     /* 26.11.2013  busy||mu||kmu  */
     if (((masy == 4))) {
         int fb=fimpuls_busi+fimpuls_kmu+fimpuls_mu;
@@ -388,6 +441,15 @@ void Plot::UpdateState()
         }
     }
 
+    if (((masy == 11) || (masy == 12))) {
+        // Сигналы АБТЦ МШ
+        SetABTCColors(     masy,
+                        
+                        impuls_svob, impuls_mu, impuls_zan4, impuls_busi, impuls_zan5,
+                        fimpuls_svob, fimpuls_mu, fimpuls_zan4, fimpuls_busi ,fimpuls_zan5,
+
+                        clr, clrp);
+    }
     // несовпадение замкн/незам
     if ((impuls_kzm0!=0)&&(impuls_kzm1!=0)){
        if ((fimpuls_kzm0+fimpuls_kzm1==0)||(fimpuls_kzm0+fimpuls_kzm1==2))
@@ -409,6 +471,7 @@ void Plot::UpdateState()
 
 }
 void  ShowPerSvet(int x, int y, int type, int iBusy, int iPlus, int iKzm, int mas, int masy, char * name,int fimpuls_block);
+
 void  Plot::Show()
 {
 
@@ -447,16 +510,17 @@ void  Plot::Show()
 
     int Y1 = yy - sh_y / 2;
     int Y2 = yy - sh_y / 2 + sh_y;
-
+    int dd=1;
+    if (((masy == 11) || (masy == 12))) dd=0;
     if ((clr == LIN) || (clr == FON)) {
         setfillstyle(1, FON);
         bar(xx + 1, Y1 - 1, xx + len - 1, Y2 + 1);
         setfillstyle(1, clr);
         //          barx(x+1,y-1,x+len-1,y+1);
-        barx(xx + 1, Y1, xx + len - 1, Y2);
+        barx(xx + dd, Y1, xx + len - dd, Y2);
 
     } else {
-        barx(xx + 1, Y1 - 1, xx + len - 1, Y2 + 1);
+        barx(xx + dd, Y1 - 1, xx + len - dd, Y2 + 1);
     }
 //-----------------ВЫВОД--------
     int nom;
@@ -682,6 +746,15 @@ void  Blok::Show()
                         AO->bNewNeisprPer,
                         clr, clrp);
     }
+    if (((masy == 11) || (masy == 12))) {
+        // Сигналы АБТЦ МШ
+        SetABTCColors(     masy,
+
+                        impuls_svob, impuls_mnus, impuls_kzm, impuls_busi, impuls_mu,
+                        fimpuls_svob, fimpuls_mnus, fimpuls_kzm, fimpuls_busi ,fimpuls_mu,
+
+                        clr, clrp);
+    }
 
     if (name[0] == '+') {
         clr = FON;
@@ -773,6 +846,10 @@ UNIT Blok::GetUnit()
 {
     return LINE;
 };
+int   Blok::GetSubType()
+{
+    return masy;
+};
 
 void Blok::SetPropMap(TPropMap &m)
 {
@@ -799,6 +876,12 @@ void Blok::GetNumberPosition(int &X, int &Y, int Width, int Height, int direct)
     yy += DELTA_Y;
     xx += DELTA_X;
     int len = mas;
+    if (bInGrid){
+        xx = X * MUL_X/2 + _X_;
+        yy = Y * MUL_Y/2 + _Y_;
+        len=mas* MUL_X/2;
+    }
+
     Y = yy - Height / 2;
     if (direct == 0) {
         X = xx + 3;
