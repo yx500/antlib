@@ -450,6 +450,15 @@ void Plot::UpdateState()
 
                         clr, clrp);
     }
+    if (masy == 13) {
+        // Сигналы АБТЦ МШ  STA
+        SetABTCColors(     masy,
+
+                        impuls_busi, impuls_kmu, impuls_mu, impuls_mnus, impuls_kzm,
+                        fimpuls_busi, fimpuls_kmu, fimpuls_mu, fimpuls_mnus, fimpuls_kzm,
+
+                        clr, clrp);
+    }
     // несовпадение замкн/незам
     if ((impuls_kzm0!=0)&&(impuls_kzm1!=0)){
        if ((fimpuls_kzm0+fimpuls_kzm1==0)||(fimpuls_kzm0+fimpuls_kzm1==2))
@@ -755,6 +764,15 @@ void  Blok::Show()
 
                         clr, clrp);
     }
+    if (masy == 13) {
+        // Сигналы АБТЦ МШ  STA
+        SetABTCColors(     masy,
+
+                        impuls_busi, impuls_kmu, impuls_mu, impuls_mnus, impuls_kzm,
+                        fimpuls_busi, fimpuls_kmu, fimpuls_mu, fimpuls_mnus, fimpuls_kzm,
+
+                        clr, clrp);
+    }
 
     if (name[0] == '+') {
         clr = FON;
@@ -763,10 +781,22 @@ void  Blok::Show()
         clr = FON;
     }
 
+    int len = mas;//!!!!!!!!!!!!!!!!!!!!!
+
+    xx = (xx - _X_) / MUL_X;
+    yy = (yy - _Y_) / MUL_Y;
+    yy += DELTA_Y;
+    xx += DELTA_X;
+
+    if (bInGrid){
+        xx = X * MUL_X/2 + _X_;
+        yy = Y * MUL_Y/2 + _Y_;
+        len=mas* MUL_X/2;
+    }
 
     int nom;
     int s = 3;
-    int len = mas;//!!!!!!!!!!!!!!!!!!!!!
+
     int ch__cod = 0;
     int nch_cod = 1;
     int ch__len = len - 2;
@@ -781,16 +811,7 @@ void  Blok::Show()
         nch_cod = 0;
     }
 
-    xx = (xx - _X_) / MUL_X;
-    yy = (yy - _Y_) / MUL_Y;
-    yy += DELTA_Y;
-    xx += DELTA_X;
 
-    if (bInGrid){
-        xx = X * MUL_X/2 + _X_;
-        yy = Y * MUL_Y/2 + _Y_;
-        len=mas* MUL_X/2;
-    }
 
     nom = atoi(name);
 
