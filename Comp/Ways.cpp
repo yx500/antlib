@@ -320,27 +320,25 @@ void SetPlotNeisprClrs(int &pclr, int &bclr, bool bNewNeisprPer)
     }
     if ((pclr == bclr) && (bclr == FON)) pclr = C_D;
 }
-void SetABTCColors(     int masy,
-                        int  imp1, int  imp2, int  imp3, int  imp4,int  imp5,
-                        int  fimp1, int  fimp2, int  fimp3, int  fimp4,int  fimp5,
-                        int &clr, int &clrpen)
+
+int GetABTCSost(     int masy,
+                     int  fimp1, int  fimp2, int  fimp3, int  fimp4,int  fimp5
+                    )
 {
-    clr = LIN;
-    clrpen = BLUE_m;
+    int sost=0;
+    if ((fimp1 == 33) || (fimp2 == 33) || (fimp3 == 33) || (fimp4 == 33) || (fimp5 == 33)) return 33;
     if (MOD == RD) {
-      int sost=0;
       if (masy==11){
         //1-Рельсовая цепь свободна "С"
         //2-Рельсовая цепь ложно занята "Л3" *
         //3-Рельсовая цепь логически занята "Л”, блокирована
         //4-Рельсовая цепь правильно занята "ПЗ" *
         //5-Рельсовая цепь занята с признаком головы "П3Г" *
-        clr = FON1;
-        if ((imp1)&&(fimp1==1)) sost=1;
-        if ((imp2)&&(fimp2==1)) sost=2;
-        if ((imp3)&&(fimp3==1)) sost=3;
-        if ((imp4)&&(fimp4==1)) sost=4;
-        if ((imp5)&&(fimp5==1)) sost=5;
+        if ((fimp1==1)) sost=1;
+        if ((fimp2==1)) sost=2;
+        if ((fimp3==1)) sost=3;
+        if ((fimp4==1)) sost=4;
+        if ((fimp5==1)) sost=5;
       }
       if (masy==12){
         //0: резерв
@@ -352,25 +350,37 @@ void SetABTCColors(     int masy,
         sost=fimp1+fimp2*2+fimp3*4;
       }
 
+    }
+    return sost;
+}
+
+
+void SetABTCColors(     int sost,
+                        int &clr, int &clrpen)
+{
+    clr = LIN;
+    clrpen = BLUE_m;
+
+    if (MOD == RD) {
+      if (sost==33) {clr = BIRUZOVIJ;return;}
+
       clr = FON1;
       if (sost==1) {
                 clrpen = BLUE_m;
                 clr = LIN;
       }
       if ((sost==3)) {
-                clrpen = COLOR_B;
-                clr = LIN;
+                clrpen = LIN;
+                clr = KRA_SER;
       }
       if ((sost==2)||(sost==4)||(sost==5)){
                 clrpen = BLUE_m;
                 clr = COLOR_B;
-                if (sost==2) clrpen =   249;
+                if (sost==2) clrpen =   KRA_CHERN;
       }
-      if ((fimp1 == 33) || (fimp2 == 33) || (fimp3 == 33) || (fimp4 == 33) || (fimp5 == 33)) clr = BIRUZOVIJ;
+
     }
-    if (MOD == ED) {
-        if (imp4==0) clr = FON;
-    }
+
 
 }
 void Plot::UpdateState()
@@ -441,25 +451,7 @@ void Plot::UpdateState()
         }
     }
 
-    if (((masy == 11) || (masy == 12))) {
-        // Сигналы АБТЦ МШ
-        SetABTCColors(     masy,
-                        
-                        impuls_svob, impuls_mu, impuls_zan4, impuls_busi, impuls_zan5,
-                        fimpuls_svob, fimpuls_mu, fimpuls_zan4, fimpuls_busi ,fimpuls_zan5,
-
-                        clr, clrp);
-    }
-    if (masy == 13) {
-        // Сигналы АБТЦ МШ  STA
-        SetABTCColors(     masy,
-
-                        impuls_busi, impuls_kmu, impuls_mu, impuls_mnus, impuls_kzm,
-                        fimpuls_busi, fimpuls_kmu, fimpuls_mu, fimpuls_mnus, fimpuls_kzm,
-
-                        clr, clrp);
-    }
-    // несовпадение замкн/незам
+     // несовпадение замкн/незам
     if ((impuls_kzm0!=0)&&(impuls_kzm1!=0)){
        if ((fimpuls_kzm0+fimpuls_kzm1==0)||(fimpuls_kzm0+fimpuls_kzm1==2))
           clrp=ZEL_SER;
@@ -472,6 +464,31 @@ void Plot::UpdateState()
         //setcolor(clr);
         //clr = FON;
     }
+
+    if (((masy == 11) || (masy == 12))) {
+        int sost=GetABTCSost(masy,
+                             fimpuls_svob, fimpuls_mu, fimpuls_zan4, fimpuls_busi ,fimpuls_zan5);
+        // Сигналы АБТЦ МШ
+        SetABTCColors(    sost, clr, clrp);
+        if ((MOD == ED)&&(impuls_svob==0)) clr = FON;
+    }
+    if (masy == 13) {
+        // Сигналы АБТЦ МШ  STA
+        int sost=GetABTCSost(11,
+                             fimpuls_busi, fimpuls_plus, fimpuls_mnus, fimpuls_kzm ,fimpuls_kmu);
+        SetABTCColors(    sost, clr, clrp);
+
+        if ((MOD == ED)&&((impuls_busi==0)||(impuls_plus==0)||(impuls_mnus==0)||(impuls_kzm==0)||(impuls_kmu==0))) clr = FON;
+    }
+    if (masy == 14) {
+        // Сигналы АБТЦ МШ  STA
+        int sost=GetABTCSost(12,
+                             fimpuls_busi, fimpuls_plus, fimpuls_mnus, 0 ,0);
+        SetABTCColors(    sost, clr, clrp);
+
+        if ((MOD == ED)&&((impuls_busi==0)||(impuls_plus==0)||(impuls_mnus==0))) clr = FON;
+    }
+
 
 
 
@@ -755,24 +772,33 @@ void  Blok::Show()
                         AO->bNewNeisprPer,
                         clr, clrp);
     }
+
+
     if (((masy == 11) || (masy == 12))) {
+        int sost=GetABTCSost(masy,
+                              fimpuls_svob, fimpuls_mnus, fimpuls_kzm, fimpuls_busi ,fimpuls_mu);
         // Сигналы АБТЦ МШ
-        SetABTCColors(     masy,
-
-                        impuls_svob, impuls_mnus, impuls_kzm, impuls_busi, impuls_mu,
-                        fimpuls_svob, fimpuls_mnus, fimpuls_kzm, fimpuls_busi ,fimpuls_mu,
-
-                        clr, clrp);
+        SetABTCColors(    sost, clr, clrp);
+        if ((MOD == ED)&&(impuls_svob==0)) clr = FON;
     }
     if (masy == 13) {
         // Сигналы АБТЦ МШ  STA
-        SetABTCColors(     masy,
+        int sost=GetABTCSost(11,
+                             fimpuls_busi, fimpuls_plus, fimpuls_mnus, fimpuls_kzm ,fimpuls_kmu);
+        SetABTCColors(    sost, clr, clrp);
 
-                        impuls_busi, impuls_kmu, impuls_mu, impuls_mnus, impuls_kzm,
-                        fimpuls_busi, fimpuls_kmu, fimpuls_mu, fimpuls_mnus, fimpuls_kzm,
-
-                        clr, clrp);
+        if ((MOD == ED)&&((impuls_busi==0)||(impuls_plus==0)||(impuls_mnus==0)||(impuls_kzm==0)||(impuls_kmu==0))) clr = FON;
     }
+    if (masy == 14) {
+        // Сигналы АБТЦ МШ  STA
+        int sost=GetABTCSost(12,
+                             fimpuls_busi, fimpuls_plus, fimpuls_mnus, 0 ,0);
+        SetABTCColors(    sost, clr, clrp);
+
+        if ((MOD == ED)&&((impuls_busi==0)||(impuls_plus==0)||(impuls_mnus==0))) clr = FON;
+    }
+
+
 
     if (name[0] == '+') {
         clr = FON;
