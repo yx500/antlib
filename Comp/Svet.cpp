@@ -31,6 +31,7 @@ Svet_0::Svet_0()
     impuls_aum_ust=0;
     fimpuls_aum_a=0;
     fimpuls_aum_ust=0;
+    bNoShowSV=false;
 }
 
 
@@ -251,9 +252,15 @@ void Svet_0::UpdateState()
         (name[0] == 'м')
     )  M = 1;
 
+    bNoShowSV=false;
     clrP = C_D;
     if ((bGorl) && (impuls_busi == 0)) {
         /* Горловина позаботилась  */
+                // не рисуем маневровые если не активные
+
+        if (((M) || (M1)) && ((AO->bNoShowMSV) && (MOD == RD) && (CurrentPicture == BG) && (clr == FON))) {
+            bNoShowSV=true;
+        }
 
 
     } else {
@@ -464,14 +471,17 @@ void Svet_0::UpdateState()
         }
 
         // не рисуем маневровые если не активные
+
         if (((M) || (M1)) && ((AO->bNoShowMSV) && (MOD == RD) && (CurrentPicture == BG) && (fimpuls_busi == 0) && (fimpuls_plus == 0) && (fimpuls_mnus == 0) && (fimpuls_kzm == 0))) {
-            clr = FON; clrP = FON;
+            clr = FON; clrP = FON;  
+            bNoShowSV=true;
         }
 
 
         // не рисовать при масу=4 при активном му на участке
         if ((masy == 4) && ((M) || (M1)) && (impuls_mu != 0) && (CurrentPicture == BG) && (fimpuls_mu == 0)) {
             clr = FON; clrP = FON;
+            bNoShowSV=true;
         }
 
 
@@ -523,6 +533,7 @@ int Svet_0::IsAlarmState()
 
 bool  Svet_0::Show1()
 {
+    if ((bNoShowSV)&& (MOD == RD))  return false;
     xx = X * MUL_X + _X_;
     yy = Y * MUL_Y + _Y_;
     M = 0; M1 = 0;

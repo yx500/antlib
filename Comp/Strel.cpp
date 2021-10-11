@@ -2598,7 +2598,7 @@ Strel::Strel()
     fimpuls_predSAminus=0;
 
     nomer = 0;
-    memset(&Prz, 0, sizeof(Prz));
+    memset(Prz, 0, sizeof(Prz));
     memset(name, 0, sizeof(name));
     InvertStrel = false;
     bText = false;

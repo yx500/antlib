@@ -181,10 +181,10 @@ Element::Element()
     impuls_kzm = 0;
     impuls_kmu = 0;
     impuls_mu = 0;
-    memset(&name, 0, sizeof(name));
+    memset(name, 0, sizeof(name));
     ID = 0;
-    memset(&RezBuf, 0, sizeof(RezBuf));
-    memset(&RezBuf1, 0, sizeof(RezBuf1));
+    memset(RezBuf, 0, sizeof(RezBuf));
+    memset(RezBuf1, 0, sizeof(RezBuf1));
     clr = FON;
 
     fimpuls_plus = 0;
@@ -208,7 +208,7 @@ Element::Element()
 Ways::Ways()
         : Element()
 {
-    memset(&IDnext, 0, sizeof(IDnext));
+    memset(IDnext, 0, sizeof(IDnext));
     memset(&TrainInfo, 0, sizeof(TrainInfo));
     impuls_svob=fimpuls_svob=0;
     impuls_IR=0;fimpuls_IR=0;impuls_predSEIR=0;fimpuls_predSEIR=0;

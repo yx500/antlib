@@ -950,10 +950,10 @@ void  ShowAUM(const char *name,int x, int y,  int i1,int i1m,int i2,int i2m)
 
 void  ShowTime(int x, int y, long timesec)
 {
-    char stime[5]=" 99 ";
+    char stime[5]=" 999 ";
     int tw = textwidth(stime)+2;
     int th = textheight(stime)+3;
-    if ((timesec>0)&&(timesec<=99)){
+    if ((timesec>0)&&(timesec<=999)){
         memset(stime,0,sizeof(stime));
         sprintf(stime, " %d ",timesec);
         setcolor(C_D);

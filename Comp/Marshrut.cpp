@@ -1271,7 +1271,7 @@ int _CurHeadInd[ParNameCnt];
 
 void MakeHeadInd(TParString *PS)
 {
-    memset(&_CurHeadInd, 0, sizeof(_CurHeadInd));
+    memset(_CurHeadInd, 0, sizeof(_CurHeadInd));
     for (int i = 0; i < ParNameCnt; i++)
         _CurHeadInd[i] = PS->GetInd(ParName[i]);
 }

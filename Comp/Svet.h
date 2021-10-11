@@ -38,6 +38,7 @@ protected:
     int fimpuls_aum_a;
     int fimpuls_aum_ust;
     bool bNiz;
+    bool bNoShowSV;
 
 public:
     bool bGorl;

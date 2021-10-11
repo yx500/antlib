@@ -293,10 +293,10 @@ int  Station::Open(const char *fn)
 //---------------------------------------------------------------------------
 void  Station::Close()
 {
-    memset(&filename, 0, sizeof(filename));
-    memset(&name, 0, sizeof(name));
+    memset(filename, 0, sizeof(filename));
+    memset(name, 0, sizeof(name));
     pPoligon = NULL;
-    memset(&ChanelOffset, 0, sizeof(ChanelOffset));
+    memset(ChanelOffset, 0, sizeof(ChanelOffset));
     memset(ChanelNames, 0, sizeof(ChanelNames));
     vUseChanelNames.clear();
     //memset(UseChanelNames,0,sizeof(UseChanelNames));

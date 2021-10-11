@@ -60,9 +60,9 @@ TY_Strel::TY_Strel()
         : Strel0()
 {
     memset(&YP, 0, sizeof(YP));
-    memset(&T, 0, sizeof(T));
-    memset(&Td, 0, sizeof(Td));
-    memset(&prSTIK, 0, sizeof(prSTIK));
+    memset(T, 0, sizeof(T));
+    memset(Td, 0, sizeof(Td));
+    memset(prSTIK, 0, sizeof(prSTIK));
     XX = YY = DH = DX = 0;
     Prz[0] = 2;
     Prz[1] = 0;

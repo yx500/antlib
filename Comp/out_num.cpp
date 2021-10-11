@@ -363,7 +363,7 @@ void EXD_ShowTrainNumber(AComp *AC, int rimpb)
             PolyColor(clr, _points, _clr, 6);
         } else {
             setfillstyle(EMPTY_FILL, clr);
-            memset(&_clr2, clr, sizeof(&_clr2));
+            memset(_clr2, clr, sizeof(_clr2));
             PolyColor(clr, _points, _clr2, 6);
         }
         clr = GetTNPenClr(&wAC->TrainInfo);
@@ -414,7 +414,7 @@ void EXD_ShowTrainNumbers(AComp *AC, int rimpb)
             PolyColor(clr, _points, _clr, 6);
         } else {
             setfillstyle(EMPTY_FILL, clr);
-            memset(&_clr2, clr, sizeof(&_clr2));
+            memset(_clr2, clr, sizeof(_clr2));
             PolyColor(clr, _points, _clr2, 6);
         }
         clr = GetTNPenClr(&wAC->TrainInfo);

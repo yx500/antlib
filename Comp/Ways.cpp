@@ -376,7 +376,7 @@ void SetABTCColors(     int sost,
       if ((sost==2)||(sost==4)||(sost==5)){
                 clrpen = BLUE_m;
                 clr = COLOR_B;
-                if (sost==2) clrpen =   KRA_CHERN;
+                if (sost==2) clrpen =   KRAYARK;
       }
 
     }
@@ -483,10 +483,10 @@ void Plot::UpdateState()
     if (masy == 14) {
         // —Ë„Ì‡Î˚ ¿¡“÷ Ãÿ  STA
         int sost=GetABTCSost(12,
-                             fimpuls_busi, fimpuls_plus, fimpuls_mnus, 0 ,0);
+                             fimpuls_mu, fimpuls_plus, fimpuls_busi, 0 ,0);
         SetABTCColors(    sost, clr, clrp);
 
-        if ((MOD == ED)&&((impuls_busi==0)||(impuls_plus==0)||(impuls_mnus==0))) clr = FON;
+        if ((MOD == ED)&&((impuls_busi==0)||(impuls_plus==0)||(fimpuls_mu==0))) clr = FON;
     }
 
 
@@ -530,14 +530,17 @@ void  Plot::Show()
     if (name[0] == '-') clr = FON;
     if (atoi(name) < 0) clr = FON;
 
+
+    if ((CurrentPicture == BG)&&(abs(len)<=6)&& (clrp==C_D)&&(clr==COLOR_B)) clrp=clr;
     setcolor(clrp);
     setfillstyle(1, clr);
+
 
 
     int Y1 = yy - sh_y / 2;
     int Y2 = yy - sh_y / 2 + sh_y;
     int dd=1;
-    if (((masy == 11) || (masy == 12))) dd=0;
+    //if (((masy == 11) || (masy == 12))) dd=0;
     if ((clr == LIN) || (clr == FON)) {
         setfillstyle(1, FON);
         bar(xx + 1, Y1 - 1, xx + len - 1, Y2 + 1);
@@ -792,10 +795,10 @@ void  Blok::Show()
     if (masy == 14) {
         // —Ë„Ì‡Î˚ ¿¡“÷ Ãÿ  STA
         int sost=GetABTCSost(12,
-                             fimpuls_busi, fimpuls_plus, fimpuls_mnus, 0 ,0);
+                             fimpuls_mu, fimpuls_plus, fimpuls_busi, 0 ,0);
         SetABTCColors(    sost, clr, clrp);
 
-        if ((MOD == ED)&&((impuls_busi==0)||(impuls_plus==0)||(impuls_mnus==0))) clr = FON;
+        if ((MOD == ED)&&((impuls_busi==0)||(impuls_plus==0)||(fimpuls_mu==0))) clr = FON;
     }
 
 
