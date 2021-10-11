@@ -349,9 +349,26 @@ int GetABTCSost(     int masy,
         //5: «ПЗГ» правильно занята с признаком головы поезда
         sost=fimp1+fimp2*2+fimp3*4;
       }
-
     }
     return sost;
+}
+
+int SumABTCSost(     int sost1,int sost2)
+{
+    if (sost1==sost2)  return sost2;
+    if ((sost1==33)|| (sost2==33)) return 33;
+    if ((sost1==0)|| (sost2==0)) return 0;
+    if (sost1==1) return sost2;
+    if (sost2==1) return sost1;
+
+    if ((sost1==3)|| (sost2==3)) return 3;
+    if ((sost1==2)|| (sost2==2)) return 2;
+
+    if ((sost1==4) && (sost2==5)) return 5;
+
+    if ((sost1==5) && (sost2==4)) return 5;
+
+    return sost2;
 }
 
 
@@ -378,10 +395,7 @@ void SetABTCColors(     int sost,
                 clr = COLOR_B;
                 if (sost==2) clrpen =   KRAYARK;
       }
-
     }
-
-
 }
 void Plot::UpdateState()
 {
@@ -489,6 +503,34 @@ void Plot::UpdateState()
         if ((MOD == ED)&&((impuls_busi==0)||(impuls_plus==0)||(fimpuls_mu==0))) clr = FON;
     }
 
+    if (masy == 15) {
+        // Сигналы АБТЦ МШ   SUM
+        int sost =0;
+        if (impuls_busi>=1000) {
+                int f1=f(impuls_busi+0);
+                int f2=f(impuls_busi+1);
+                int f3=f(impuls_busi+2);
+                sost=GetABTCSost(12,f1, f2, f3, 0 ,0);
+        }
+        if (impuls_kmu>=1000) {
+                int f1=f(impuls_kmu+0);
+                int f2=f(impuls_kmu+1);
+                int f3=f(impuls_kmu+2);
+                int sost2=GetABTCSost(12,f1, f2, f3, 0 ,0);
+                sost=SumABTCSost(sost,sost2);
+        }
+        if (impuls_mu>=1000) {
+                int f1=f(impuls_mu+0);
+                int f2=f(impuls_mu+1);
+                int f3=f(impuls_mu+2);
+                int sost2=GetABTCSost(12,f1, f2, f3, 0 ,0);
+                sost=SumABTCSost(sost,sost2);
+        }
+        SetABTCColors(    sost, clr, clrp);
+        if ((MOD == ED)&&(impuls_busi==0)) clr = FON;
+    }
+
+
 
 
 
@@ -541,6 +583,7 @@ void  Plot::Show()
     int Y2 = yy - sh_y / 2 + sh_y;
     int dd=1;
     //if (((masy == 11) || (masy == 12))) dd=0;
+    if ((CurrentPicture == BG)&&(abs(len)<=6)) dd=0;
     if ((clr == LIN) || (clr == FON)) {
         setfillstyle(1, FON);
         bar(xx + 1, Y1 - 1, xx + len - 1, Y2 + 1);
