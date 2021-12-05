@@ -473,7 +473,8 @@ void VisibleArray::ClearAll(void)
 
     for (TvObjPtr::iterator i = vObjPtr.begin(); i != vObjPtr.end(); ++i) {
         ac = (*i);
-        if (ac->GetType() != ASN) ac->Clear();
+        //if (ac->GetType() != ASN)
+        ac->Clear();
     }
 }
 

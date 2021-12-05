@@ -242,7 +242,8 @@ const _ctstr = 3;
 const _ctsvt = 4;
 const _ctlmp = 5;
 const _ctnpr = 6;
-static char _CommonTypeName[7][5] = {"", "путь", "уч", "стр", "свт", "лмп", "напр"};
+const _ctuksps = 7;
+static char _CommonTypeName[8][5] = {"", "путь", "уч", "стр", "свт", "лмп", "нпр", "укс"};
 //                                  0     1     2     3     4     5     6     7    8  9   10      11     12     13     14    15
 static char _BASHTypeName[16][7] = {"кгн", "кгн", "кгн", "кгн", "кгн", "кгн", "кгн", "кгн", "", "", "укспс", "саут", "кгу", "диск", "кгу", "ячейка"};
 static int _CommonTypeInd[CompTypeCount] = {
@@ -265,7 +266,7 @@ static int _CommonTypeInd[CompTypeCount] = {
     _ctnon, _ctnon, _ctnon,//STIK   ,ELEKTR ,PLATF  ,
 //ENGL1  ,ENGL2  ,XBOST1 ,XBOST2 ,XBOST3 ,XBOST4 ,KUS1   ,KUS2   ,
     _ctstr, _ctstr,  _ctstr, _ctstr, _ctstr, _ctstr, _ctstr, _ctstr,
-    _ctnon, _ctnon,//P_SVE  ,BASH,
+    _ctnon, _ctuksps,//P_SVE  ,BASH,
 //SWrtW   ,SWltW   ,SWlbW   ,SWrbW,
     _ctstr, _ctstr, _ctstr, _ctstr,
     _ctlmp, _ctlmp,//SUPERLAMP1,SUPERLAMP2,

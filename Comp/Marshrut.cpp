@@ -304,8 +304,8 @@ void TMarshrut::SetMarshSectType()
         return;
     }
 
-    if ((pS_PRED->GetType() == WAY))  T1 = 0; else if ((pS_PRED->GetType() == PLOT))T1 = 1;
-    if ((pS_PAST->GetType() == WAY))  T2 = 0; else if ((pS_PAST->GetType() == PLOT))T2 = 1;
+    if ((pS_PRED->GetType() == WAY))  T1 = 0; else if ((pS_PRED->GetType() == PLOT))T1 = 1;else if ((pS_PRED->GetType() == 36))T1 = 1;
+    if ((pS_PAST->GetType() == WAY))  T2 = 0; else if ((pS_PAST->GetType() == PLOT))T2 = 1;else if ((pS_PAST->GetType() == 36))T2 = 1;
     if ((T1 == 3) || (T2 == 3)) MarshSectType = mstUnknow; else
         MarshSectType = AMarshSectType[T1*2+T2];
 }
@@ -835,7 +835,7 @@ TYP STAStrelTypes[] = {SWRT   , SWLT   , SWLB   , SWRB   ,
                        Y_STREL_1, Y_STREL_2, Y_STREL_3, Y_STREL_4, G_STREL_Y, G_RC, G_RC_2, G_ZAMI, G_ZKR, G_STREL_1, G_ZAMP, G_OSY, G_STREL_2,Y_STREL_5,Y_STREL_6
                       };
 TYP STAWaysTypes[] = {WAY};
-TYP STABlockTypes[] = {PLOT};
+TYP STABlockTypes[] = {PLOT,36};
 
 void TMarshList::ConnectToStanSTA(Station * pS)
 {

@@ -466,7 +466,7 @@ void Svet_0::UpdateState()
                         }
         if (impuls_aum_a!=0){
            if (fimpuls_aum_a==1) clrP = ZEL ;
-           if (fimpuls_aum_ust==1) clrP = ZEL_SER ;
+           if (fimpuls_aum_ust==1) clrP = ZEL_MIG ;
 
         }
 

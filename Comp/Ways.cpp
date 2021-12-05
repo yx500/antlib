@@ -275,6 +275,17 @@ UNIT Way::GetUnit()
     return WAYS;
 };
 
+bool Way::isKzm(){
+        if(f(impuls_plus)==1) return true;
+        return false;
+}
+
+
+bool Way::isBusyKzmAccepted(){
+        if((impuls_busi!=0)&&(impuls_plus!=0)) return true;
+        return false;
+}
+
 /* =================================  Plot  ===============================*/
 Plot::Plot()
 {
@@ -819,27 +830,27 @@ void  Blok::Show()
                         clr, clrp);
     }
 
-
+    int sostABTC=0;
     if (((masy == 11) || (masy == 12))) {
-        int sost=GetABTCSost(masy,
+        sostABTC=GetABTCSost(masy,
                               fimpuls_svob, fimpuls_mnus, fimpuls_kzm, fimpuls_busi ,fimpuls_mu);
         // Сигналы АБТЦ МШ
-        SetABTCColors(    sost, clr, clrp);
+        SetABTCColors(    sostABTC, clr, clrp);
         if ((MOD == ED)&&(impuls_svob==0)) clr = FON;
     }
     if (masy == 13) {
         // Сигналы АБТЦ МШ  STA
-        int sost=GetABTCSost(11,
+        sostABTC=GetABTCSost(11,
                              fimpuls_busi, fimpuls_plus, fimpuls_mnus, fimpuls_kzm ,fimpuls_kmu);
-        SetABTCColors(    sost, clr, clrp);
+        SetABTCColors(    sostABTC, clr, clrp);
 
         if ((MOD == ED)&&((impuls_busi==0)||(impuls_plus==0)||(impuls_mnus==0)||(impuls_kzm==0)||(impuls_kmu==0))) clr = FON;
     }
     if (masy == 14) {
         // Сигналы АБТЦ МШ  STA
-        int sost=GetABTCSost(12,
+        sostABTC=GetABTCSost(12,
                              fimpuls_mu, fimpuls_plus, fimpuls_busi, 0 ,0);
-        SetABTCColors(    sost, clr, clrp);
+        SetABTCColors(    sostABTC, clr, clrp);
 
         if ((MOD == ED)&&((impuls_busi==0)||(impuls_plus==0)||(fimpuls_mu==0))) clr = FON;
     }
@@ -907,6 +918,15 @@ void  Blok::Show()
     setfillstyle(1, clr);
     setcolor(clrp);
     barx(xx + 1, yy - s, xx + len - 1, yy + s);
+    //5-Рельсовая цепь занята с признаком головы "П3Г" *
+    if (sostABTC==5){
+        if (len==0) len=1;
+        int xy[6];
+        xy[0]=xx + 1;         xy[1]=yy - s;
+        xy[2]=xx + len/2 - 1; xy[3]=yy - s-s*2;
+        xy[4]=xx + len - 1;         xy[5]=yy - s;
+        fillpoly(3, xy);
+    }
 
     if ((AO->FLAG_POINT_NUMBER) && (nom > 0)) {
         _SetText(F_LITT_S, CENTER_TEXT, BOTTOM_TEXT);
@@ -985,6 +1005,11 @@ void Blok::GetNumberPosition(int &X, int &Y, int Width, int Height, int direct)
 
 
 void SetPlotNeisprClrs(int &pclr, int &bclr);
+bool Bl_uh::isBusyKzmAccepted()
+{
+        if ((impuls_plus!=0)&&(impuls_kzm!=0)) return true;
+        return false;
+}
 
 
 void  Bl_uh::Show()

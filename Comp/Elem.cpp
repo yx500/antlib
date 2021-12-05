@@ -337,3 +337,20 @@ void Ways::SetUstIR(int AIR)
     default: bShowUIR=false; break;//SetStrelShowParams(-1,-1,-1,-1,-1,-1); break;
     }
 }
+
+
+bool Ways::isBusy(){
+        UpdateState();
+        if(clr==COLOR_B) return true;
+        return false;
+}
+
+
+bool Ways::isKzm(){
+        if(f(impuls_kzm)==1) return true;
+        return false;
+}
+bool Ways::isBusyKzmAccepted(){
+        if((impuls_busi!=0)/*&&(impuls_kzm!=0)*/) return true;
+        return false;
+}

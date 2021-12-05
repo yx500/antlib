@@ -30,6 +30,8 @@ public:
     virtual void ChangeMarkerXY(int iMarker,int aX,int aY);
     virtual int GetMarkerCount(){return 2;};
     virtual void GetMarkerPoint(int iMarker,int &aX,int &aY);
+    virtual bool isKzm();
+    virtual bool isBusyKzmAccepted();
     
 
 };
@@ -83,6 +85,7 @@ public:
     };
     virtual void ShowTrainNumber();
     virtual void HideTrainNumber();
+    virtual bool isBusyKzmAccepted();
 };
 
 

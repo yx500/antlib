@@ -108,6 +108,11 @@ public:
 
     void SetUstIR(int AIR);
 
+    virtual bool isBusy();
+    virtual bool isKzm();
+    virtual bool isBusyKzmAccepted();
+
+
 };
 
 

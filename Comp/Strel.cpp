@@ -532,6 +532,31 @@ void Strel0::UpdateState()
 }
 
 
+bool Strel0::isBusy(){
+        if (nomer < 0) {
+            if (f(impuls_busi)==1){
+                if ((f(impuls_kmu)==0)&&(f(impuls_mu)==0))
+                        return 1;
+            }
+            return 0;
+        } else return Ways::isBusy();
+}
+bool Strel0::isKzm(){
+        if (nomer < 0) {
+            if (f(impuls_kzm)==1){
+                if ((f(impuls_kmu)==0)&&(f(impuls_mu)==0))
+                        return 1;
+            }
+        }
+        return 0;
+}
+bool Strel0::isBusyKzmAccepted(){
+    if (nomer < 0) {
+        if((impuls_busi!=0)&&(impuls_kzm!=0)) return true;
+    }
+    return false;
+}
+
 int Def_gr(char *name)
 {
     if ((name[0] == '×') && (name[1] == 'Ï'))return 0; // ×ÅÒÍÛÅ ÑÒÐÅËÊÈ
@@ -1414,6 +1439,9 @@ void  Asn::Show()
 //  impuls_kzm      Œ€˜1
 //  impuls_kmu      Œ€˜2
 //  impuls_mu       Œ€˜3
+    if (impuls_plus==0) {
+        if (Zan==1) SS = SS3; else SS = SS0;
+    }
     if (MOD == ED) SS = SS3;
     if (SS == SS3) {
         setcolor(C_D);
