@@ -863,7 +863,7 @@ void  ShowAUM(const char *name,int x, int y,  int i1,int i1m,int i2,int i2m)
         i2m=0;
     }
     if (CurrentPicture==BG){
-        if ((i1==0) && (i1m==0) && (i2==0) && (i2m==0)) return;
+        if ((i1!=1) && (i1m!=1) && (i2!=1) && (i2m!=1)) return;
     }
     int p=0;
     int d=0;
