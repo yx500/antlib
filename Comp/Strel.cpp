@@ -1531,6 +1531,9 @@ void  Napr::Show()
             if ((fimpuls_kzm == 1)  && (fimpuls_mnus == 0) && (fimpuls_plus == 1) && (fimpuls_busi == 0))  {
                 clr = ZEL; pclr = COLOR_B;
             }
+            if (
+            (fimpuls_kzm == 33) ||
+            (fimpuls_busi == 33))  clr = BIRUZOVIJ;
         }
         // несовпадение занятости/свободности
         if ((impuls_busi!=0)&&(impuls_svob!=0)&&((fimpuls_busi+fimpuls_svob==0)||(fimpuls_busi+fimpuls_svob==2))) pclr=KRA_ZEL;
