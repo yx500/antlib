@@ -426,6 +426,11 @@ void Strel0::UpdateState()
         if (impuls_busi) clr = Clr_Set(fimpuls_busi);
         if (clr != COLOR_B) {
             if (impuls_kzm)  clr = Clr_SetK(fimpuls_kzm);
+            // Доп замыкание
+            if ((impuls_kzm)&&(fimpuls_kzm==0)&&(impuls_kmu2)&&(fimpuls_mu2!=1)){
+                clr = Clr_SetK(impuls_kmu2);
+            }
+
             if ((clr != COLOR_SET) && (bShowInSpyMarsh)) clr = COLOR_S;
         }
 
