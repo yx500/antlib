@@ -7,44 +7,44 @@
 #define BL_CV 0
 
 
-const     C_D       =   0      ;
-const     BLUE_m    =   0      ;
-const     ZEL       =   2      ; //
-const     COLOR_SVZ =   2      ; //2 GREEN     ; светофор
-//const     BIRUZOVIJ  =  3      ; // FON  ;     /* цвет фнона */
-const     CYAN_m    =   3      ; // CYAN      ;
-const     TIME_FON  =   3      ; //
-const     COLOR_B   =   4      ; // RED       ;     /* цвет занятятости */
-const     KRA       =   4      ; //
-const     KRAYARK   =   5      ; //  Яркокрасн
-const     LIN_W     =   6      ; // BROWN     ;     /* цвет линии */
-const     LIN       =   7      ; // LIN ;     /* цвет линии */
-const     COLOR_F_PRG = 7      ; // LIN ;  StnL
-const     COLOR_F_P =   7      ; // LIN ;     /* цвет "свободен" для пути */
-const     FON       =   8      ; // FON  ;     /* цвет фнона */
-const     FON1      =   9      ; // FON  ;     /* цвет фнона */
-const     BLUE_mmm  =   9      ; // 9         ;
-const     SV_MIG    =   10     ; // WHT       ;   Ч/Бел
-//const     KRA_MIG =   10     ; //  не исп!
-const     GELT      =   11     ; //   ЖЕЛТЫЙ
-const     COLOR_PSV =   12     ; // WHT       ;   КР/Бел
-const     ZEL_MIG   =   13     ;
-const     BOLOT     =   14     ; //
-const     TXT       =   15     ; // TXT     ;
-const     GELT_SER  =   16     ; //; 16 желтый/серый
-const     KRA_SER   =   17     ; //; 17 красный/серый
-const     BEL_SER   =   18     ; //; 18 белый/серый
-const     ZEL_SER   =   19     ; //; 19 зелёный/серый
-const     KRA_CHERN =   20     ; //; 20 красный/черный
-const     KRA_BEL   =   21     ; //; 21 красный/белый
-const     KRA_ZEL   =   22     ; //; 22 красный/зелёный
-const     KRA_GELT  =   23     ; //; 23 красный/желтый
-const     ZEL_LIN   =   24     ; //; зелёный/св серый
-const     GELT_LIN  =   25     ; //; желтый/св серый
-const     CHERN_FON =  26     ; //; ФОН/черный
-const     SER_CHERN =    27     ; //; св серый/ФОН
+const int     C_D       =   0      ;
+const int     BLUE_m    =   0      ;
+const int     ZEL       =   2      ; //
+const int     COLOR_SVZ =   2      ; //2 GREEN     ; светофор
+//const int     BIRUZOVIJ  =  3      ; // FON  ;     /* цвет фнона */
+const int     CYAN_m    =   3      ; // CYAN      ;
+const int     TIME_FON  =   3      ; //
+const int     COLOR_B   =   4      ; // RED       ;     /* цвет занятятости */
+const int     KRA       =   4      ; //
+const int     KRAYARK   =   5      ; //  Яркокрасн
+const int     LIN_W     =   6      ; // BROWN     ;     /* цвет линии */
+const int     LIN       =   7      ; // LIN ;     /* цвет линии */
+const int     COLOR_F_PRG = 7      ; // LIN ;  StnL
+const int     COLOR_F_P =   7      ; // LIN ;     /* цвет "свободен" для пути */
+const int     FON       =   8      ; // FON  ;     /* цвет фнона */
+const int     FON1      =   9      ; // FON  ;     /* цвет фнона */
+const int     BLUE_mmm  =   9      ; // 9         ;
+const int     SV_MIG    =   10     ; // WHT       ;   Ч/Бел
+//const int     KRA_MIG =   10     ; //  не исп!
+const int     GELT      =   11     ; //   ЖЕЛТЫЙ
+const int     COLOR_PSV =   12     ; // WHT       ;   КР/Бел
+const int     ZEL_MIG   =   13     ;
+const int     BOLOT     =   14     ; //
+const int     TXT       =   15     ; // TXT     ;
+const int     GELT_SER  =   16     ; //; 16 желтый/серый
+const int     KRA_SER   =   17     ; //; 17 красный/серый
+const int     BEL_SER   =   18     ; //; 18 белый/серый
+const int     ZEL_SER   =   19     ; //; 19 зелёный/серый
+const int     KRA_CHERN =   20     ; //; 20 красный/черный
+const int     KRA_BEL   =   21     ; //; 21 красный/белый
+const int     KRA_ZEL   =   22     ; //; 22 красный/зелёный
+const int     KRA_GELT  =   23     ; //; 23 красный/желтый
+const int     ZEL_LIN   =   24     ; //; зелёный/св серый
+const int     GELT_LIN  =   25     ; //; желтый/св серый
+const int     CHERN_FON =  26     ; //; ФОН/черный
+const int     SER_CHERN =    27     ; //; св серый/ФОН
 
-const     COLOR_IR_F =  GELT_SER ; //   цвет ИР маршрута при свободном
+const int     COLOR_IR_F =  GELT_SER ; //   цвет ИР маршрута при свободном
 
 
 extern int   COLOR_SET ; //   // цвет замыкания маршрута
@@ -80,7 +80,7 @@ extern int TonnelStateColors[8][2];
 void _ALIB_ SwapDACForPrinter();
 void _ALIB_ RestoreDAC();
 
-const  MaxLampType = 32;
+const  int MaxLampType = 32;
 bool _ALIB_ wc_LoadIniFile();
 void _ALIB_ wc_SetColorByT_N(int T, int N);
 int _ALIB_ wc_GetColor(int T, int N);

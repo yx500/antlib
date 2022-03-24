@@ -22,6 +22,9 @@
 #include "winpalet.h"
 #include "Col.h"
 #include "uImgContainer.h"
+
+#include "GMPEN.H"
+
 //#include "ALIB.h"
 
 //static
@@ -54,7 +57,7 @@ TColor BgiColor(unsigned int c)
 }
 #define BGICOLOR(c) BgiColor(c)
 
-#include "GMPEN.H"
+
 
 bool UseNativeFontSize = true;
 

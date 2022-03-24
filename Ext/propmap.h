@@ -1,10 +1,15 @@
 #ifndef propmapH
 #define propmapH
 //---------------------------------------------------------------------------
+#ifndef QT_ANTLIB
 #include <Classes.hpp>
+#else
+#include <vcl.h>
+#endif
 
 #include <vector>
 #include <map>
+
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

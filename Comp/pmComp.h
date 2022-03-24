@@ -27,10 +27,10 @@ public:
     char * __fastcall GetPropEx(char * PropName, void ** ptr);
     const char * GetPropMapStr(int ver = 1);
     void SetPropMapStr(char * szSrc);
-
+#ifndef QT_ANTLIB
     __property char * Prop[char * PropName]  = { read = GetProp, write = SetProp };
     __property int PropInt[char * PropName]  = { read = GetPropInt, write = SetPropInt };
-
+#endif
 };
 
 

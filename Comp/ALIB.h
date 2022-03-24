@@ -9,7 +9,7 @@
 #include "ACom_V.h"
 
 
-#include "size.h"
+#include "SIZE.h"
 #include "col.h"
 
 
@@ -26,14 +26,14 @@
 #include "Vatempl.h"
 #include "Stan.h"
 #include "Polig.h"
-#include "Y_Strel.h"
+#include "Y_STREL.h"
 #include "Gor_Elem.h"
 #include "YchParams.h"
 #include "Impuls.h"
 
 
-#include "WinBgi.h"
-#include "WinPalet.h"
+#include "winbgi.h"
+#include "winpalet.h"
 
 #include "uEXD.h"
 

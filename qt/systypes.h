@@ -4,15 +4,6 @@
 /*                                                                    */
 /*--------------------------------------------------------------------*/
 
-/*
- *      C/C++ Run Time Library - Version 11.0
- *
- *      Copyright (c) 1987, 2002 by Borland Software Corporation
- *      All Rights Reserved.
- *
- */
-
-/* $Revision: 9.4.2.1 $ */
 
 
 #include <cstdint>
@@ -28,7 +19,13 @@
 //typedef unsigned short uint16;
 //typedef unsigned long uint32;
 
+typedef int8_t int8;
+typedef int16_t int16;
+typedef int32_t int32;
+
 typedef uint8_t uint8;
+typedef uint16_t uint16;
+typedef uint32_t uint32;
 
 
 

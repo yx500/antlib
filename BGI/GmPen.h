@@ -1,5 +1,7 @@
 #ifndef GmPenH
 #define GmPenH
+
+#ifndef QT_ANTLIB
 //----------------------------------------------------------------------------
 //  Copyright GTSS c 2000. All Rights Reserved.
 //----------------------------------------------------------------------------
@@ -16,4 +18,14 @@ public:
     __fastcall ~TGmPen();
 };
 //---------------------------------------------------------------------------
+#else
+class TGmPen
+{
+public:
+    __fastcall TGmPen(TCanvas*){}
+    __fastcall ~TGmPen(){}
+};
 #endif
+
+#endif
+

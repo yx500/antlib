@@ -1,15 +1,20 @@
 
 
-
-
+DEFINES +=QT_ANTLIB
 
 #QT+=concurrent
 
 INCLUDEPATH +=$$PWD/../qt
+INCLUDEPATH +=$$PWD/../BGI
+INCLUDEPATH +=$$PWD/../Ext
+INCLUDEPATH +=$$PWD/../Gora
+INCLUDEPATH +=$$PWD/../Comp
 
 
 HEADERS += \
 $$PWD/../qt/systypes.h \
+$$PWD/../qt/winbgi_qt.h \
+$$PWD/../BGI/winbgi.h \
 $$PWD/../Comp/ACom_T.h \
 $$PWD/../Comp/ACom_V.h \
 $$PWD/../Comp/ALIB.h \
@@ -52,7 +57,8 @@ $$PWD/../Ext/uETTList.h \
 $$PWD/../Ext/uEXD.h \
 $$PWD/../Ext/uFormula.h \
 $$PWD/../Ext/uImgContainer.h \
-$$PWD/../Ext/uParString.h
+$$PWD/../Ext/uParString.h \
+    $$PWD/vcl.h
 
 
 SOURCES += \

@@ -2,15 +2,20 @@
 #ifndef VatemplxH
 #define VatemplxH
 //---------------------------------------------------------------------------
-
-#include "comp.h"
-#include <classes.hpp>
+#ifndef QT_ANTLIB
+#include <Classes.hpp>
+#else
+#include <vcl.h>
+#endif
 #include <stdio.h>
 #include <vector>
 
+#include "Comp.h"
 
-const AllocError = -1;
-const Ok = 0;
+
+
+const int AllocError = -1;
+const int Ok = 0;
 
 
 

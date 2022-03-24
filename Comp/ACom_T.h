@@ -1,11 +1,14 @@
 #ifndef ACom_TH
 #define ACom_TH
 //---------------------------------------------------------------------------
-
+#ifndef QT_ANTLIB
 #if defined(ACOMPDLLMAKE)
 # define _ALIB_     __declspec(dllexport)
 #else
 # define _ALIB_     __declspec(dllimport)
+#endif
+#else
+    #define _ALIB_
 #endif
 
 
@@ -59,7 +62,7 @@ enum STATUS { NET,/*не используется*/
             };/* Мимо 2*/
 
 // ТИПЫ КОМПОНЕНТ
-const CompTypeCount = 86;
+const int CompTypeCount = 86;
 enum TYP {NOTHING, WAY    , PLOT   , SIG_L  , SIG_R  , SWRT   , SWLT   ,
           SWLB   , SWRB   , SWL    , SWKT   , SWKB   , SWrt   , SWlt   ,
           SWlb   , SWrb   , INFO   , BLOK   , FISH_L , FISH_R , FISH   ,

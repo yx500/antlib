@@ -13,9 +13,9 @@
 
 
 #include "common.h"
-#include "WinBgi.h"
-#include "WinPalet.h"
-#include "size.h"
+#include "winbgi.h"
+#include "winpalet.h"
+#include "SIZE.h"
 #include "col.h"
 
 

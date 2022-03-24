@@ -1,7 +1,8 @@
 #ifndef TGORKA_H
 #define TGORKA_H
 
-#include "vdefs.h"
+//#include "vdefs.h"
+#include <systypes.h>
 #include "tNsl4Term.h"
 
 #pragma pack(push, 1)
@@ -333,10 +334,10 @@ struct TKZPFROM{
 };
 
 struct  tDescrCom {
-     uint8  type   ; //  TYP комманды
-     uint8  num    ; // Номер отцепа 1-255 Живет в течении роспуска одного
-     uint8  mar    ; // Заданный маршрут
-     uint16 Vr     ; // Расчетная скорость выхода
+     uint8  type   ; //  TYP комм нды
+     uint8  num    ; // Номер отцеп  1-255 Живет в течении роспуск  одного
+     uint8  mar    ; // З д нный м ршрут
+     uint16 Vr     ; // Р счетн я скорость выход 
      uint8  Stupen ; // Ступень торможения
      uint8  old_num;
      uint8  old_mar;

@@ -3,7 +3,11 @@
 
 #include "col.h"
 #include "winpalet.h"
+#ifndef QT_ANTLIB
 #include <inifiles.hpp>
+#else
+#include "vcl.h"
+#endif
 
 
 
@@ -363,9 +367,11 @@ void _SetCol(int T, int N, String S)
         SPPLC[T][N] = -S.ToIntDef(0); else
         SPPLC[T][N] = S.ToIntDef(0);
 }
-static bool wc_loaded=false;
+#ifndef QT_ANTLIB
+
 bool wc_LoadIniFile()
 {
+    static bool wc_loaded=false;
     try {
         if (wc_loaded) return true;
         String FN = String(DACCfgFileName);
@@ -402,7 +408,7 @@ bool wc_LoadIniFile()
     wc_loaded=true;
     return true;
 }
-
+#endif
 
 void wc_SetColorByT_N(int T, int N)
 {
