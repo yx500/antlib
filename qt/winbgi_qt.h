@@ -7,15 +7,27 @@
 
 
 
-#define _WINBGI_
-#define far
-
 
 #if !defined(__COLORS)
 #define __COLORS
 
-#include "windef.h"
+//#include "windef.h"
 //#include "winuser.h"
+
+typedef struct tagPOINT
+{
+  int  x;
+  int  y;
+} POINT;
+
+typedef struct tagRECT
+{
+  int    left;
+  int    top;
+  int    right;
+  int    bottom;
+} RECT;
+
 
 struct TPoint : public POINT
   {
