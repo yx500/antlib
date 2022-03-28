@@ -135,7 +135,7 @@ public:
     virtual void ShowTrainNumber();
     virtual void HideTrainNumber();
 
-    char * GetStrelInfo();
+    //char * GetStrelInfo();
     virtual bool isBusy();
     virtual bool isKzm();
     virtual bool isBusyKzmAccepted();

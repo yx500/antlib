@@ -31,24 +31,7 @@ void WriteToErr(const std::string& Str)
 //---------------------------------------------------------------------------
 
 
-/*
-INFO   ,
-BLOK   ,
-FISH_L ,
-FISH_R ,
-FISH   ,
-NAME   ,
-GORL_L ,GORL_R ,MESS   ,SzT    ,SzB    , GORL  ,
-          ASN    ,KRIV   ,OVER   ,POIN  ,NOMER  ,
-          TUPIC  ,BL_UH  ,STIK   ,ELEKTR ,PLATF  ,
 
-            ,
-
-          SUPERLAMP1,,
-
-          BD_SVET,BD_STREL,BD_WAY,BD_BLOK,BD_LAMP,BD_SPECEL, BD_STATIC
-
- */
 
 const int _ctnon = 0;
 const int _ctway = 1;

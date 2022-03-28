@@ -2878,7 +2878,7 @@ void Strel0::ShowStik(int xx, int yy, int prSTIK)
     }
 }
 
-
+/*
 static String _SS_GetStrelInfo;
 char * Strel0::GetStrelInfo()
 {
@@ -2912,7 +2912,7 @@ char * Strel0::GetStrelInfo()
     }
     return _SS_GetStrelInfo.c_str();
 }
-
+*/
 
 
 

@@ -281,6 +281,7 @@ void Ways::SetPropMap(TPropMap &m)
 
 static String _SS_GetCompInfo;
 extern T_GetSigName_Func _GetSigName_Func;
+/*
 char * Ways::GetCompInfo()
 {
     _SS_GetCompInfo = "";
@@ -318,7 +319,7 @@ char * Ways::GetCompInfo()
 
     return _SS_GetCompInfo.c_str();
 }
-
+*/
 void Ways::ShowTrainNumber()
 {
     EXD_ShowTrainNumber(this, fimpuls_busi);

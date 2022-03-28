@@ -93,7 +93,7 @@ public:
 
     Ways();
 
-    virtual char * GetCompInfo();
+    //virtual char * GetCompInfo();
 
     virtual void UpdateState();
 

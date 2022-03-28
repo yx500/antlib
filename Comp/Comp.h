@@ -88,7 +88,7 @@ public:
     bool  SetNativeImp(int RealImpls, short int &NativeImp);
     int   GetNativeImp(int RealImpls);
     char * GetImpulsName(char * PropName);
-    virtual char * GetCompInfo();
+    //virtual char * GetCompInfo();
 
     virtual void UpdateState();
 
@@ -104,9 +104,9 @@ public:
     //virtual int GetUsedImpulsCount();
     //virtual char *  GetUsedImpulsInfo(int NumImpProp, int &RealOffset); // ñ 0
 
-    int  GetImpulsInfo(int aimp, const char* &CnlName, int &RealOffset);  // ñ 0
-    char * GetImpulsInfo2(char * PropName, int &RealOffset);
-    char * GetImpulsInfo3(char * PropName, const char* &CnlName, int &RealOffset);
+    //int  GetImpulsInfo(int aimp, const char* &CnlName, int &RealOffset);  // ñ 0
+    //char * GetImpulsInfo2(char * PropName, int &RealOffset);
+    //char * GetImpulsInfo3(char * PropName, const char* &CnlName, int &RealOffset);
     virtual void ShowTrainNumber();
     virtual void HideTrainNumber();
 

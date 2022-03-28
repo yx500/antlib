@@ -3,11 +3,11 @@
 #pragma hdrstop
 
 #include "common.h"
-#include "comp.h"
+#include "Comp.h"
 #include "Vatempl.h"
-#include "stan.h"
-#include "polig.h"
-#include "WinBgi.h"
+#include "Stan.h"
+#include "Polig.h"
+#include "winbgi.h"
 #include "Impuls.h"
 #include"out_num.h"
 #include "uParString.h"
@@ -537,7 +537,7 @@ void AComp::GetNumberPosition(int &X, int &Y, int Width, int Height, int direct)
     Y = this->Y * MUL_Y + _Y_;
 }
 
-
+/*
 static String _SS_GetCompInfo;
 char * AComp::GetCompInfo()
 {
@@ -565,7 +565,7 @@ char * AComp::GetCompInfo()
 
     return _SS_GetCompInfo.c_str();
 }
-
+*/
 char* AComp::GetText(char *txt)
 {
     strcpy(txt, Com_Nam[GetType()]);
