@@ -1,9 +1,8 @@
-#ifndef WINBGI_QT_H
-#define WINBGI_QT_H
+#pragma once
 //----------------------------------------------------------------------------
 //  Copyright GTSS c 2022. All Rights Reserved.
 //----------------------------------------------------------------------------
-#  include <systypes.h>
+#include <systypes.h>
 #include <QPainter>
 
 
@@ -253,9 +252,7 @@ int    Draw_Ramka(int left, int top, int right, int bottom, UINT edge = 4, UINT 
 
 //!!!!inline  void  outtextxy(int x, int y, char* str) { OutTextXY(x, y, str); }
 
-//Интерфейс для использования в компонентах +++++++++++++++++++++++++++++++++++++
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
 
 RECT&  ClearBgiCoverRect(void);
 RECT&  GetBgiCoverRect(void);
@@ -305,11 +302,9 @@ public:
 
 void SetGradientFactor(float AGradientFactor);
 
-// функции для работы с EMF
 bool drawemf(CONST RECT *lpRect,
              const char * szimagename,
              int animstep = 0
             );
 
 
-#endif

@@ -1,15 +1,6 @@
-/*--------------------------------------------------------------------*/
-/*                                                                    */
-/*  SYSTYPES.H                                                        */
-/*                                                                    */
-/*--------------------------------------------------------------------*/
-
-
+#pragma once
 
 #include <cstdint>
-
-#if !defined( __SYSTYPES_H )
-#define __SYSTYPES_H
 
 //typedef signed char int8;
 //typedef signed short int16;
@@ -29,5 +20,3 @@ typedef uint32_t uint32;
 
 typedef double TDateTime;
 
-
-#endif  /* __SYSTYPES_H  */
