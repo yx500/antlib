@@ -5,6 +5,9 @@
 //---------------------------------------------------------------------------
 
 #include <pshpack1.h>
+#ifdef QT_ANTLIB
+#include "systypes.h"
+#endif
 
 /*
 struct tTNCell{
@@ -51,7 +54,7 @@ struct TKroshTrainInfo  {
     char channame[12];
     TTrainInfo TrainInfo;
 };
-const KrPackCnt = 499 / sizeof(TKroshTrainInfo);
+const int KrPackCnt = 499 / sizeof(TKroshTrainInfo);
 struct TKrPack {
     TKroshTrainInfo KTI[KrPackCnt];
 };
@@ -65,7 +68,7 @@ struct TMKMarshItem {
     __int32          state_mk_ex;   // состояние маршрута ()
 };
 
-const MKMarshPackCnt = 480 / sizeof(TMKMarshItem);
+const int MKMarshPackCnt = 480 / sizeof(TMKMarshItem);
 struct TMKMarshAll {
     unsigned __int32 esr;
     int              cnt;
@@ -102,12 +105,12 @@ struct TAVMarshItem {
 
 };
 
-const AVMarshPackCnt = 420 / sizeof(TAVMarshItem);
+const int AVMarshPackCnt = 420 / sizeof(TAVMarshItem);
 
-const izNO = 0; // Нечетное отправление    < . . .
-const izCP = 1; // четное прием            . > . .
-const izNP = 2; // Нечетное прием          . . < .
-const izCO = 3; // четное отправление      . . . >
+const int izNO = 0; // Нечетное отправление    < . . .
+const int izCP = 1; // четное прием            . > . .
+const int izNP = 2; // Нечетное прием          . . < .
+const int izCO = 3; // четное отправление      . . . >
 
 struct TAVStanInfo {
     unsigned __int32 esr;
@@ -124,7 +127,7 @@ struct TElemCheckState {
     __int8 id_check;
     __int8 state;
 };
-const ElemStatePackCnt = 480 / sizeof(TElemCheckState);
+const int ElemStatePackCnt = 480 / sizeof(TElemCheckState);
 struct TEIPack {
     TElemCheckState ES[ElemStatePackCnt];
 };

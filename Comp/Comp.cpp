@@ -454,7 +454,7 @@ void _PST(String &ST,String Key, int Val){
 void AComp::UpdateState()
 {};
 
-static TImpPropNamesInfo _IPNI;
+/*static TImpPropNamesInfo _IPNI;
 
 int AComp::GetUsedImpulsCount()
 {
@@ -520,7 +520,7 @@ char * AComp::GetImpulsInfo3(char * PropName, const char* &CnlName, int &RealOff
     _S = _GetSigName_Func(_IMP.AbsNumber);
     return _S.c_str();
 }
-
+*/
 
 void AComp::ShowTrainNumber() {};
 void AComp::HideTrainNumber() {};

@@ -18,15 +18,15 @@ struct TFormulaElement {
 typedef std::vector<TFormulaElement> TvFormulaElement;
 typedef std::deque<TFormulaElement>  TsFormulaElement;
 
-const _CI = -3;
-const _CO = -4;
-const _AN = -5;
-const _OR = -6;
-const _NT = -7;
-const _PL = -10;
-const _MN = -11;
-const _MU = -12;
-const _DV = -13;
+const int _CI = -3;
+const int _CO = -4;
+const int _AN = -5;
+const int _OR = -6;
+const int _NT = -7;
+const int _PL = -10;
+const int _MN = -11;
+const int _MU = -12;
+const int _DV = -13;
 
 
 void feSt2vFormula(const char * szFormula, TvFormulaElement & vFormulaElement);

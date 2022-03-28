@@ -185,12 +185,12 @@ public:
     TMarshDirType GetDirType();
     TMarshOdd_Even GetOddEven();
     //int CheckGoodDir();
-
+#ifndef QT_ANTLIB
     __property TStrInMarsh * STRELS[ int Index ]  = { read = GetSTRELS, write = SetSTRELS };  // массив стрелок по порядку
     __property int           STRELSCOUNT  = { read = GetSTRELSCOUNT };
-    __property TStrInMarsh * STRELSORD[ int Index ]  = { read = GetSTRELSORD, write = SetSTRELSORD };                            // размер массива стрелок
+    __property TStrInMarsh * STRELSORD[ int Index ]  = { read = GetSTRELSORD, write = SetSTRELSORD };
+#endif
 };
-
 
 class TMarshList
 {
@@ -234,12 +234,12 @@ public:
     void        AddMarshrut(TMarshrut* M);  // добавление нового маршрута
     void        DelMarshrut(TMarshrut* M);
 
-
+#ifndef QT_ANTLIB
     __property TStrInMarsh * STRELS[ int Index ]  = { read = GetSTRELS, write = SetSTRELS };  // массив стрелок по порядку
     __property int           STRELSCOUNT  = { read = GetSTRELSCOUNT };
     __property TMarshrut*    MARSHRUTS[ int Index ]  = { read = GetMARSHRUTS };
     __property int           MARSHRUTSCOUNT  = { read = GetMARSHRUTSCOUNT };
-
+#endif
 };
 
 

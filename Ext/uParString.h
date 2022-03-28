@@ -45,8 +45,9 @@ public:
     TParString& operator = (const String& st) {
         SetVal(st); return *this;
     }
-
+#ifndef QT_ANTLIB
     __property int ParamsCount  = { read = GetParamsCount };
+#endif
 };
 
 

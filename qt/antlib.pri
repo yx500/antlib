@@ -58,6 +58,7 @@ $$PWD/../Ext/uEXD.h \
 $$PWD/../Ext/uFormula.h \
 $$PWD/../Ext/uImgContainer.h \
 $$PWD/../Ext/uParString.h \
+    $$PWD/antlibstringlist.h \
     $$PWD/vcl.h
 
 
@@ -101,6 +102,7 @@ $$PWD/../Ext/uETTList.cpp \
 $$PWD/../Ext/uEXD.cpp \
 $$PWD/../Ext/uFormula.cpp \
 $$PWD/../Ext/uImgContainer.cpp \
-$$PWD/../Ext/uParString.cpp
+$$PWD/../Ext/uParString.cpp \
+    $$PWD/antlibstringlist.cpp
 
     

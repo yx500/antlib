@@ -2,8 +2,11 @@
 #define VCL_H
 
 
+
 #include "antlibstring.h"
 typedef AntLibString String;
+#include "antlibstringlist.h"
+
 
 
 
@@ -11,7 +14,7 @@ typedef AntLibString String;
 //#include <QString>
 //class String :public QString
 //{
-//public:
+//
 //  int Pos(const String& subStr) const { return indexOf(subStr);}
 //  int Length() const {return size();}
 //  int ToInt() const {return toInt(); }
@@ -20,10 +23,9 @@ typedef AntLibString String;
 //    int r=toInt(&ok);
 //    if (!ok) r=defaultValue;
 //    return r;
-//  }
+//  }public:
 
 //};
-
 
 
 

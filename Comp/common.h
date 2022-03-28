@@ -17,7 +17,7 @@ extern  void Qui(char*, int, int);
 void WriteToLog(const std::string& Str);
 void WriteToErr(const std::string& Str);
 
-
+/*
 struct TImpPropNamesInfo {
     char   CompType[64];
     char   CompName[64];
@@ -27,6 +27,7 @@ struct TImpPropNamesInfo {
     int RealOffset[6];
 };
 void  _GetImpPropNamesInfo(AComp * ac , TImpPropNamesInfo &I);
+*/
 char * GetTypeName(AComp * AC);
 char * GetTypeAndName(AComp * AC);
 

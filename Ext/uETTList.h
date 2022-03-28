@@ -90,10 +90,11 @@ class TETTList
       bool Like(TETTList * ETTList2);
       void Clear();
 
-
+#ifndef QT_ANTLIB
 
         __property TETTListItem * Items[int ind]  = { read=GetItems };
         __property int ItemsCount  = { read=GetItemsCount };
+#endif
 private:
         TETTListItem * __fastcall GetItems(int ind);
         int __fastcall GetItemsCount();

@@ -101,8 +101,8 @@ public:
 
 
 
-    virtual int GetUsedImpulsCount();
-    virtual char *  GetUsedImpulsInfo(int NumImpProp, int &RealOffset); // ñ 0
+    //virtual int GetUsedImpulsCount();
+    //virtual char *  GetUsedImpulsInfo(int NumImpProp, int &RealOffset); // ñ 0
 
     int  GetImpulsInfo(int aimp, const char* &CnlName, int &RealOffset);  // ñ 0
     char * GetImpulsInfo2(char * PropName, int &RealOffset);

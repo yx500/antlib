@@ -122,7 +122,7 @@ public:
     void BeginGenerateTN();
     int UpdateState();
     void ShowTrainNumbers(bool bHide);
-    bool GetObjByImpulsName(String &impname, String & respropname, int &resimpabsnumber);
+    //bool GetObjByImpulsName(String &impname, String & respropname, int &resimpabsnumber);
     void GetPropMap(TPropMap &m);
     void SetPropMap(TPropMap &m);
     AComp * SetFocus(unsigned int ObjID, int focus);

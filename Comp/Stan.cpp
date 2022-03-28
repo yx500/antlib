@@ -720,6 +720,7 @@ void Station::ShowTrainNumbers(bool bHide)
 }
 
 extern T_GetSigName_Func _GetSigName_Func;
+/*
 static TImpPropNamesInfo _II;
 bool Station::GetObjByImpulsName(String &impname, String & respropname, int &resimpabsnumber)
 {
@@ -744,6 +745,7 @@ bool Station::GetObjByImpulsName(String &impname, String & respropname, int &res
     return false;
 
 }
+*/
 //---------------------------------------------------------------------------
 static String _StanPropName[14] = {
     "öôNom"   ,          // 0

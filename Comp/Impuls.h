@@ -31,7 +31,9 @@ public:
 
     char * ToString();
     void FromString(const char *stSrc);
+#ifndef QT_ANTLIB
     __property int AbsNumber  = { read = GetAbsNumber, write = SetAbsNumber };
+#endif
 
 
 };
