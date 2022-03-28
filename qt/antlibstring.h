@@ -12,9 +12,13 @@ class AntLibString : public std::string
 public:
   AntLibString():std::string() {}
 
-  int Pos(const std::string& subStr) const { return this->find_first_of(subStr); }
+  int Pos(const std::string& subStr) const {
+    return this->find_first_of(subStr);
+  }
 
-  int Length() const { return size(); }
+  int Length() const {
+    return size();
+  }
 
   int ToInt() const {
     try {

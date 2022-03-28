@@ -1,16 +1,5 @@
 
 
-DEFINES +=QT_ANTLIB
-
-#QT+=concurrent
-
-INCLUDEPATH +=$$PWD/../qt
-INCLUDEPATH +=$$PWD/../BGI
-INCLUDEPATH +=$$PWD/../Ext
-INCLUDEPATH +=$$PWD/../Gora
-INCLUDEPATH +=$$PWD/../Comp
-
-
 HEADERS += \
 $$PWD/../qt/systypes.h \
 $$PWD/../qt/winbgi_qt.h \
