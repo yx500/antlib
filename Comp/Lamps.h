@@ -11,27 +11,27 @@
 
 #include<pshpack1.h>
 struct TLampData {
-    unsigned __int8 TypKp;
-    unsigned __int8 NKp;
-    unsigned __int8 NGr;
-    unsigned __int8 NOb;
-    unsigned __int8 LS;
+    uint8 TypKp;
+    uint8 NKp;
+    uint8 NGr;
+    uint8 NOb;
+    uint8 LS;
 };
 struct TGrpahExElem {
-    unsigned __int8 Enabled;
-    unsigned __int8 PictNumber;
-    unsigned __int8 PictWidthStan;
-    unsigned __int8 PictHeightStan;
-    unsigned __int8 PictWidthYch;
-    unsigned __int8 PictHeightYch;
-    unsigned __int8 TextFontNStan;
-    unsigned __int8 TextFontNYch;
-    unsigned __int8 TextFontColor;
-    unsigned __int8 TextPosStan;
-    unsigned __int8 TextPosYch;
-    unsigned __int8 TextRotate;
-    unsigned __int8 GridAllign;
-    unsigned __int8 TestExSet;
+    uint8 Enabled;
+    uint8 PictNumber;
+    uint8 PictWidthStan;
+    uint8 PictHeightStan;
+    uint8 PictWidthYch;
+    uint8 PictHeightYch;
+    uint8 TextFontNStan;
+    uint8 TextFontNYch;
+    uint8 TextFontColor;
+    uint8 TextPosStan;
+    uint8 TextPosYch;
+    uint8 TextRotate;
+    uint8 GridAllign;
+    uint8 TestExSet;
 };
 struct TLampMEM {
     TLampData LD;

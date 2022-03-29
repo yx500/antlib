@@ -1281,7 +1281,7 @@ TFont*   Font(int font)
     return font < FontCount ? Fonts[ font ]  : NULL;
 }
 
-TColor   Color(__int8 palColor)
+TColor   Color(int8 palColor)
 {
     return BGICOLOR(palColor);
 }

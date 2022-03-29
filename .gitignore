@@ -29,4 +29,4 @@ CSV
 *.lst
 obj.tmp
 --build*
-
+*.user.*

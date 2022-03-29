@@ -266,7 +266,7 @@ extern bool  NoGmPen;
 //TCanvas* __fastcall DC( void );
 TCanvas*  BgiCanvas(void);  //{ return DC(); }
 //TFont*    Font( int );
-//TColor    Color( __int8 );
+//TColor    Color( int8 );
 
 
 void *  SetNullDC();

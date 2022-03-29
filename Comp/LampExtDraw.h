@@ -73,8 +73,8 @@ public:
     unsigned int Height[2];
 
     signed   char nomer;
-    unsigned __int8 GridAllign;
-    unsigned __int8 TextAllign;
+    uint8 GridAllign;
+    uint8 TextAllign;
     bool bUseGrid;
 
     std::string ExtPropStr;

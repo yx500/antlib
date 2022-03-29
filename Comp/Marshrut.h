@@ -30,11 +30,11 @@ const MarshrutPropNameCount = 9;
 extern String MarshrutPropName[];
 
 struct _tTULite {
-    unsigned __int8   mid;            // идентификатор отправителя
-    unsigned __int8   stan ;          // Станция
-    unsigned __int8   group;          // Группа
-    unsigned __int8   cod;            // Команда
-    unsigned __int8   num;            // Номер в буфере у Антона
+    uint8   mid;            // идентификатор отправителя
+    uint8   stan ;          // Станция
+    uint8   group;          // Группа
+    uint8   cod;            // Команда
+    uint8   num;            // Номер в буфере у Антона
 };
 
 struct _tTU {

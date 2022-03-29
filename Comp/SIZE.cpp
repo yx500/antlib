@@ -11,17 +11,17 @@
 #define ST_SIZE     48
 #define ST_SIZE_F   54
 
-unsigned __int8   BLOK_Y;
-unsigned __int8   SH_WAY;
-unsigned __int8   STREL_X;
-unsigned __int8   STREL_Y;
-//  unsigned __int8   STREL_y;
-unsigned __int8   WAY_X  ;
-unsigned __int8   WAY_Y  ;
-unsigned __int8   DL_US  ;
-unsigned __int8   S_WAY_X;
-unsigned __int8   S_WAY_Y;
-unsigned __int8   SIG_X  ;
-unsigned __int8   SIG_Y  ;
+uint8   BLOK_Y;
+uint8   SH_WAY;
+uint8   STREL_X;
+uint8   STREL_Y;
+//  uint8   STREL_y;
+uint8   WAY_X  ;
+uint8   WAY_Y  ;
+uint8   DL_US  ;
+uint8   S_WAY_X;
+uint8   S_WAY_Y;
+uint8   SIG_X  ;
+uint8   SIG_Y  ;
 
 

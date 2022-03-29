@@ -3,11 +3,9 @@
 #ifndef EXDHH
 #define EXDHH
 //---------------------------------------------------------------------------
+#include <systypes.h>
 
 #include <pshpack1.h>
-#ifdef QT_ANTLIB
-#include "systypes.h"
-#endif
 
 /*
 struct tTNCell{
@@ -39,14 +37,14 @@ struct TIUTrainPriznak {
 
 struct TTrainInfo  {
     unsigned __int16 TrainNumber;             // 2 байта - номер поезда в ГИД.
-    unsigned __int8  TrainColor;              // 1 байт  - цвет, которым отображается в ГИД нитка поезда с этим номером.
+    uint8  TrainColor;              // 1 байт  - цвет, которым отображается в ГИД нитка поезда с этим номером.
     TIUTrainPriznak TrainPriznak;    // 1 байт - спец. признаки поезда
-    unsigned __int8  TrainLength;             // 1 байт - условная длина поезда
+    uint8  TrainLength;             // 1 байт - условная длина поезда
     unsigned __int16 TrainWeight;             // 2 байта - вес поезда (с тарой)
     unsigned __int16 TrainIndex[3];           // 6 байт - индекс поезда (ст. формирования - 2 байта,номер состава - 2 байта , ст. назначения - 2 байта)
     unsigned __int16 LocomSeries;             // 2 байта - серия головного локомотива
-    unsigned __int8  LocomNumber[3];          // 3 байта - номер головной секции локомотива
-    unsigned __int8  Reserv2[7];              // 7 байт - резерв
+    uint8  LocomNumber[3];          // 3 байта - номер головной секции локомотива
+    uint8  Reserv2[7];              // 7 байт - резерв
 };
 
 struct TKroshTrainInfo  {
@@ -124,8 +122,8 @@ struct TAVStanInfo {
 
 struct TElemCheckState {
     unsigned __int16 id_obj;
-    __int8 id_check;
-    __int8 state;
+    int8 id_check;
+    int8 state;
 };
 const int ElemStatePackCnt = 480 / sizeof(TElemCheckState);
 struct TEIPack {

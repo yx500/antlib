@@ -280,7 +280,7 @@ extern bool  NoGmPen;
 
 //TCanvas* __fastcall DC( void );
 //TFont*    Font( int );
-//TColor    Color( __int8 );
+//TColor    Color( int8 );
 
 
 

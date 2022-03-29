@@ -25,7 +25,7 @@ public:
     TAntOpt AO;
     void  SetSelfAntOpt();
 
-    __int8 * ENG_Pack;
+    int8 * ENG_Pack;
     int CABufCount;
 
 
@@ -65,7 +65,7 @@ public:
     int  TstXY(int, int);
     int  GetNumStanFor(int x, int y);
 
-    void * SetCommBuf(__int8 A);
+    void * SetCommBuf(int8 A);
     int UpdateState();
     void for_each_chanel(TGetPacketOffset f);
     void reassignChanelOffset();

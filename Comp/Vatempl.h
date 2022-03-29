@@ -60,7 +60,7 @@ public:
 
 typedef VisibleArray* PVisibleArray;
 
-typedef void *(*TSetCommBufFunc)(__int8);
+typedef void *(*TSetCommBufFunc)(int8);
 void _ALIB_ SetSetCommBufFunc(TSetCommBufFunc ASetCommBuf);
 
 typedef void(*TEachAComp)(PAComp);

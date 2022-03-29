@@ -395,7 +395,7 @@ int Poligon::GetNumStanFor(int x, int y)
 }
 
 
-void * Poligon::SetCommBuf(__int8 A)
+void * Poligon::SetCommBuf(int8 A)
 {
 
     try {

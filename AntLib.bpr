@@ -4,17 +4,15 @@
   <MACROS>
     <VERSION value="BCB.06.00"/>
     <PROJECT value="AntLib.lib"/>
-    <OBJFILES value="obj.tmp\ACom_V.obj obj.tmp\actools.obj obj.tmp\pmComp.obj obj.tmp\Comp.obj 
-      obj.tmp\col.obj obj.tmp\common.obj obj.tmp\Elem.obj obj.tmp\F.obj 
-      obj.tmp\Gorl.obj obj.tmp\Line.obj obj.tmp\Polig.obj obj.tmp\Scrin.obj 
-      obj.tmp\SIZE.obj obj.tmp\Stan.obj obj.tmp\Static.obj obj.tmp\Str_fun.obj 
-      obj.tmp\Strel.obj obj.tmp\Svet.obj obj.tmp\Vatempl.obj 
-      obj.tmp\uExtElem.obj obj.tmp\YchParams.obj obj.tmp\uEXD.obj 
-      obj.tmp\Y_STREL.obj obj.tmp\out_num.obj obj.tmp\Ways.obj obj.tmp\Lamps.obj 
-      obj.tmp\LampExtDraw.obj obj.tmp\Impuls.obj obj.tmp\Marshrut.obj 
-      obj.tmp\propmap.obj obj.tmp\uParString.obj obj.tmp\Gor_Elem.obj 
-      obj.tmp\Gor_Logic.obj obj.tmp\uFormula.obj obj.tmp\EnergUnit.obj 
-      obj.tmp\CompHint.obj obj.tmp\uETTList.obj"/>
+    <OBJFILES value="tmp\ACom_V.obj tmp\actools.obj tmp\pmComp.obj tmp\Comp.obj tmp\col.obj 
+      tmp\common.obj tmp\Elem.obj tmp\F.obj tmp\Gorl.obj tmp\Line.obj 
+      tmp\Polig.obj tmp\Scrin.obj tmp\SIZE.obj tmp\Stan.obj tmp\Static.obj 
+      tmp\Str_fun.obj tmp\Strel.obj tmp\Svet.obj tmp\Vatempl.obj 
+      tmp\uExtElem.obj tmp\YchParams.obj tmp\uEXD.obj tmp\Y_STREL.obj 
+      tmp\out_num.obj tmp\Ways.obj tmp\Lamps.obj tmp\LampExtDraw.obj 
+      tmp\Impuls.obj tmp\Marshrut.obj tmp\propmap.obj tmp\uParString.obj 
+      tmp\Gor_Elem.obj tmp\Gor_Logic.obj tmp\uFormula.obj tmp\EnergUnit.obj 
+      tmp\CompHint.obj tmp\uETTList.obj"/>
     <RESFILES value=""/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -44,7 +42,7 @@
       -I..\VladSrc\vlib -src_suffix cpp -D_DEBUG -boa"/>
     <CFLAG1 value="-Od -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 -5 -b- -k -y -v -vi- 
       -c -tW -tWM"/>
-    <PFLAGS value="-N2obj.tmp -N0obj.tmp -$YD -$W -$O- -$A8 -v -JPHNE -M"/>
+    <PFLAGS value="-N2.\tmp -N0.\tmp -$YD -$W -$O- -$A8 -v -JPHNE -M"/>
     <AFLAGS value="/mx /w2 /zi"/>
     <LFLAGS value="/P256"/>
     <OTHERFILES value=""/>
@@ -182,8 +180,9 @@ Item5=_DEBUG;ACOMPDLLMAKE;
 Item6=BGIPALETTE;YU_COORD;_DEBUG
 
 [HistoryLists\hlIntOutputDir]
-Count=1
-Item0=obj.tmp
+Count=2
+Item0=.\tmp
+Item1=obj.tmp
 
 [HistoryLists\hlTlibPageSize]
 Count=9
@@ -221,10 +220,5 @@ LinkCGLIB=0
 AddServerUnit=1
 AddClientUnit=1
 PrecompiledHeaders=1
-
-[Language]
-ActiveLang=
-ProjectLang=
-RootDir=
   </IDEOPTIONS>
 </PROJECT>

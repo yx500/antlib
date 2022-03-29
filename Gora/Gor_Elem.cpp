@@ -437,7 +437,7 @@ void tG_Strel_Y::SetPropMap(TPropMap &m)
     tGRC0::SetPropMap(m);
 
     String N = m.get("ÒÏ»Ãﬂ");
-    __int8 nn = N.ToIntDef(0);
+    int8 nn = N.ToIntDef(0);
     N = "$" + N;
     if ((nn != 0) && (nomer == 0)) nomer = nn;
     strncpy(name, N.c_str(), sizeof(name) - 1);
@@ -819,7 +819,7 @@ void tG_Strel_1::SetPropMap(TPropMap &m)
 
     tGRC0::SetPropMap(m);
     String N = m.get("ÒÏ»Ãﬂ");
-    __int8 nn = N.ToIntDef(0);
+    int8 nn = N.ToIntDef(0);
     N = "$" + N;
     if ((nn != 0) && (nomer == 0)) nomer = nn;
     strncpy(name, N.c_str(), sizeof(name) - 1);
@@ -1023,7 +1023,7 @@ void tG_RC::SetPropMap(TPropMap &m)
     NP.y = m.geti(_G_RCPropName[3]);
 
     String N = m.get("ÒÏ»Ãﬂ");
-    __int8 nn = N.ToIntDef(0);
+    int8 nn = N.ToIntDef(0);
     N = "$" + N;
     if ((nn != 0) && (nomer == 0)) nomer = nn;
     strncpy(name, N.c_str(), sizeof(name) - 1);

@@ -126,7 +126,7 @@ struct AMemory {
 
     short int   iMacro;
     // ========== +++++++++++++++++++++  ==============
-    __int8        GID     ;  //  ГИД                                ¦
+    int8        GID     ;  //  ГИД                                ¦
     TExtPriz    ExtPriz   ;  // Дополнительные признаки 04.04.2002 из GID
     signed   char        masy       ;  //  масштаб по у               (1)     ¦
     signed   char        masx2      ;  //  масштаб х 2                (1) -----
