@@ -2,29 +2,11 @@
 //----------------------------------------------------------------------------
 //  Copyright GTSS c 2022. All Rights Reserved.
 //----------------------------------------------------------------------------
-#include <systypes.h>
+#include "aheaders_h.h"
 #include <QPainter>
-
-
-
 
 #if !defined(__COLORS)
 #define __COLORS
-
-typedef struct tagPOINT
-{
-  int  x;
-  int  y;
-} POINT;
-
-typedef struct tagRECT
-{
-  int    left;
-  int    top;
-  int    right;
-  int    bottom;
-} RECT;
-
 
 struct TPoint : public POINT
   {
@@ -162,51 +144,51 @@ struct arccoordstype {
 };
 
 
-void       _WINBGI_ bar(int __left, int __top, int __right, int __bottom);
-void       _WINBGI_ circle(int __x, int __y, int __radius);
-void       _WINBGI_ arc(int x, int y, int start_angle, int end_angle, int radius);
-void       _WINBGI_ pie(int X1, int Y1, int X2, int Y2, int X3, int Y3, int X4, int Y4);
-//void       _WINBGI_ cleardevice( void );
-//void       _WINBGI_ clearviewport( void );
-void       _WINBGI_ drawpoly(int __numpoints, const int *__polypoints);
-void       _WINBGI_ fillellipse(int __x, int __y, int __xradius, int __yradius);
-void       _WINBGI_ fillpoly(int __numpoints, const int  *__polypoints);
-//int        _WINBGI_ getcolor( void );
-//void       _WINBGI_ getfillsettings( struct fillsettingstype  *__fillinfo );
-//void       _WINBGI_ getimage( int __left, int __top, int __right, int __bottom,
+void        bar(int __left, int __top, int __right, int __bottom);
+void        circle(int __x, int __y, int __radius);
+void        arc(int x, int y, int start_angle, int end_angle, int radius);
+void        pie(int X1, int Y1, int X2, int Y2, int X3, int Y3, int X4, int Y4);
+//void        cleardevice( void );
+//void        clearviewport( void );
+void        drawpoly(int __numpoints, const int *__polypoints);
+void        fillellipse(int __x, int __y, int __xradius, int __yradius);
+void        fillpoly(int __numpoints, const int  *__polypoints);
+//int         getcolor( void );
+//void        getfillsettings( struct fillsettingstype  *__fillinfo );
+//void        getimage( int __left, int __top, int __right, int __bottom,
 //                              void  *__bitmap );
-int        _WINBGI_ getmaxx(void);
-int        _WINBGI_ getmaxy(void);
-//unsigned   _WINBGI_ getpixel( int __x, int __y );
-//void       _WINBGI_ gettextsettings( struct textsettingstype  *__texttypeinfo );
-//unsigned   _WINBGI_ imagesize( int __left, int __top, int __right, int __bottom );
-void       _WINBGI_ line(int __x1, int __y1, int __x2, int __y2);
-//void       _WINBGI_ outtextxy(int __x, int __y, const char  *__textstring);
-//void       _WINBGI_ putimage( int __left, int __top, const void  *__bitmap,int __op );
-//void       _WINBGI_ putpixel( int __x, int __y, int __color );
-void       _WINBGI_ rectangle(int __left, int __top, int __right, int __bottom);
-void       _WINBGI_ roundrect(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int nWidth, int nHeight);
+int         getmaxx(void);
+int         getmaxy(void);
+//unsigned    getpixel( int __x, int __y );
+//void        gettextsettings( struct textsettingstype  *__texttypeinfo );
+//unsigned    imagesize( int __left, int __top, int __right, int __bottom );
+void        line(int __x1, int __y1, int __x2, int __y2);
+//void        outtextxy(int __x, int __y, const char  *__textstring);
+//void        putimage( int __left, int __top, const void  *__bitmap,int __op );
+//void        putpixel( int __x, int __y, int __color );
+void        rectangle(int __left, int __top, int __right, int __bottom);
+void        roundrect(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int nWidth, int nHeight);
 
 
 
-//void       _WINBGI_ setbkcolor( int __color );
-void       _WINBGI_ setcolor(int __color);
-void       _WINBGI_ setfillpattern(const char  *__upattern, int __color);
-void       _WINBGI_ setfillstyle(int __pattern, int __color);
-void       _WINBGI_ setlinestyle(int __linestyle, unsigned __upattern,
+//void        setbkcolor( int __color );
+void        setcolor(int __color);
+void        setfillpattern(const char  *__upattern, int __color);
+void        setfillstyle(int __pattern, int __color);
+void        setlinestyle(int __linestyle, unsigned __upattern,
                                  int __thickness);
-void       _WINBGI_ settextjustify(int __horiz, int __vert);
-void       _WINBGI_ settextstyle(int __font, int __direction, int __charsize);
+void        settextjustify(int __horiz, int __vert);
+void        settextstyle(int __font, int __direction, int __charsize);
 void                _SetText(unsigned int font, int d1, int d2);
 void                _SetTextSize(int charsize);
-//void       _WINBGI_ setviewport( int __left, int __top, int __right, int __bottom, int __clip );
-int        _WINBGI_ textheight(const char  *__textstring);
-int        _WINBGI_ textwidth(const char  *__textstring);
+//void        setviewport( int __left, int __top, int __right, int __bottom, int __clip );
+int         textheight(const char  *__textstring);
+int         textwidth(const char  *__textstring);
 void                OutTextXY(int x, int y, char* str);
 void                DrawText(int x, int y, int tw, int th, char* str);
-//void       _WINBGI_ closegraph( void );
-//int        _WINBGI_ installuserfont( const char  *__name );
-void       _WINBGI_ initgraph(int* device, int* mode, const char* p);
+//void        closegraph( void );
+//int         installuserfont( const char  *__name );
+void        initgraph(int* device, int* mode, const char* p);
 
 
 

@@ -1,12 +1,9 @@
-
 #include "aheaders_cpp.h"
 
 #include "col.h"
 #include "winpalet.h"
 #ifndef QT_ANTLIB
 #include <inifiles.hpp>
-#else
-#include "vcl.h"
 #endif
 
 

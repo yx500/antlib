@@ -20,7 +20,7 @@ extern TGetPacketOffset CustomGetPacketOffset;
 typedef void(*TEachStan)(Station*);
 extern TEachStan EachStanPostShow;
 
-#include<pshpack1.h>
+#pragma pack(push,1)
 struct St_Dat {
     short int  Nom;             /*номер станции */
     char filename[13];    /*имя файла     */
@@ -31,7 +31,7 @@ struct St_Dat {
     short int  Y_begin[2];      /*привязка по  Y  */
 };
 
-#include<poppack.h>
+#pragma pack(pop)
 typedef St_Dat* PSt_Dat;
 struct TUseChanelName {
     int type;

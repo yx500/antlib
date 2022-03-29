@@ -9,7 +9,7 @@
 #include "strel.h"
 #include "uFormula.h"
 
-#include<pshpack1.h>
+#pragma pack(push,1)
 struct TLampData {
     uint8 TypKp;
     uint8 NKp;
@@ -38,7 +38,7 @@ struct TLampMEM {
     TGrpahExElem GE;
 };
 
-#include<poppack.h>
+#pragma pack(pop)
 
 
 

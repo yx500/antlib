@@ -6,7 +6,7 @@
 #ifndef QT_ANTLIB
 #include <windows.h>
 #endif
-#include <systypes.h>
+#include "aheaders_h.h"
 
 /*
 class TBgiPalette

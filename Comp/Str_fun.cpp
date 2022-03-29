@@ -265,7 +265,7 @@ int  linec2(int x2, int y2, int x1, int y1, int h, int direct, int h1, int dx, i
 
 
 
-void   _fillpoly_(int sw_tip, int far kr[], int dr, bool bShowIsNormalMnus, int  clr, int  clrfill)
+void   _fillpoly_(int sw_tip, int  kr[], int dr, bool bShowIsNormalMnus, int  clr, int  clrfill)
 {
 
     int t1 = 0, t2;

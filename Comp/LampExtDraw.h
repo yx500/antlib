@@ -16,7 +16,7 @@ const _sizeLEDstr = sizeof(MEM.DMD);
 
 //---------------------------------------------------------------------------
 // структур для передачи данных во вне
-#include<pshpack1.h>
+#pragma pack(push,1)
 struct TLED_EXTDataObj {
     unsigned int ID_OBJ;
     char         STA_FN[13];
@@ -53,7 +53,7 @@ struct TLED_EXTData {
 
 };
 
-#include<poppack.h>
+#pragma pack(pop)
 //---------------------------------------------------------------------------
 
 

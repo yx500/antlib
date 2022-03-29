@@ -3,9 +3,9 @@
 #ifndef EXDHH
 #define EXDHH
 //---------------------------------------------------------------------------
-#include <systypes.h>
+#include "aheaders_h.h"
 
-#include <pshpack1.h>
+#pragma pack(push,1)
 
 /*
 struct tTNCell{
@@ -132,6 +132,6 @@ struct TEIPack {
 
 
 
-#include <poppack.h>
+#pragma pack(pop)
 
 #endif

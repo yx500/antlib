@@ -6,7 +6,7 @@
 #include "ACom_T.h"
 #include "Lamps.h"
 #include "LampExtDraw.h"
-#include<pshpack1.h>
+#pragma pack(push,1)
 
 struct TE_KeySost {
     unsigned onoff_ok: 1;
@@ -24,7 +24,7 @@ const _MaxLampsInPacket = 490 / sizeof(TEnergLampData);
 struct TEnergStanLamps {
     TEnergLampData Lamps[_MaxLampsInPacket];
 };
-#include<poppack.h>
+#pragma pack(pop)
 
 TEnergLampData * __fastcall GetEnergLampData(TEnergStanLamps * EnergStanLamps, unsigned __int16 ObjID);
 int __fastcall SetEnergLampData(TEnergStanLamps * EnergStanLamps, unsigned __int16 ObjID, TEnergLampData * EnergLampData);

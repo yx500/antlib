@@ -1,8 +1,7 @@
 #ifndef TGORKA_H
 #define TGORKA_H
 
-//#include "vdefs.h"
-#include <systypes.h>
+#include "aheaders_h.h"
 #include "tNsl4Term.h"
 
 #pragma pack(push, 1)

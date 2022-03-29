@@ -15,7 +15,7 @@
 
 int Def_gr(char *txt);
 class Strel0;
-#include<pshpack1.h>
+#pragma pack(push,1)
 
 struct ID_ZO {
     byte b[4];
@@ -45,13 +45,13 @@ struct Grl {
     char   **Matr;                // юДПЕЯ люрпхжш  люпьпсрнб
     char   *Strel_N;                // юДПЕЯ мнлепю ярпекнй
     Strel0    * *_Strel;               // сЙЮГЮРЕКЭ МЮ сйюгюрекх (б тюике менопедекемш)
-    far Signal *Sign;                 // сЙЮГЮРЕКЭ ябернтнпнб нропюбкемхъ
+     Signal *Sign;                 // сЙЮГЮРЕКЭ ябернтнпнб нропюбкемхъ
     Signal     Sign_i;                // ябернтн опхелю
-    far short int    *impuls_m;             // яхцмюкш мю сярюмнбйс люпьпсрю
-    far short int    *impuls_km;            // яхцмюкш мю гюмърхе люпьпсрю
+     short int    *impuls_m;             // яхцмюкш мю сярюмнбйс люпьпсрю
+     short int    *impuls_km;            // яхцмюкш мю гюмърхе люпьпсрю
 //------------======  якефемхе  =======-----------
     byte   IN_OUT  ;                 // ОПХЕЛ \НРОПЮБКЕМХЕ  (1)              -╛
-    far ID_ZO  *zona_M;              // яохянй оепелеммшу хлем гнм  (4*6=24)  +
+     ID_ZO  *zona_M;              // яохянй оепелеммшу хлем гнм  (4*6=24)  +
     ID_ZO  zona_1    ;               // онярнъмюъ гнмю               (4)      ╕ 133
     short int    tu_marh;
     long   time_tu;
@@ -69,7 +69,7 @@ struct Grl {
     Grl();
 
 };
-#include<poppack.h>
+#pragma pack(pop)
 
 typedef Grl* PGrl;
 class Strel0;

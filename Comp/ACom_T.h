@@ -1,7 +1,7 @@
 #ifndef ACom_TH
 #define ACom_TH
 //---------------------------------------------------------------------------
-#include <systypes.h>
+#include "aheaders_h.h"
 
 
 #define CN              6 //  ДЛИНА ИМЕНИ
@@ -70,7 +70,7 @@ enum TYP {NOTHING, WAY    , PLOT   , SIG_L  , SIG_R  , SWRT   , SWLT   ,
 /*--------------------------------------------------------------------------
               ОПИСАНИЕ СТРУКТУР В ФАЙЛЕ И В ОПЕРАТИИИВНОЙ ПАМЯТИ
 ----------------------------------------------------------------------------*/
-#include<pshpack1.h>
+#pragma pack(push,1)
 
 //  Структура элемента в файле                       sizeof
 
@@ -122,7 +122,7 @@ struct AMemory {
     short int        impuls_mu  ;  //  номер лампочки му
 
 };
-#include<poppack.h>
+#pragma pack(pop)
 
 
 
