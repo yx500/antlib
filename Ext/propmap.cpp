@@ -1,10 +1,10 @@
-#include <vcl.h>
-#pragma hdrstop
+
+#include "aheaders_cpp.h"
 #include <StrUtils.hpp>
 
 #include "propmap.h"
 //---------------------------------------------------------------------------
-#pragma package(smart_init)
+
 static String _stNULL = "";
 static String _stRES = "";
 static char ans[255];

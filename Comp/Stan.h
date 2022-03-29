@@ -15,10 +15,10 @@ class VisibleArray;
 struct TEnergStanLamps;
 
 typedef int(*TGetPacketOffset)(int typ, const char * PacketName, int WantNamber);
-extern _ALIB_ TGetPacketOffset CustomGetPacketOffset;
+extern TGetPacketOffset CustomGetPacketOffset;
 
 typedef void(*TEachStan)(Station*);
-extern TEachStan _ALIB_ EachStanPostShow;
+extern TEachStan EachStanPostShow;
 
 #include<pshpack1.h>
 struct St_Dat {
@@ -41,7 +41,7 @@ typedef std::vector<TUseChanelName> TvUseChanelNames;
 
 class TETTList;
 //---------------------------------------------------------------------------
-class  _ALIB_ Station
+class  Station
 {
 protected:
     TETTList * ETTList;

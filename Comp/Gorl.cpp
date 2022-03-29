@@ -1,5 +1,5 @@
-//#include <vcl.h>
-#pragma hdrstop
+//
+#include "aheaders_cpp.h"
 #include "APch.h"
 
 #include "gorl.h"

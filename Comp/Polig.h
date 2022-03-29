@@ -10,7 +10,7 @@ class Station;
 #include "YchParams.h"
 #include "stan.h"
 
-class  _ALIB_ Poligon
+class  Poligon
 {
 public:
 

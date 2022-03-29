@@ -7,7 +7,7 @@
 extern  int Tip_Opis_PKS;  //  пришлось сделать для описания параметров
 
 
-class _ALIB_ Strel: public Ways
+class Strel: public Ways
 {
 protected:
 
@@ -91,7 +91,7 @@ public:
 typedef Strel* PStrel;
 
 
-class _ALIB_ Strel0: public Strel
+class Strel0: public Strel
 {
 protected :
     int sav_sh;

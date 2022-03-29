@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 
-#include <vcl.h>
-#pragma hdrstop
+
+#include "aheaders_cpp.h"
 
 #include "Marshrut.h"
 #include "uParString.h"
@@ -15,7 +15,7 @@
 
 //---------------------------------------------------------------------------
 
-#pragma package(smart_init)
+
 extern bool ShowUstMarshOnly_1;
 const String chNO_CHECK_IS = "#";
 TStrInMarsh::TStrInMarsh()

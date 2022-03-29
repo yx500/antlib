@@ -74,7 +74,7 @@ struct Grl {
 typedef Grl* PGrl;
 class Strel0;
 
-class _ALIB_ Gorl : public AComp
+class Gorl : public AComp
 {
 private:
     Strel0 * nom[_Size_G];

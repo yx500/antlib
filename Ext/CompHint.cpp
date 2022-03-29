@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
 
-#pragma hdrstop
+#include "aheaders_cpp.h"
 #include <string>
 #include <vector>
 #include <time.h>
@@ -11,7 +11,7 @@
 #include "APch.h"
 //---------------------------------------------------------------------------
 
-#pragma package(smart_init)
+
 
 TACOMPHINT ACOMPHINT;
 

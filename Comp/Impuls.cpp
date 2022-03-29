@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 
-//#include <vcl.h>
-#pragma hdrstop
+//
+#include "aheaders_cpp.h"
 
 #include "Impuls.h"
 #include "Comp.h"
@@ -12,7 +12,7 @@
 
 //---------------------------------------------------------------------------
 
-#pragma package(smart_init)
+
 
 extern T_GetSigName_Func _GetSigName_Func;
 

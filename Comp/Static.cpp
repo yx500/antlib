@@ -1,5 +1,5 @@
-#include <vcl.h>
-#pragma hdrstop
+
+#include "aheaders_cpp.h"
 #include "APch.h"
 
 #include "static.h"
@@ -90,7 +90,7 @@ void  Name::Show()
 
     _SetText(F_LITT, CENTER_TEXT, CENTER_TEXT);
     int a;
-///  Это дурацкий сдвигназвания станций
+///  Это дур цкий сдвигн зв ния ст нций
     int _DELTA_X = (1280 - 640 - 10) / 2;
     int dlt = _DELTA_X / 10;
 

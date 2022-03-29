@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 
-#include <vcl.h>
-#pragma hdrstop
+
+#include "aheaders_cpp.h"
 #include "APch.h"
 
 #include <inifiles.hpp>
@@ -11,7 +11,7 @@
 
 //---------------------------------------------------------------------------
 
-#pragma package(smart_init)
+
 
 
 bool bLoadYchParams = true;

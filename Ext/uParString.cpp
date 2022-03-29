@@ -1,9 +1,9 @@
-#include <vcl.h>
-#pragma hdrstop
+
+#include "aheaders_cpp.h"
 
 #include "uParString.h"
 //---------------------------------------------------------------------------
-#pragma package(smart_init)
+
 
 using namespace std;
 

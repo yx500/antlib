@@ -77,13 +77,13 @@ extern int BASH15Colors[16][2];
 extern int PerSvetStateColors3[8][2];
 extern int TonnelStateColors[8][2];
 
-void _ALIB_ SwapDACForPrinter();
-void _ALIB_ RestoreDAC();
+void SwapDACForPrinter();
+void RestoreDAC();
 
 const  int MaxLampType = 32;
-bool _ALIB_ wc_LoadIniFile();
-void _ALIB_ wc_SetColorByT_N(int T, int N);
-int _ALIB_ wc_GetColor(int T, int N);
+bool wc_LoadIniFile();
+void wc_SetColorByT_N(int T, int N);
+int wc_GetColor(int T, int N);
 extern int KROSHBCOL[];
 extern int KROSHPCOL[];
 

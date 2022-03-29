@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
-#include <vcl.h>
-#pragma hdrstop
+
+#include "aheaders_cpp.h"
 #include <math.h>
 #include "APch.h"
 
@@ -13,7 +13,7 @@
 
 //---------------------------------------------------------------------------
 
-#pragma package(smart_init)
+
 
 int PA(TPoint *P, ...);
 int IA(int *P, ...);

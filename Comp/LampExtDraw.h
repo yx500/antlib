@@ -58,7 +58,7 @@ struct TLED_EXTData {
 
 
 typedef int (*T_LED_EXT_Func)(TLED_EXTData*);
-void _ALIB_ Set_LED_EXT_Func(T_LED_EXT_Func ALED_EXT);
+void Set_LED_EXT_Func(T_LED_EXT_Func ALED_EXT);
 
 
 class TLED : public SuperLamp2

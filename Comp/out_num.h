@@ -14,7 +14,7 @@ bool GetNumberRct(AComp *AC, int &X, int &Y, int Width, int Height, int direct);
 void EXD_ShowTrainNumbers(AComp *AC, int rimpb);
 
 
-/*class _ALIB_ TrNum:public AComp
+/*class TrNum:public AComp
 {
 public:
 

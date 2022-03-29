@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 
-#include <vcl.h>
-#pragma hdrstop
+
+#include "aheaders_cpp.h"
 #include "APch.h"
 
 #include "uExtElem.h"
@@ -14,7 +14,7 @@
 
 //---------------------------------------------------------------------------
 
-#pragma package(smart_init)
+
 
 
 static TGrpahExElem GE;

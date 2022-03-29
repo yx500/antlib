@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
 
-#pragma hdrstop
+#include "aheaders_cpp.h"
 
 #include "common.h"
 #include "Comp.h"

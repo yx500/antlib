@@ -1,19 +1,6 @@
 #ifndef ACom_TH
 #define ACom_TH
 //---------------------------------------------------------------------------
-#ifndef QT_ANTLIB
-#if defined(ACOMPDLLMAKE)
-# define _ALIB_     __declspec(dllexport)
-#else
-# define _ALIB_     __declspec(dllimport)
-#endif
-#else
-    #define _ALIB_
-#endif
-
-
-
-
 #include <systypes.h>
 
 

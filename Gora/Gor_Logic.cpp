@@ -1,12 +1,12 @@
 //---------------------------------------------------------------------------
 
-#include <vcl.h>
-#pragma hdrstop
+
+#include "aheaders_cpp.h"
 #include "Gor_Logic.h"
 #include "tGorka.h"
 //---------------------------------------------------------------------------
 
-#pragma package(smart_init)
+
 typedef void *(*T_GetDatagramData_Func)(int typ, const char * PacketName);
 extern T_GetDatagramData_Func GetDatagramData_Func;
 const VMetrPacketType = 4;

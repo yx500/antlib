@@ -1,13 +1,13 @@
 //---------------------------------------------------------------------------
 
 
-#pragma hdrstop
+#include "aheaders_cpp.h"
 
 #include "pmComp.h"
 
 //---------------------------------------------------------------------------
 
-#pragma package(smart_init)
+
 
 static TPropMap _m;
 static String S;

@@ -7,7 +7,7 @@
 #include "ACom_T.h"
 
 // сруктура хранящая параметры участка влияющие на прорисовку.
-class _ALIB_ TAntOpt
+class TAntOpt
 {
 public:
     unsigned char TW;  //  =1 для энергетиков 0 для ост
@@ -81,21 +81,21 @@ public:
 
 
 
-extern  bool            _ALIB_ bNoEmbeddSubStations;
-extern  bool            _ALIB_ bShowExtInfo;
-extern bool             _ALIB_ bShowNumberPosition;
-extern char             _ALIB_ Ych_Dir[256];
-extern char             _ALIB_ Sta_Dir[256];
-extern char             _ALIB_ Dat_Dir[256];
-extern char             _ALIB_ NBDRV_Path[256];
+extern  bool            bNoEmbeddSubStations;
+extern  bool            bShowExtInfo;
+extern bool             bShowNumberPosition;
+extern char             Ych_Dir[256];
+extern char             Sta_Dir[256];
+extern char             Dat_Dir[256];
+extern char             NBDRV_Path[256];
 
 extern  int            CommonAnimationStep; // шаг для прорисовки анимации
 
 
 
-extern  bool            _ALIB_ DNC;
+extern  bool            DNC;
 
-extern  bool            _ALIB_ TRAINNUM_SHOW; // все номера рисовать
+extern  bool            TRAINNUM_SHOW; // все номера рисовать
 extern  bool            bNameBlack;
 
 
@@ -120,35 +120,35 @@ extern    unsigned char        _sv_ras_y_1d[50];
 //   ту из Сомп в инп_ту
 /*-------------------*/
 extern  int                    Tip_Opis_PKS;  //  пришлось сделать для описания параметров
-extern   int            _ALIB_    C_M;
-extern   int            _ALIB_ DNC_DC;
-extern   int            _ALIB_ MOD ;                //РЕЖИМ РЕДАКТОР/ЧТЕНИЕ (ED/RD)
-extern   int            _ALIB_ CurrentStation;      // ТЕКУЩЯЯ СТАНЦИЯ
-extern   int            _ALIB_ DELTA_X;
-extern   int            _ALIB_ DELTA_Y;
+extern   int               C_M;
+extern   int            DNC_DC;
+extern   int            MOD ;                //РЕЖИМ РЕДАКТОР/ЧТЕНИЕ (ED/RD)
+extern   int            CurrentStation;      // ТЕКУЩЯЯ СТАНЦИЯ
+extern   int            DELTA_X;
+extern   int            DELTA_Y;
 //параметры  в функциии Show
 //extern int                     clr;
 
 
 // Основные глобальные переменные
-extern  int             _ALIB_ MUL_X;
-extern  int             _ALIB_ MUL_Y;
-extern  int             _ALIB_ _X_;
-extern  int             _ALIB_ _Y_;
+extern  int             MUL_X;
+extern  int             MUL_Y;
+extern  int             _X_;
+extern  int             _Y_;
 extern  int                    Current_Name;
-extern int              _ALIB_ FLAG_NAPRAVLENIJA_PO_MINSK; //
-extern  int             _ALIB_ CurrentPicture;
+extern int              FLAG_NAPRAVLENIJA_PO_MINSK; //
+extern  int             CurrentPicture;
 extern unsigned char *         sv_ras_y;
 extern unsigned char *         ras     ;
 extern unsigned char *         ras_6   ;
-extern  int             _ALIB_ sh_y;
-extern  char *          _ALIB_ Com_Nam[CompTypeCount+1];
-extern  int             _ALIB_ CurrentUCH;
+extern  int             sh_y;
+extern  char *          Com_Nam[CompTypeCount+1];
+extern  int             CurrentUCH;
 
 
 
-extern  AMemory         _ALIB_ MEM;
-extern  AMemory         _ALIB_ MEM2;
+extern  AMemory         MEM;
+extern  AMemory         MEM2;
 
 
 #endif

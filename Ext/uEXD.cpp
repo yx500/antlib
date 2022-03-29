@@ -1,16 +1,16 @@
 //---------------------------------------------------------------------------
 
 
-#include <vcl.h>
 
-#pragma hdrstop
+
+#include "aheaders_cpp.h"
 
 #include "uEXD.h"
 #include "tGorka.h"
 #include "Gor_Logic.h"
 //---------------------------------------------------------------------------
 
-#pragma package(smart_init)
+
 
 
 typedef void *(*T_GetDatagramData_Func)(int typ, const char * PacketName);

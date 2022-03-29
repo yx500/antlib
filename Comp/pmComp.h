@@ -9,7 +9,7 @@
 
 // абстрактный класс для использования пм
 
-class  _ALIB_ pmComp
+class  pmComp
 {
 
 private:

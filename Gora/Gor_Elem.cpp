@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 
-#include <vcl.h>
-#pragma hdrstop
+
+#include "aheaders_cpp.h"
 
 #include <math.h>
 
@@ -20,7 +20,7 @@
 #include "scrin.h"
 //---------------------------------------------------------------------------
 
-#pragma package(smart_init)
+
 bool    IsClrMig(int Clr);
 void ShowPictXY(int PictNumber, int x, int y, int WP, int HP);
 typedef void *(*T_GetDatagramData_Func)(int typ, const char * PacketName);

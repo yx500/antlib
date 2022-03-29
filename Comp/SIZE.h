@@ -11,13 +11,13 @@
 
 extern  uint8   BLOK_Y;
 extern  uint8   SH_WAY;
-extern  uint8   _ALIB_ STREL_X;
+extern  uint8   STREL_X;
 extern  uint8   STREL_Y;
 //  extern  uint8   STREL_y;
-extern  uint8   _ALIB_ WAY_X  ;
+extern  uint8   WAY_X  ;
 extern  uint8   WAY_Y  ;
 extern  uint8   DL_US  ;
-extern  uint8   _ALIB_ S_WAY_X;
+extern  uint8   S_WAY_X;
 extern  uint8   S_WAY_Y;
 extern  uint8   SIG_X  ;
 extern  uint8   SIG_Y  ;

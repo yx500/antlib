@@ -1,5 +1,5 @@
-#include <vcl.h>
-#pragma hdrstop
+
+#include "aheaders_cpp.h"
 
 #include"out_num.h"
 
@@ -80,7 +80,7 @@ void Box_L_(int x1, int y1, int x2, int y2)  // <-
 
 
 //-------------------------------------------------------
-// Функция прорисовки номера с контуром
+// Функция прорисовки номер  с контуром
 //-------------------------------------------------------
 void Box_(int x, int y, int dr , int n, int Js)
 {

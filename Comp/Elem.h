@@ -7,7 +7,7 @@
 #include "out_num.h"
 
 
-class _ALIB_ Element: public AComp
+class Element: public AComp
 {
 public:
 

@@ -20,7 +20,7 @@ const int Ok = 0;
 
 
 class Station;
-class  _ALIB_ VisibleArray
+class  VisibleArray
 {
 
 public:
@@ -61,18 +61,18 @@ public:
 typedef VisibleArray* PVisibleArray;
 
 typedef void *(*TSetCommBufFunc)(int8);
-void _ALIB_ SetSetCommBufFunc(TSetCommBufFunc ASetCommBuf);
+void SetSetCommBufFunc(TSetCommBufFunc ASetCommBuf);
 
 typedef void(*TEachAComp)(PAComp);
-extern TEachAComp _ALIB_ EachACompPreFun;
-extern TEachAComp _ALIB_ EachACompPostFun;
-extern TEachAComp _ALIB_ EachACompStanPreFun;
-extern TEachAComp _ALIB_ EachACompStanPostFun;
-extern TEachAComp _ALIB_ MakeNewComp;
+extern TEachAComp EachACompPreFun;
+extern TEachAComp EachACompPostFun;
+extern TEachAComp EachACompStanPreFun;
+extern TEachAComp EachACompStanPostFun;
+extern TEachAComp MakeNewComp;
 
 
 
-extern FILE*      _ALIB_ CurStanFile;
+extern FILE*      CurStanFile;
 
 
 

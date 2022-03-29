@@ -1,8 +1,8 @@
-#include <vcl.h>
-#pragma hdrstop
+
+#include "aheaders_cpp.h"
 
 #if (__BORLANDC__ >= 0x530)
-#pragma package(smart_init)
+
 #endif
 //----------------------------------------------------------------------------
 

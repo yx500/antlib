@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 
-#include <vcl.h>
-#pragma hdrstop
+
+#include "aheaders_cpp.h"
 
 
 #include "Ways.h"
@@ -17,7 +17,7 @@
 #include "Impuls.h"
 //---------------------------------------------------------------------------
 
-#pragma package(smart_init)
+
 void ShowPictText(int x, int y, void * AGE, char * szText, int YS);
 /*  ========================= Way ==================*/
 

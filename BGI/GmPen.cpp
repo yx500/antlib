@@ -1,13 +1,13 @@
 //---------------------------------------------------------------------------
-#include <vcl.h>
-#pragma hdrstop
+
+#include "aheaders_cpp.h"
 #include <windows.h>
 #include <wingdi.h>
 #include <limits.h>
 
 #include "GmPen.h"
 //---------------------------------------------------------------------------
-#pragma package(smart_init)
+
 
 
 /* TODO : !!! Cashing pens */

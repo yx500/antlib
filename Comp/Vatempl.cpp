@@ -1,5 +1,5 @@
-//#include <vcl.h>
-#pragma hdrstop
+//
+#include "aheaders_cpp.h"
 #include <algorithm>
 
 #include "APch.h"
@@ -7,7 +7,7 @@
 #include "Vatempl.h"
 //---------------------------------------------------------------------------
 
-#pragma package(smart_init)
+
 
 #include "elem.h"
 #include "Ways.h"

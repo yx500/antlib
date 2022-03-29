@@ -1,15 +1,15 @@
 //---------------------------------------------------------------------------
 
-#include <vcl.h>
+
 #include <string.h>
-#pragma hdrstop
+#include "aheaders_cpp.h"
 
 #include "ACom_V.h"
 #include "col.h"
 
 //---------------------------------------------------------------------------
 
-#pragma package(smart_init)
+
 
 
 

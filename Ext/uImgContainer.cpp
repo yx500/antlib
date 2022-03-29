@@ -1,8 +1,8 @@
 //---------------------------------------------------------------------------
 
 
-#pragma hdrstop
-#include <vcl.h>
+#include "aheaders_cpp.h"
+
 #include <map>
 #include "uImgContainer.h"
 
@@ -10,7 +10,7 @@
 #pragma resource "Ext\\ExtRc.res"
 //---------------------------------------------------------------------------
 
-#pragma package(smart_init)
+
 
 //typedef std::map<std::string,HENHMETAFILE , std::less<std::string> > imitems_type;
 typedef std::map<std::string, TMetafile * , std::less<std::string> > imitems_type;

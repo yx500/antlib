@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
 
-#include <vcl.h>
-#pragma hdrstop
+
+#include "aheaders_cpp.h"
 
 #include "APch.h"
 #include "scrin.h"
@@ -17,7 +17,7 @@
 //---------------------------------------------------------------------------
 
 
-#pragma package(smart_init)
+
 
 
 TEnergLampData * __fastcall GetEnergLampData(TEnergStanLamps * EnergStanLamps, unsigned __int16 ObjID)

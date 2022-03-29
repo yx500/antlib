@@ -11,7 +11,7 @@
 
 
 
-class /*_ALIB_*/ TEXD
+class /**/ TEXD
 {
 private:
 
@@ -54,6 +54,6 @@ public:
 
 };
 
-extern TEXD /*_ALIB_*/ EXD;
+extern TEXD /**/ EXD;
 
 #endif

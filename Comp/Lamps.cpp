@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
-#include <vcl.h>
 
-#pragma hdrstop
+
+#include "aheaders_cpp.h"
 
 #include "Lamps.h"
 
@@ -20,7 +20,7 @@
 #include "tGorka.h"
 //---------------------------------------------------------------------------
 
-#pragma package(smart_init)
+
 
 void ShowPictText(int x, int y, void * AGE, char * szText, int YS);
 bool ExShowLamp(int x, int y, Lamp * AL, int YS);

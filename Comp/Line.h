@@ -5,7 +5,7 @@
 
 
 
-class _ALIB_ Lini: public AComp
+class Lini: public AComp
 {
 protected:
 
@@ -107,7 +107,7 @@ public:
 typedef Lini* PLini;
 
 
-class _ALIB_ Lini2: public AComp
+class Lini2: public AComp
 {
 protected:
 

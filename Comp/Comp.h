@@ -19,7 +19,7 @@ struct TACompPad{
     char  param[12];
 };
 
-class  _ALIB_ AComp : public pmComp
+class  AComp : public pmComp
 {
 
 private:
@@ -130,19 +130,19 @@ typedef AComp* PAComp;
 PAComp Trans(char*, int);
 
 typedef int (*T_f_Func)(int, void *);
-void _ALIB_ Set_f_Func(T_f_Func A_f_);
+void Set_f_Func(T_f_Func A_f_);
 
 typedef int (*T_f2_Func)(int, const char *);
-void _ALIB_ Set_f2_Func(T_f2_Func A_f2_);
+void Set_f2_Func(T_f2_Func A_f2_);
 
 typedef char *(*T_GetSigName_Func)(int);
-void _ALIB_ Set_T_GetSigName_Func(T_GetSigName_Func AGetSigName_Func);
+void Set_T_GetSigName_Func(T_GetSigName_Func AGetSigName_Func);
 
 typedef void *(*T_GetDatagramData_Func)(int typ, const char * PacketName);
-void _ALIB_ Set_GetDatagramData_Func(T_GetDatagramData_Func AGetDatagramData_Func);
+void Set_GetDatagramData_Func(T_GetDatagramData_Func AGetDatagramData_Func);
 
 typedef void *(*T_GetDatagramPacket2_Func)(int typ, const char * PacketName);
-void _ALIB_ Set_GetDatagramPacket2_Func(T_GetDatagramPacket2_Func AGetDatagramPacket2_Func);
+void Set_GetDatagramPacket2_Func(T_GetDatagramPacket2_Func AGetDatagramPacket2_Func);
 
 extern T_GetDatagramData_Func GetDatagramData_Func;
 extern T_GetDatagramPacket2_Func GetDatagramPacket2_Func;

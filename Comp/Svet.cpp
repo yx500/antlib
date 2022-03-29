@@ -1,7 +1,7 @@
 //---------------------------------------------------------------------------
-#include <vcl.h>
 
-#pragma hdrstop
+
+#include "aheaders_cpp.h"
 
 #include "Svet.h"
 
@@ -13,7 +13,7 @@
 #include "Impuls.h"
 //---------------------------------------------------------------------------
 
-#pragma package(smart_init)
+
 
 
 Svet_0::Svet_0()
