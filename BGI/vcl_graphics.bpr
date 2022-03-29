@@ -4,7 +4,7 @@
   <MACROS>
     <VERSION value="BCB.06.00"/>
     <PROJECT value="vcl_graphics.lib"/>
-    <OBJFILES value="winbgi.obj winpalet.obj winbgi_vcl.obj GmPen.obj ..\Ext\uImgContainer.obj"/>
+    <OBJFILES value="tmp\winpalet.obj tmp\winbgi_vcl.obj tmp\GmPen.obj tmp\uImgContainer.obj"/>
     <RESFILES value=""/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -27,18 +27,18 @@
     <USERDEFINES value="_DEBUG;"/>
     <SYSDEFINES value="NO_STRICT"/>
     <MAINSOURCE value="vcl_graphics.bpf"/>
-    <INCLUDEPATH value="..\Ext;.;$(BCB)\include;$(BCB)\include\vcl;..\..\VladSrc\vlib;..\..\VladSrc\comprj;..\comp"/>
+    <INCLUDEPATH value="..\ax;..\Ext;..\comp;.;$(BCB)\include;$(BCB)\include\vcl"/>
     <LIBPATH value="..\Ext;$(BCB)\lib\obj;$(BCB)\lib"/>
     <WARNINGS value="-w-par"/>
     <LISTFILE value=""/>
     <OTHERFILES value=""/>
   </MACROS>
   <OPTIONS>
-    <IDLCFLAGS value="-I..\Ext -I. -I$(BCB)\include -I$(BCB)\include\vcl -I..\..\VladSrc\vlib 
-      -I..\..\VladSrc\comprj -I..\comp -src_suffix cpp -D_DEBUG -boa"/>
+    <IDLCFLAGS value="-I..\ax -I..\Ext -I..\comp -I. -I$(BCB)\include -I$(BCB)\include\vcl 
+      -src_suffix cpp -D_DEBUG -boa"/>
     <CFLAG1 value="-Od -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 -b -k -y -v -vi- -c 
       -tW -tWM"/>
-    <PFLAGS value="-$YD -$W -$O- -$A8 -v -JPHNE -M"/>
+    <PFLAGS value="-N2./tmp -N0./tmp -$YD -$W -$O- -$A8 -v -JPHNE -M"/>
     <AFLAGS value="/mx /w2 /zd"/>
     <LFLAGS value="/P64"/>
     <OTHERFILES value=""/>
@@ -50,7 +50,6 @@
   </LINKER>
   <FILELIST>
       <FILE FILENAME="vcl_graphics.bpf" FORMNAME="" UNITNAME="vcl_graphics" CONTAINERID="BPF" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="winbgi.cpp" FORMNAME="" UNITNAME="winbgi" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="winpalet.cpp" FORMNAME="" UNITNAME="WinPalet" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="winbgi_vcl.cpp" FORMNAME="" UNITNAME="winbgi_vcl" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="GmPen.cpp" FORMNAME="" UNITNAME="GMPEN" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
@@ -91,15 +90,17 @@ Comments=
 D:\Program Files\ip4000vcl6\package\ip4000dcl6.bpl=Woll2Woll InfoPower 4000
 
 [HistoryLists\hlIncludePath]
-Count=8
-Item0=..\Ext;.;$(BCB)\include;$(BCB)\include\vcl;..\..\VladSrc\vlib;..\..\VladSrc\comprj;..\comp
-Item1=.;$(BCB)\include;$(BCB)\include\vcl;..\..\VladSrc\vlib;..\..\VladSrc\comprj;..\comp
-Item2=.;$(BCB)\include;$(BCB)\include\vcl;..\..\VladSrc\vlib;..\..\VladSrc\comprj;..
-Item3=.;$(BCB)\include;$(BCB)\include\vcl;..\..\VladSrc\vlib;..\..\VladSrc\comprj
-Item4=.;$(BCB)\include;$(BCB)\include\vcl;..\vlib;..\..\vlib
-Item5=.;$(BCB)\include;$(BCB)\include\vcl;..\vlib
-Item6=D:\Program Files\Borland\CBuilder6\Projects;Bgi;.;Ext;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl;..\vlib
-Item7=$(BCB)\include;$(BCB)\include\vcl
+Count=10
+Item0=..\ax;..\Ext;..\comp;.;$(BCB)\include;$(BCB)\include\vcl
+Item1=..\Ext;..\comp;.;$(BCB)\include;$(BCB)\include\vcl
+Item2=..\Ext;.;$(BCB)\include;$(BCB)\include\vcl;..\..\VladSrc\vlib;..\..\VladSrc\comprj;..\comp
+Item3=.;$(BCB)\include;$(BCB)\include\vcl;..\..\VladSrc\vlib;..\..\VladSrc\comprj;..\comp
+Item4=.;$(BCB)\include;$(BCB)\include\vcl;..\..\VladSrc\vlib;..\..\VladSrc\comprj;..
+Item5=.;$(BCB)\include;$(BCB)\include\vcl;..\..\VladSrc\vlib;..\..\VladSrc\comprj
+Item6=.;$(BCB)\include;$(BCB)\include\vcl;..\vlib;..\..\vlib
+Item7=.;$(BCB)\include;$(BCB)\include\vcl;..\vlib
+Item8=D:\Program Files\Borland\CBuilder6\Projects;Bgi;.;Ext;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl;..\vlib
+Item9=$(BCB)\include;$(BCB)\include\vcl
 
 [HistoryLists\hlLibraryPath]
 Count=3
@@ -116,6 +117,10 @@ Count=3
 Item0=_DEBUG;
 Item1=_DEBUG;STRICT;_USE_WINGDIPLUS;
 Item2=_DEBUG
+
+[HistoryLists\hlIntOutputDir]
+Count=1
+Item0=./tmp
 
 [HistoryLists\hlTlibPageSize]
 Count=3
@@ -147,10 +152,5 @@ LinkCGLIB=0
 AddServerUnit=1
 AddClientUnit=1
 PrecompiledHeaders=1
-
-[Language]
-ActiveLang=
-ProjectLang=
-RootDir=
   </IDEOPTIONS>
 </PROJECT>

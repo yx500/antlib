@@ -30,16 +30,15 @@
     <USERDEFINES value="_DEBUG"/>
     <SYSDEFINES value="NO_STRICT"/>
     <MAINSOURCE value="AntLib.bpf"/>
-    <INCLUDEPATH value="..\nb_trb;..\CommonSrc\ImgContainer;..\TestWinGDI;Gora;Bgi;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl;..\VladSrc\comprj;..\VladSrc\vlib"/>
+    <INCLUDEPATH value="ax;Gora;Bgi;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl"/>
     <LIBPATH value="..\nb_trb;..\CommonSrc\ImgContainer;..\TestWinGDI;Gora;..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib"/>
     <WARNINGS value="-wuse -wstv -w-par"/>
     <LISTFILE value=""/>
     <OTHERFILES value=""/>
   </MACROS>
   <OPTIONS>
-    <IDLCFLAGS value="-I..\nb_trb -I..\CommonSrc\ImgContainer -I..\TestWinGDI -IGora -IBgi -IExt 
-      -IComp -I$(BCB)\include -I$(BCB)\include\vcl -I..\VladSrc\comprj 
-      -I..\VladSrc\vlib -src_suffix cpp -D_DEBUG -boa"/>
+    <IDLCFLAGS value="-Iax -IGora -IBgi -IExt -IComp -I$(BCB)\include -I$(BCB)\include\vcl 
+      -src_suffix cpp -D_DEBUG -boa"/>
     <CFLAG1 value="-Od -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 -5 -b- -k -y -v -vi- 
       -c -tW -tWM"/>
     <PFLAGS value="-N2.\tmp -N0.\tmp -$YD -$W -$O- -$A8 -v -JPHNE -M"/>
@@ -124,26 +123,27 @@ ProductVersion=1.0.0.0
 Comments=
 
 [HistoryLists\hlIncludePath]
-Count=19
-Item0=..\nb_trb;..\CommonSrc\ImgContainer;..\TestWinGDI;Gora;Bgi;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl;..\VladSrc\comprj;..\VladSrc\vlib
-Item1=..\CommonSrc\ImgContainer;..\TestWinGDI;Gora;Bgi;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl;..\VladSrc\comprj;..\VladSrc\vlib
-Item2=..\TestWinGDI;Gora;Bgi;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl;..\VladSrc\comprj;..\VladSrc\vlib
-Item3=C:\Program Files\Borland\CBuilder6\Projects;..\TestWinGDI;Gora;Bgi;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl;..\VladSrc\comprj;..\VladSrc\vlib
-Item4=Gora;Bgi;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl;..\VladSrc\comprj;..\VladSrc\vlib
-Item5=Bgi;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl;..\VladSrc\comprj;..\VladSrc\vlib
-Item6=Bgi;.;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl;..\VladSrc\comprj;..\VladSrc\vlib
-Item7=Bgi;.;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl;..\VladSrc\comprj
-Item8=Bgi;.;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl;..\VladSrc
-Item9=C:\Program Files\Borland\CBuilder6\Projects;Bgi;.;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl;..\VladSrc
-Item10=C:\Program Files\Borland\CBuilder6\Projects;Bgi;.;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl
-Item11=Bgi;.;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl
-Item12=C:\Program Files\Borland\CBuilder6\Projects;D:\Program Files\Borland\CBuilder6\Projects;Bgi;.;Ext;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl;..\vlib
-Item13=D:\Program Files\Borland\CBuilder6\Projects;Bgi;.;Ext;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl;..\vlib
-Item14=Bgi;.;Ext;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl;..\vlib
-Item15=.;Ext;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl;..\vlib;
-Item16=Ext;..\vlib;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl
-Item17=..\vlib;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl
-Item18=VladSrc;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl
+Count=20
+Item0=ax;Gora;Bgi;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl
+Item1=..\nb_trb;..\CommonSrc\ImgContainer;..\TestWinGDI;Gora;Bgi;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl;..\VladSrc\comprj;..\VladSrc\vlib
+Item2=..\CommonSrc\ImgContainer;..\TestWinGDI;Gora;Bgi;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl;..\VladSrc\comprj;..\VladSrc\vlib
+Item3=..\TestWinGDI;Gora;Bgi;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl;..\VladSrc\comprj;..\VladSrc\vlib
+Item4=C:\Program Files\Borland\CBuilder6\Projects;..\TestWinGDI;Gora;Bgi;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl;..\VladSrc\comprj;..\VladSrc\vlib
+Item5=Gora;Bgi;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl;..\VladSrc\comprj;..\VladSrc\vlib
+Item6=Bgi;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl;..\VladSrc\comprj;..\VladSrc\vlib
+Item7=Bgi;.;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl;..\VladSrc\comprj;..\VladSrc\vlib
+Item8=Bgi;.;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl;..\VladSrc\comprj
+Item9=Bgi;.;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl;..\VladSrc
+Item10=C:\Program Files\Borland\CBuilder6\Projects;Bgi;.;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl;..\VladSrc
+Item11=C:\Program Files\Borland\CBuilder6\Projects;Bgi;.;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl
+Item12=Bgi;.;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl
+Item13=C:\Program Files\Borland\CBuilder6\Projects;D:\Program Files\Borland\CBuilder6\Projects;Bgi;.;Ext;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl;..\vlib
+Item14=D:\Program Files\Borland\CBuilder6\Projects;Bgi;.;Ext;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl;..\vlib
+Item15=Bgi;.;Ext;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl;..\vlib
+Item16=.;Ext;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl;..\vlib;
+Item17=Ext;..\vlib;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl
+Item18=..\vlib;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl
+Item19=VladSrc;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl
 
 [HistoryLists\hlLibraryPath]
 Count=17
