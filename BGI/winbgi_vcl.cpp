@@ -1,10 +1,4 @@
-
 #include "aheaders_cpp.h"
-
-#if (__BORLANDC__ >= 0x530)
-
-#endif
-//----------------------------------------------------------------------------
 
 #include <windows.h>
 #include <stddef.h>
@@ -12,8 +6,6 @@
 #include <math.h>
 #include <iostream>
 #include <fstream>
-//#include <algorithm>
-//#include <map>
 
 #include <SyncObjs.hpp>
 

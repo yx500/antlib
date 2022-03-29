@@ -1,9 +1,6 @@
-//---------------------------------------------------------------------------
-
-
-#include <string.h>
 #include "aheaders_cpp.h"
 
+#include <string.h>
 #include "ACom_V.h"
 #include "col.h"
 

@@ -11,9 +11,6 @@
 #if !defined(__COLORS)
 #define __COLORS
 
-//#include "windef.h"
-//#include "winuser.h"
-
 typedef struct tagPOINT
 {
   int  x;

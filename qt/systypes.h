@@ -19,7 +19,3 @@ typedef uint16_t uint16;
 typedef uint32_t uint32;
 
 typedef double TDateTime;
-
-#define _WINBGI_
-#define far
-#define __fastcall
