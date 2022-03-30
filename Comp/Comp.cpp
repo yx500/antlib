@@ -7,7 +7,7 @@
 #include "Vatempl.h"
 #include "Stan.h"
 #include "Polig.h"
-#include "winbgi.h"
+#include "bgi.h"
 #include "Impuls.h"
 #include"out_num.h"
 #include "uParString.h"

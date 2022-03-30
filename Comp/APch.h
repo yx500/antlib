@@ -13,7 +13,7 @@
 
 
 #include "common.h"
-#include "winbgi.h"
+#include "bgi.h"
 #include "winpalet.h"
 #include "SIZE.h"
 #include "col.h"

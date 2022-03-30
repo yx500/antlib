@@ -32,7 +32,7 @@
 #include "Impuls.h"
 
 
-#include "winbgi.h"
+#include "bgi.h"
 #include "winpalet.h"
 
 #include "uEXD.h"

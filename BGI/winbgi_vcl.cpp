@@ -1,5 +1,7 @@
 #include "aheaders_cpp.h"
 
+#include "winbgi_vcl.h"
+
 #include <windows.h>
 #include <stddef.h>
 #include <stdio.h>
@@ -9,15 +11,12 @@
 
 #include <SyncObjs.hpp>
 
-//#define  BGIDBG
-#include "winbgi.h"
 #include "winpalet.h"
 #include "Col.h"
 #include "uImgContainer.h"
 
 #include "GMPEN.H"
 
-//#include "ALIB.h"
 
 //static
 TCanvas* dc = 0;

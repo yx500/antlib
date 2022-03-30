@@ -1,4 +1,3 @@
-//---------------------------------------------------------------------------
 #include "aheaders_cpp.h"
 
 #include "LampExtDraw.h"
@@ -14,6 +13,9 @@
 #include "uImgContainer.h"
 #include "uEXD.h"
 #include "Impuls.h"
+
+#include "winbgi_vcl.h"
+//#include "bgi.h"
 
 //---------------------------------------------------------------------------
 

@@ -183,10 +183,11 @@ Item5=_DEBUG;ACOMPDLLMAKE;
 Item6=BGIPALETTE;YU_COORD;_DEBUG
 
 [HistoryLists\hlIntOutputDir]
-Count=3
-Item0=.\obj.tmp
-Item1=.\tmp
-Item2=obj.tmp
+Count=4
+Item0=.\obj.tmp 
+Item1=.\obj.tmp
+Item2=.\tmp
+Item3=obj.tmp
 
 [HistoryLists\hlTlibPageSize]
 Count=9

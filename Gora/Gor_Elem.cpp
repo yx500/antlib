@@ -13,11 +13,13 @@
 #include "Vatempl.h"
 #include "stan.h"
 #include "polig.h"
-#include "WinBgi.h"
 #include "Impuls.h"
 #include "Col.h"
 #include "Gor_Logic.h"
 #include "scrin.h"
+//#include "winbgi_vcl.h"
+#include "bgi.h"
+
 //---------------------------------------------------------------------------
 
 
