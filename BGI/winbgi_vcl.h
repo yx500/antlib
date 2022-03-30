@@ -4,6 +4,7 @@
 #include "aheaders_h.h"
 
 #include "bgi.h"
+#include "winpalet.h"
 #include <graphics.hpp>
 
 

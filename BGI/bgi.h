@@ -1,6 +1,7 @@
 #ifndef BGI_H
 #define BGI_H
 
+#include "winpalet.h"
 
 enum COLORS {
     BLACK,          /* dark colors */

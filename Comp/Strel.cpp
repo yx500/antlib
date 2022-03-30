@@ -14,6 +14,7 @@
 
 #include "propmap.h"
 #include"out_num.h"
+#include "bgi.h"
 
 
 void SetGradientFactor(float AGradientFactor);
