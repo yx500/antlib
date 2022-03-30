@@ -38,9 +38,6 @@ void SetGradientFactor(float AGradientFactor)
 
 TColor BgiColor(unsigned int c)
 {
-    //if( UseBGIPalette )
-    //    return PALETTEINDEX( c );
-
     TColor clr = c;
     if (c < 256) clr = BgiDacColor(c);
     if ((GradientFactor != 1) && (c != FON)) clr = GetGradientColor(clr, GradientFactor);
@@ -54,9 +51,6 @@ bool UseNativeFontSize = true;
 
 const int FontCount = 32;
 static TFont *Fonts[ FontCount ];
-
-
-using namespace std;
 
 
 

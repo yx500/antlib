@@ -29,10 +29,10 @@ enum line_styles {      /* Line styles for get/setlinestyle */
                    USERBIT_LINE = 4,   /* User defined line style */
 };
 
-    enum line_widths {      /* Line widths for get/setlinestyle */
-                       NORM_WIDTH  = 1,
-                       THICK_WIDTH = 3,
-                       };
+enum line_widths {      /* Line widths for get/setlinestyle */
+                   NORM_WIDTH  = 1,
+                   THICK_WIDTH = 3,
+};
 
 enum font_names {
     DEFAULT_FONT    = 0,    /* 8x8 bit mapped font */
@@ -47,11 +47,6 @@ enum font_names {
     EUROPEAN_FONT = 9,
     BOLD_FONT = 10
 };
-
-#define HORIZ_DIR   0   /* left to right */
-#define VERT_DIR    1   /* bottom to top */
-
-#define USER_CHAR_SIZE  0   /* user-defined char size */
 
 enum fill_patterns {        /* Fill patterns for get/setfillstyle */
                      EMPTY_FILL,     /* fills area in background color */
@@ -87,8 +82,6 @@ enum text_just {        /* Horizontal and vertical justification
                  TOP_TEXT    = 0x0002
 };
 
-
-
 struct linesettingstype {
     int linestyle;
     unsigned int upattern;
@@ -123,37 +116,39 @@ struct arccoordstype {
 };
 
 
-void        bar(int __left, int __top, int __right, int __bottom);
-void        circle(int __x, int __y, int __radius);
-void        arc(int x, int y, int start_angle, int end_angle, int radius);
-void        pie(int X1, int Y1, int X2, int Y2, int X3, int Y3, int X4, int Y4);
-void        drawpoly(int __numpoints, const int *__polypoints);
-void        fillellipse(int __x, int __y, int __xradius, int __yradius);
-void        fillpoly(int __numpoints, const int  *__polypoints);
-int         getmaxx(void);
-int         getmaxy(void);
-void        line(int __x1, int __y1, int __x2, int __y2);
-void        rectangle(int __left, int __top, int __right, int __bottom);
-void        roundrect(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int nWidth, int nHeight);
-void        setcolor(int __color);
-void        setfillpattern(const char  *__upattern, int __color);
-void        setfillstyle(int __pattern, int __color);
-void        setlinestyle(int __linestyle, unsigned __upattern,
-                  int __thickness);
-void        settextjustify(int __horiz, int __vert);
-void        settextstyle(int __font, int __direction, int __charsize);
-void                _SetText(unsigned int font, int d1, int d2);
-void                _SetTextSize(int charsize);
-int         textheight(const char  *__textstring);
-int         textwidth(const char  *__textstring);
-void                OutTextXY(int x, int y, char* str);
-void                DrawText(int x, int y, int tw, int th, char* str);
-void        initgraph(int* device, int* mode, const char* p);
+void  bar(int __left, int __top, int __right, int __bottom);
+void  circle(int __x, int __y, int __radius);
+void  arc(int x, int y, int start_angle, int end_angle, int radius);
+void  pie(int X1, int Y1, int X2, int Y2, int X3, int Y3, int X4, int Y4);
+void  drawpoly(int __numpoints, const int *__polypoints);
+void  fillellipse(int __x, int __y, int __xradius, int __yradius);
+void  fillpoly(int __numpoints, const int  *__polypoints);
+int   getmaxx(void);
+int   getmaxy(void);
+void  line(int __x1, int __y1, int __x2, int __y2);
+void  rectangle(int __left, int __top, int __right, int __bottom);
+void  roundrect(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int nWidth, int nHeight);
+void  setcolor(int __color);
+void  setfillpattern(const char  *__upattern, int __color);
+void  setfillstyle(int __pattern, int __color);
+void  setlinestyle(int __linestyle, unsigned __upattern, int __thickness);
+void  settextjustify(int __horiz, int __vert);
+void  settextstyle(int __font, int __direction, int __charsize);
+void  _SetText(unsigned int font, int d1, int d2);
+void  _SetTextSize(int charsize);
+int   textheight(const char  *__textstring);
+int   textwidth(const char  *__textstring);
+void  OutTextXY(int x, int y, char* str);
+void  DrawText(int x, int y, int tw, int th, char* str);
+void  initgraph(int* device, int* mode, const char* p);
 
 
 
 /*-----------------------------------------*/
 //FONTS
+#define HORIZ_DIR   0   /* left to right */
+#define VERT_DIR    1   /* bottom to top */
+
 extern int F_DEFAULT; //0
 extern int F_LITT   ; //1
 extern int F_LITT_S ; //2
@@ -194,7 +189,7 @@ extern int F_LITT_B ; //3
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 extern bool  UseNativeFontSize;
 extern bool  NoGmPen;
-extern int   UseBGIPalette; // by default=1
+extern int   UseBGIPalette;
 
 void   PolyColor(int iBrushColor, const TPoint *Points, const int * iColors, const int Points_Count, int PenW = 1);
 int    Draw_Ramka(int left, int top, int right, int bottom, int edge = BDR_RAISEDINNER, int grfFlags = BF_RECT);
@@ -202,18 +197,15 @@ int    Draw_Ramka(int left, int top, int right, int bottom, int edge = BDR_RAISE
 RECT&  ClearBgiCoverRect(void);
 RECT&  GetBgiCoverRect(void);
 
-void  SwapDACColor();
-int      Get_DAC(void);
+void    SwapDACColor();
+int     Get_DAC(void);
 
-void *  SetNullDC();
+void*   SetNullDC();
 void    RestoreNullDC();
 
-void SetGradientFactor(float AGradientFactor);
+void    SetGradientFactor(float AGradientFactor);
 
-bool drawemf(const RECT *lpRect,
-             const char * szimagename,
-             int animstep = 0
-             );
+bool drawemf(const RECT *lpRect, const char * szimagename, int animstep = 0);
 
 
 
