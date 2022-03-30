@@ -3,14 +3,16 @@
 
 
 
-#include<QStringList>
 #include "antlibstring.h"
+#include<QStringList>
+
+
 class TStringList : public QStringList
 {
 public:
     TStringList();
-    void  LoadFromFile(const AntLibString FileName);
-    int Add(const AntLibString S);
+    void  LoadFromFile(const String& FileName);
+    int Add(const String& S);
 };
 
 

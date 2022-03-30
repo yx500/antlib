@@ -7,6 +7,8 @@
 #include <iomanip>
 
 
+
+
 class AntLibString : public std::string
 {
 public:
@@ -44,13 +46,12 @@ public:
 
 };
 
+using String = AntLibString;
 
-extern AntLibString  IntToStr(int Value);
-extern AntLibString  IntToStr(__int64 Value);
-extern AntLibString  IntToHex(int Value, int Digits);
-extern AntLibString  IntToHex(__int64 Value, int Digits);
-extern int  StrToInt(const AntLibString S);
-extern int  StrToIntDef(const AntLibString S, int Default);
+extern String  IntToStr(int Value);
+extern String  IntToHex(int Value, int Digits);
+extern int  StrToInt(const String& S);
+extern int  StrToIntDef(const String& S, int Default);
 
 
 

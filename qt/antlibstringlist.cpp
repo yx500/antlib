@@ -2,12 +2,13 @@
 
 #include <QFileInfo>
 #include <QDebug>
+
+
 TStringList::TStringList() :QStringList()
 {
-
 }
 
-void TStringList::LoadFromFile(const AntLibString FileName)
+void TStringList::LoadFromFile(const String& FileName)
 {
     QString fileName=QString(FileName.c_str());
     QFile txtfile(fileName);
@@ -23,12 +24,12 @@ void TStringList::LoadFromFile(const AntLibString FileName)
             }
             txtfile.close();
         } else {
-            qDebug() << "can't open file" << fileName  << endl;
+          qDebug() << "can't open file" << fileName  << Qt::endl;
         }
 }
 
-int TStringList::Add(const AntLibString S)
+int TStringList::Add(const String& S)
 {
-    append(QString(S.c_str()));
+    append( QString(S.c_str()) );
     return size();
 }

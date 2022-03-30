@@ -1,6 +1,5 @@
-//---------------------------------------------------------------------------
-
 #include "aheaders_cpp.h"
+
 #include <windows.h>
 #include <wingdi.h>
 #include <limits.h>
