@@ -1442,7 +1442,7 @@ void PolyColor(int iBrushColor, const TPoint * Points, const int * iColors, cons
 }
 
 
-int Draw_Ramka(int left, int top, int right, int bottom, UINT edge, UINT grfFlags)
+int Draw_Ramka(int left, int top, int right, int bottom, int edge, int grfFlags)
 {
     if (top > bottom)  swap(top, bottom);
     if (left > right)  swap(left, right);

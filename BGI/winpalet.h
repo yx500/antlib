@@ -3,45 +3,27 @@
 //----------------------------------------------------------------------------
 //  Copyright GTSS c 2000. All Rights Reserved.
 //----------------------------------------------------------------------------
-#ifndef QT_ANTLIB
-#include <windows.h>
-#endif
+
 #include "aheaders_h.h"
 
-/*
-class TBgiPalette
-{
-    LPLOGPALETTE lpLogPal;
-    HPALETTE     m_Palette;
 
-public:
-
-    __fastcall TBgiPalette();
-    __fastcall ~TBgiPalette();
-
-    HPALETTE      __fastcall Handle() {return m_Palette;}
-    LPLOGPALETTE  __fastcall LogPal(void)  {return lpLogPal;}
-    COLORREF      __fastcall Color(int indx);
-};
-
-extern TBgiPalette*  BgiPalette;
-*/
 
 #ifdef QT_ANTLIB
 #include <QColor>
-typedef struct tagPALETTEENTRY {
-    int8_t        peRed;
-    int8_t        peGreen;
-    int8_t        peBlue;
-    int8_t        peFlags;
-} PALETTEENTRY;
-typedef QColor COLORREF;
 #endif
+
+typedef struct tagDAC_PALETTEENTRY {
+    uint8        peRed;
+    uint8        peGreen;
+    uint8        peBlue;
+    uint8        peFlags;
+} DAC_PALETTEENTRY;
+
 struct  TDAC {
-    PALETTEENTRY pe[2];
+    DAC_PALETTEENTRY       pe[2];
     bool         idx;
     int          dt;
-    COLORREF     Clr[2];
+    unsigned long     Clr[2];
 };
 
 
@@ -52,7 +34,14 @@ int     Get_DAC(void);
 void    Update_DAC(void);
 bool    IsClrMig(int Clr);
 void    SwapDACColor();
-COLORREF  BgiDacColor(unsigned int c);
+
+
+#ifndef QT_ANTLIB
+unsigned long  BgiDacColor(unsigned int c);
+#else
+QColor  BgiDacColor(unsigned int c);
+#endif
+int GetGradientColor(int Color, float factor);
 
 //----------------------------------------------------------------------------
 #endif

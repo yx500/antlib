@@ -130,39 +130,19 @@ struct arccoordstype {
     int xstart, ystart, xend, yend;
 };
 
-/*
-#ifdef __cplusplus
-extern "C" {
-#endif
-*/
+
 void        bar(int __left, int __top, int __right, int __bottom);
 void        circle(int __x, int __y, int __radius);
 void        arc(int x, int y, int start_angle, int end_angle, int radius);
 void        pie(int X1, int Y1, int X2, int Y2, int X3, int Y3, int X4, int Y4);
-//void        cleardevice( void );
-//void        clearviewport( void );
 void        drawpoly(int __numpoints, const int *__polypoints);
 void        fillellipse(int __x, int __y, int __xradius, int __yradius);
 void        fillpoly(int __numpoints, const int  *__polypoints);
-//int         getcolor( void );
-//void        getfillsettings( struct fillsettingstype  *__fillinfo );
-//void        getimage( int __left, int __top, int __right, int __bottom,
-//                              void  *__bitmap );
 int         getmaxx(void);
 int         getmaxy(void);
-//unsigned    getpixel( int __x, int __y );
-//void        gettextsettings( struct textsettingstype  *__texttypeinfo );
-//unsigned    imagesize( int __left, int __top, int __right, int __bottom );
 void        line(int __x1, int __y1, int __x2, int __y2);
-//void        outtextxy(int __x, int __y, const char  *__textstring);
-//void        putimage( int __left, int __top, const void  *__bitmap,int __op );
-//void        putpixel( int __x, int __y, int __color );
 void        rectangle(int __left, int __top, int __right, int __bottom);
 void        roundrect(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int nWidth, int nHeight);
-
-
-
-//void        setbkcolor( int __color );
 void        setcolor(int __color);
 void        setfillpattern(const char  *__upattern, int __color);
 void        setfillstyle(int __pattern, int __color);
@@ -172,22 +152,13 @@ void        settextjustify(int __horiz, int __vert);
 void        settextstyle(int __font, int __direction, int __charsize);
 void                _SetText(unsigned int font, int d1, int d2);
 void                _SetTextSize(int charsize);
-//void        setviewport( int __left, int __top, int __right, int __bottom, int __clip );
 int         textheight(const char  *__textstring);
 int         textwidth(const char  *__textstring);
 void                OutTextXY(int x, int y, char* str);
 void                DrawText(int x, int y, int tw, int th, char* str);
-//void        closegraph( void );
-//int         installuserfont( const char  *__name );
 void        initgraph(int* device, int* mode, const char* p);
 
 
-
-/*
-#ifdef __cplusplus
-}
-#endif
-*/
 
 /*-----------------------------------------*/
 //FONTS
@@ -226,18 +197,11 @@ extern int F_LITT_B ; //3
 #define WEBDI10b 26+4
 #define TERMI10b 27+4
 
-//void _SetTextStyle( unsigned int font );
 
-
-//void  SetTextStyle( unsigned int font, int direction=0, int charsize=0 );
-
-//void  initfnt( void );
-
-//#include <windows.h>
 #include <graphics.hpp>
 
 void   PolyColor(int iBrushColor, const TPoint *Points, const int * iColors, const int Points_Count, int PenW = 1);
-int    Draw_Ramka(int left, int top, int right, int bottom, UINT edge = BDR_RAISEDINNER, UINT grfFlags = BF_RECT);
+int    Draw_Ramka(int left, int top, int right, int bottom, int edge = BDR_RAISEDINNER, int grfFlags = BF_RECT);
 
 
 //!!!!inline  void  outtextxy(int x, int y, char* str) { OutTextXY(x, y, str); }
@@ -248,29 +212,19 @@ int    Draw_Ramka(int left, int top, int right, int bottom, UINT edge = BDR_RAIS
 
 RECT&  ClearBgiCoverRect(void);
 RECT&  GetBgiCoverRect(void);
-//extern  void *  SetWinBgiDC(void * pdc);
-//extern /**/ void * _GetFont( int i );
-//extern /**/ void _SetFont( int i,void * F );
-extern TColor  BgiColor(unsigned int c);
-extern  void  SwapDACColor();
+
+TColor  BgiColor(unsigned int c);
+void  SwapDACColor();
 int      Get_DAC(void);
 extern bool  UseNativeFontSize;
 extern bool  NoGmPen;
 
 
-//TCanvas* __fastcall DC( void );
 TCanvas*  BgiCanvas(void);  //{ return DC(); }
-//TFont*    Font( int );
-//TColor    Color( int8 );
 
 
 void *  SetNullDC();
 void    RestoreNullDC();
-
-
-//void     DrawTextWithPr( int cx,int cy,int cw,int ch,char* str,int priz );
-//void     DrawTextWithPr( TRect R,char* str,int priz );
-
 
 
 //VLAD VLAD VLAD VLAD VLAD VLAD VLAD VLAD VLAD VLAD VLAD VLAD VLAD VLAD VLAD VLAD
@@ -292,19 +246,7 @@ public:
     void SwapDACColor();
 };
 //----------------------------------------------------------------------------
-class TNFSSmart
-{
-    bool old;
-public:
-    TNFSSmart()  {
-        old = UseNativeFontSize; UseNativeFontSize = 1;
-    }
-    ~TNFSSmart()  {
-        UseNativeFontSize = old;
-    }
-};
-#define NFS TNFSSmart _nfs
-//----------------------------------------------------------------------------
+
 
 //VLAD VLAD VLAD VLAD VLAD VLAD VLAD VLAD VLAD VLAD VLAD VLAD VLAD VLAD VLAD VLAD
 

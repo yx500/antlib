@@ -5,8 +5,20 @@
 #include <fstream>
 #include <algorithm>
 
+#ifndef QT_ANTLIB
+#include <windows.h>
+#else
 
-static RGBQUAD rgbStd256[] = {
+#endif
+
+typedef struct tagRGBQUAD256 {
+        uint8    rgbBlue;
+        uint8    rgbGreen;
+        uint8    rgbRed;
+        uint8    rgbReserved;
+} RGBQUAD256;
+
+static RGBQUAD256 rgbStd256[] = {
     {   0,  0,  0, 0 }, {   0,  0, 128, 0 }, {   0, 128,  0, 0 }, {   0, 128, 128, 0 },
     { 128,  0,  0, 0 }, { 128,  0, 128, 0 }, { 128, 128,  0, 0 }, { 192, 192, 192, 0 },
     { 192, 220, 192, 0 }, { 240, 202, 166, 0 }, { 238, 238, 238, 0 }, { 221, 221, 221, 0 },
@@ -74,51 +86,7 @@ static RGBQUAD rgbStd256[] = {
 };
 //----------------------------------------------------------------------------
 const int MX = 4;
-/*TBgiPalette* BgiPalette=NULL;
-//----------------------------------------------------------------------------
-__fastcall TBgiPalette::TBgiPalette()
-        :
-        m_Palette(NULL),
-        lpLogPal(NULL)
-{
-    lpLogPal = (LPLOGPALETTE) new BYTE[sizeof(LOGPALETTE) + ((255) * sizeof(PALETTEENTRY))];
-    lpLogPal->palVersion = 0x0300;
-    lpLogPal->palNumEntries = 256;
-    for (int i = 0; i < 256; i++) {
-        lpLogPal->palPalEntry[i].peRed   = rgbStd256[i].rgbRed;
-        lpLogPal->palPalEntry[i].peGreen = rgbStd256[i].rgbGreen;
-        lpLogPal->palPalEntry[i].peBlue  = rgbStd256[i].rgbBlue;
-        lpLogPal->palPalEntry[i].peFlags = 0;
-    }
 
-    for (int i = 0; i < sizeof(DAC)/sizeof(DAC[0]); i++) {
-        lpLogPal->palPalEntry[i].peRed   = DAC[i].pe[0].peBlue *MX;//ѕ≈–≈ѕ”“јЌј  »Ќ»÷»јЋ»«ј÷»я ћј——»¬ј
-        lpLogPal->palPalEntry[i].peGreen = DAC[i].pe[0].peGreen*MX;
-        lpLogPal->palPalEntry[i].peBlue  = DAC[i].pe[0].peRed  *MX;
-        lpLogPal->palPalEntry[i].peFlags = PC_RESERVED;
-    }
-    m_Palette = ::CreatePalette( lpLogPal );
-}
-//----------------------------------------------------------------------------
-__fastcall TBgiPalette::~TBgiPalette()
-{
-    ::DeleteObject(m_Palette);
-    delete [] (BYTE *)lpLogPal;
-}
-//----------------------------------------------------------------------------
-COLORREF __fastcall TBgiPalette::Color(int i)
-{
-    /*
-     return i<256 ? RGB(lpLogPal->palPalEntry[i].peRed,
-                lpLogPal->palPalEntry[i].peGreen,
-                lpLogPal->palPalEntry[i].peBlue
-                ) : 0;
-    *
-    static PALETTEENTRY pe[256];
-    ::GetPaletteEntries(m_Palette, 0, 256, (LPPALETTEENTRY)&pe);
-    return i<256 ? RGB(pe[i].peRed, pe[i].peGreen, pe[i].peBlue) : 0;
-}
-*/
 //----------------------------------------------------------------------------
 const int DAC_ARRAYSIZE = 32;
 TDAC DAC[DAC_ARRAYSIZE] = {
@@ -162,6 +130,76 @@ void SetGradientFactor(float AGradientFactor)
 {
     GradientFactor = AGradientFactor;
 }
+
+
+#ifndef QT_ANTLIB
+unsigned long BgiDacColor(unsigned int c)
+{
+    COLORREF clr;
+    if (c < DAC_ARRAYSIZE) {
+        // до 32 цвет из палитры ƒј ј
+        clr = DAC[c].Clr[DAC[c].idx];
+    } else if (c < 255) {
+        // 32-255 цвет из странной палитры rgbStd256
+        clr = RGB(rgbStd256[c].rgbRed,
+                  rgbStd256[c].rgbGreen,
+                  rgbStd256[c].rgbBlue);
+    } else {
+        // аз ин
+        clr = c;
+    }
+    // добавлена возможность смещать цвет
+    if ((GradientFactor != 1) && (c != 8)) clr = GetGradientColor(clr, GradientFactor);
+    return clr;
+
+}
+#else
+typedef unsigned long       DWORD;
+typedef int                 BOOL;
+typedef unsigned char       BYTE;
+typedef unsigned short      WORD;
+
+
+
+
+
+QColor Color2Qcolor(unsigned long clr)
+{
+#define DWORD_PTR DWORD
+#define LOBYTE(w)           ((BYTE)((DWORD_PTR)(w) & 0xff))
+#define RGB(r,g,b) ((DWORD)(((BYTE)(r)|((WORD)((BYTE)(g))<<8))|(((DWORD)(BYTE)(b))<<16)))
+#define GetRValue(rgb) (LOBYTE(rgb))
+#define GetGValue(rgb) (LOBYTE(((WORD)(rgb)) >> 8))
+#define GetBValue(rgb) (LOBYTE((rgb)>>16))
+
+    return QColor::fromRgb(GetRValue(clr),GetGValue(clr),GetBValue(clr));
+}
+
+
+QColor BgiDacColor(unsigned int c)
+{
+    DWORD clr;
+    if (c < DAC_ARRAYSIZE) {
+        // до 32 цвет из палитры ƒј ј
+        clr = DAC[c].Clr[DAC[c].idx];
+    } else if (c < 255) {
+        // 32-255 цвет из странной палитры rgbStd256
+        clr = RGB(rgbStd256[c].rgbRed,
+                  rgbStd256[c].rgbGreen,
+                  rgbStd256[c].rgbBlue);
+    } else {
+        // аз ин
+        clr = c;
+    }
+    // добавлена возможность смещать цвет
+    if ((GradientFactor != 1) && (c != 8)) clr = GetGradientColor(clr, GradientFactor);
+    return Color2Qcolor(clr);
+
+}
+
+
+#endif
+
 int GetGradientColor(int Color, float factor)
 {
     if (factor == 1.) return Color;
@@ -186,29 +224,6 @@ int GetGradientColor(int Color, float factor)
                std::min((int)(b / FACTOR), 255));
 
 }
-
-
-COLORREF BgiDacColor(unsigned int c)
-{
-    COLORREF clr;
-    if (c < DAC_ARRAYSIZE) {
-        // до 32 цвет из палитры ƒј ј
-        clr = DAC[c].Clr[DAC[c].idx];
-    } else if (c < 255) {
-        // 32-255 цвет из странной палитры rgbStd256
-        clr = RGB(rgbStd256[c].rgbRed,
-                  rgbStd256[c].rgbGreen,
-                  rgbStd256[c].rgbBlue);
-    } else {
-        // аз ин
-        clr = c;
-    }
-    // добавлена возможность смещать цвет
-    if ((GradientFactor != 1) && (c != 8)) clr = GetGradientColor(clr, GradientFactor);
-    return clr;
-
-}
-
 
 //---------------------------------------------------------------------------
 
