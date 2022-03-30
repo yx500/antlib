@@ -144,7 +144,7 @@ static void select_font()
 {
     if (text_settings.font < 0 || text_settings.font >= FontCount) {
         text_settings.font = 0;
-        cerr << "Default font." << endl;
+        std::cerr << "Default font." << std::endl;
     }
     if ((dc == NULL) && (_SaveDC == NULL))  return;
     //ptm = &font_tm[ text_settings.font ];
@@ -311,8 +311,8 @@ void  fillpoly(int numpoints, const int *polypoints)
 
 void bar(int left, int top, int right, int bottom)
 {
-    if (top > bottom)  swap(top, bottom);
-    if (left > right)  swap(left, right);
+    if (top > bottom)  std::swap(top, bottom);
+    if (left > right)  std::swap(left, right);
 
     POINT rect[ 5 ];
     rect[ 0 ].x = left,  rect[ 0 ].y = top;
@@ -400,8 +400,8 @@ void  line(int x0, int y0, int x1, int y1)
 
 void  rectangle(int left, int top, int right, int bottom)
 {
-    if (top > bottom)  swap(top, bottom);
-    if (left > right)  swap(left, right);
+    if (top > bottom)  std::swap(top, bottom);
+    if (left > right)  std::swap(left, right);
 
     POINT rect[ 5 ];
     rect[ 0 ].x = left, rect[ 0 ].y = top;
@@ -430,8 +430,8 @@ void  roundrect(int nLeftRect,   // x-coord. of bounding rectangle's upper-left 
                 int nHeight    // height of ellipse used to draw rounded corners
                )
 {
-    if (nTopRect > nBottomRect)  swap(nTopRect, nBottomRect);
-    if (nLeftRect > nRightRect)  swap(nLeftRect, nRightRect);
+    if (nTopRect > nBottomRect)  std::swap(nTopRect, nBottomRect);
+    if (nLeftRect > nRightRect)  std::swap(nLeftRect, nRightRect);
 
     POINT rect[ 5 ];
     rect[ 0 ].x = nLeftRect, rect[ 0 ].y = nTopRect;
@@ -1194,7 +1194,7 @@ static char FontFileNames[ FontCount ][ 20 ]  = {
 char BgiCfgFileName[ 256 ]  = "bgifnt.cfg";
 void InitBgiFont(void)
 {
-    ifstream is(BgiCfgFileName);
+    std::ifstream is(BgiCfgFileName);
     if (is.is_open())
         for (int i = 0; i < FontCount && is.good(); i++) {
             ws(is).get(FontFileNames[ i ], sizeof(FontFileNames[ i ]));
@@ -1437,8 +1437,8 @@ void PolyColor(int iBrushColor, const TPoint * Points, const int * iColors, cons
 
 int Draw_Ramka(int left, int top, int right, int bottom, int edge, int grfFlags)
 {
-    if (top > bottom)  swap(top, bottom);
-    if (left > right)  swap(left, right);
+    if (top > bottom)  std::swap(top, bottom);
+    if (left > right)  std::swap(left, right);
 
     POINT rect[ 5 ];
     rect[ 0 ].x = left, rect[ 0 ].y = top;
@@ -1473,9 +1473,9 @@ int GetGradientColor(int Color, float factor)
       if ( r > 0 && r < i ) r = i;
       if ( g > 0 && g < i ) g = i;
       if ( b > 0 && b < i ) b = i;*/
-    return RGB(min((int)(r / FACTOR), 255),
-               min((int)(g / FACTOR), 255),
-               min((int)(b / FACTOR), 255));
+    return RGB(std::min((int)(r / FACTOR), 255),
+               std::min((int)(g / FACTOR), 255),
+               std::min((int)(b / FACTOR), 255));
 
 }
 
