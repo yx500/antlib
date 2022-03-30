@@ -4,7 +4,8 @@
   <MACROS>
     <VERSION value="BCB.06.00"/>
     <PROJECT value="vcl_graphics.lib"/>
-    <OBJFILES value="tmp\winpalet.obj tmp\winbgi_vcl.obj tmp\GmPen.obj tmp\uImgContainer.obj"/>
+    <OBJFILES value="..\obj.tmp\winpalet.obj ..\obj.tmp\winbgi_vcl.obj ..\obj.tmp\GmPen.obj 
+      ..\obj.tmp\uImgContainer.obj"/>
     <RESFILES value=""/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -38,7 +39,7 @@
       -src_suffix cpp -D_DEBUG -boa"/>
     <CFLAG1 value="-Od -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 -b -k -y -v -vi- -c 
       -tW -tWM"/>
-    <PFLAGS value="-N2./tmp -N0./tmp -$YD -$W -$O- -$A8 -v -JPHNE -M"/>
+    <PFLAGS value="-N2..\obj.tmp -N0..\obj.tmp -$YD -$W -$O- -$A8 -v -JPHNE -M"/>
     <AFLAGS value="/mx /w2 /zd"/>
     <LFLAGS value="/P64"/>
     <OTHERFILES value=""/>
@@ -119,8 +120,9 @@ Item1=_DEBUG;STRICT;_USE_WINGDIPLUS;
 Item2=_DEBUG
 
 [HistoryLists\hlIntOutputDir]
-Count=1
-Item0=./tmp
+Count=2
+Item0=..\obj.tmp
+Item1=./tmp
 
 [HistoryLists\hlTlibPageSize]
 Count=3

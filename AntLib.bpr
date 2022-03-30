@@ -4,15 +4,17 @@
   <MACROS>
     <VERSION value="BCB.06.00"/>
     <PROJECT value="AntLib.lib"/>
-    <OBJFILES value="tmp\ACom_V.obj tmp\actools.obj tmp\pmComp.obj tmp\Comp.obj tmp\col.obj 
-      tmp\common.obj tmp\Elem.obj tmp\F.obj tmp\Gorl.obj tmp\Line.obj 
-      tmp\Polig.obj tmp\Scrin.obj tmp\SIZE.obj tmp\Stan.obj tmp\Static.obj 
-      tmp\Str_fun.obj tmp\Strel.obj tmp\Svet.obj tmp\Vatempl.obj 
-      tmp\uExtElem.obj tmp\YchParams.obj tmp\uEXD.obj tmp\Y_STREL.obj 
-      tmp\out_num.obj tmp\Ways.obj tmp\Lamps.obj tmp\LampExtDraw.obj 
-      tmp\Impuls.obj tmp\Marshrut.obj tmp\propmap.obj tmp\uParString.obj 
-      tmp\Gor_Elem.obj tmp\Gor_Logic.obj tmp\uFormula.obj tmp\EnergUnit.obj 
-      tmp\CompHint.obj tmp\uETTList.obj"/>
+    <OBJFILES value="obj.tmp\ACom_V.obj obj.tmp\actools.obj obj.tmp\pmComp.obj obj.tmp\Comp.obj 
+      obj.tmp\col.obj obj.tmp\common.obj obj.tmp\Elem.obj obj.tmp\F.obj 
+      obj.tmp\Gorl.obj obj.tmp\Line.obj obj.tmp\Polig.obj obj.tmp\Scrin.obj 
+      obj.tmp\SIZE.obj obj.tmp\Stan.obj obj.tmp\Static.obj obj.tmp\Str_fun.obj 
+      obj.tmp\Strel.obj obj.tmp\Svet.obj obj.tmp\Vatempl.obj 
+      obj.tmp\uExtElem.obj obj.tmp\YchParams.obj obj.tmp\uEXD.obj 
+      obj.tmp\Y_STREL.obj obj.tmp\out_num.obj obj.tmp\Ways.obj obj.tmp\Lamps.obj 
+      obj.tmp\LampExtDraw.obj obj.tmp\Impuls.obj obj.tmp\Marshrut.obj 
+      obj.tmp\propmap.obj obj.tmp\uParString.obj obj.tmp\Gor_Elem.obj 
+      obj.tmp\Gor_Logic.obj obj.tmp\uFormula.obj obj.tmp\EnergUnit.obj 
+      obj.tmp\CompHint.obj obj.tmp\uETTList.obj"/>
     <RESFILES value=""/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -31,7 +33,7 @@
     <SYSDEFINES value="NO_STRICT"/>
     <MAINSOURCE value="AntLib.bpf"/>
     <INCLUDEPATH value="ax;Gora;Bgi;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl"/>
-    <LIBPATH value="..\nb_trb;..\CommonSrc\ImgContainer;..\TestWinGDI;Gora;..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <LIBPATH value="..\nb_trb;..\CommonSrc\ImgContainer;Gora;..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib"/>
     <WARNINGS value="-wuse -wstv -w-par"/>
     <LISTFILE value=""/>
     <OTHERFILES value=""/>
@@ -41,7 +43,7 @@
       -src_suffix cpp -D_DEBUG -boa"/>
     <CFLAG1 value="-Od -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 -5 -b- -k -y -v -vi- 
       -c -tW -tWM"/>
-    <PFLAGS value="-N2.\tmp -N0.\tmp -$YD -$W -$O- -$A8 -v -JPHNE -M"/>
+    <PFLAGS value="-N2.\obj.tmp -N0.\obj.tmp -$YD -$W -$O- -$A8 -v -JPHNE -M"/>
     <AFLAGS value="/mx /w2 /zi"/>
     <LFLAGS value="/P256"/>
     <OTHERFILES value=""/>
@@ -146,24 +148,25 @@ Item18=..\vlib;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl
 Item19=VladSrc;SPY;Comp;$(BCB)\include;$(BCB)\include\vcl
 
 [HistoryLists\hlLibraryPath]
-Count=17
-Item0=..\nb_trb;..\CommonSrc\ImgContainer;..\TestWinGDI;Gora;..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
-Item1=..\CommonSrc\ImgContainer;..\TestWinGDI;Gora;..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
-Item2=..\TestWinGDI;Gora;..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
-Item3=C:\Program Files\Borland\CBuilder6\Projects;..\TestWinGDI;Gora;..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
-Item4=Gora;..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
-Item5=..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
-Item6=C:\Program Files\Borland\CBuilder6\Projects;..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
-Item7=C:\Program Files\Borland\CBuilder6\Projects;..\WinEnerg;..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
-Item8=..\WinEnerg;..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
-Item9=..\VladSrc;C:\Program Files\Borland\CBuilder6\Projects;D:\Program Files\Borland\CBuilder6\Projects;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
-Item10=D:\Program Files\Borland\CBuilder6\Projects;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
-Item11=Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
-Item12=D:\Program Files\Borland\CBuilder6\Projects;Bgi;Ext;SPY;Comp;$(BCB)\lib\obj;$(BCB)\lib
-Item13=Bgi;Ext;SPY;Comp;$(BCB)\lib\obj;$(BCB)\lib
-Item14=Ext;SPY;Comp;$(BCB)\lib\obj;$(BCB)\lib
-Item15=SPY;Comp;$(BCB)\lib\obj;$(BCB)\lib
-Item16=VladSrc;SPY;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Count=18
+Item0=..\nb_trb;..\CommonSrc\ImgContainer;Gora;..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item1=..\nb_trb;..\CommonSrc\ImgContainer;..\TestWinGDI;Gora;..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item2=..\CommonSrc\ImgContainer;..\TestWinGDI;Gora;..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item3=..\TestWinGDI;Gora;..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item4=C:\Program Files\Borland\CBuilder6\Projects;..\TestWinGDI;Gora;..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item5=Gora;..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item6=..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item7=C:\Program Files\Borland\CBuilder6\Projects;..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item8=C:\Program Files\Borland\CBuilder6\Projects;..\WinEnerg;..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item9=..\WinEnerg;..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item10=..\VladSrc;C:\Program Files\Borland\CBuilder6\Projects;D:\Program Files\Borland\CBuilder6\Projects;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item11=D:\Program Files\Borland\CBuilder6\Projects;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item12=Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item13=D:\Program Files\Borland\CBuilder6\Projects;Bgi;Ext;SPY;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item14=Bgi;Ext;SPY;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item15=Ext;SPY;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item16=SPY;Comp;$(BCB)\lib\obj;$(BCB)\lib
+Item17=VladSrc;SPY;Comp;$(BCB)\lib\obj;$(BCB)\lib
 
 [HistoryLists\hlDebugSourcePath]
 Count=1
@@ -180,9 +183,10 @@ Item5=_DEBUG;ACOMPDLLMAKE;
 Item6=BGIPALETTE;YU_COORD;_DEBUG
 
 [HistoryLists\hlIntOutputDir]
-Count=2
-Item0=.\tmp
-Item1=obj.tmp
+Count=3
+Item0=.\obj.tmp
+Item1=.\tmp
+Item2=obj.tmp
 
 [HistoryLists\hlTlibPageSize]
 Count=9

@@ -13,7 +13,6 @@
 
 #include "propmap.h"
 #include "Y_STREL.h"
-#include "dmpacket2.h"
 #include "tGorka.h"
 //---------------------------------------------------------------------------
 
@@ -768,6 +767,17 @@ SuperLamp2::SuperLamp2()
     timesec_begin=0;
     timesec_dt=0;
 }
+
+#pragma pack(push, 4)
+struct TDatagramPacket2_header {
+    uint32        tag;     //
+    uint32        addr;    //адрес от кого
+    uint32        tick;    //кол пришедших ракетов
+    uint32        time;    //время пришедшего пакета
+    uint32        msec;    //время пришедшего пакета msec
+};
+#pragma pack(pop)
+
 void SuperLamp2::UpdateState()
 {
     Strel::UpdateState();
@@ -777,7 +787,7 @@ void SuperLamp2::UpdateState()
 
                 long timesecD=0;
                 if (GetDatagramPacket2_Func!=NULL){
-                        TDatagramPacket2 *DatagramPacket2=(TDatagramPacket2 *)GetDatagramPacket2_Func(1,Stan()->ChanelNames[impuls_busi/1000]);
+                        TDatagramPacket2_header *DatagramPacket2=(TDatagramPacket2_header *)GetDatagramPacket2_Func(1,Stan()->ChanelNames[impuls_busi/1000]);
                         if (DatagramPacket2!=NULL) {
                                 timesecD=DatagramPacket2->time;
                         }
