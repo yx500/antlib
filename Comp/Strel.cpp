@@ -60,50 +60,7 @@ int Strel0::TestMu(void)
     }
     return 1;
 }
-/*int Strel::Test_strel(int clr,int st1,int st2,int st3, int is)
-{
- int clr_old=0;
- int st1_old=0;
- int st2_old=0;
- int st3_old=0;
- int is_old=0;
- if(priznak_pereris_strel_if_change_mu){
-   //set[C_M] = st2*16*8*8*8+st1*16*8*8+st3*16*8+is*16+clr;
-   return 1;
- }
-/*  7654 32107 654 3210
-    000 000 000 000  0000
-   ÚÄÄÄ ÚÄ  ÚÄÄÚÄÄ  ÚÄÄÄ
-   ³    ³   ³  ³    ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄ  clr
-   ³    ³   ³  ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ  is
-   ³    ³   ³
-   ³    ³   ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ  st3
-   ³    ³
-   ³    ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ   st1
-   ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ   st2  *
 
- clr_old  = set[C_M] %16;
- is_old   = (set[C_M] /16)%8;
- st3_old  = ((set[C_M] /16)/8)%8;
- st1_old  = (((set[C_M])/16 /8)/8)%8;
- st2_old  = (((set[C_M])/16 /8)/8/8)%8;
-/*----------¯à®¢¥àª  á®áâ®ï­¨ï ---------*
-   if (IsClrMig(clr)==true)
-      return 1;
-   if((clr_old==clr)&&
-      (is_old == is)&&
-      (st1_old==st1)&&
-      (st3_old==st3)&&
-      (st2_old==st2)
-
-      ) return 0;
-/*-------¢á¥ à®¢¥àª --------------------*
- set[C_M] = st2*16*8*8*8+st1*16*8*8+st3*16*8+is*16+clr;
-//et[C_M] = st2*16*16*16+st1*16*16+is*16+clr;
-
- return 1;
-}
-*/
 void Strel::Set()
 {
     Ways::Set();
