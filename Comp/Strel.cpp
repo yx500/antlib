@@ -411,7 +411,6 @@ void Strel0::UpdateState()
                     fimpuls_mnus
                 ) is = W;
             } else {
-                //  ÇÆ °´®≠ Æ‚·•Á™† !! //  îêêêê
                 if (fimpuls_kmu || fimpuls_mu) {
                     if (fimpuls_busi != 33) clr = LIN;
                     priz_otse++;
@@ -1396,12 +1395,7 @@ void  Asn::Show()
     }
 //  }
     chn = nomer % 2;
-//  impuls_busi     áÄçüíàÖ
-//  impuls_plus     ëàÉçÄã
-//  impuls_mnus     áÄåõä
-//  impuls_kzm      åÄêò1
-//  impuls_kmu      åÄêò2
-//  impuls_mu       åÄêò3
+
     if (impuls_plus==0) {
         if (Zan==1) SS = SS3; else SS = SS0;
     }
@@ -1658,7 +1652,6 @@ void  APoint::Show()
 
     if ((AO->FLAG_POINT_NUMBER) && (nom > 0)) {
         _SetText(F_LITT_S, CENTER_TEXT, BOTTOM_TEXT);
-//   ç„¨•‡†Ê®Ô
 //        setusercharsize(14,10,14,10);
 
         if (nom % 2 == nch_cod) {
