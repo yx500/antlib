@@ -1,9 +1,7 @@
 #ifndef propmapH
 #define propmapH
 //---------------------------------------------------------------------------
-#ifdef QT_ANTLIB
 #include "aheaders_h.h"
-#endif
 
 #include <vector>
 #include <map>

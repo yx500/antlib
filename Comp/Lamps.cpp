@@ -1178,22 +1178,20 @@ void SuperLamp2::GetPropMap(TPropMap &m)
 CommLmp::CommLmp()
 {
     Prz[0] = 22;
-    lComps = new TList();
 }
 CommLmp::~CommLmp()
 {
-    delete lComps;
 }
 
 void CommLmp::CollectComps()
 {
     AComp * ac;
-    lComps->Clear();
+    vComps.clear();
     Station *S = pVisibleArray->pStation ;
     for (int i = 1; i < Units_Size; i++) {
         for (int j = 0; j < S->POLE[i]->GetArraySize(); j++) {
             ac = S->POLE[i]->GetObjPtr(j);
-            if (ac->ExtPriz.UseInCommLmp) lComps->Add(ac);
+            if (ac->ExtPriz.UseInCommLmp) vComps.push_back(ac);
         }
     }
 }
@@ -1203,13 +1201,13 @@ void CommLmp::UpdateState()
     AComp * ac;
     try {
         if (MOD == ED) {
-            lComps->Clear();
+            vComps.clear();
         } else {
-            if (lComps->Count == 0) CollectComps();
+            if (vComps.size() == 0) CollectComps();
             // находим общее
             int b = 0;
-            for (int i = 0; i < lComps->Count; i++) {
-                ac = (AComp *)lComps->Items[i];
+            for (int i = 0; i < vComps.size(); i++) {
+                ac = (AComp *)vComps[i];
                 ac->UpdateState(); // НЕКРАСИВО ТО КАК!
                 b = ac->IsAlarmState();
                 ac->StateChanged = true; // УЖАС

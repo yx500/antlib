@@ -227,7 +227,7 @@ VisibleArray::VisibleArray(int ArraySize, Station * pAStation)
     RTGorlCnt = 0;
 }
 
-_fastcall VisibleArray::~VisibleArray()
+VisibleArray::~VisibleArray()
 {
     RemoveAll();
 }

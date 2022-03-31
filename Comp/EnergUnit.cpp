@@ -259,7 +259,7 @@ void TE_OBJ::GetPropMap(TPropMap &m)
     m.put(_E_OBJPropName[ i++],                NOb, 0);
     m.put(_E_OBJPropName[ i++],                bTUOnlyVkl, 0);
     m.put(_E_OBJPropName[ i++],                TO, 0);
-    m.putEx(_E_OBJPropName[ i++], OldImpToNewStr(impulsTU  , this), (void*)GetRealImp(impulsTU), OldImpToNewStr(0  , this));
+    m.putEx(_E_OBJPropName[ i++], OldImpToNewStr(impulsTU  , this), GetRealImp(impulsTU), OldImpToNewStr(0  , this));
     m.put(_E_OBJPropName[ i++], stTI_1.c_str());
     m.put(_E_OBJPropName[ i++], stTI_2.c_str());
     m.put(_E_OBJPropName[ i++], stTI_3.c_str());
@@ -280,14 +280,14 @@ void TE_OBJ::GetPropMap(TPropMap &m)
         itoa(i + 1, ss, 10);
         PropName = PropName + ss;
         //if ((Aimp[i]!=0)||(MOD==ED))
-        m.putEx(PropName.c_str(), OldImpToNewStr(Aimp[i]  , this), (void*)GetRealImp(Aimp[i]), OldImpToNewStr(0  , this));
+        m.putEx(PropName.c_str(), OldImpToNewStr(Aimp[i]  , this), GetRealImp(Aimp[i]), OldImpToNewStr(0  , this));
     }
     for (int i = 0; i < MaxWimp; i++) {
         PropName = "тс—игналѕ";
         itoa(i + 1, ss, 10);
         PropName = PropName + ss;
         //if ((Wimp[i]!=0)||(MOD==ED))
-        m.putEx(PropName.c_str(), OldImpToNewStr(Wimp[i]  , this), (void*)GetRealImp(Wimp[i]), OldImpToNewStr(0  , this));
+        m.putEx(PropName.c_str(), OldImpToNewStr(Wimp[i]  , this), GetRealImp(Wimp[i]), OldImpToNewStr(0  , this));
     }
 
 

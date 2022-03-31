@@ -5,7 +5,8 @@
 
 #ifdef __BORLANDC__
 #include <systypes.h>
-
+#include <system.hpp>
+#include <Classes.hpp>
 #else //QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT
 
 //#define QT_ANTLIB = 1

@@ -348,7 +348,7 @@ void AComp::GetPropMap(TPropMap &m)
     m.put(_ACompPropName[4], mas,       0);
     m.put(_ACompPropName[5], masy,      0);
     m.put(_ACompPropName[6], masx2,     0);
-    m.putEx(_ACompPropName[7], OldImpToNewStr(impuls_busi, this), (void*)GetRealImp(impuls_busi), OldImpToNewStr(0, this));
+    m.putEx(_ACompPropName[7], OldImpToNewStr(impuls_busi, this), GetRealImp(impuls_busi), OldImpToNewStr(0, this));
     m.put(_ACompPropName[8], ExtPriz.NoShowYch,       0);
     m.put(_ACompPropName[9], ExtPriz.NoShowStan,      0);
     m.put(_ACompPropName[10], ExtPriz.MEM2,           0);
@@ -423,21 +423,14 @@ void AComp::SetPropMap(TPropMap &m)
 
 
 
-char * AComp::GetImpulsName(char * PropName)
+const char * AComp::GetImpulsName(char * PropName)
 {
     static String _S;
-    static TAImpuls _IMP;
     if (_GetSigName_Func == NULL) return "";
-    void *pimp;
     int imp;
-    _S = GetPropEx(PropName, &pimp);
-    imp = (int)pimp;
+    _S = GetPropEx(PropName, imp);
     if (_S == "") return "";
-    /*if (imp==0){
-       _IMP.Parent=this;
-       _IMP.FromString(_S);
-       imp=_IMP.AbsNumber;
-    } */
+
     _S = _GetSigName_Func(imp);
     return _S.c_str();
 }

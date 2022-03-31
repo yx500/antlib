@@ -88,11 +88,11 @@ void Element::GetPropMap(TPropMap &m)
 {
     AComp::GetPropMap(m);
 
-    m.putEx(_ElementPropName[0], OldImpToNewStr(impuls_plus  , this), (void*)GetRealImp(impuls_plus),   OldImpToNewStr(0  , this));
-    m.putEx(_ElementPropName[1], OldImpToNewStr(impuls_mnus  , this), (void*)GetRealImp(impuls_mnus),   OldImpToNewStr(0  , this));
-    m.putEx(_ElementPropName[2], OldImpToNewStr(impuls_kzm, this), (void*)GetRealImp(impuls_kzm),       OldImpToNewStr(0  , this));
-    m.putEx(_ElementPropName[3], OldImpToNewStr(impuls_kmu, this), (void*)GetRealImp(impuls_kmu),       OldImpToNewStr(0  , this));
-    m.putEx(_ElementPropName[4], OldImpToNewStr(impuls_mu , this), (void*)GetRealImp(impuls_mu),        OldImpToNewStr(0  , this));
+    m.putEx(_ElementPropName[0], OldImpToNewStr(impuls_plus  , this), GetRealImp(impuls_plus),   OldImpToNewStr(0  , this));
+    m.putEx(_ElementPropName[1], OldImpToNewStr(impuls_mnus  , this), GetRealImp(impuls_mnus),   OldImpToNewStr(0  , this));
+    m.putEx(_ElementPropName[2], OldImpToNewStr(impuls_kzm, this), GetRealImp(impuls_kzm),       OldImpToNewStr(0  , this));
+    m.putEx(_ElementPropName[3], OldImpToNewStr(impuls_kmu, this), GetRealImp(impuls_kmu),       OldImpToNewStr(0  , this));
+    m.putEx(_ElementPropName[4], OldImpToNewStr(impuls_mu , this), GetRealImp(impuls_mu),        OldImpToNewStr(0  , this));
     m.put(_ElementPropName[5], name);
 }
 
@@ -250,9 +250,9 @@ void Ways::Get()
 void Ways::GetPropMap(TPropMap &m)
 {
     Element::GetPropMap(m);
-    m.putEx("òñimpuls_svob", OldImpToNewStr(impuls_svob  , this), (void*)GetRealImp(impuls_svob),   OldImpToNewStr(0  , this));
-    m.putEx("òñimpuls_IR", OldImpToNewStr(impuls_IR  , this), (void*)GetRealImp(impuls_IR),   OldImpToNewStr(0  , this));
-    m.putEx("òñimpuls_predSEIR", OldImpToNewStr(impuls_predSEIR  , this), (void*)GetRealImp(impuls_predSEIR),   OldImpToNewStr(0  , this));
+    m.putEx("òñimpuls_svob", OldImpToNewStr(impuls_svob  , this), GetRealImp(impuls_svob),   OldImpToNewStr(0  , this));
+    m.putEx("òñimpuls_IR", OldImpToNewStr(impuls_IR  , this), GetRealImp(impuls_IR),   OldImpToNewStr(0  , this));
+    m.putEx("òñimpuls_predSEIR", OldImpToNewStr(impuls_predSEIR  , this), GetRealImp(impuls_predSEIR),   OldImpToNewStr(0  , this));
     String ss;
     for (int d = 0; d < 2; d++) {
         for (int i = 0; i < 2; i++) {
