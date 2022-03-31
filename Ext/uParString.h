@@ -1,7 +1,9 @@
 #ifndef uParStringH
 #define uParStringH
 //---------------------------------------------------------------------------
+#ifdef QT_ANTLIB
 #include "aheaders_h.h"
+#endif
 
 #include <string>
 #include <vector>
