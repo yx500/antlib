@@ -7,7 +7,5 @@ HEADERS += \
         $$PWD/winpalet.h \
 
 
-
-
 SOURCES += \
         $$PWD/winpalet.cpp \

@@ -1,18 +1,11 @@
 #ifndef propmapH
 #define propmapH
-//---------------------------------------------------------------------------
-#ifndef QT_ANTLIB
-#include <Classes.hpp>
-#else
-#include <vcl.h>
-#endif
+#include "aheaders_h.h"
 
 #include <vector>
 #include <map>
 
 
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 class _Props
 {
 public:
