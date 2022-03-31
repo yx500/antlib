@@ -58,15 +58,15 @@ struct TKrPack {
 
 
 struct TMKMarshItem {
-    unsigned __int32 id_mar;  // идентификатор маршрута в БД APilot (marsh_nsi)
-    unsigned __int32 numcom;
-    __int32          state_mk;      // состояние маршрута ()
-    __int32          state_mk_ex;   // состояние маршрута ()
+    uint32 id_mar;  // идентификатор маршрута в БД APilot (marsh_nsi)
+    uint32 numcom;
+    int32          state_mk;      // состояние маршрута ()
+    int32          state_mk_ex;   // состояние маршрута ()
 };
 
 const int MKMarshPackCnt = 480 / sizeof(TMKMarshItem);
 struct TMKMarshAll {
-    unsigned __int32 esr;
+    uint32 esr;
     int              cnt;
     TMKMarshItem     M[MKMarshPackCnt];
 };
@@ -89,15 +89,15 @@ enum state_mk_ex {
 
 
 struct TAVMarshItem {
-    unsigned __int32 id;      // идентификатор маршрута в БД APilot (marsh_nsi)
-    unsigned __int32 id_zak;  // идентификатор маршрута в БД APilot (marsh_nsi)
-    unsigned __int32 id_mar;  // идентификатор маршрута в БД APilot (marsh_nsi)
-    unsigned __int32 numcom;
-    __int32          state_av;      // состояние маршрута ()
-    __int32          state_av_ex;   // состояние маршрута ()
+    uint32 id;      // идентификатор маршрута в БД APilot (marsh_nsi)
+    uint32 id_zak;  // идентификатор маршрута в БД APilot (marsh_nsi)
+    uint32 id_mar;  // идентификатор маршрута в БД APilot (marsh_nsi)
+    uint32 numcom;
+    int32          state_av;      // состояние маршрута ()
+    int32          state_av_ex;   // состояние маршрута ()
     TDateTime           time_op;
     TDateTime           time_tu;
-    unsigned __int32 num_train;
+    uint32 num_train;
 
 };
 
@@ -109,8 +109,8 @@ const int izNP = 2; // Нечетное прием          . . < .
 const int izCO = 3; // четное отправление      . . . >
 
 struct TAVStanInfo {
-    unsigned __int32 esr;
-    unsigned __int32 AV_DU;
+    uint32 esr;
+    uint32 AV_DU;
     char     dnc_guid[40];
     uint16 z_cnt[4];
     uint16 cnt;

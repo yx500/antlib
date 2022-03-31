@@ -52,7 +52,7 @@ bool  GetZamData(int AddrLKSlot,
 {
     V = 0; Voleg = 0; RC = 0; RRC = 0;
     if (addr == 0) return true;
-    unsigned __int32     biostime;
+    uint32     biostime;
     t_ARSDescrCell *  VMetrCells = GetZamDataCell(AddrLKSlot,           addr,     biostime);
 
     if (VMetrCells == NULL) {
@@ -296,7 +296,7 @@ String GetADAM_val(String packetName)
     return "--";
 }
 const MaxADK3Cell=490/sizeof(tADK3Cell);
-tADK3Cell* GetADK3Cell(int AddrLKSlot, int addr, unsigned __int32     &biostime)
+tADK3Cell* GetADK3Cell(int AddrLKSlot, int addr, uint32     &biostime)
                              // 1Ц 1 байт Ц собственный адрес, должен совпадать с запросом.
                              // 2Ц 2 байт Ц уровн€ давлени€ в ¬”ѕ« є1.
                              // 3Ц 3 байт уровн€ давлени€ в ¬”ѕ« є2 (аналогично как дл€ ¬”ѕ« є1).

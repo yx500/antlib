@@ -3,12 +3,12 @@
 #include "APch.h"
 
 
-#include "strel.h"
+#include "Strel.h"
 #include "str_fun.h"
-#include "gorl.h"
-#include "scrin.h"
-#include "elem.h"
-#include "f.h"
+#include "Gorl.h"
+#include "Scrin.h"
+#include "Elem.h"
+#include "F.h"
 #include "Impuls.h"
 #include "Vatempl.h"
 

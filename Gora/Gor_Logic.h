@@ -56,10 +56,10 @@ bool GetZKRData(int ZKR_N,
                );
 String GetADAM_val(String packetName);
 struct tADK3Cell;
-tADK3Cell* GetADK3Cell(int AddrLKSlot, int addr, unsigned __int32     &biostime);
+tADK3Cell* GetADK3Cell(int AddrLKSlot, int addr, uint32     &biostime);
 
 struct t_ARSDescrCell;
-t_ARSDescrCell*  GetZamDataCell(int AddrLKSlot,           int addr , unsigned __int32     &biostime);
+t_ARSDescrCell*  GetZamDataCell(int AddrLKSlot,           int addr , uint32     &biostime);
 t_Descr*  GetDescr_mar(int mar);
 
 struct tDescrCom;
