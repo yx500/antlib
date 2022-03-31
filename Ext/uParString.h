@@ -1,9 +1,10 @@
 #ifndef uParStringH
 #define uParStringH
 //---------------------------------------------------------------------------
+#include "aheaders_h.h"
+
 #include <string>
 #include <vector>
-
 
 /*
       Класс TParString для работы со строками с разделителями
@@ -23,28 +24,25 @@ private:
 
 public:
 
-    __fastcall TParString(String ASTR, String achr = ";", bool acont = false);
+    TParString(const String& ASTR, const String& achr = ";", bool acont = false);
     ~TParString() {}
 
-    void __fastcall SetVal(String ASTR);
-    String __fastcall ResultStr();
-    int __fastcall GetParamsCount();
+    void SetVal(const String& ASTR);
+    String ResultStr();
+    int GetParamsCount();
 
-    String __fastcall GetStr(int ind, String DefaultStr = "");
-    void __fastcall SetStr(int ind, String StrVal);
+    String GetStr(int ind, const String& DefaultStr = "");
+    void SetStr(int ind, const String& StrVal);
 
-    int  __fastcall GetInt(int ind, int DefaultVal = 0);
-    void __fastcall SetInt(int ind, signed int IntVal);
-    void __fastcall SetHex(int ind, signed int IntVal);
+    int  GetInt(int ind, int DefaultVal = 0);
+    void SetInt(int ind, signed int IntVal);
+    void SetHex(int ind, signed int IntVal);
 
-    int __fastcall GetInd(String stPar);
+    int GetInd(const String& stPar);
 
-    String operator [](int i) {
-        return GetStr(i);
-    };
-    TParString& operator = (const String& st) {
-        SetVal(st); return *this;
-    }
+    String operator [](int i) { return GetStr(i); }
+    TParString& operator = (const String& st) { SetVal(st); return *this; }
+
 #ifndef QT_ANTLIB
     __property int ParamsCount  = { read = GetParamsCount };
 #endif
@@ -52,8 +50,8 @@ public:
 
 
 
-void __fastcall SplitString(String  ST, TStringList * SL, String chBreak);
-String  __fastcall MakeSplitString(TStringList * SL, char chBreak);
+void SplitString(const String& ST, TStringList * SL, const String& chBreak);
+String  MakeSplitString(TStringList * SL, char chBreak);
 
 //---------------------------------------------------------------------------
 #endif

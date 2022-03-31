@@ -87,9 +87,9 @@ const char *GetTypeName(AComp * AC)
     return _CommonTypeName[_CommonTypeInd[AType]];
 }
 
-static String _TypeAndName;
 const char * GetTypeAndName(AComp * AC)
 {
+    static String _TypeAndName;
     _TypeAndName = String(GetTypeName(AC)) + " " + AC->GetName();
     return _TypeAndName.c_str();
 }

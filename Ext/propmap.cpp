@@ -1,20 +1,14 @@
-
 #include "aheaders_cpp.h"
 #include <StrUtils.hpp>
 
 #include "propmap.h"
 //---------------------------------------------------------------------------
 
-static String _stNULL = "";
-static String _stRES = "";
-static char ans[255];
-
-
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void  _Props::reindex()
 {
     index.clear();
-    BoxType::iterator i = box.begin();
+    std::vector<Elem>::iterator i = box.begin();
     while (i != box.end()) {
         index[ i->lKey ] = i;
         ++i;
@@ -22,7 +16,7 @@ void  _Props::reindex()
 }
 void  _Props::erase(const String& key)
 {
-    BoxType::iterator i = box.begin();
+    std::vector<Elem>::iterator i = box.begin();
     while (i != box.end()) {
         if (key == i->lKey) {
             box.erase(i);
@@ -39,28 +33,29 @@ TPropMap::TPropMap(): _p()
     bNotPutDefault = false;
 }
 //---------------------------------------------------------------------------
-String TPropMap::get(String stKey)
+String TPropMap::get(const String& stKey)
 {
     _Props::Elem* i = _p.ElemOf(stKey);
     if (i) return i->lVal;
-    return _stNULL;
+    return "";
 }
 //---------------------------------------------------------------------------
-String TPropMap::getOEM(String stKey)
+String TPropMap::getOEM(const String& stKey)
 {
     String stVal = get(stKey);
-    CharToOem(stVal.c_str(), ans);
-    return String(ans);
+    static char tmp[255];
+    CharToOem(stVal.c_str(), tmp);
+    return tmp;
 }
 //---------------------------------------------------------------------------
-void TPropMap::putOEM(String stKey, String stVal)
+void TPropMap::putOEM(const String& stKey, String stVal)
 {
-    OemToChar(stVal.c_str(), ans);
-    stVal = String(ans);
-    put(stKey, stVal);
+    static char tmp[255];
+    OemToChar(stVal.c_str(), tmp);
+    put(stKey, String(tmp));
 }
 //---------------------------------------------------------------------------
-String TPropMap::getEx(String stKey, void ** ptr)
+String TPropMap::getEx(const String& stKey, void ** ptr)
 {
     _Props::Elem* i = _p.ElemOf(stKey);
     if (i) {
@@ -68,16 +63,16 @@ String TPropMap::getEx(String stKey, void ** ptr)
         return i->lVal;
     }
     ptr = NULL;
-    return _stNULL;
+    return "";
 }
 //---------------------------------------------------------------------------
-void*  TPropMap::getPtr(String stKey)
+void*  TPropMap::getPtr(const String& stKey)
 {
     _Props::Elem* i = _p.ElemOf(stKey);
     return i ? i->Obj : NULL;
 }
 //---------------------------------------------------------------------------
-void TPropMap::putEx(String stKey, String stVal, void *ptr)
+void TPropMap::putEx(const String& stKey, String stVal, void *ptr)
 {
     _Props::Elem* i = _p.ElemOf(stKey, true);
     i->lKey = stKey;
@@ -85,7 +80,7 @@ void TPropMap::putEx(String stKey, String stVal, void *ptr)
     i->Obj = ptr;
 }
 //---------------------------------------------------------------------------
-void TPropMap::putEx(String stKey, String stVal, void * ptr, String stValDef)
+void TPropMap::putEx(const String& stKey, String stVal, void * ptr, String stValDef)
 {
     if ((bNotPutDefault) && (stVal == stValDef)) {
         _Props::Elem* i = _p.ElemOf(stKey);
@@ -100,9 +95,9 @@ const char * TPropMap::textext(char rkeyval, char rString)
 {
     int sz = _p.count();
     if (sz == 0)
-        return _stNULL.c_str();
+        return "";
 
-    _stRES = "";
+    static String _stRES = "";
     for (int i = 0; i < sz; i++) {
         const _Props::Elem& e = _p.get(i);
         _stRES = _stRES + e.lKey + rkeyval + e.lVal + rString;
@@ -142,32 +137,32 @@ void TPropMap::textext(char * szText, char rkeyval, char rString, bool clr)
     }
 }
 //---------------------------------------------------------------------------
-void __fastcall TPropMap::SetKeys(int i, String value)
+void  TPropMap::SetKeys(int i, const String& value)
 {
     _p.setKey(i, value);
 }
 //---------------------------------------------------------------------------
-String __fastcall TPropMap::GetKeys(int i)
+String  TPropMap::GetKeys(int i)
 {
     return _p.get(i).lKey;
 }
 //---------------------------------------------------------------------------
-void __fastcall TPropMap::SetVal(int i, String value)
+void  TPropMap::SetVal(int i, const String& value)
 {
     _p.setVal(i, value);
 }
 //---------------------------------------------------------------------------
-String __fastcall TPropMap::GetVal(int i)
+String  TPropMap::GetVal(int i)
 {
     return _p.get(i).lVal;
 }
 //---------------------------------------------------------------------------
-void __fastcall TPropMap::SetP(String stKey, String value)
+void  TPropMap::SetP(const String& stKey, const String& value)
 {
     put(stKey, value);
 }
 //---------------------------------------------------------------------------
-String __fastcall TPropMap::GetP(String stKey)
+String  TPropMap::GetP(const String& stKey)
 {
     return get(stKey);
 }
@@ -190,7 +185,7 @@ const char * TPropMap::getpropmapstr(char * sztext)
     TPropMap pm;
     pm.text(sztext);
     pm.addpropmap(*this);
-    _stRES = pm.text();
+    static String _stRES = pm.text();
     return _stRES.c_str();
 }
 //---------------------------------------------------------------------------

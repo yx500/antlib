@@ -1,8 +1,6 @@
-
 #include "aheaders_cpp.h"
 
 #include "uParString.h"
-//---------------------------------------------------------------------------
 
 
 using namespace std;
@@ -37,7 +35,7 @@ int TParString::string_splitex(const string & text, const string& separators, st
     return words.size();
 }
 //---------------------------------------------------------------------------
-__fastcall TParString::TParString(String ASTR, String achr, bool acont)
+TParString::TParString(const String& ASTR, const String& achr, bool acont)
         : words()
 {
     words.reserve(32);
@@ -46,12 +44,12 @@ __fastcall TParString::TParString(String ASTR, String achr, bool acont)
     SetVal(ASTR);
 }
 //---------------------------------------------------------------------------
-int __fastcall TParString::GetParamsCount()
+int TParString::GetParamsCount()
 {
     return words.size();
 }
 //---------------------------------------------------------------------------
-void __fastcall TParString::SetVal(String ASTR)
+void TParString::SetVal(const String &ASTR)
 {
     words.clear();
     if (ASTR.Length()==0) return;
@@ -62,7 +60,7 @@ void __fastcall TParString::SetVal(String ASTR)
     }
 }
 //---------------------------------------------------------------------------
-String __fastcall TParString::GetStr(int ind, String def)
+String TParString::GetStr(int ind, const String &def)
 {
     if ((ind >= words.size()) || (ind < 0))
         return def;
@@ -72,7 +70,7 @@ String __fastcall TParString::GetStr(int ind, String def)
     return s;
 }
 //---------------------------------------------------------------------------
-int __fastcall TParString::GetInt(int ind, int def)
+int TParString::GetInt(int ind, int def)
 {
     if ((ind >= words.size()) || (ind < 0))
         return def;
@@ -80,7 +78,7 @@ int __fastcall TParString::GetInt(int ind, int def)
     return s.ToIntDef(def);
 }
 //---------------------------------------------------------------------------
-void __fastcall TParString::SetStr(int ind, String StrVal)
+void TParString::SetStr(int ind, const String &StrVal)
 {
     if (ind >= words.size()) {
         words.resize(ind + 1, "");
@@ -88,7 +86,7 @@ void __fastcall TParString::SetStr(int ind, String StrVal)
     words[ind] = StrVal.c_str();
 }
 //---------------------------------------------------------------------------
-String __fastcall TParString::ResultStr()
+String TParString::ResultStr()
 {
     String STR = "";
     for (int i = 0; i < words.size(); i++) {
@@ -98,17 +96,17 @@ String __fastcall TParString::ResultStr()
     return STR;
 }
 //---------------------------------------------------------------------------
-void __fastcall TParString::SetInt(int ind, signed int IntVal)
+void TParString::SetInt(int ind, signed int IntVal)
 {
     SetStr(ind, IntToStr(IntVal));
 }
 //---------------------------------------------------------------------------
-void __fastcall TParString::SetHex(int ind, signed int IntVal)
+void TParString::SetHex(int ind, signed int IntVal)
 {
     SetStr(ind, "0x" + IntToHex(IntVal, 2));
 }
 //---------------------------------------------------------------------------
-int __fastcall TParString::GetInd(String stPar)
+int TParString::GetInd(const String &stPar)
 {
     for (int i = 0; i < words.size(); i++)
         if (stPar == words[i].c_str())
@@ -117,7 +115,7 @@ int __fastcall TParString::GetInd(String stPar)
 }
 //---------------------------------------------------------------------------
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void __fastcall SplitString(String  ST, TStringList * SL, String chBreak)
+void SplitString(const String &ST, TStringList * SL, const String &chBreak)
 {
     String s = "";
     SL->Clear();
@@ -132,7 +130,7 @@ void __fastcall SplitString(String  ST, TStringList * SL, String chBreak)
     if (s != "")SL->Add(s);
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-String  __fastcall MakeSplitString(TStringList * SL, char chBreak)
+String  MakeSplitString(TStringList * SL, char chBreak)
 {
     String s = "";
     for (int i = 0; i < SL->Count - 1; i++)

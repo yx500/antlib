@@ -1,11 +1,7 @@
 #ifndef propmapH
 #define propmapH
 //---------------------------------------------------------------------------
-#ifndef QT_ANTLIB
-#include <Classes.hpp>
-#else
 #include "aheaders_h.h"
-#endif
 
 #include <vector>
 #include <map>
@@ -23,35 +19,24 @@ public:
     };
 
 private:
-    typedef template std::vector<Elem>     BoxType;
-    typedef template std::map<String, Elem*> IndexType;
-
-    BoxType box;
-    IndexType index;
-
+    std::vector<Elem> box;
+    std::map<String, Elem*> index;
     void  reindex();
 
 public:
-    _Props(): box(), index() {
-        box.reserve(32);
-    }
+    _Props(): box(), index() { }
 
-    const Elem& get(int i) const {
-        return  box[i];
-    }
-    int count() const {
-        return  box.size();
-    }
+    const Elem& get(int i) const { return  box[i]; }
+    int count() const { return  box.size(); }
     void clear() {
         index.clear();
         box.clear();
-        box.reserve(32);
     }
 
     void erase(const String& key);
 
     Elem* ElemOf(const String& key, bool create = false) {
-        IndexType::const_iterator f = index.find(key);
+        std::map<String, Elem*>::const_iterator f = index.find(key);
         if (f != index.end())
             return f->second;
         else {
@@ -93,32 +78,32 @@ public:
 
     TPropMap();
     ~TPropMap() {}
-    String get(String stKey);
-    String getOEM(String stKey);
-    String getEx(String stKey, void ** ptr);
-    void*   getPtr(String stKey);
-    int geti(String stKey) {
+    String get(const String& stKey);
+    String getOEM(const String& stKey);
+    String getEx(const String& stKey, void ** ptr);
+    void*   getPtr(const String& stKey);
+    int geti(const String& stKey) {
         return StrToIntDef(get(stKey), 0);
     }
 
-    void putEx(String stKey, String stVal, void * ptr);
-    void putEx(String stKey, String stVal, void * ptr, String stValDef);
-    void putOEM(String stKey, String stVal);
+    void putEx(const String& stKey, String stVal, void * ptr);
+    void putEx(const String& stKey, String stVal, void * ptr, String stValDef);
+    void putOEM(const String& stKey, String stVal);
 
-    void put(String stKey, String stVal) {
+    void put(const String& stKey, String stVal) {
         putEx(stKey, stVal, 0);
     }
-    void put(String stKey, String stVal, String stValDef)   {
+    void put(const String& stKey, String stVal, String stValDef)   {
         putEx(stKey, stVal, 0, stValDef);
     }
-    void put(String stKey, int iVal)    {
+    void put(const String& stKey, int iVal)    {
         put(stKey, IntToStr(iVal));
     }
-    void put(String stKey, int iVal, int iValDef) {
+    void put(const String& stKey, int iVal, int iValDef) {
         put(stKey, IntToStr(iVal), IntToStr(iValDef));
     }
 
-    void del(String stKey) {
+    void del(const String& stKey) {
         _p.erase(stKey);
     }
 
@@ -132,10 +117,10 @@ public:
     void textext(char* szText, char rkeyval = '=', char rString = '\n', bool clr = true);
     const char* textext(char rkeyval = '=', char rString = '\n');
 
-    bool KeyExists(String stKey) {
+    bool KeyExists(const String& stKey) {
         return (_p.ElemOf(stKey) != 0);
     }
-//---------------------------------------------------------------------------
+    //---------------------------------------------------------------------------
     TStringList* createStringList();
 
     void addpropmap(TPropMap & pm);
@@ -147,26 +132,26 @@ public:
     String operator [](int i) {
         return _p.get(i).lVal;
     };
-    void clear() {
-        _p.clear();
-    }
+    void clear() { _p.clear(); }
 
 #ifndef QT_ANTLIB
     __property int ItemsCount  = { read = GetItemsCount };
     __property String Keys[ int i ]  = { read = GetKeys, write = SetKeys };
     __property String Val[ int i ]  = { read = GetVal, write = SetVal };
-    __property String P[ String stKey]  = { read = GetP, write = SetP };
+    __property String P[String stKey]  = { read = GetP, write = SetP };
 #endif
+
 private:
-    int __fastcall GetItemsCount() {
-        return _p.count();
-    }
-    void __fastcall SetKeys(int i, String value);
-    String __fastcall GetKeys(int i);
-    void __fastcall SetVal(int i, String value);
-    String __fastcall GetVal(int i);
-    void __fastcall SetP(String stKey, String value);
-    String __fastcall GetP(String stKey);
+    int GetItemsCount() const { return _p.count(); }
+
+    void SetKeys(int i, const String& value);
+    String GetKeys(int i);
+
+    void SetVal(int i, const String& value);
+    String GetVal(int i);
+
+    void SetP(const String& stKey, const String& value);
+    String GetP(const String& stKey);
 };
 
 

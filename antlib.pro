@@ -3,8 +3,6 @@ QT       += core gui widgets
 
 CONFIG += c++17
 
-
-
 DEFINES +=QT_ANTLIB
 
 INCLUDEPATH +=$$PWD/ax
