@@ -1,8 +1,7 @@
-//elem.h
 #ifndef ELEM_H
 #define ELEM_H
 
-#include "comp.h"
+#include "Comp.h"
 #include "uEXD.h"
 #include "out_num.h"
 
@@ -26,17 +25,9 @@ public:
     unsigned char RezBuf[4];
     unsigned char RezBuf1[2];
 
-
-
-
-
 public:
-
-
     virtual void Set();
     virtual void Get();
-    //virtual void Show(void);
-
     virtual void Go();
 
     virtual void UpdateState();
@@ -46,7 +37,6 @@ public:
 
     Element();
     ~Element() {}
-
 };
 
 typedef Element* PElement;
@@ -69,7 +59,7 @@ public:
 
 
 
-// абстрактный класс с которого наследуются все элементы рц
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 
 class Ways : public Element
 {
@@ -88,8 +78,8 @@ public:
     bool bShowUIR;
 
     TTrainInfo TrainInfo;
-    int                     is, _is;        // положение
-    unsigned __int16 IDnext[2][2]; // сцылки на след элементы для гида
+    int                     is, _is;        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    uint16 IDnext[2][2]; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 
     Ways();
 
@@ -111,8 +101,6 @@ public:
     virtual bool isBusy();
     virtual bool isKzm();
     virtual bool isBusyKzmAccepted();
-
-
 };
 
 

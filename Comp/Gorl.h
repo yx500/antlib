@@ -63,7 +63,7 @@ struct Grl {
     short int    old_marsh;      // номер прошлого маршрута
     unsigned long tim_o_m; // время прошлого маршрута при потере
 
-    unsigned __int16 ID;
+    uint16 ID;
     char zapas[2];
 
     Grl();

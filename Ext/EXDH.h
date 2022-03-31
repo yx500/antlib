@@ -7,19 +7,19 @@
 
 /*
 struct tTNCell{
-  __int16 T;
-  __int16 Sig;
-  __int16 NS;
-  __int16 NF;
-  __int16 xESR;
+  int16 T;
+  int16 Sig;
+  int16 NS;
+  int16 NF;
+  int16 xESR;
 };
 
 struct TTNData{
-  __int16 ID_OBJ;
-  __int16 IMPULS;
-  __int16 ID_CHAIN;
-  __int16 NUMBER;
-  __int16 ESR;
+  int16 ID_OBJ;
+  int16 IMPULS;
+  int16 ID_CHAIN;
+  int16 NUMBER;
+  int16 ESR;
 };
 */
 struct TIUTrainPriznak {
@@ -34,13 +34,13 @@ struct TIUTrainPriznak {
 };
 
 struct TTrainInfo  {
-    unsigned __int16 TrainNumber;             // 2 байта - номер поезда в √»ƒ.
+    uint16 TrainNumber;             // 2 байта - номер поезда в √»ƒ.
     uint8  TrainColor;              // 1 байт  - цвет, которым отображаетс€ в √»ƒ нитка поезда с этим номером.
     TIUTrainPriznak TrainPriznak;    // 1 байт - спец. признаки поезда
     uint8  TrainLength;             // 1 байт - условна€ длина поезда
-    unsigned __int16 TrainWeight;             // 2 байта - вес поезда (с тарой)
-    unsigned __int16 TrainIndex[3];           // 6 байт - индекс поезда (ст. формировани€ - 2 байта,номер состава - 2 байта , ст. назначени€ - 2 байта)
-    unsigned __int16 LocomSeries;             // 2 байта - сери€ головного локомотива
+    uint16 TrainWeight;             // 2 байта - вес поезда (с тарой)
+    uint16 TrainIndex[3];           // 6 байт - индекс поезда (ст. формировани€ - 2 байта,номер состава - 2 байта , ст. назначени€ - 2 байта)
+    uint16 LocomSeries;             // 2 байта - сери€ головного локомотива
     uint8  LocomNumber[3];          // 3 байта - номер головной секции локомотива
     uint8  Reserv2[7];              // 7 байт - резерв
 };
@@ -112,14 +112,14 @@ struct TAVStanInfo {
     unsigned __int32 esr;
     unsigned __int32 AV_DU;
     char     dnc_guid[40];
-    unsigned __int16 z_cnt[4];
-    unsigned __int16 cnt;
+    uint16 z_cnt[4];
+    uint16 cnt;
     TAVMarshItem     M[AVMarshPackCnt];
 };
 
 
 struct TElemCheckState {
-    unsigned __int16 id_obj;
+    uint16 id_obj;
     int8 id_check;
     int8 state;
 };

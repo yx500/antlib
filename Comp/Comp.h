@@ -41,7 +41,7 @@ public:
     void * Data;
     std::string Tagstr;
     int Tag;
-    unsigned __int16 ID;
+    uint16 ID;
 
     bool StateChanged;
     TRect RCT;

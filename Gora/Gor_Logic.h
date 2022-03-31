@@ -4,7 +4,7 @@
 #define Gor_LogicH
 //---------------------------------------------------------------------------
 
-double TPVal(unsigned __int16 w);
+double TPVal(uint16 w);
 
 struct t_Descr;
 struct t_NewDescr;

@@ -2,10 +2,10 @@
 #ifndef STREL_H
 #define STREL_H
 
-#include "comP.h"
-#include "elem.h"
-extern  int Tip_Opis_PKS;  //  пришлось сделать для описания параметров
+#include "Comp.h"
+#include "Elem.h"
 
+extern  int Tip_Opis_PKS;  //  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 class Strel: public Ways
 {
@@ -68,8 +68,8 @@ public:
     bool bText;
     bool bShowPol;
 
-    /* увеличиваю мя с 7 до 10 */
-// char name[10]; << в element
+    /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅ 7 пїЅпїЅ 10 */
+// char name[10]; << пїЅ element
 public:
 
 
@@ -102,19 +102,19 @@ public:
 
 
     bool bShowInSpyMarsh;
-    // параметры UpdateState
-// bool bSetIs;                        // сам нахожу IS
-// bool bSetClr;                       // сам нахожу Clr
-// bool bSetStyll;                     // сам нахожу Styll
-// bool bSetcbord;                     // сам нахожу cbord
-    // параметры прорисовки
-    //clr         // цвет
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ UpdateState
+// bool bSetIs;                        // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ IS
+// bool bSetClr;                       // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ Clr
+// bool bSetStyll;                     // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ Styll
+// bool bSetcbord;                     // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ cbord
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    //clr         // пїЅпїЅпїЅпїЅ
     
-    int                     styll1, _styll1;    // штриховка +
-    int                     styll2, _styll2;    // штриховка -
-    int                     styll3, _styll3;    // штриховка W
-    int                     cbord1;     // цвет окантовки +
-    int                     cbord2;     // цвет окантовки -
+    int                     styll1, _styll1;    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ +
+    int                     styll2, _styll2;    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ -
+    int                     styll3, _styll3;    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ W
+    int                     cbord1;     // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ +
+    int                     cbord2;     // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ -
 
 
     signed   char rnomer;

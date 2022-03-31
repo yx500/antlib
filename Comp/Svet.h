@@ -1,10 +1,8 @@
-//---------------------------------------------------------------------------
-
 #ifndef SvetH
 #define SvetH
 //---------------------------------------------------------------------------
-#include "comp.h"
-#include "elem.h"
+#include "Comp.h"
+#include "Elem.h"
 
 
 class Svet_0 : public Element

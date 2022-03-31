@@ -1,21 +1,19 @@
-//poligon.h
 #ifndef POLIGON_H
 #define POLIGON_H
-
 
 
 
 class Station;
 #include "ACom_V.h"
 #include "YchParams.h"
-#include "stan.h"
+#include "Stan.h"
 
 class  Poligon
 {
 public:
 
     char  filename[255];
-    char  FullFileName[255]; // полное имя файла
+    char  FullFileName[255]; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     char  name[255];
     int  Col_ST;
     Station * ST [30];

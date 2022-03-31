@@ -17,7 +17,7 @@ struct TE_KeySost {
 };
 
 struct TEnergLampData {
-    unsigned __int16 ObjID;
+    uint16 ObjID;
     TE_KeySost KeySost;
 };
 const _MaxLampsInPacket = 490 / sizeof(TEnergLampData);
@@ -26,8 +26,8 @@ struct TEnergStanLamps {
 };
 #pragma pack(pop)
 
-TEnergLampData * __fastcall GetEnergLampData(TEnergStanLamps * EnergStanLamps, unsigned __int16 ObjID);
-int __fastcall SetEnergLampData(TEnergStanLamps * EnergStanLamps, unsigned __int16 ObjID, TEnergLampData * EnergLampData);
+TEnergLampData * __fastcall GetEnergLampData(TEnergStanLamps * EnergStanLamps, uint16 ObjID);
+int __fastcall SetEnergLampData(TEnergStanLamps * EnergStanLamps, uint16 ObjID, TEnergLampData * EnergLampData);
 void __fastcall LoadTEnergStanLamps(char * fn, TEnergStanLamps * EnergStanLamps);
 
 void __fastcall LampsLSFromNet(Station *Stan);
@@ -62,10 +62,10 @@ public:
     std::string FParentName;
     TE_KeySost KeySost_default;
     TE_KeySost KeySost_current;
-    byte TypKp;
-    byte NKp;
-    byte NGr;
-    byte NOb;
+    uint8 TypKp;
+    uint8 NKp;
+    uint8 NGr;
+    uint8 NOb;
     bool bTUOnlyVkl;
     int tun_in_csv[10];
     int tipVklOkc;

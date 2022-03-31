@@ -1,12 +1,10 @@
-//---------------------------------------------------------------------------
-
 #ifndef LampsH
 #define LampsH
 //---------------------------------------------------------------------------
 
-#include "comp.h"
-#include "elem.h"
-#include "strel.h"
+#include "Comp.h"
+#include "Elem.h"
+#include "Strel.h"
 #include "uFormula.h"
 
 #pragma pack(push,1)

@@ -17,7 +17,7 @@ const MaxDescrPacketCount = 99;
 const MaxtVMetrCell = 480 / sizeof(t_VMetrCell);
 const MaxtOsyCell = 480 / sizeof(t_OsyCell);
 
-double TPVal(unsigned __int16 w)
+double TPVal(uint16 w)
 {
     return (!w || w == 0xffff) ?  0. : (1000000. / (70.*w));
 }

@@ -1,11 +1,10 @@
-//stan.h
 #ifndef STAN_H
 #define STAN_H
 
 #include "ACom_T.h"
-#include "vatempl.h"
+#include "Vatempl.h"
 #include "Marshrut.h"
-#include "elem.h"
+#include "Elem.h"
 
 
 
@@ -22,13 +21,13 @@ extern TEachStan EachStanPostShow;
 
 #pragma pack(push,1)
 struct St_Dat {
-    short int  Nom;             /*номер станции */
-    char filename[13];    /*имя файла     */
-    char descriptor[13];  /*имя станции   */
-    int8 MUL_X[2];        /*масштабный множитель   по X */
-    int8 MUL_Y[2];        /*масштабный множитель   по Y */
-    short int  X_begin[2];      /*привязка по  X  */
-    short int  Y_begin[2];      /*привязка по  Y  */
+    short int  Nom;             /*пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
+    char filename[13];    /*пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ     */
+    char descriptor[13];  /*пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ   */
+    int8 MUL_X[2];        /*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ   пїЅпїЅ X */
+    int8 MUL_Y[2];        /*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ   пїЅпїЅ Y */
+    short int  X_begin[2];      /*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ  X  */
+    short int  Y_begin[2];      /*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ  Y  */
 };
 
 #pragma pack(pop)
@@ -48,15 +47,15 @@ protected:
     bool bETTListNotFound;
 public:
     PSt_Dat       Dat;
-    VisibleArray * POLE[Units_Size+1];  // +1 -` номера поездов
+    VisibleArray * POLE[Units_Size+1];  // +1 -` пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     Poligon * pPoligon;
-    int ChanelOffset[255];                /*Смещение для каналов 1..255, 0 - не трогать*/
-    char ChanelNames[255][12];             /*Смещение для каналов 1..255, 0 - не трогать*/
+    int ChanelOffset[255];                /*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1..255, 0 - пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ*/
+    char ChanelNames[255][12];             /*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1..255, 0 - пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ*/
     TvUseChanelNames vUseChanelNames;
     int ID_RP;                     /*   */
-    char filename[255];    /*имя файла     */
-    char name[255];    /*имя      */
-    TEnergStanLamps * EnergStanLamps;  // Буфер энергетиков
+    char filename[255];    /*пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ     */
+    char name[255];    /*пїЅпїЅпїЅ      */
+    TEnergStanLamps * EnergStanLamps;  // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     TMarshList MARSHLIST;
     TAntOpt * AO;
     char ElemsSostPacketName[12];
@@ -127,7 +126,7 @@ public:
     void SetPropMap(TPropMap &m);
     AComp * SetFocus(unsigned int ObjID, int focus);
     void Connect_stNext();
-    unsigned __int16 SetUnicalID(unsigned __int16 ID);
+    uint16 SetUnicalID(uint16 ID);
     void for_each_chanel(TGetPacketOffset f);
     void reassignChanelOffset();
 
@@ -148,7 +147,7 @@ public:
     int dx0, dy0;
 
     Station *substan;
-    char filename[13];    /*имя файла     */
+    char filename[13];    /*пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ     */
     char repl[10][64];
     bool bNoRebuildID;
 

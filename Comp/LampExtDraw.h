@@ -1,11 +1,9 @@
-//---------------------------------------------------------------------------
-
 #ifndef LampExtDrawH
 #define LampExtDrawH
 //---------------------------------------------------------------------------
-#include "comp.h"
-#include "elem.h"
-#include "strel.h"
+#include "Comp.h"
+#include "Elem.h"
+#include "Strel.h"
 #include "Lamps.h"
 #include "ACom_V.h"
 #include <string>
@@ -15,7 +13,7 @@
 const _sizeLEDstr = sizeof(MEM.DMD);
 
 //---------------------------------------------------------------------------
-// структур для передачи данных во вне
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ
 #pragma pack(push,1)
 struct TLED_EXTDataObj {
     unsigned int ID_OBJ;
@@ -24,7 +22,7 @@ struct TLED_EXTDataObj {
     int          Type;
     int          Tag;
     char *PropStr;
-    // данные динамич сохранения в элементе
+    // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     int  PersistInt;
     int  PersistVoid;
 };
@@ -32,8 +30,8 @@ struct TLED_EXTDataObj {
 
 struct TLED_EXTData {
     AComp* pElement;
-    // отображалово
-    // графика
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     void* hdc;
     int X;
     int Y;
@@ -42,11 +40,11 @@ struct TLED_EXTData {
     int YchStan;
 
     char *Picture;     // Picture
-    int  PictureState;   // State -  ставит внешнее ПО
-    bool bDefaultState;  // рисовать DEFAULT_State если нет Picture_State
+    int  PictureState;   // State -  пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
+    bool bDefaultState;  // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ DEFAULT_State пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ Picture_State
     int  PictureAnimateStep;    // Picture_State_PictureAnimateStep
 
-    // собственно данные Обьекта для внешней обработки
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     TLED_EXTDataObj ObjData;
 
 
@@ -81,7 +79,7 @@ public:
     std::string TextStr;
     std::string TagStr;
     std::string Picture;
-    int  PictureState;   // State -  ставит внешнее ПО
+    int  PictureState;   // State -  пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
 
     int  PersistInt;
     int  PersistVoid;

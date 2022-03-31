@@ -1116,7 +1116,7 @@ void Station::ShowElemsTagStr()
 }
 
 //---------------------------------------------------------------------------
-unsigned __int16 Station::SetUnicalID(unsigned __int16 ID)
+uint16 Station::SetUnicalID(uint16 ID)
 {
     // уже уникум?
     AComp * ac;
@@ -1131,7 +1131,7 @@ unsigned __int16 Station::SetUnicalID(unsigned __int16 ID)
     }
     if (unic)  return ID;
     // »щем макс за стартом
-    unsigned __int16 maxID = 0;
+    uint16 maxID = 0;
     for (int i = 0; i < Units_Size; i++) {
         for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
             ac = POLE[i]->GetObjPtr(j);
