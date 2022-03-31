@@ -5,7 +5,7 @@
 #ifndef QT_ANTLIB
 #include <Classes.hpp>
 #else
-#include <vcl.h>
+#include "aheaders_h.h"
 #endif
 #include <stdio.h>
 #include <vector>

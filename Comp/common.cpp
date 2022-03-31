@@ -72,7 +72,7 @@ static int _CommonTypeInd[CompTypeCount] = {
     _ctlmp//  LED,
 };
 
-char * GetTypeName(AComp * AC)
+const char *GetTypeName(AComp * AC)
 {
 
     TYP AType = AC->GetType();
@@ -88,7 +88,7 @@ char * GetTypeName(AComp * AC)
 }
 
 static String _TypeAndName;
-char * GetTypeAndName(AComp * AC)
+const char * GetTypeAndName(AComp * AC)
 {
     _TypeAndName = String(GetTypeName(AC)) + " " + AC->GetName();
     return _TypeAndName.c_str();

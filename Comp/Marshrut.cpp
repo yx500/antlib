@@ -143,8 +143,6 @@ TMarshrut::TMarshrut()
         apilotEsr(0),
         apilotId_mar(0)*/
 {
-    FStrels = new TList();
-    FStrels->Capacity = 5;
     pSV = NULL;
     pSV2 = NULL;
     pS_PRED = NULL;
@@ -175,37 +173,35 @@ TMarshrut::TMarshrut()
 
 void TMarshrut::Clear()
 {
-    for (int i = 0; i < FStrels->Count; i++) delete((TStrInMarsh *)FStrels->Items[i]);
-    FStrels->Clear();
+    for (int i = 0; i < vStrels.size(); i++) delete vStrels[i];
+    vStrels.clear();                                           
 }
-
 TMarshrut::~TMarshrut()
 {
     Clear();
-    delete FStrels;
 }
 
 void __fastcall TMarshrut::SetSTRELS(int Index, TStrInMarsh * value)
 {
-    memcpy(FStrels->Items[Index], value, sizeof(TStrInMarsh));
+    memcpy(vStrels[Index], value, sizeof(TStrInMarsh));
 }
 TStrInMarsh * __fastcall TMarshrut::GetSTRELS(int Index)
 {
-    return (TStrInMarsh *) FStrels->Items[Index];
+    return vStrels[Index];
 }
 
 int __fastcall TMarshrut::GetSTRELSCOUNT()
 {
-    return FStrels->Count;
+    return vStrels.size();
 }
 
 
 TStrInMarsh * TMarshrut::GetStrelByName(String StrelName)
 {
     //TStrInMarsh * sim;
-    for (int i = 0; i < FStrels->Count; i++)
-        if (String(((TStrInMarsh *)FStrels->Items[i])->STRELNAME) == StrelName)
-            return (TStrInMarsh *)FStrels->Items[i];
+    for (int i = 0; i < vStrels.size(); i++)
+        if (String((vStrels[i])->STRELNAME) == StrelName)
+            return vStrels[i];
     return NULL;
 }
 
@@ -263,7 +259,7 @@ void TMarshrut::SetPropMap(TPropMap &m)
                 sim = new TStrInMarsh();
                 sim->FromString(V);
                 strncpy(sim->STRELNAME, K.c_str(),sizeof(sim->STRELNAME)-1);
-                FStrels->Add(sim);
+                vStrels.push_back(sim);
             }
         };
     }
@@ -395,13 +391,14 @@ bool TMarshrut::UpdateStrelOrder() // Устанавливает параметр ORDER для стрелок
 
 void TMarshrut::AddStrInMarsh(TStrInMarsh *sim)
 {
-    FStrels->Add(sim);
+    vStrels.push_back(sim);
 }
 
 void TMarshrut::DelStrInMarsh(TStrInMarsh *sim)
 {
-    int i = FStrels->IndexOf(sim);
-    if (i >= 0) FStrels->Delete(i);
+    vStrels.erase(&sim);
+    //int i = FStrels->IndexOf(sim);
+    //if (i >= 0) FStrels->Delete(i);
 }
 
 
@@ -476,39 +473,34 @@ TMarshOdd_Even TMarshrut::GetOddEven()
 
 TMarshList::TMarshList()
 {
-    FStrels = new TList();
-    FStrels->Capacity = 20;
-    FMarshuts = new TList();
     memset(indMarshrutPropName, 0, sizeof(indMarshrutPropName));
 }
 
 TMarshList::~TMarshList()
 {
     Clear();
-    delete FStrels;
-    delete FMarshuts;
 }
 
 void TMarshList::Clear()
 {
-    for (int i = 0; i < FStrels->Count; i++) delete((TStrInMarsh *)FStrels->Items[i]);
-    FStrels->Clear();
-    for (int i = 0; i < FMarshuts->Count; i++) delete((TMarshrut *)FMarshuts->Items[i]);
-    FMarshuts->Clear();
+    for (int i = 0; i < vStrels.size(); i++) delete vStrels[i];
+    vStrels.clear();
+    for (int i = 0; i < vMarshuts.size(); i++) delete vMarshuts[i];
+    vMarshuts.clear();
 }
 
 void __fastcall TMarshList::SetSTRELS(int Index, TStrInMarsh * value)
 {
-    memcpy(FStrels->Items[Index], value, sizeof(TStrInMarsh));
+    memcpy(vStrels[Index], value, sizeof(TStrInMarsh));
 }
 TStrInMarsh * __fastcall TMarshList::GetSTRELS(int Index)
 {
-    return (TStrInMarsh *) FStrels->Items[Index];
+    return vStrels[Index];
 }
 
 int __fastcall TMarshList::GetSTRELSCOUNT()
 {
-    return FStrels->Count;
+    return vStrels.size();
 }
 
 
@@ -560,7 +552,7 @@ bool TMarshList::LoadFromCSV(String stFN)
             if (!IsPropNameStrel(PS[i])) continue;
             mes = new TStrInMarsh();
             strncpy(mes->STRELNAME, PS[i].c_str(),sizeof(mes->STRELNAME)-1);
-            FStrels->Add(mes);
+            vStrels.push_back(mes);
         }
 
         for (int i = 0; i < SL->Count; i++) {
@@ -796,32 +788,29 @@ void        TMarshList::AddMarshrut(TMarshrut* M)// добавление нового маршрута
             mes = new TStrInMarsh();
             strncpy(mes->STRELNAME, M->STRELS[i]->STRELNAME,sizeof(mes->STRELNAME)-1);
             mes->pStrel = M->STRELS[i]->pStrel;
-            FStrels->Add(mes);
+            vStrels.push_back(mes);
         }
     }
     // добавляем маршрут
-    FMarshuts->Add(M);
+    vMarshuts.push_back(M);
     M->MarshList = this;
 }
 void        TMarshList::DelMarshrut(TMarshrut* M)
 {
     // Удаляем маршрут
-    int i = FMarshuts->IndexOf(M);
-    if (i >= 0) {
-        FMarshuts->Delete(i);
-        delete M;
-    }
+    vMarshuts.erase(&M);
+    delete M;
 }
 
 
 TMarshrut* __fastcall TMarshList::GetMARSHRUTS(int Index)
 {
-    return (TMarshrut*)FMarshuts->Items[Index];
+    return vMarshuts[Index];
 }
 
 int __fastcall TMarshList::GetMARSHRUTSCOUNT()
 {
-    return FMarshuts->Count;
+    return vMarshuts.size();
 }
 
 
@@ -947,9 +936,9 @@ void TMarshList::UpdateState()
 
 TStrInMarsh * TMarshList::GetStrelByName(String StrelName)
 {
-    for (int i = 0; i < FStrels->Count; i++)
-        if (String(((TStrInMarsh *)FStrels->Items[i])->STRELNAME) == StrelName)
-            return (TStrInMarsh *)FStrels->Items[i];
+    for (int i = 0; i < vStrels.size(); i++)
+        if (String((vStrels[i])->STRELNAME) == StrelName)
+            return vStrels[i];
     return NULL;
 }
 

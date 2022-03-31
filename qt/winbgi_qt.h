@@ -5,19 +5,7 @@
 #include <QPainter>
 
 
-struct TPoint : public POINT
-{
-    TPoint() {}
-    TPoint(int _x, int _y) {
-        x=_x;
-        y=_y;
-    }
 
-    TPoint(POINT& pt){
-        x = pt.x;
-        y = pt.y;
-    }
-};
 
 
 

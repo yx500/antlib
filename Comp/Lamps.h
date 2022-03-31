@@ -46,10 +46,10 @@ class Lamp : public Element
 {
 public:
 
-    byte TypKp;
-    byte NKp;
-    byte NGr;
-    byte NOb;
+    int8 TypKp;
+    int8 NKp;
+    int8 NGr;
+    int8 NOb;
     //byte MyStat5; //  Выборность
     __tLStat    *LS;
     //tLStat  LastLS;
@@ -122,7 +122,7 @@ class CommLmp : public SuperLamp2
 
 public:
 
-    TList * lComps;
+    std::vector<AComp*> vComps;
     CommLmp();
     ~CommLmp();
     void CollectComps();

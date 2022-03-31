@@ -83,7 +83,7 @@ public:
     int impuls_svob;
     int fimpuls_svob;
 
-    byte   MyFishk;
+    int8   MyFishk;
 
     bool bShowUIR;
 

@@ -4,7 +4,7 @@
 #ifndef QT_ANTLIB
 #include <Classes.hpp>
 #else
-#include <vcl.h>
+#include "aheaders_h.h"
 #endif
 
 #include <vector>
@@ -150,10 +150,13 @@ public:
     void clear() {
         _p.clear();
     }
+
+#ifndef QT_ANTLIB
     __property int ItemsCount  = { read = GetItemsCount };
     __property String Keys[ int i ]  = { read = GetKeys, write = SetKeys };
     __property String Val[ int i ]  = { read = GetVal, write = SetVal };
     __property String P[ String stKey]  = { read = GetP, write = SetP };
+#endif
 private:
     int __fastcall GetItemsCount() {
         return _p.count();

@@ -28,8 +28,8 @@ struct TImpPropNamesInfo {
 };
 void  _GetImpPropNamesInfo(AComp * ac , TImpPropNamesInfo &I);
 */
-char * GetTypeName(AComp * AC);
-char * GetTypeAndName(AComp * AC);
+const char * GetTypeName(AComp * AC);
+const char * GetTypeAndName(AComp * AC);
 
 #endif
 

@@ -273,14 +273,14 @@ void AComp::Go()
     UpdateState();
     Show();
 }
-
+/*
 void AComp::UpdateRCT()
 {
     ClearBgiCoverRect();
     Show();
     RCT = GetBgiCoverRect();
 }
-
+*/
 
 void AComp::Set()
 {

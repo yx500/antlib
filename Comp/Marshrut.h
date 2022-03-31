@@ -12,6 +12,7 @@ class Station;
 class Ways;
 class TMarshList;
 class TY_ZONA;
+class Strel0;
 
 // описание типа маршрута W- путь, B-блокуч
 enum TMarshSectType {mstUnknow = 0, mstBW = 1, mstWB = 2, mstWW = 3, mstBB = 4};
@@ -24,8 +25,8 @@ enum TStrInMarshChek  {cNORMAL = 0, cNO_CHECK_BUSY = 1, cNO_CHECK_IS = 2};
 enum TMarshOdd_Even {mOdd = 0, mEven = 1, mUnknown = 2};  // <-Ќ   „ ->
 enum TMarshDirType {mdirUnknown = 0, mdirDep = 1, mdirArr = 2, mdirMove = 3};
 
-const NOORDER = 0;
-const MarshrutPropNameCount = 9;
+const int NOORDER = 0;
+const int MarshrutPropNameCount = 9;
 
 extern String MarshrutPropName[];
 
@@ -83,7 +84,7 @@ private:
     TStrInMarsh * __fastcall GetSTRELSORD(int Index);
 
 protected:
-    TList * FStrels;   // вектор не катит.
+    std::vector<TStrInMarsh*> vStrels;   // вектор не катит.
     // не забываем , что не храним не используемые стрелки
 public:
     TMarshList * MarshList;
@@ -203,8 +204,8 @@ private:
 
 protected:
 
-    TList * FMarshuts;   // список маршрутов
-    TList * FStrels;     // все стрелки станции
+    std::vector<TMarshrut *> vMarshuts;   // список маршрутов
+    std::vector<TStrInMarsh*> vStrels;     // все стрелки станции
     //void        UpdateLoadedImps();
     int indMarshrutPropName[MarshrutPropNameCount];
 
