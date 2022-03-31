@@ -27,11 +27,11 @@ bool    IsClrMig(int Clr);
 void ShowPictXY(int PictNumber, int x, int y, int WP, int HP);
 typedef void *(*T_GetDatagramData_Func)(int typ, const char * PacketName);
 extern T_GetDatagramData_Func GetDatagramData_Func;
-String GorElemTypeName[9] = {"???", "пїЅпїЅ", "пїЅпїЅпїЅ", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ", "пїЅпїЅпїЅ.пїЅпїЅпїЅ", "пїЅпїЅпїЅ.пїЅпїЅпїЅпїЅ", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ1", "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ2", "пїЅпїЅ2"};
+String GorElemTypeName[9] = {"???", "РЦ", "ЗКР", "Стрелка", "Зам.инт", "Зам.парк", "Стрелка1", "Стрелка2", "РЦ2"};
 
 int GetGorWayNum(Station *stan, int olegwaynum)
 {
-    // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ3 пїЅпїЅпїЅ2
+    // ищем все тп3 кзп2
     AComp * ac;
     for (int i = 0; i < Units_Size; i++){
         for (int j = 0; j < stan->POLE[i]->GetArraySize(); j++) {
@@ -104,22 +104,22 @@ tGRC0::tGRC0()
 }
 
 static String _GRC_0_PropName[] = {
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",      // 0
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",      // 1
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",   // 2
-    "пїЅпїЅпїЅпїЅпїЅ.пїЅпїЅпїЅпїЅ",   // 3
-    "пїЅпїЅпїЅпїЅпїЅпїЅ.пїЅпїЅпїЅпїЅ",  // 4
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",      // 5
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",  // 6
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",  // 7
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ_пїЅпїЅ",  // 8
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",  // 9
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ_пїЅпїЅ",  // 10
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.пїЅпїЅпїЅ",   // 11
-    "пїЅпїЅпїЅпїЅпїЅ.пїЅпїЅпїЅпїЅ1",   // 12
-    "пїЅпїЅпїЅпїЅпїЅпїЅ.пїЅпїЅпїЅпїЅ1",  // 13
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅ_0",     //14
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅ_1"      //15
+    "цфТипРЦ",      // 0
+    "смТипРЦ",      // 1
+    "тс_Занятие",   // 2
+    "цфМин.путь",   // 3
+    "цфМакс.путь",  // 4
+    "цфДлина",      // 5
+    "цфПутьПарка",  // 6
+    "смСледующий",  // 7
+    "смСледующий_мн",  // 8
+    "смПредидующий",  // 9
+    "смПредидующий_мн",  // 10
+    "лгИспольз.ГАЦ",   // 11
+    "цфМин.путь1",   // 12
+    "цфМакс.путь1",  // 13
+    "тс_Свет_0",     //14
+    "тс_Свет_1"      //15
 
 
 };
@@ -130,7 +130,7 @@ void tGRC0::GetPropMap(TPropMap &m)
     TY_Strel::GetPropMap(m);
     m.put(_GRC_0_PropName[0], GetGorElemType());
     m.put(_GRC_0_PropName[1], GorElemTypeName[GetGorElemType()].c_str());
-    m.putEx(_GRC_0_PropName[2], OldImpToNewStr(impuls_busi, this), GetRealImp(impuls_busi));
+    m.putEx(_GRC_0_PropName[2], OldImpToNewStr(impuls_busi, this), (void*)GetRealImp(impuls_busi));
 
     m.put(_GRC_0_PropName[3], MinWay);
     m.put(_GRC_0_PropName[4], MaxWay);
@@ -148,8 +148,8 @@ void tGRC0::GetPropMap(TPropMap &m)
     m.put(_GRC_0_PropName[11], bUseGAC);
     m.put(_GRC_0_PropName[12], MinWay1,0);
     m.put(_GRC_0_PropName[13], MaxWay1,0);
-    m.putEx(_GRC_0_PropName[14], OldImpToNewStr(impuls_sv[0], this), GetRealImp(impuls_sv[0]));
-    m.putEx(_GRC_0_PropName[15], OldImpToNewStr(impuls_sv[1], this), GetRealImp(impuls_sv[1]));
+    m.putEx(_GRC_0_PropName[14], OldImpToNewStr(impuls_sv[0], this), (void*)GetRealImp(impuls_sv[0]));
+    m.putEx(_GRC_0_PropName[15], OldImpToNewStr(impuls_sv[1], this), (void*)GetRealImp(impuls_sv[1]));
 
 }
 void tGRC0::SetPropMap(TPropMap &m)
@@ -209,7 +209,7 @@ tG_Strel_Y::tG_Strel_Y()
 void tG_Strel_Y::ShowFON()
 {
      TPoint P3W[13] = {T[0], T[1],  T[3], T[5], T[6], T[7],  T[17], T_[7], T_[6], T_[5], T_[3], T_[1], T[13]};
-    /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
+    /* затирем фоном на случай изм. положения */
     {
         int clr3[13] = {   FON, FON, FON, FON, FON, FON, FON, FON, FON, FON, FON,   FON,  FON};
         PolyColor(FON, P3W, clr3, 13);
@@ -231,7 +231,7 @@ void tG_Strel_Y::Show()
     TPoint P3W[13] = {T[0], T[1],  T[3], T[5], T[6], T[7],  T[17], T_[7], T_[6], T_[5], T_[3], T_[1], T[13]};
 
 
-    /*  пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ */
+    /*  НЕТ СИГН */
     if (_is == D) {
         setfillstyle(_styll3, clBP);
         TPoint P1[5] = {T[0], T[1], T[16], T_[1], T[13]};
@@ -244,7 +244,7 @@ void tG_Strel_Y::Show()
         PolyColor(clBP, P3, fillclr3M, 6, PW);
         PolyColor(clBP, P3_, fillclr3P, 6, PW);
     }
-    /*  пїЅпїЅпїЅпїЅпїЅ */
+    /*  неопр */
     if (_is == W) {
         int fillclr3[13] = {   clPP, clPP, clPP, clS3, clPP, clPP, clPP,   clPP,  clS2,  clPP , clPP,  clPP, clS1};
         setfillstyle(_styll3, clBP); PolyColor(clBP, P3W, fillclr3, 13, PW);
@@ -271,7 +271,7 @@ void tG_Strel_Y::Show()
 
 
 
-    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    // Вывод номера
     int textfillclr = BLUE_m;
     ShowStrelNum(x_n, y_n, textfillclr, StrelName);
 
@@ -283,7 +283,7 @@ void tG_Strel_Y::Show()
         if (stNext[0][1] == "") ShowStik(YP.M[4].x, YP.M[4].y, 61);
         if (stNext[0][0] == "") ShowStik(YP.M[6].x, YP.M[6].y, 61);
 
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+        // Отрисовываем места под номер
         if (bShowNumberPosition) {
             int _oldis = _is;
             int xn, yn;
@@ -331,7 +331,7 @@ void tG_Strel_Y::GetNumberPosition(int &X, int &Y, int Width, int Height, int di
 
 bool tG_Strel_Y::CheckNegabarit()
 {
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // проверяем негабарит
     tGRC0 * rc_next;
     for (int m = 0; m < 2; m++) {
         rc_next = dynamic_cast<tGRC0 *>(this->pNext[0][m]);
@@ -357,7 +357,7 @@ void tG_Strel_Y::UpdateState()
 
 
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    // расставляем цвета ручки
     for (int i = 0; i < 8; i++) {
         clrp[i] = FON; clrb[i] = FON;
         if (fimpuls_pr[i] == 33) {
@@ -365,7 +365,7 @@ void tG_Strel_Y::UpdateState()
         }
     }
 
-    // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    // если нет занятия но есть кзп то рисуем красный кантик
     if ((fimpuls_busi == 0) && (fimpuls_pr[i_m] == 1)) {
         cbord1 = RED; cbord2 = RED;
     }
@@ -407,29 +407,29 @@ void tG_Strel_Y::UpdateState()
 }
 
 static String _G_Strel_YPropName[] = {
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅ" ,     // 0
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅпїЅ",     // 1
-    "пїЅпїЅ_пїЅпїЅпїЅ",   // 2
-    "пїЅпїЅ_пїЅпїЅпїЅ",   // 3
-    "пїЅпїЅ_пїЅпїЅ" ,   // 4
-    "пїЅпїЅ_пїЅ",     // 5
-    "пїЅпїЅ_пїЅпїЅпїЅ",     // 6
-    "пїЅпїЅ_пїЅпїЅпїЅ1",     // 7
-    "пїЅпїЅ_пїЅпїЅпїЅ2",     // 8
-    "пїЅпїЅ_пїЅпїЅпїЅ_пїЅпїЅпїЅпїЅ",    // 9
-    "пїЅпїЅ_пїЅпїЅ_пїЅпїЅпїЅ",   // 10
-    "пїЅпїЅ_пїЅпїЅ_пїЅпїЅпїЅ",   // 11
-    "пїЅпїЅпїЅпїЅпїЅ_пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",     // 12
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅX",     // 13
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅY",     // 14
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅX",    // 15
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅY",    // 16
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",    // 17
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",    // 18
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",     // 19
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",     // 20
-    "пїЅпїЅ_пїЅпїЅпїЅ_пїЅпїЅпїЅ",    // 21
-    "пїЅпїЅ_пїЅпїЅпїЅ_пїЅпїЅпїЅ"    // 22
+    "тс_Плюс" ,     // 0
+    "тс_Минус",     // 1
+    "тс_ПРП",   // 2
+    "тс_ПРМ",   // 3
+    "тс_СК" ,   // 4
+    "тс_М",     // 5
+    "тс_ИПД",     // 6
+    "тс_ПЕД1",     // 7
+    "тс_ПЕД2",     // 8
+    "тс_УВК_БЛОК",    // 9
+    "цф_ТУ_ПРП",   // 10
+    "цф_ТУ_ПРМ",   // 11
+    "смИмя_стрелки",     // 12
+    "цфНомерПлюсX",     // 13
+    "цфНомерПлюсY",     // 14
+    "цфНомерМинусX",    // 15
+    "цфНомерМинусY",    // 16
+    "лгНегабарит",    // 17
+    "фсБлокировка",    // 18
+    "цфПризнакПлюс",     // 19
+    "цфПризнакМинус",     // 20
+    "тс_УВК_ГАЦ",    // 21
+    "тс_УВК_СТР"    // 22
 
 };
 
@@ -438,7 +438,7 @@ void tG_Strel_Y::SetPropMap(TPropMap &m)
     //Y_Strel_2.SetPropMap(m);
     tGRC0::SetPropMap(m);
 
-    String N = m.get("пїЅпїЅпїЅпїЅпїЅ");
+    String N = m.get("смИМЯ");
     int8 nn = N.ToIntDef(0);
     N = "$" + N;
     if ((nn != 0) && (nomer == 0)) nomer = nn;
@@ -476,10 +476,10 @@ void tG_Strel_Y::GetPropMap(TPropMap &m)
 {
     //Y_Strel_2.GetPropMap(m);
     tGRC0::GetPropMap(m);
-    m.putEx(_G_Strel_YPropName[0], OldImpToNewStr(impuls_plus, this), GetRealImp(impuls_plus), OldImpToNewStr(0, this));
-    m.putEx(_G_Strel_YPropName[1], OldImpToNewStr(impuls_mnus, this), GetRealImp(impuls_mnus), OldImpToNewStr(0, this));
+    m.putEx(_G_Strel_YPropName[0], OldImpToNewStr(impuls_plus, this), (void*)GetRealImp(impuls_plus), OldImpToNewStr(0, this));
+    m.putEx(_G_Strel_YPropName[1], OldImpToNewStr(impuls_mnus, this), (void*)GetRealImp(impuls_mnus), OldImpToNewStr(0, this));
     for (int i = 0; i < 8; i++)
-        m.putEx(_G_Strel_YPropName[i+2], OldImpToNewStr(impuls_pr[i], this), GetRealImp(impuls_pr[i]), OldImpToNewStr(0, this));
+        m.putEx(_G_Strel_YPropName[i+2], OldImpToNewStr(impuls_pr[i], this), (void*)GetRealImp(impuls_pr[i]), OldImpToNewStr(0, this));
     for (int i = 0; i < 2; i++)
         m.put(_G_Strel_YPropName[i+10], TU_pr[i], 0);
 
@@ -493,22 +493,22 @@ void tG_Strel_Y::GetPropMap(TPropMap &m)
     m.put(_G_Strel_YPropName[18], fevFormula2St(frm_blok), "");
     m.put(_G_Strel_YPropName[19], StrelPrizak[0], 0);
     m.put(_G_Strel_YPropName[20], StrelPrizak[1], 0);
-    m.putEx(_G_Strel_YPropName[21], OldImpToNewStr(impuls_uvk_gac, this), GetRealImp(impuls_uvk_gac), OldImpToNewStr(0, this));
-    m.putEx(_G_Strel_YPropName[22], OldImpToNewStr(impuls_uvk_str, this), GetRealImp(impuls_uvk_str), OldImpToNewStr(0, this));
+    m.putEx(_G_Strel_YPropName[21], OldImpToNewStr(impuls_uvk_gac, this), (void*)GetRealImp(impuls_uvk_gac), OldImpToNewStr(0, this));
+    m.putEx(_G_Strel_YPropName[22], OldImpToNewStr(impuls_uvk_str, this), (void*)GetRealImp(impuls_uvk_str), OldImpToNewStr(0, this));
 
 
 }
 
-/* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ x_org пїЅ y_org пїЅпїЅ пїЅпїЅпїЅпїЅ theta */
+/* Вращение точки вокруг центра с координатами x_org и y_org на угол theta */
 void rotate_point(double theta, TPoint &P, TPoint Pc)
 {
     double tx, ty;
-    /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ X пїЅ Y пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ */
+    /* нормализация X и Y к начальному адресу */
     tx = P.x - Pc.x; ty = P.y - Pc.y;
-    /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
+    /* вращение */
     P.x = tx * cos(theta) - ty * sin(theta);
     P.y = tx * sin(theta) + ty * cos(theta);
-    /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
+    /* возвращение значений координат */
     P.x += Pc.x; P.y += Pc.y;
 }
 void rotate_points(double theta, TPoint Pc, TPoint *Points, int Points_Count)
@@ -526,13 +526,13 @@ void offset_points(int dx, int dy, TPoint *Points, int Points_Count)
 void tG_Strel_Y::CalcPRRTDS()
 {
     rr = sh_y * 2;//MUL_Y/3;
-    int dx0 = 3 * MUL_X;   // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
-    int dx1 = rr * 3 / 4;//MUL_Y*2/4; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
-    int dx2 = 1 * MUL_X;//MUL_Y;   // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
-    int dx22 = rr;//1*MUL_X/2;//MUL_Y;   // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    int shpr = sh_y / 2;   // 1/2 пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
-    int shpr2 = dx22 / 2 - shpr;   // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    int prd = 4; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    int dx0 = 3 * MUL_X;   // отступ до центра круга
+    int dx1 = rr * 3 / 4;//MUL_Y*2/4; // отступ до ручки
+    int dx2 = 1 * MUL_X;//MUL_Y;   // длина ручки
+    int dx22 = rr;//1*MUL_X/2;//MUL_Y;   // длина треугольника
+    int shpr = sh_y / 2;   // 1/2 ширины ручки
+    int shpr2 = dx22 / 2 - shpr;   // отступ ширины треугольника
+    int prd = 4; // отступ от ручки
     int n = 1;
 
 
@@ -568,7 +568,7 @@ void tG_Strel_Y::ShowRTDS_IPD()
         if (impuls_pr[i_m] == 0) {clrp[i_m] = FON;clrb[i_m] = FON;}
         if (impuls_pr[i_ipd] == 0) {clrp[i_ipd] = FON;clrb[i_ipd] = FON;}
     }
-    /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
+    /* затирем фоном на случай изм. положения */
     setfillstyle(SOLID_FILL, FON); setcolor(FON);
     bar(Mr[0].x - rr / 2 - 2, Mr[0].y - rr / 2 - 2, Mr[0].x + rr / 2 + 2, Mr[0].y + rr / 2 + 2);
 
@@ -619,7 +619,7 @@ void tG_Strel_Y::ShowPR()
         PolPl = 1; PolMn = 0;
     }
 
-    /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
+    /* затирем фоном на случай изм. положения */
     int clrF[7] = {FON, FON, FON, FON, FON, FON, FON};
     setfillstyle(SOLID_FILL, FON); setcolor(FON);
     //PolyColor(FON,Pr,clrF,4);
@@ -627,7 +627,7 @@ void tG_Strel_Y::ShowPR()
     PolyColor(FON, Prm1, clrF, 3);//PolyColor(FON,Prm2,clrF,3);
     PolyColor(FON, Tr, clrF, 7);
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // рисуем подложку под среднее положеие
     //if ((fimpuls_pr[i_sk ]==1)) {
     //   setfillstyle(SOLID_FILL,COLOR_GOR_A);setcolor(FON1);
     //   roundrect(Pr[0].x,Pr[0].y,Pr[2].x,Pr[2].y,sh_y,sh_y);
@@ -643,7 +643,7 @@ void tG_Strel_Y::ShowPR()
         int clr1[3] = {clrp[i_prm], clrp[i_prm], clrp[i_prm]};
         PolyColor(clrb[i_prm], Prpm[PolMn][0], clr1, 3);//PolyColor(clrb[i_prm],Prpm[PolMn][1],clr1,3);
     }
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // среднее положение
 
     if ((fimpuls_pr[i_sk ] != 0) || ((MOD == ED) && (impuls_pr[i_sk ] != 0))) {
         int clr1[7] = {clrp[i_sk], clrp[i_sk], clrp[i_sk], clrp[i_sk], clrp[i_sk], clrp[i_sk], clrp[i_sk]};
@@ -675,13 +675,13 @@ void tG_Strel_1::Show()
     if (L2 <= 0) {
         P3W[7] = T[8]; P3W[8] = T[11];
     }
-    /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
+    /* затирем фоном на случай изм. положения */
     {
         int clr3[10] = {   FON, FON, FON, FON, FON, FON, FON, FON,  FON, FON};
         if (L2 <= 0) clr3[7] = clPP;
         PolyColor(FON, P3W, clr3, 10);
     }
-    /*  пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ */
+    /*  НЕТ СИГН */
     if (_is == D) {
         setfillstyle(_styll3, clBP);
         TPoint P1[4] = {T[0], T[1], T[12], T[13]};
@@ -696,7 +696,7 @@ void tG_Strel_1::Show()
             PolyColor(clBP, P2, clr2, 4);
         }
     }
-    /*  пїЅпїЅпїЅпїЅпїЅ */
+    /*  неопр */
     if (_is == W) {
         int clr3[10] = {   clPP, clPP, clPP, clS3, clPP, clPP, clPP, clS2,  clPP, clS1};
         if (L2 <= 0)clr3[7] = clPP;
@@ -726,12 +726,12 @@ void tG_Strel_1::Show()
             setfillstyle(_styll1, clBP);PolyColor(clBP, PP, clrP, 4);
         }
     }
-    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    // Вывод номера
     int textfillclr = BLUE_m;
     ShowStrelNum(x_n, y_n, textfillclr, StrelName);
 
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    // проверяем связи
     ShowStik(YP.M[1].x, YP.M[1].y, prSTIK[0]);
     ShowStik(YP.M[4].x, YP.M[4].y, prSTIK[2]);
     ShowStik(YP.M[2].x, YP.M[2].y, prSTIK[1]);
@@ -739,7 +739,7 @@ void tG_Strel_1::Show()
         //if (idNext[1][0]==0) Y_Strel_1.ShowStik(Y_Strel_1.YP.M[1.x,Y_Strel_1.YP.M[1.y,61);
         //if (idNext[0][1]==0) Y_Strel_1.ShowStik(Y_Strel_1.YP.M[4.x,Y_Strel_1.YP.M[4.y,61);
         //if (idNext[0][0]==0) Y_Strel_1.ShowStik(Y_Strel_1.YP.M[2.x,Y_Strel_1.YP.M[2.y,61);
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+        // Отрисовываем места под номер
         if (bShowNumberPosition) {
             int _oldis = _is;
             int xn, yn;
@@ -804,23 +804,23 @@ void tG_Strel_1::UpdateState()
 }
 
 static String _G_Strel_1PropName[] = {
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅпїЅпїЅпїЅ" ,     // 0
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅпїЅ",     // 1
-    "пїЅпїЅCпїЅпїЅпїЅ1",     // 2
-    "пїЅпїЅCпїЅпїЅпїЅ2",     // 3
-    "пїЅпїЅCпїЅпїЅпїЅ3",     // 4
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅX",     // 5
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅY",     // 6
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅX",    // 7
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅY",    // 8
-    "пїЅпїЅпїЅпїЅпїЅ_пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"     // 9
+    "тс_Маршрут" ,     // 0
+    "тс_Минус",     // 1
+    "цфCтык1",     // 2
+    "цфCтык2",     // 3
+    "цфCтык3",     // 4
+    "цфНомерПлюсX",     // 5
+    "цфНомерПлюсY",     // 6
+    "цфНомерМинусX",    // 7
+    "цфНомерМинусY",    // 8
+    "смИмя_стрелки"     // 9
 };
 
 void tG_Strel_1::SetPropMap(TPropMap &m)
 {
 
     tGRC0::SetPropMap(m);
-    String N = m.get("пїЅпїЅпїЅпїЅпїЅ");
+    String N = m.get("смИМЯ");
     int8 nn = N.ToIntDef(0);
     N = "$" + N;
     if ((nn != 0) && (nomer == 0)) nomer = nn;
@@ -843,8 +843,8 @@ void tG_Strel_1::SetPropMap(TPropMap &m)
 void tG_Strel_1::GetPropMap(TPropMap &m)
 {
     tGRC0::GetPropMap(m);
-    m.putEx(_G_Strel_1PropName[0], OldImpToNewStr(tsMarshrut, this), GetRealImp(tsMarshrut), OldImpToNewStr(0, this));
-    m.putEx(_G_Strel_1PropName[1],OldImpToNewStr(impuls_mnus,this), GetRealImp(impuls_mnus),OldImpToNewStr(0,this));
+    m.putEx(_G_Strel_1PropName[0], OldImpToNewStr(tsMarshrut, this), (void*)GetRealImp(tsMarshrut), OldImpToNewStr(0, this));
+    m.putEx(_G_Strel_1PropName[1],OldImpToNewStr(impuls_mnus,this), (void*)GetRealImp(impuls_mnus),OldImpToNewStr(0,this));
     m.put(_G_Strel_1PropName[2], prSTIK[0], 0);
     m.put(_G_Strel_1PropName[3], prSTIK[1], 0);
     m.put(_G_Strel_1PropName[4], prSTIK[2], 0);
@@ -885,7 +885,7 @@ void tG_Strel_2::UpdateState()
             ((InvertStrel) && (fimpuls_mnus == 1) && (fimpuls_plus == 0))) {
 
     } else {
-        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 29.11.11
+        // Убрали за поканенадобностью 29.11.11
         //if (fimpuls_busy_m[0]==1) clr=COLOR_B;
         //if (fimpuls_busy_m[1]==1) clr=COLOR_B;
     }
@@ -893,9 +893,9 @@ void tG_Strel_2::UpdateState()
 }
 
 static String _G_Strel_2PropName[] = {
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅ",         // 0
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ1",    // 1
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ2",    // 2
+    "тс_Плюс",         // 0
+    "тс_ЗанятиеМ1",    // 1
+    "тс_ЗанятиеМ2",    // 2
 
 };
 
@@ -912,9 +912,9 @@ void tG_Strel_2::SetPropMap(TPropMap &m)
 void tG_Strel_2::GetPropMap(TPropMap &m)
 {
     tG_Strel_1::GetPropMap(m);
-    m.putEx(_G_Strel_2PropName[0], OldImpToNewStr(impuls_plus, this), GetRealImp(impuls_plus), OldImpToNewStr(0, this));
-    m.putEx(_G_Strel_2PropName[1], OldImpToNewStr(impuls_busy_m[0], this), GetRealImp(impuls_busy_m[0]), OldImpToNewStr(0, this));
-    m.putEx(_G_Strel_2PropName[2], OldImpToNewStr(impuls_busy_m[1], this), GetRealImp(impuls_busy_m[1]), OldImpToNewStr(0, this));
+    m.putEx(_G_Strel_2PropName[0], OldImpToNewStr(impuls_plus, this), (void*)GetRealImp(impuls_plus), OldImpToNewStr(0, this));
+    m.putEx(_G_Strel_2PropName[1], OldImpToNewStr(impuls_busy_m[0], this), (void*)GetRealImp(impuls_busy_m[0]), OldImpToNewStr(0, this));
+    m.putEx(_G_Strel_2PropName[2], OldImpToNewStr(impuls_busy_m[1], this), (void*)GetRealImp(impuls_busy_m[1]), OldImpToNewStr(0, this));
 }
 
 
@@ -993,10 +993,10 @@ void tG_RC::GetNumberPosition(int &X, int &Y, int Width, int Height, int direct)
 
 
 static String _G_RCPropName[] = {
-    "пїЅпїЅCпїЅпїЅпїЅ1",     // 0
-    "пїЅпїЅCпїЅпїЅпїЅ2",     // 1
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅX",     // 2
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅY"      // 3
+    "цфCтык1",     // 0
+    "цфCтык2",     // 1
+    "цфНомерX",     // 2
+    "цфНомерY"      // 3
 };
 
 
@@ -1024,7 +1024,7 @@ void tG_RC::SetPropMap(TPropMap &m)
     NP.x = m.geti(_G_RCPropName[2]);
     NP.y = m.geti(_G_RCPropName[3]);
 
-    String N = m.get("пїЅпїЅпїЅпїЅпїЅ");
+    String N = m.get("смИМЯ");
     int8 nn = N.ToIntDef(0);
     N = "$" + N;
     if ((nn != 0) && (nomer == 0)) nomer = nn;
@@ -1062,7 +1062,7 @@ void ShowTR1(int x, int y, int clrp, int clrb, int napr, ttrchast trchast = _trf
 
 
 
-int _clrbPP[8] = {     //           A  пїЅпїЅC  пїЅпїЅпїЅпїЅ
+int _clrbPP[8] = {     //           A  РРC  Ступ
     FON ,              //    0      0   0   0
     FON ,              //    1      0   0   1
     FON ,              //    2      0   1   0
@@ -1075,36 +1075,36 @@ int _clrbPP[8] = {     //           A  пїЅпїЅC  пїЅпїЅпїЅпїЅ
 
 
 
-int _clrbPPRRC[8] = {  //          пїЅпїЅпїЅпїЅC пїЅпїЅпїЅпїЅпїЅ пїЅ
-    FON ,              //    0      0     0    0                       пїЅпїЅпїЅпїЅпїЅпїЅпїЅ , пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    COLOR_GOR_A ,      //    1      0     0    1                       пїЅпїЅпїЅпїЅпїЅпїЅпїЅ , пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ
-    FON ,              //    2      0     1    0       !!!!            пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    KRA_ZEL,           //    3      0     1    1                       пїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    FON,               //    4      1     0    0                       пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    KRA_ZEL,           //    5      1     0    1                       пїЅпїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    FON,               //    6      1     1    0                       пїЅпїЅпїЅпїЅпїЅпїЅпїЅ , пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    COLOR_GOR_A        //    7      1     1    1                       пїЅпїЅпїЅпїЅпїЅпїЅпїЅ , пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ
+int _clrbPPRRC[8] = {  //          тсРРC мкРРС А
+    FON ,              //    0      0     0    0                       обычное , индикация ступеней
+    COLOR_GOR_A ,      //    1      0     0    1                       обычное , индикация ступеней, А
+    FON ,              //    2      0     1    0       !!!!            Красное обрамление
+    KRA_ZEL,           //    3      0     1    1                       красно/зеленый мигающий
+    FON,               //    4      1     0    0                       Красное обрамление
+    KRA_ZEL,           //    5      1     0    1                       красно/зеленый мигающий
+    FON,               //    6      1     1    0                       обычное , индикация ступеней
+    COLOR_GOR_A        //    7      1     1    1                       обычное , индикация ступеней, А
 };
 void tG_ZAMI::SetZamColors(int T1, int T2, int T3, int T4, int R, int A, int mkRRC,int mkErrCS,int tsRRC)
-//                  int &kolTR,  // пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-//                  int &clrpTR, // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-//                  int &clrbTR, // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-//                  int &clrpK,  // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-//                  int &clrbK,  // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-//                  int &clrpPP, // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-//                  int &clrbPP  // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+//                  int &kolTR,  // кол-во рисуемых треугольников
+//                  int &clrpTR, // цвет окантовки треугольников
+//                  int &clrbTR, // цвет заполнения треугольников
+//                  int &clrpK,  // цвет окантовки прямоугольника
+//                  int &clrbK,  // цвет заполнения прямоугольника
+//                  int &clrpPP, // цвет окантовки подлжки
+//                  int &clrbPP  // цвет заполнения подлжки
 //                 )
 {
     kolTR = 0; clrpTR = C_D; clrpK = C_D; clrpPP = FON1; clrbPP = FON;
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // подложка
     if (mkRRC == 33) {
-        // пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        // Если не нашли в массиве
         clrpPP = C_D;
         clrbPP = FON1;
         if (A == 1) clrbPP = KRA_ZEL;
     }  else  {
-        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        // Если подвязано то рисуем по таблице
         int n =0;
         if (tsRRC==33){
            int stup = T1 + T2 + T3 + T4 + R;
@@ -1119,43 +1119,43 @@ void tG_ZAMI::SetZamColors(int T1, int T2, int T3, int T4, int R, int A, int mkR
         }
         if (clrbPP == FON) clrpPP = FON; else clrpPP = FON1;
         if ((A == 1)) clrpPP = GELT;
-        if ((A != 1) && (mkRRC == 1)) clrpPP = COLOR_GOR_A; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ RRC=1
+        if ((A != 1) && (mkRRC == 1)) clrpPP = COLOR_GOR_A; // обрамление при RRC=1
         if ((mkRRC!=tsRRC)&&(tsRRC!=33)) clrpPP = RED;
         if (!bNomkErrCS)
            if ( ((impuls_zam[_impROSPUSK]==0) || (fimpuls_zam[_impROSPUSK]==1)) && (A == 1) && (mkErrCS==1)) clrbPP = KRA_ZEL;
 
     }
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
+    // проверяем тс
     if ((T1 == 33) | (T2 == 33) | (T3 == 33) | (T4 == 33) | (R == 33) | (A == 33)) {
         clrbTR = BIRUZOVIJ; clrbK = BIRUZOVIJ;
         return;
     }
-    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    //находим кол-во треугольников
 
     if (T1 == 1) kolTR = 1;
     if (T2 == 1) kolTR = 2;
     if (T3 == 1) kolTR = 3;
     if (T4 == 1) kolTR = 4;
     if (R == 1) kolTR = 2;
-    // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
+    // если ничего нет
     if (T1 + T2 + T3 + T4 + R == 0) {
         clrpK = C_D; clrbK = FON1;
         //if (clrbPP!=FON) clrpPP=clrpK;
     }
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // торможение
     if (T1 + T2 + T3 + T4 >= 1) {
         clrbK = 205; clrbTR = 211;
     }
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // расторможка
     if (R == 1) {
         clrbK = 251/*GELT*/;
         clrbTR = TXT;
         clrbK = TXT;
     }
-    // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅ
+    // если ступеней куча - ошибка
     /*if (T1+T2+T3+T4+R>1) {
-       clrbK=0;  // пїЅпїЅпїЅпїЅпїЅпїЅ
+       clrbK=0;  // черный
        clrbTR=0;
        kolTR=4;
     } */
@@ -1167,10 +1167,10 @@ void tG_ZAMI::SetZamColors(int T1, int T2, int T3, int T4, int R, int A, int mkR
 
 void tG_ZAMI::ShowZAM(float stupen)
 {
-    int shzam = sh_y * 3 / 4; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
-    int ddx = 3;      // пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
-    int ddy = 1;      // пїЅпїЅпїЅпїЅпїЅ
-    int ddyTR = 2;    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    int shzam = sh_y * 3 / 4; // толщина полоски зама
+    int ddx = 3;      // отсуп с краев рц
+    int ddy = 1;      // отсуп
+    int ddyTR = 2;    // отсуп от колбаски до треугольников
     int naprK[2];
     naprK[0] = 1; naprK[1] = -1;
     int naprTR[2];
@@ -1187,9 +1187,9 @@ void tG_ZAMI::ShowZAM(float stupen)
     /*clrpTR=C_D;
     if       (stupen==0){ //
        clrbK=FON1;
-    }else if (stupen==-1){ //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    }else if (stupen==-1){ //расторможка
        clrbK=251;clrbTR=GELT;
-    }else if (stupen==-33){ //пїЅпїЅпїЅпїЅпїЅпїЅ
+    }else if (stupen==-33){ //ошибка
        clrbK=KRA_ZEL;
        clrbTR=KRA_SER;
        kolTR=4;
@@ -1199,16 +1199,16 @@ void tG_ZAMI::ShowZAM(float stupen)
     }
     */
 
-    if (stupen == -33) { //пїЅпїЅпїЅпїЅпїЅпїЅ
+    if (stupen == -33) { //ошибка
         clrbK = KRA_ZEL;
         clrbTR = KRA_SER;
         kolTR = 4;
     }
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // расставляем сдвиги и направления треугольников
     if (stupen == 0) { //
         ddy = sh_y * 1;
-    } else if (stupen == -1) { //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    } else if (stupen == -1) { //расторможка
         naprTR[0] = -naprTR[0]; naprTR[1] = -naprTR[1];
         ddy = sh_y / 2;
         //yTR[0]=T[0].y-3-/*sh_y-ddy-*/shzam-ddyTR;
@@ -1226,7 +1226,7 @@ void tG_ZAMI::ShowZAM(float stupen)
     ZT[1][0] = Point(T[13].x + ddx, T[13].y + ddy + shzam);
     ZT[1][1] = Point(T[6].x - ddx, T[6].y + ddy + shzam);
     int hpodl = shzam + sh_y + ddyTR + (sh_y) / 2;
-    if (stupen == -2) { //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    if (stupen == -2) { //ситрание фоном
         int clr1[4] = {FON, FON, FON, FON};
         ZTr[0] = Point(ZT[0][0].x - 2, T[0].y - 1);
         ZTr[1] = Point(ZT[0][0].x - 2, ZTr[0].y - hpodl);
@@ -1253,7 +1253,7 @@ void tG_ZAMI::ShowZAM(float stupen)
     }
 
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // колбаска
     for (int d = 0; d < 2; d++) {
         ZTr[0] = ZT[d][0]; ZTr[1] = ZT[d][1];
         ZTr[2] = Point(ZT[d][1].x, ZT[d][1].y + shzam * naprK[d]);
@@ -1262,7 +1262,7 @@ void tG_ZAMI::ShowZAM(float stupen)
         PolyColor(clrbK, ZTr, clr1, 4);
 
     }
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    // треугольники целые
     double dxTR = 0;
     int kolTRhalf = 0;
     if ((TipStupen != 0) && (stupen > 0)) {
@@ -1272,10 +1272,10 @@ void tG_ZAMI::ShowZAM(float stupen)
     if (kolTR > 0)dxTR = (ZT[0][1].x - ZT[0][0].x) / (kolTR + 1);
 
     for (int d = 0; d < 2; d++) {
-        for (int tr = 0; tr < kolTR - kolTRhalf; tr++) { // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+        for (int tr = 0; tr < kolTR - kolTRhalf; tr++) { // треугольники целые
             ShowTR1(ZT[0][0].x + dxTR*(tr + 1), yTR[d], clrpTR, clrbTR, naprTR[d]);
         }
-        // // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+        // // треугольники не целые
         if (kolTRhalf > 0) ShowTR1(ZT[0][0].x + dxTR*(kolTR), yTR[d], clrpTR, clrbTR, naprTR[d], _trhalf);
     }
 
@@ -1322,7 +1322,7 @@ void tG_ZAMI::ShowZAM(float stupen)
 void tG_ZAMI::Show()
 {
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    // расставляем цвета
 
     if (MOD == ED) {
         kolTR = 0;
@@ -1353,9 +1353,9 @@ void tG_ZAMI::Show()
     sh_y += DopMashtab;
 
     tG_RC::Show();
-    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    //затираем фоном
     ShowZAM(-2);
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // считаем ступень
     float stupen = 0;
     if (fimpuls_zam[_impR] == 1) stupen = -1; else if (fimpuls_zam[_impT4] == 1) stupen = 4; else if (fimpuls_zam[_impT3] == 1) stupen = 3; else if (fimpuls_zam[_impT2] == 1) stupen = 2; else if (fimpuls_zam[_impT1] == 1) stupen = 1;
 
@@ -1373,7 +1373,7 @@ void tG_ZAMI::Show()
 
     }
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // проверяем чтобы был только один активный импульс
     if ((TipStupen == 0) ||
             ((TipStupen == 1) && (fimpuls_zam[_impA ] == 0))) {
         int actimp = 0;
@@ -1425,7 +1425,7 @@ void tG_ZAMI::UpdateState()
     int V = 0, Voleg = 0, RC = 0, _RRC = 0,_ErrCS=0;
 
     if (!GetZamData(AddrLKSlot, AddrLK, V, Voleg, RC, _RRC,_ErrCS)) {
-        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        // если нет посылок
     }
     StateChanged = StateChanged | (_RRC != RRC)|(_ErrCS!=ErrCS);
     RRC = _RRC;
@@ -1440,37 +1440,37 @@ void tG_ZAMI::UpdateState()
 
 }
 static String _GZAM_StrelPropName[] = {
-    "пїЅпїЅпїЅпїЅпїЅ_пїЅпїЅпїЅ",   // 0
-    "пїЅпїЅпїЅ_пїЅпїЅ",   // 1
-    "пїЅпїЅпїЅпїЅпїЅ_пїЅпїЅ", // 2
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ_пїЅпїЅ",     // 3
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ_пїЅпїЅ_пїЅпїЅпїЅпїЅ",     // 4
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ_пїЅпїЅпїЅ",     // 5
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",     // 6
+    "смИмя_Зам",   // 0
+    "цф№_ТП",   // 1
+    "цфТип_ЗМ", // 2
+    "цфАдрес_ЛК",     // 3
+    "цфАдрес_ЛК_Слот",     // 4
+    "цфАдрес_КЗП",     // 5
+    "цфТипСтупеней",     // 6
 
-    "пїЅпїЅ_пїЅ1",     //  7
-    "пїЅпїЅ_пїЅ2",     //  8
-    "пїЅпїЅ_пїЅ3",     //  9
-    "пїЅпїЅ_пїЅ4",     //  10
-    "пїЅпїЅ_пїЅ",      //  11
-    "пїЅпїЅ_пїЅ",      //  12
-    "пїЅпїЅ_пїЅпїЅ",     //  13
-    "пїЅпїЅ_пїЅпїЅпїЅ",    //  14
-    "пїЅпїЅ_пїЅпїЅ",     //  15
-    "пїЅпїЅ_пїЅпїЅпїЅ",     //  15
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",     //  16
+    "тс_Т1",     //  7
+    "тс_Т2",     //  8
+    "тс_Т3",     //  9
+    "тс_Т4",     //  10
+    "тс_Р",      //  11
+    "тс_А",      //  12
+    "тс_КЗ",     //  13
+    "тс_Ман",    //  14
+    "тс_ОГ",     //  15
+    "тс_РРС",     //  15
+    "тс_РОСПУСК",     //  16
 
-    "пїЅпїЅпїЅпїЅ_пїЅпїЅпїЅпїЅпїЅпїЅпїЅ", //  17
-    "пїЅпїЅDX_V",   //  18
-    "пїЅпїЅDY_V",    //  19
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ_V",   //  20
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ_V",    //  21
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ_V",   //  22
-    "пїЅпїЅmasy_V",   //  23
-    "пїЅпїЅNomkErrCS",   //24
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",     // 25
-    "пїЅпїЅпїЅпїЅпїЅпїЅVпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
+    "цфНе_масштаб", //  17
+    "цфDX_V",   //  18
+    "цфDY_V",    //  19
+    "цфШирина_V",   //  20
+    "цфВысота_V",    //  21
+    "цфВесБуквы_V",   //  22
+    "цфmasy_V",   //  23
+    "лгNomkErrCS",   //24
+    "лгНетСкВых",     // 25
+    "цфПровVвых",
+    "цфРЦзан"
 
 
 };
@@ -1484,11 +1484,11 @@ void tG_ZAMI::GetPropMap(TPropMap &m)
     m.put(_GZAM_StrelPropName[i++],  TipZM);
     m.put(_GZAM_StrelPropName[i++],  AddrLK);
     m.put(_GZAM_StrelPropName[i++],  AddrLKSlot);
-    i++;// пїЅпїЅпїЅ
+    i++;// КЗП
     m.put(_GZAM_StrelPropName[i++],  TipStupen);
 
     for (int ii = 0; ii < 11; ii++)
-        m.putEx(_GZAM_StrelPropName[i++], OldImpToNewStr(impuls_zam[ii], this), GetRealImp(impuls_zam[ii]));
+        m.putEx(_GZAM_StrelPropName[i++], OldImpToNewStr(impuls_zam[ii], this), (void*)GetRealImp(impuls_zam[ii]));
 
     m.put(_GZAM_StrelPropName[i++],  DopMashtab);
 
@@ -1514,7 +1514,7 @@ void tG_ZAMI::SetPropMap(TPropMap &m)
     TipZM =  m.geti(_GZAM_StrelPropName[i++]);
     AddrLK = m.geti(_GZAM_StrelPropName[i++]);
     AddrLKSlot = m.geti(_GZAM_StrelPropName[i++]);
-    i++;// пїЅпїЅпїЅ
+    i++;// КЗП
     TipStupen = m.geti(_GZAM_StrelPropName[i++]);
     for (int ii = 0; ii < 11; ii++)
         impuls_zam[ii] = NewStrToOldImp(m.get(_GZAM_StrelPropName[i++]).c_str());
@@ -1552,40 +1552,40 @@ void tG_ZAMP::SetPropMap(TPropMap &m)
 //==================================================================
 
 static String _G_ZKR_PropName[] = {
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅ1",   // 0
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅ2",   // 1
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅпїЅпїЅ",  // 2
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅпїЅ",   // 3
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅпїЅ",   // 4
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅпїЅ",   // 5
-    "пїЅпїЅ_пїЅпїЅпїЅ",     // 6
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅпїЅпїЅ",  // 7
-    "пїЅпїЅ_пїЅ1",      // 8
-    "пїЅпїЅ_пїЅ2",      // 9
-    "пїЅпїЅ_пїЅ3",      // 10
-    "пїЅпїЅ_пїЅпїЅ1",     // 11
-    "пїЅпїЅ_пїЅпїЅ2",     // 12
-    "пїЅпїЅ_пїЅпїЅ3",     // 13
-    "пїЅпїЅ_пїЅ11",      // 14
-    "пїЅпїЅ_пїЅ12",      // 15
-    "пїЅпїЅ_пїЅ21",      // 16
-    "пїЅпїЅ_пїЅ22",      // 17
-    "пїЅпїЅ_пїЅ31",      // 17
-    "пїЅпїЅ_пїЅ32",      // 18
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅпїЅпїЅпїЅ",      //
-    "пїЅпїЅ_пїЅпїЅ_пїЅпїЅпїЅ",  //
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅ1",   //
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅ2",   //
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅ3",   //
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅпїЅ",   //
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅпїЅ",   //
-    "пїЅпїЅ_пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",//
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ_пїЅпїЅ",     //
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ_пїЅпїЅ_пїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ_Y",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ_Y",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
+    "тс_РТДС1",   // 0
+    "тс_РТДС2",   // 1
+    "тс_СветКр",  // 2
+    "тс_СветЖ",   // 3
+    "тс_СветЗ",   // 4
+    "тс_СветБ",   // 5
+    "тс_Авт",     // 6
+    "тс_Расцеп",  // 7
+    "тс_Д1",      // 8
+    "тс_Д2",      // 9
+    "тс_Д3",      // 10
+    "тс_ДН1",     // 11
+    "тс_ДН2",     // 12
+    "тс_ДН3",     // 13
+    "тс_Д11",      // 14
+    "тс_Д12",      // 15
+    "тс_Д21",      // 16
+    "тс_Д22",      // 17
+    "тс_Д31",      // 17
+    "тс_Д32",      // 18
+    "тс_Роспуск",      //
+    "цф_ТУ_РРС",  //
+    "цф_ДИСО1",   //
+    "цф_ДИСО2",   //
+    "цф_ДИСО3",   //
+    "цф_Режим",   //
+    "цф_Вагон",   //
+    "цф_ПутьНадвига",//
+    "цфАдрес_ЛК",     //
+    "цфАдрес_ЛК_Слот",
+    "цфТипВыводДСО",
+    "цфСдвигРТДС_Y",
+    "цфРазмерРТДС_Y",
+    "лгНевыводРТДС"
         //
 
 
@@ -1665,7 +1665,7 @@ void tG_ZKR::Show()
 
     tG_RC::Show();
 
-    // пїЅ1 пїЅ2 пїЅ3
+    // Д1 Д2 Д3
     int d = 1;
     x0 = YP.M[1].x;
     if (mas < 0) {
@@ -1696,7 +1696,7 @@ void tG_ZKR::Show()
         line(x0, y_rtds + h_rtds, x0 + dx*2, y_rtds - h_rtds);
     }
     }
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅm
+    // затираем фоноm
     if (params_zkr[_zkr_tip_vivod_dso]==0){
     makebs(1);
     for (int i = 0; i < 3; i++) {
@@ -1754,7 +1754,7 @@ void tG_ZKR::GetPropMap(TPropMap &m)
 {
     tG_RC::GetPropMap(m);
     for (int i = 0; i < _zkr_max_imp; i++)
-        m.putEx(_G_ZKR_PropName[i], OldImpToNewStr(impuls_zkr[i], this), GetRealImp(impuls_zkr[i]));
+        m.putEx(_G_ZKR_PropName[i], OldImpToNewStr(impuls_zkr[i], this), (void*)GetRealImp(impuls_zkr[i]));
     for (int i = 0; i < 13; i++)
         m.put(_G_ZKR_PropName[_zkr_max_imp+i], params_zkr[i]);
 
@@ -1775,24 +1775,24 @@ void tG_ZKR::SetPropMap(TPropMap &m)
 
 
 static String _G_OTCLABEL_PropName[] = {
-    "пїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅimp_descr_start1",
-    "пїЅпїЅimp_descr_start2",
-    "пїЅпїЅimp_descr_start3",
-    "пїЅпїЅimp_descr_start4",
-    "пїЅпїЅimp_descr_start5",
-    "пїЅпїЅimp_descr_end1",
-    "пїЅпїЅimp_descr_end2",
-    "пїЅпїЅimp_descr_end3",
-    "пїЅпїЅimp_descr_end4",
-    "пїЅпїЅimp_descr_end5",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ_пїЅпїЅ1",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ_пїЅпїЅ1_пїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ_пїЅпїЅ2",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ_пїЅпїЅ2_пїЅпїЅпїЅпїЅ"
+    "Имя",
+    "цфНомерТП",
+    "цфШирина",
+    "цфВысота",
+    "тсimp_descr_start1",
+    "тсimp_descr_start2",
+    "тсimp_descr_start3",
+    "тсimp_descr_start4",
+    "тсimp_descr_start5",
+    "тсimp_descr_end1",
+    "тсimp_descr_end2",
+    "тсimp_descr_end3",
+    "тсimp_descr_end4",
+    "тсimp_descr_end5",
+    "цфАдрес_ЛК1",
+    "цфАдрес_ЛК1_Слот",
+    "цфАдрес_ЛК2",
+    "цфАдрес_ЛК2_Слот"
 };
 
 tG_OTCLABEL::tG_OTCLABEL()
@@ -1811,7 +1811,7 @@ void tG_OTCLABEL::Show()
     int y = Y * MUL_Y + _Y_;
     setcolor(C_D);
     int H_2 = Height / 2;
-    int HH1 = Height - 4; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    int HH1 = Height - 4; // размер квадрата категории
     TPoint T[4];
     T[0] = Point(x, y - H_2);
     T[1] = Point(T[0].x + Width, T[0].y);
@@ -1828,7 +1828,7 @@ void tG_OTCLABEL::Show()
     int clrB = clInfoBk;
 
 
-    //Stupen = Descr->st;  // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 06 08 2007
+    //Stupen = Descr->st;  // типа реальная ступень какаято 06 08 2007
 
 
     if (mar_f <= 0) {
@@ -1862,7 +1862,7 @@ void tG_OTCLABEL::Show()
 }
 
 t_Descr* FindDescr(tGRC0 * RCstart,
-                   int d,           // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+                   int d,           // направление
                    int se,          // start=0/end=1
                    bool onlyBusy,
                    bool end_slg_inc,
@@ -1873,7 +1873,7 @@ t_Descr* FindDescr(tGRC0 * RCstart,
     for (int i = 0; i < maxRC; i++){
         if (RC != NULL) {
             if ((onlyBusy) && (RC->fimpuls_busi!=1)) return NULL;
-            t_Descr* DD=GetDescr_imp1(RC->impuls_busi,       // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ / пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+            t_Descr* DD=GetDescr_imp1(RC->impuls_busi,       // Местоположение Головы / жопы отцепа
                                       se,          // start=0/end=1
                                       end_slg_inc
             );
@@ -1883,7 +1883,7 @@ t_Descr* FindDescr(tGRC0 * RCstart,
                 if (RC->pNext[d][1]!=NULL) m=1;
 
             RCN = dynamic_cast<tGRC0 *>(RC->pNext[d][m]);
-            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            // проверяем обратку
             if (RCN != NULL) {
                 int m1 = 0;
                 if (RCN->fimpuls_mnus == 1) m1 = 1;
@@ -1919,30 +1919,30 @@ void tG_OTCLABEL::UpdateState()
     Stupen = 0;
     p_rzp=0;
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
+    // смотрим заняте ТП
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
-    t_Descr* _Descr= GetDescr_imp(imp_descr_start,       // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ / пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    // Смотрим голову
+    t_Descr* _Descr= GetDescr_imp(imp_descr_start,       // Местоположение Головы / жопы отцепа
                        5,
                        0,//  se,          // start=0/end=1
                        false//end_slg_inc
                       );
-    if (_Descr==NULL)  _Descr= GetDescr_imp(imp_descr_start,       // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ / пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    if (_Descr==NULL)  _Descr= GetDescr_imp(imp_descr_start,       // Местоположение Головы / жопы отцепа
                        5,
                        1,//  se,          // start=0/end=1
                        false//end_slg_inc
                       );
 
     /*if (mar_f == -1) {
-        if (!GetDescrData_imp(imp_descr_start,          // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ |    N пїЅпїЅ пїЅпїЅ пїЅ пїЅпїЅ     |
+        if (!GetDescrData_imp(imp_descr_start,          // Местоположение Головы отцепа |    N Эл РЦ в ТС     |
                               5, 0,       // start
                               NTP,
                               num, mar_f  , ves , len    , Stupen , V_Zad, fV_out,p_rzp)
            ) mar_f = -1;
     }
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    // Смотрим хвост
     if (mar_f == -1) {
-        if (!GetDescrData_imp(imp_descr_end,          // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ |    N пїЅпїЅ пїЅпїЅ пїЅ пїЅпїЅ     |
+        if (!GetDescrData_imp(imp_descr_end,          // Местоположение хвоста отцепа |    N Эл РЦ в ТС     |
                               5,  1,       // end
                               NTP,
                               num, mar_f  , ves , len    , Stupen , V_Zad, V_out,p_rzp)
@@ -1961,7 +1961,7 @@ void tG_OTCLABEL::UpdateState()
        num = Descr.num;
        ves = Descr.ves;
        len = Descr.len;
-       Stupen = Descr.st;  // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 06 08 2007
+       Stupen = Descr.st;  // типа реальная ступень какаято 06 08 2007
        p_rzp=Descr.p_rzp;
     }
 
@@ -1977,9 +1977,9 @@ void tG_OTCLABEL::GetPropMap(TPropMap &m)
     m.put(_G_OTCLABEL_PropName[ii++], Width);
     m.put(_G_OTCLABEL_PropName[ii++], Height);
     for (int i = 0; i < 5; i++)
-        m.putEx(_G_OTCLABEL_PropName[ii++], OldImpToNewStr(imp_descr_start[i], this), GetRealImp(imp_descr_start[i]));
+        m.putEx(_G_OTCLABEL_PropName[ii++], OldImpToNewStr(imp_descr_start[i], this), (void*)GetRealImp(imp_descr_start[i]));
     for (int i = 0; i < 5; i++)
-        m.putEx(_G_OTCLABEL_PropName[ii++], OldImpToNewStr(imp_descr_end[i], this), GetRealImp(imp_descr_end[i]));
+        m.putEx(_G_OTCLABEL_PropName[ii++], OldImpToNewStr(imp_descr_end[i], this), (void*)GetRealImp(imp_descr_end[i]));
 
     m.put(_G_OTCLABEL_PropName[ii++], addr1);
     m.put(_G_OTCLABEL_PropName[ii++], AddrLK1Slot);
@@ -2017,16 +2017,16 @@ void tG_OTCLABEL::SetPropMap(TPropMap &m)
 
 
 static String _G_TPLABEL_PropName[] = {
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅV",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅV",
-    "пїЅпїЅZKR",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅADAM",
-    "пїЅпїЅADK3",
-    "пїЅпїЅVпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅVпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
+    "цфВесБуквы",
+    "тсКраснЗаданV",
+    "тсКраснМигЗаданV",
+    "цфZKR",
+    "лгНетСкВых",
+    "стADAM",
+    "цфADK3",
+    "лгVнадвиг",
+    "цфПровVвых",
+    "цфРЦзан"
 
 };
 
@@ -2052,8 +2052,8 @@ void tG_TPLABEL::GetPropMap(TPropMap &m)
     int i = 0;
 
     m.put(_G_TPLABEL_PropName[i++], VesBukv,0);
-    m.putEx(_G_TPLABEL_PropName[i++], OldImpToNewStr(imp_krasn, this), GetRealImp(imp_krasn),0);
-    m.putEx(_G_TPLABEL_PropName[i++], OldImpToNewStr(imp_krasn_mig, this), GetRealImp(imp_krasn_mig),0);
+    m.putEx(_G_TPLABEL_PropName[i++], OldImpToNewStr(imp_krasn, this), (void*)GetRealImp(imp_krasn),0);
+    m.putEx(_G_TPLABEL_PropName[i++], OldImpToNewStr(imp_krasn_mig, this), (void*)GetRealImp(imp_krasn_mig),0);
     m.put(_G_TPLABEL_PropName[i++], ZKR_N,0);
     m.put(_G_TPLABEL_PropName[i++], NoShowVout,0);
     m.put(_G_TPLABEL_PropName[i++], ADAM,"");
@@ -2089,8 +2089,8 @@ void tG_TPLABEL::Show()
     int y = Y * MUL_Y + _Y_;
     setcolor(C_D);
     int H_2 = Height / 2;
-    int HH1 = Height - 4; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    int HH2 = (Width - HH1) / 2 - 8;//HH1;      // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    int HH1 = Height - 4; // размер квадрата категории
+    int HH2 = (Width - HH1) / 2 - 8;//HH1;      // размер квадрата зад скорости
     TPoint T[4];
     T[0] = Point(x, y - H_2);
     T[1] = Point(T[0].x + Width, T[0].y);
@@ -2123,13 +2123,13 @@ void tG_TPLABEL::Show()
     if (w < w2) w = w2;
 
 
-        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ...
+        //Показуха по команде руководителей бе...
         if (RC1 != 0 && RC2 == 0)  w = w1;
         if (RC2 != 0 && RC1 == 0)  w = w2;
         if (RC1 != 0 && RC2 != 0)  w1 < w2 ? w2 : w1;// max
         if (RC1 == 0 && RC2 == 0) w = 0.;
 
-     // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+     // когда махонькая выводит толко себя
     if (masy >= 100) w=w1;
 
 
@@ -2142,7 +2142,7 @@ void tG_TPLABEL::Show()
         clrP = FON;////clInfoBk;
         clrB = FON;
     }
-    // пїЅпїЅпїЅпїЅпїЅ
+    // выход
     int colV=C_D;
 
     if ((w == 0) && (V_out != 0) && (V_out!=65535)) {
@@ -2152,7 +2152,7 @@ void tG_TPLABEL::Show()
           if (provV!=0){
                 if (V_out-V_Zad>provV) colV=RED;
           }
-          // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+          // скорость выхода вместо фактической
           w = V_out / 10.;
        } else {
           clrP = FON;clrB = FON;dV_Zad=0;Stupen=0;
@@ -2160,7 +2160,7 @@ void tG_TPLABEL::Show()
     }
 
     String stV_Zad = "";
-    //if ((dV_Zad > 4.5) && (dV_Zad < 30)) пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ???
+    //if ((dV_Zad > 4.5) && (dV_Zad < 30)) нахрена оно вообще тут было???
     if (dV_Zad > 0)    stV_Zad.printf("%2.1f", dV_Zad);
 
     String SS;
@@ -2205,18 +2205,18 @@ void tG_TPLABEL::Show()
             String stVes;
             if (VesBukv == 0) {
                 switch (Stupen) {
-                case 1: pictn=132; stVes="пїЅ"; break;
-                case 2: pictn=133; stVes="пїЅпїЅ"; break;
-                case 3: pictn=134; stVes="пїЅ"; break;
-                case 4: pictn=135; stVes="пїЅ"; break;
+                case 1: pictn=132; stVes="Л"; break;
+                case 2: pictn=133; stVes="ЛС"; break;
+                case 3: pictn=134; stVes="С"; break;
+                case 4: pictn=135; stVes="Т"; break;
                 default:pictn=131; stVes="";
                 }
             } else {
                 switch (Stupen) {
-                case 1: pictn=136; stVes="пїЅ"; break;
-                case 2: pictn=137; stVes="пїЅпїЅ"; break;
-                case 3: pictn=138; stVes="пїЅ"; break;
-                case 4: pictn=139; stVes="пїЅ"; break;
+                case 1: pictn=136; stVes="Л"; break;
+                case 2: pictn=137; stVes="ЛС"; break;
+                case 3: pictn=138; stVes="С"; break;
+                case 4: pictn=139; stVes="Т"; break;
                 default:pictn=131; stVes="";
                 }
             }
@@ -2234,10 +2234,10 @@ void tG_TPLABEL::Show()
                int cZ[4] = {   C_D, C_D, C_D, C_D};
                PolyColor(0x00246BFF, TZ, cZ, 4);
                int fontcol=C_D;
-               if (p_rzp == 4) {   //  4 - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+               if (p_rzp == 4) {   //  4 - скорость не откорректирована
                 fontcol=C_D;
                } else
-               if (p_rzp <= 3) {   //  1,2,3 - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+               if (p_rzp <= 3) {   //  1,2,3 - скорость откорретирована
                 fontcol=COLOR_PSV;
                }
                setcolor(fontcol);
@@ -2353,8 +2353,8 @@ void tG_TPLABEL::UpdateState()
     Stupen = 0;
     p_rzp=0;
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // смотрим заняте ТП
+    // скорость забираем
     int fV1 = V1;
     int fV2 = V2;
     int RRC;
@@ -2393,7 +2393,7 @@ void tG_TPLABEL::UpdateState()
         mar_f = -1;
         t_Descr* _Descr=NULL;
 
-        // пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+        // по олыку
         _Descr=GetDescr_ARS(NTP,
                        AddrLK1Slot,
                        addr1
@@ -2404,75 +2404,75 @@ void tG_TPLABEL::UpdateState()
                       );
 
         if (_Descr!=NULL) {
-                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
+                // проверяем что не сдох
             if (_Descr->end_slg==1) _Descr=NULL;
         }
 
-        // пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+        // мы будем жить теперь по новому
         if (G_ZAMI!=NULL){
-           // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 5 пїЅпїЅ
+           // если свободно ищем сзади до 5 рц
 
            if (G_ZAMI->fimpuls_busi==0){
               int _maxRC=5;
               if (masy == 100) _maxRC=2;
 
               if (_Descr==NULL) _Descr=FindDescr(G_ZAMI,
-                   1,          // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+                   1,          // направление
                    0,          // start=0/end=1
                    false,      //onlyBusy,
                    false,      // end_slg_inc,
                    _maxRC      //maxRC
                    );
               if (_Descr==NULL) _Descr=FindDescr(G_ZAMI,
-                   1,          // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+                   1,          // направление
                    1,          // start=0/end=1
                    false,      //onlyBusy,
                    false,      // end_slg_inc,
                    5           //maxRC
                    );
-           } else // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+           } else // если занято ищем сзади далеко хвост
            if (_Descr==NULL) _Descr=FindDescr(G_ZAMI,
-                   1,          // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+                   1,          // направление
                    1,          // start=0/end=1
                    true,      //onlyBusy,
                    false,      // end_slg_inc,
                    15           //maxRC
                    );
-           // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+           // ищем ушедшее
            if (_Descr==NULL) _Descr=FindDescr(G_ZAMI,
-                   0,          // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+                   0,          // направление
                    1,          // start=0/end=1
                    false,      //onlyBusy,
                    false,      // end_slg_inc,
                    5           //maxRC
                    );
            if (_Descr==NULL) _Descr=FindDescr(G_ZAMI,
-                   0,          // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+                   0,          // направление
                    0,          // start=0/end=1
                    false,      //onlyBusy,
                    false,      // end_slg_inc,
                    5           //maxRC
                    );
-           // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+           // ищем ушедшее вконец
            if ((_Descr==NULL)&&(G_ZAMI->NTP==3)) _Descr=FindDescr(G_ZAMI,
-                   0,          // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+                   0,          // направление
                    1,          // start=0/end=1
                    false,      //onlyBusy,
                    true,      // end_slg_inc,
                    1           //maxRC
                    );
         } else {
-                if (_Descr==NULL) _Descr= GetDescr_imp(imp_descr_start,       // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ / пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+                if (_Descr==NULL) _Descr= GetDescr_imp(imp_descr_start,       // Местоположение Головы / жопы отцепа
                        5,
                        0,//  se,          // start=0/end=1
                        false//end_slg_inc
                       );
-                if (_Descr==NULL)  _Descr= GetDescr_imp(imp_descr_start,       // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ / пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+                if (_Descr==NULL)  _Descr= GetDescr_imp(imp_descr_start,       // Местоположение Головы / жопы отцепа
                        5,
                        1,//  se,          // start=0/end=1
                        false//end_slg_inc
                       );
-                if (_Descr==NULL)  _Descr= GetDescr_imp(imp_descr_end,       // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ / пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+                if (_Descr==NULL)  _Descr= GetDescr_imp(imp_descr_end,       // Местоположение Головы / жопы отцепа
                        5,
                        1,//  se,          // start=0/end=1
                        false//end_slg_inc
@@ -2491,7 +2491,7 @@ void tG_TPLABEL::UpdateState()
            num = Descr.num;
            ves = Descr.ves;
            len = Descr.len;
-           Stupen = Descr.st;  // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ 06 08 2007
+           Stupen = Descr.st;  // типа реальная ступень какаято 06 08 2007
            p_rzp=Descr.p_rzp;
         }
         //StateChanged = (fnum != num) || (fmar_f != mar_f) || (fves != ves) || (flen != len) || (fStupen != Stupen) || (fV_Zad != V_Zad)|| (fp_rzp != p_rzp);
@@ -2517,8 +2517,8 @@ void tG_TPLABEL::UpdateState()
                         double p=ADK3Cell->p[0];
                         if (ADK3=="p[1]")p=ADK3Cell->p[1];
                         if (p==0) FADK3_val="---"; else {
-                        p=((p+1)/256-0.04)/0.0012858; //пїЅпїЅпїЅ
-                        p=p*1000/101325; //пїЅпїЅпїЅ
+                        p=((p+1)/256-0.04)/0.0012858; //кПа
+                        p=p*1000/101325; //Атм
                         FADK3_val.printf("%1.3f",p);
                         }
                 }else
@@ -2526,7 +2526,7 @@ void tG_TPLABEL::UpdateState()
                         double t=ADK3Cell->t[0];
                         if (ADK3=="t[1]")t=ADK3Cell->t[1];
                         if (t==0) FADK3_val="---";  else {
-                        t=(t+177)*(500./512.)-273.16; // CпїЅпїЅ
+                        t=(t+177)*(500./512.)-273.16; // Cгр
                         FADK3_val.printf("%2.1f",t);
                         }
                 }else
@@ -2534,7 +2534,7 @@ void tG_TPLABEL::UpdateState()
                         double u=ADK3Cell->u[0];
                         if (ADK3=="u[1]")u=ADK3Cell->u[1];
                         if (u==0) FADK3_val="---"; else {
-                        u=(u/256.)*50.; // пїЅ
+                        u=(u/256.)*50.; // В
                         FADK3_val.printf("%4.1f",u);
                         }
                 } else
@@ -2600,16 +2600,16 @@ void tG_TPLABEL::SetParamsFromZam(tG_ZAMI * G_ZAMI)
 
 
 static String _G_KZP_PropName[] = {
-    "пїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅT",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅT",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅaddr",
-    "пїЅпїЅEmask"
+    "Имя",
+    "цфШирина",
+    "цфВысота",
+    "цфШиринаT",
+    "цфВысотаT",
+    "цфНаправление",
+    "цфМаксЗнач",
+    "цфВыводУВ",
+    "цфaddr",
+    "цфEmask"
 
 };
 
@@ -2631,10 +2631,10 @@ void tG_KZP::Show()
     setcolor(C_D);
     int H_2 = Height / 2;
     int H_2T = HeightT / 2;
-    int HH1 = HeightT - 4; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    int dxT = 4; // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
-    int xx; // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    int xx1;// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    int HH1 = HeightT - 4; // размер квадрата категории
+    int dxT = 4; // сдвиг до цифры
+    int xx; // ширина реального
+    int xx1;// ширина предидущего
 
     int W = Width - 1;
     if (MaxD == 0) MaxD = 1000;
@@ -2657,21 +2657,21 @@ void tG_KZP::Show()
     }
     TPoint Tpr = Point(x, y);
     TPoint Ttxt = Point(x + Width + dxT, y);
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // переворот
     if (Direct == 1) {
         Ttxt = Point(x, y);
         Tpr = Point(x + WidthT + dxT, y);
         xx = W - xx; xx1 = W - xx1;
     }
     if (W > 0) {
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        // Подложка
         TPoint T[4];
         T[0] = Point(Tpr.x, Tpr.y - H_2); T[1] = Point(T[0].x + Width, T[0].y);
         T[2] = Point(T[1].x, T[0].y + Height); T[3] = Point(T[0].x, T[2].y);
         int c1[4] = {   clrbPodl, clrbPodl, clrbPodl, clrbPodl};
         PolyColor(clrbPodl, T, c1, 4);
         Draw_Ramka(T[0].x, T[0].y, T[2].x + 1, T[2].y + 1, EDGE_BUMP);
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        // реальная величина
         if (xx >= 0) {
             if (Direct == 0) {
                 T[0] = Point(Tpr.x + xx, T[0].y); T[3] = Point(Tpr.x + xx, T[3].y);
@@ -2681,7 +2681,7 @@ void tG_KZP::Show()
             int c1[4] = {   clrbD, clrbD, clrbD, clrbD};
             PolyColor(clrbD, T, c1, 4);
         }
-        /* // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        /* // прошлая
         if (xx1>=0){
            if (Direct==0) {T[0]=Point(Tpr.x+xx1,T[0].y);T[3]=Point(Tpr.x+xx1,T[3].y);} else
                           {T[1]=Point(Tpr.x+xx1,T[1].y);T[2]=Point(Tpr.x+xx1,T[2].y);}
@@ -2730,10 +2730,10 @@ void tG_KZP::UpdateState()
     //if (Emask!=0) E=E & Emask;
     if (E==65535) E=1; else E=0;
     StateChanged = (_D != D) || (_E != E);
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 0
+    // запоминаем предыдущее
+    // сброс на 0
     if (E == 0) {
-        // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ 5 пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ 5
+        // если меньше 5 и предид больше 5
         if ((D < _D) && (D < 5) && (_D > 5)) {
             D1 = _D;
         }
@@ -2787,14 +2787,14 @@ void tG_KZP::SetPropMap(TPropMap &m)
 
 
 static String _G_OSY_PropName[] = {
-    "пїЅпїЅaddr",
-    "пїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+    "цфaddr",
+    "тсОси",
+    "цфТип",
+    "лгВыводОси",
+    "цфПараметр",
     "PacketName_21",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
+    "смСледующий",
+    "смПредидующий"
 };
 
 tG_OSY::tG_OSY()
@@ -2814,7 +2814,7 @@ void tG_OSY::GetPropMap(TPropMap &m)
     Element::GetPropMap(m);
     int ii = 0;
     m.put(_G_OSY_PropName[ii++], AddrLK);
-    m.putEx(_G_OSY_PropName[ii++], OldImpToNewStr(imp_osy, this), GetRealImp(imp_osy),       OldImpToNewStr(0, this));
+    m.putEx(_G_OSY_PropName[ii++], OldImpToNewStr(imp_osy, this), (void*)GetRealImp(imp_osy),       OldImpToNewStr(0, this));
     m.put(_G_OSY_PropName[ii++], tip);
     m.put(_G_OSY_PropName[ii++], bShowOs);
     m.put(_G_OSY_PropName[ii++], outParam);
@@ -2981,40 +2981,40 @@ void tG_OSY::UpdateState()
 //======================= KZP2 ============================
 
 static String _G_KZP2_PropName[] = {
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ_пїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅXпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅXпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅYпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅV",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅV",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅV",
-    "пїЅпїЅdXV",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅ_mas",
-    "пїЅпїЅпїЅпїЅ_masy",
-    "пїЅпїЅпїЅпїЅ_masx2",
-    "пїЅпїЅпїЅпїЅ_Prz0",
-    "пїЅпїЅпїЅпїЅ_Prz1",
-    "пїЅпїЅпїЅпїЅ_Prz2",
-    "пїЅпїЅпїЅпїЅ_impuls_busi",
-    "пїЅпїЅпїЅпїЅ_impuls_plus",
-    "пїЅпїЅпїЅпїЅ_impuls_minus",
-    "пїЅпїЅпїЅпїЅ_impuls_kzm",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅEmask",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
+    "цфМаршрут",
+    "цфАдрес_КЗП",
+    "цфШирина",
+    "цфВысота",
+    "цфСдвигXТнпути",
+    "цфВысотаТнпути",
+    "цфШиринаТсвоб",
+    "цфВысотаТсвоб",
+    "цфСдвигXТзан",
+    "цфСдвигYТзан",
+    "цфШиринаТзан",
+    "цфВысотаТзан",
+    "цфШиринаV",
+    "цфВысотаV",
+    "цфНаправление",
+    "цфМасштаб",
+    "цфВыводУВ",
+    "цфВыводV",
+    "цфdXV",
+    "цфСтарыйВвод",
+    "цфВыводЗанят",
+    "цфнп_mas",
+    "цфнп_masy",
+    "цфнп_masx2",
+    "цфнп_Prz0",
+    "цфнп_Prz1",
+    "цфнп_Prz2",
+    "тснп_impuls_busi",
+    "тснп_impuls_plus",
+    "тснп_impuls_minus",
+    "тснп_impuls_kzm",
+    "лгПодсвОтц",
+    "цфEmask",
+    "цфКолОтц"
 
 
 };
@@ -3022,12 +3022,12 @@ static String _G_KZP2_PropName[] = {
 tG_KZP2::tG_KZP2()
         : tG_RC()
 {
-    szAll.cx = 120; szAll.cy = 14;// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    szAll.cx = 120; szAll.cy = 14;// размер всего без текста свободности и текста занятости
     xxNP = szAll.cx + 5;
-    szNSV.cx = 24;  szNSV.cy = 14;// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    szNP.cx = 32;   szNP.cy = 24;// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    szV.cx = 32;    szV.cy = 24;// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    szNZ.cx = 32;   szNZ.cy = 20;// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    szNSV.cx = 24;  szNSV.cy = 14;// размер текста свободности
+    szNP.cx = 32;   szNP.cy = 24;// размер текста текста свободности
+    szV.cx = 32;    szV.cy = 24;// размер ячейки скорости
+    szNZ.cx = 32;   szNZ.cy = 20;// размер текста текста занятости
     xxNZ = xxNP + szNP.cx + 5;
     memset(&KvKzp, 0, sizeof(KvKzp));
     memset(&KzpInf, 0, sizeof(KzpInf));
@@ -3080,10 +3080,10 @@ void tG_KZP2::GetPropMap(TPropMap &m)
     m.put(_G_KZP2_PropName[ii++], Lmp.Prz[1]);
     m.put(_G_KZP2_PropName[ii++], Lmp.Prz[2]);
 
-    m.putEx(_G_KZP2_PropName[ii++], OldImpToNewStr(Lmp.impuls_busi, this), GetRealImp(Lmp.impuls_busi),       OldImpToNewStr(0, this));
-    m.putEx(_G_KZP2_PropName[ii++], OldImpToNewStr(Lmp.impuls_plus, this), GetRealImp(Lmp.impuls_plus),       OldImpToNewStr(0, this));
-    m.putEx(_G_KZP2_PropName[ii++], OldImpToNewStr(Lmp.impuls_mnus, this), GetRealImp(Lmp.impuls_mnus),       OldImpToNewStr(0, this));
-    m.putEx(_G_KZP2_PropName[ii++], OldImpToNewStr(Lmp.impuls_kzm, this), GetRealImp(Lmp.impuls_kzm),      OldImpToNewStr(0, this));
+    m.putEx(_G_KZP2_PropName[ii++], OldImpToNewStr(Lmp.impuls_busi, this), (void*)GetRealImp(Lmp.impuls_busi),       OldImpToNewStr(0, this));
+    m.putEx(_G_KZP2_PropName[ii++], OldImpToNewStr(Lmp.impuls_plus, this), (void*)GetRealImp(Lmp.impuls_plus),       OldImpToNewStr(0, this));
+    m.putEx(_G_KZP2_PropName[ii++], OldImpToNewStr(Lmp.impuls_mnus, this), (void*)GetRealImp(Lmp.impuls_mnus),       OldImpToNewStr(0, this));
+    m.putEx(_G_KZP2_PropName[ii++], OldImpToNewStr(Lmp.impuls_kzm, this), (void*)GetRealImp(Lmp.impuls_kzm),      OldImpToNewStr(0, this));
 
     m.put(_G_KZP2_PropName[ii++], bOtcMig);
     m.put(_G_KZP2_PropName[ii++], Emask);
@@ -3181,8 +3181,8 @@ void tG_KZP2::UpdateState()
 
 
 }
-const _dd = 2;// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
-const _ddNP = 8;// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ NP
+const _dd = 2;// отступ от края
+const _ddNP = 8;// отступ от края для NP
 
 uint16 delta_time(uint32 t2, uint32 t1)
 {
@@ -3195,8 +3195,8 @@ double GetVkzp(t_KzpInf *KzpInf, int dxV)
 {
     int dl, dl1, val1;
     uint32 dtim, dtim1,  tim1;
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ tim  пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
-    // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ 0.1 пїЅ/пїЅ
+    // считаем что tim  абс точно
+    // нужная точность не меньше 0.1 м/с
     if ((KzpInf->points_count < 2) ||(KzpInf->points_count > 16)) return KzpInf->v;
     int i = KzpInf->points_count - 1;
     dl = 0; dtim = 0;
@@ -3206,7 +3206,7 @@ double GetVkzp(t_KzpInf *KzpInf, int dxV)
         dl=dl+dl1;
         dtim=dtim+dtim1;
         if (dl==-1) dl=0;
-        dtim0=1000*10/(dl+1); // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ mпїЅ.
+        dtim0=1000*10/(dl+1); // мин время для нужной точности в mс.
         i--;
     } while ((i>=1) &&(dl<10) && (dtim<dtim0));   */
     tim1 = KzpInf->points[i].tim; val1 = KzpInf->points[i].val;
@@ -3223,7 +3223,7 @@ double GetVkzp(t_KzpInf *KzpInf, int dxV)
         i--;
     } while ((i >= 1) && (dl < 10));
 
-    //  пїЅ пїЅпїЅпїЅпїЅпїЅ
+    //  в тупую
     dl = 0;
     for (int i = 1; i < KzpInf->points_count; i++)
         dl = dl + KzpInf->points[i].val - KzpInf->points[i-1].val;
@@ -3260,10 +3260,10 @@ void tG_KZP2::Show()
     setcolor(C_D);
     int H_2 = szAll.cy / 2;
     int D, UD, V, Z, ZV, ZV1, ZZ;
-    clr_podl = clSilver;  // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    clr_Z = COLOR_B;//210;  // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    clr_S = COLOR_F_P;  // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    clr_US = 77;  // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    clr_podl = clSilver;  // цвет подложки
+    clr_Z = COLOR_B;//210;  // цвет занятости
+    clr_S = COLOR_F_P;  // цвет свободности
+    clr_US = 77;  // цвет усл свободности
 
     String stS = "--";
     String stZ = "";
@@ -3331,7 +3331,7 @@ void tG_KZP2::Show()
     T[3] = TPoint(x         , y + H_2);
 
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // свободглсть
     int svob_tj=LEFT_TEXT;
     TS[0] = TPoint(T[0].x + _dd,         T[0].y + _dd);
     TS[1] = TPoint(T[0].x + _dd + xx,      T[0].y + _dd);
@@ -3350,13 +3350,13 @@ void tG_KZP2::Show()
     TZ[3] = TS[2];
 
 
-    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+    // Номер Пути
     TNP[0] = TPoint(x + xxNP        , y - szNP.cy / 2);
     TNP[1] = TPoint(x + xxNP + szNP.cy * 2, y - szNP.cy / 2);
     TNP[2] = TPoint(x + xxNP + szNP.cy * 2, y + szNP.cy / 2);
     TNP[3] = TPoint(x + xxNP        , y + szNP.cy / 2);
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // занятость
     if (D < Len) {
 
         TNZ[0] = TPoint(x + xxNZ                ,     y + yyNZ - szNZ.cy / 2);
@@ -3365,15 +3365,15 @@ void tG_KZP2::Show()
         TNZ[3] = TPoint(x + xxNZ                ,     y + yyNZ + szNZ.cy / 2);
     }
 
-    // пїЅпїЅпїЅ  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // усл  занятость
     if (UD > D) {
         int xx_do = 1.*kx * UD;
-        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        // Пршлая занятость
         TUS[0] = TPoint(TZ[0].x            , TZ[0].y);
         TUS[1] = TPoint(TS[0].x + xx_do      , TZ[0].y);
         TUS[2] = TPoint(TS[0].x + xx_do      , TZ[3].y);
         TUS[3] = TPoint(TZ[3].x            , TZ[3].y);
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        // занятость вагонами
         if (ZV1 > 0) {
             if (D + ZV1 < UD) {
                 int xx_do_dirki = 1.*kx * (D + ZV1);
@@ -3382,7 +3382,7 @@ void tG_KZP2::Show()
             }
         }
     }
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // скорость
     if (outV != 0) {
         memset(_TV, 0, sizeof(TV));
         if (V > 0) {
@@ -3393,7 +3393,7 @@ void tG_KZP2::Show()
         }
     }
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // переворот
     int fmx=1;
     if (Direct==1){
        fmx=-1;
@@ -3408,12 +3408,12 @@ void tG_KZP2::Show()
        svob_tj=RIGHT_TEXT;
     }
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // Подложка
     int c1[4] = {   C_D, C_D, C_D, C_D};
     if (WA>0)
        PolyColor(clr_podl, T, c1, 4);
 
-    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+    // Номер Пути
     if (szNP.cy>0){
        setcolor(GELT);
        if (bOtcMig){
@@ -3436,7 +3436,7 @@ void tG_KZP2::Show()
        Lmp.Show();
        if (bOtcMig){
            unsigned int font = Lmp.Prz[1] ? Lmp.Prz[1] : 10u;
-                unsigned int font_size = Lmp.Prz[0] ? (uint8)(Lmp.Prz[0]) : 10u;
+                unsigned int font_size = Lmp.Prz[0] ? (BYTE)(Lmp.Prz[0]) : 10u;
                 _SetText(font, CENTER_TEXT , CENTER_TEXT);
                 _SetTextSize(font_size);
                 int tw = textwidth(Lmp.name)+4;
@@ -3457,13 +3457,13 @@ void tG_KZP2::Show()
 
     }
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // занятость
 
     if ((WA>0)&&(D < Len)) {
         int cZ[4] = {   clr_Z, clr_Z, clr_Z, clr_Z};
         PolyColor(clr_Z, TZ, cZ, 4);
         if (outZZ!=0){
-           int cF[4] = {FON, FON, FON, FON};
+           int cF[4] = {   FON, FON, FON, FON};
            PolyColor(FON, TNZ, cF, 4);
            if ((outZZ!=0)&&(ZZ != 0)) {
               setcolor(C_D);
@@ -3473,20 +3473,20 @@ void tG_KZP2::Show()
            }
         }
     }
-    // пїЅпїЅпїЅ  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // усл  занятость
     if ((WA>0)&&(UD > D)) {
         //int xx_do = 1.*kx * UD;
-        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        // Пршлая занятость
         int cUS[4] = {   clr_US, clr_US, clr_US, clr_US};
         PolyColor(clr_US, TUS, cUS, 4);
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        // занятость вагонами
         if (ZV1 > 0) {
             int cZ[4] = {   clr_Z, clr_Z, clr_Z, clr_Z};
             PolyColor(clr_Z, TUS, cZ, 4);
         }
     }
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // свободглсть
     if ((WA>0)&&(D > 0)) {
         int cS[4] = {   clr_S, clr_S, clr_S, clr_S};
         PolyColor(clr_S, TS, cS, 4);
@@ -3503,9 +3503,9 @@ void tG_KZP2::Show()
 
     }
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // скорость
     if ((WA>0)&&(outV != 0)) {
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        // стираем
         if ((_TV[0].x != 0)) {
             int cF[4] = {   FON, FON, FON, FON};
             PolyColor(FON, _TV, cF, 4);
@@ -3547,11 +3547,11 @@ int tG_KZP2::getospolyline(TPoint * PK,int Psz)
 
 
 static String _tG_RC_2_PropName[] = {
-    "пїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅ1",
-    "пїЅпїЅпїЅпїЅпїЅ2",
-    "пїЅпїЅпїЅпїЅпїЅ1пїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅ2пїЅпїЅпїЅпїЅ"
+    "тсОси",
+    "тсДСО1",
+    "тсДСО2",
+    "тсДСО1счет",
+    "тсДСО2счет"
 };
 
 tG_RC_2::tG_RC_2()
@@ -3567,11 +3567,11 @@ void tG_RC_2::GetPropMap(TPropMap &m)
 {
     tG_RC::GetPropMap(m);
     int ii = 0;
-    m.putEx(_tG_RC_2_PropName[ii++], OldImpToNewStr(imp_osy_cnt   , this), GetRealImp(imp_osy_cnt   ),       OldImpToNewStr(0, this));
-    m.putEx(_tG_RC_2_PropName[ii++], OldImpToNewStr(imp_dso[0], this), GetRealImp(imp_dso[0]),       OldImpToNewStr(0, this));
-    m.putEx(_tG_RC_2_PropName[ii++], OldImpToNewStr(imp_dso[1], this), GetRealImp(imp_dso[1]),       OldImpToNewStr(0, this));
-    m.putEx(_tG_RC_2_PropName[ii++], OldImpToNewStr(imp_dso_cnt[0], this), GetRealImp(imp_dso_cnt[0]),       OldImpToNewStr(0, this));
-    m.putEx(_tG_RC_2_PropName[ii++], OldImpToNewStr(imp_dso_cnt[1], this), GetRealImp(imp_dso_cnt[1]),       OldImpToNewStr(0, this));
+    m.putEx(_tG_RC_2_PropName[ii++], OldImpToNewStr(imp_osy_cnt   , this), (void*)GetRealImp(imp_osy_cnt   ),       OldImpToNewStr(0, this));
+    m.putEx(_tG_RC_2_PropName[ii++], OldImpToNewStr(imp_dso[0], this), (void*)GetRealImp(imp_dso[0]),       OldImpToNewStr(0, this));
+    m.putEx(_tG_RC_2_PropName[ii++], OldImpToNewStr(imp_dso[1], this), (void*)GetRealImp(imp_dso[1]),       OldImpToNewStr(0, this));
+    m.putEx(_tG_RC_2_PropName[ii++], OldImpToNewStr(imp_dso_cnt[0], this), (void*)GetRealImp(imp_dso_cnt[0]),       OldImpToNewStr(0, this));
+    m.putEx(_tG_RC_2_PropName[ii++], OldImpToNewStr(imp_dso_cnt[1], this), (void*)GetRealImp(imp_dso_cnt[1]),       OldImpToNewStr(0, this));
 
 }
 void tG_RC_2::SetPropMap(TPropMap &m)

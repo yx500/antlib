@@ -1,4 +1,4 @@
 del *.obj
-del bgi\*.obj
-del comp\*.obj
-del ext\*.obj
+del Bgi\*.obj
+del Comp\*.obj
+del Ext\*.obj

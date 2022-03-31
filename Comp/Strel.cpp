@@ -3,12 +3,12 @@
 #include "APch.h"
 
 
-#include "Strel.h"
+#include "strel.h"
 #include "str_fun.h"
-#include "Gorl.h"
-#include "Scrin.h"
-#include "Elem.h"
-#include "F.h"
+#include "gorl.h"
+#include "scrin.h"
+#include "elem.h"
+#include "f.h"
 #include "Impuls.h"
 #include "Vatempl.h"
 
@@ -241,29 +241,29 @@ void Strel::GetPropMap(TPropMap &m)
     m.put(_StrelPropName[_n++], N);
 
         //m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_IR, this), (void*)GetRealImp(impuls_IR),       OldImpToNewStr(0, this));
-        m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_PKS, this),GetRealImp(impuls_PKS),     OldImpToNewStr(0, this));
-        m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_ZS, this), GetRealImp(impuls_ZS),        OldImpToNewStr(0, this));
-        m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_ZS2, this), GetRealImp(impuls_ZS2),    OldImpToNewStr(0, this));
-        m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_kmu2, this), GetRealImp(impuls_kmu2),  OldImpToNewStr(0, this));
-        m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_mu2, this), GetRealImp(impuls_mu2),   OldImpToNewStr(0, this));
+        m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_PKS, this), (void*)GetRealImp(impuls_PKS),     OldImpToNewStr(0, this));
+        m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_ZS, this), (void*)GetRealImp(impuls_ZS),        OldImpToNewStr(0, this));
+        m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_ZS2, this), (void*)GetRealImp(impuls_ZS2),    OldImpToNewStr(0, this));
+        m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_kmu2, this), (void*)GetRealImp(impuls_kmu2),  OldImpToNewStr(0, this));
+        m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_mu2, this), (void*)GetRealImp(impuls_mu2),   OldImpToNewStr(0, this));
 
 
 
     m.put(_StrelPropName[_n++], bText,                           0);
     m.put(_StrelPropName[_n++], InvertStrel,                     0);
     m.put(_StrelPropName[_n++], bShowPol,                        0);
-    m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_otc, this), GetRealImp(impuls_otc), OldImpToNewStr(0, this));
-    m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_SPU, this), GetRealImp(impuls_SPU), OldImpToNewStr(0, this));
-    m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_AV, this), GetRealImp(impuls_AV),  OldImpToNewStr(0, this));
+    m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_otc, this), (void*)GetRealImp(impuls_otc), OldImpToNewStr(0, this));
+    m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_SPU, this), (void*)GetRealImp(impuls_SPU), OldImpToNewStr(0, this));
+    m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_AV, this), (void*)GetRealImp(impuls_AV),  OldImpToNewStr(0, this));
 
-    m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_block, this), GetRealImp(impuls_block),  OldImpToNewStr(0, this));
-    m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_predSA, this), GetRealImp(impuls_predSA),  OldImpToNewStr(0, this));
-    m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_predSAplus, this), GetRealImp(impuls_predSAplus),  OldImpToNewStr(0, this));
-    m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_predSAminus, this), GetRealImp(impuls_predSAminus),  OldImpToNewStr(0, this));
-    //m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_predSEIR, this), GetRealImp(impuls_predSEIR),  OldImpToNewStr(0, this));
+    m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_block, this), (void*)GetRealImp(impuls_block),  OldImpToNewStr(0, this));
+    m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_predSA, this), (void*)GetRealImp(impuls_predSA),  OldImpToNewStr(0, this));
+    m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_predSAplus, this), (void*)GetRealImp(impuls_predSAplus),  OldImpToNewStr(0, this));
+    m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_predSAminus, this), (void*)GetRealImp(impuls_predSAminus),  OldImpToNewStr(0, this));
+    //m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_predSEIR, this), (void*)GetRealImp(impuls_predSEIR),  OldImpToNewStr(0, this));
 
-    m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_otkl_plus, this), GetRealImp(impuls_otkl_plus),  OldImpToNewStr(0, this));
-    m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_otkl_minus, this), GetRealImp(impuls_otkl_minus),  OldImpToNewStr(0, this));
+    m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_otkl_plus, this), (void*)GetRealImp(impuls_otkl_plus),  OldImpToNewStr(0, this));
+    m.putEx(_StrelPropName[_n++], OldImpToNewStr(impuls_otkl_minus, this), (void*)GetRealImp(impuls_otkl_minus),  OldImpToNewStr(0, this));
 
 }
 
@@ -1504,7 +1504,7 @@ void Napr::SetPropMap(TPropMap &m)
 void Napr::GetPropMap(TPropMap &m)
 {
     Strel::GetPropMap(m);
-    m.putEx("òñimpuls_svob2", OldImpToNewStr(impuls_svob2, this), GetRealImp(impuls_svob2),       OldImpToNewStr(0, this));
+    m.putEx("òñimpuls_svob2", OldImpToNewStr(impuls_svob2, this), (void*)GetRealImp(impuls_svob2),       OldImpToNewStr(0, this));
 }
 void Napr::UpdateState()
 {

@@ -1,3 +1,5 @@
+//---------------------------------------------------------------------------
+
 #include "aheaders_cpp.h"
 
 #include "common.h"
@@ -155,10 +157,10 @@ int  AComp::f(int impls)
     if (imp < 1000) return 0;
     if (imp / 1000 >= 255) return 33;
 
-    if (_f2_) {  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    if (_f2_) {  // ôóíêöèÿ ïî íàçâàíèþ êàíàëà è íîìåðó èìïóëüñà
         Station* STAN = Stan();
         r = _f2_(imp, STAN->ChanelNames[imp/1000]);
-    } else {      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    } else {      // ñòàðûé âàðèàíò
         Station* STAN = Stan();
         if ((STAN != NULL)) {
             if (STAN->ChanelOffset[imp/1000] > 0)
@@ -309,31 +311,31 @@ void AComp::Get()
 
 
 static char _ACompPropName[25][20] = {
-    "ï¿½ï¿½ID"   ,          // 0
-    "ï¿½ï¿½type" ,          // 1
-    "ï¿½ï¿½X_"   ,          // 2
-    "ï¿½ï¿½Y_"   ,          // 3
-    "ï¿½ï¿½mas"  ,          // 4
-    "ï¿½ï¿½masy" ,          // 5
-    "ï¿½ï¿½masx2",          // 6
-    "ï¿½ï¿½impuls_busi",    // 7
-    "ï¿½ï¿½NoShowYch",      // 8
-    "ï¿½ï¿½NoShowStan",     // 9
-    "ï¿½ï¿½MEM2",           // 10
-    "ï¿½ï¿½UseInRevizor",   // 11
-    "ï¿½ï¿½UseInCommLmp",   // 12
-    "ï¿½ï¿½iMacro",         // 13
-    "ï¿½ï¿½NoShowYchAct",   // 14
-    "ï¿½ï¿½NoShowExtInfo",  // 15
-    "ï¿½ï¿½Pad1xy",         // 16
-    "ï¿½ï¿½Pad1cmd",        // 17
-    "ï¿½ï¿½Pad1param",      // 18
-    "ï¿½ï¿½Pad2xy",         // 19
-    "ï¿½ï¿½Pad2cmd",        // 20
-    "ï¿½ï¿½Pad2param",      // 21
-    "ï¿½ï¿½Pad3xy",         // 22
-    "ï¿½ï¿½Pad3cmd",        // 23
-    "ï¿½ï¿½Pad3param"       // 24
+    "öôID"   ,          // 0
+    "öôtype" ,          // 1
+    "öôX_"   ,          // 2
+    "öôY_"   ,          // 3
+    "öômas"  ,          // 4
+    "öômasy" ,          // 5
+    "öômasx2",          // 6
+    "òñimpuls_busi",    // 7
+    "ëãNoShowYch",      // 8
+    "ëãNoShowStan",     // 9
+    "ëãMEM2",           // 10
+    "ëãUseInRevizor",   // 11
+    "ëãUseInCommLmp",   // 12
+    "öôiMacro",         // 13
+    "ëãNoShowYchAct",   // 14
+    "ëãNoShowExtInfo",  // 15
+    "ñìPad1xy",         // 16
+    "ñìPad1cmd",        // 17
+    "ñìPad1param",      // 18
+    "ñìPad2xy",         // 19
+    "ñìPad2cmd",        // 20
+    "ñìPad2param",      // 21
+    "ñìPad3xy",         // 22
+    "ñìPad3cmd",        // 23
+    "ñìPad3param"       // 24
 
 };
 void AComp::GetPropMap(TPropMap &m)
@@ -346,7 +348,7 @@ void AComp::GetPropMap(TPropMap &m)
     m.put(_ACompPropName[4], mas,       0);
     m.put(_ACompPropName[5], masy,      0);
     m.put(_ACompPropName[6], masx2,     0);
-    m.putEx(_ACompPropName[7], OldImpToNewStr(impuls_busi, this), GetRealImp(impuls_busi), OldImpToNewStr(0, this));
+    m.putEx(_ACompPropName[7], OldImpToNewStr(impuls_busi, this), (void*)GetRealImp(impuls_busi), OldImpToNewStr(0, this));
     m.put(_ACompPropName[8], ExtPriz.NoShowYch,       0);
     m.put(_ACompPropName[9], ExtPriz.NoShowStan,      0);
     m.put(_ACompPropName[10], ExtPriz.MEM2,           0);
@@ -363,14 +365,14 @@ void AComp::GetPropMap(TPropMap &m)
            stxy=IntToStr(Pad[i].xy[0]);
            for (int j=1;j<8;j++) stxy=stxy+";"+IntToStr(Pad[i].xy[j]);
         }
-        m.put(String("ï¿½ï¿½Pad")+IntToStr(i+1)+String("xy"),    stxy , String(""));
-        m.put("ï¿½ï¿½Pad"+IntToStr(i+1)+"cmd",   Pad[i].cmd,    "" );
-        m.put("ï¿½ï¿½Pad"+IntToStr(i+1)+"param", Pad[i].param,  "" );
+        m.put("ñìPad"+IntToStr(i+1)+"xy",    stxy , "");
+        m.put("ñìPad"+IntToStr(i+1)+"cmd",   Pad[i].cmd,    "" );
+        m.put("ñìPad"+IntToStr(i+1)+"param", Pad[i].param,  "" );
     }
 
     if (pmRepl != NULL) {
-        for (int i = 0; i < pmRepl->GetItemsCount(); i++) {
-            m.put(pmRepl->GetKeys(i), pmRepl->GetVal(i));
+        for (int i = 0; i < pmRepl->ItemsCount; i++) {
+            m.put(pmRepl->Keys[i], pmRepl->Val[i]);
         }
     }
 
@@ -397,23 +399,23 @@ void AComp::SetPropMap(TPropMap &m)
     ExtPriz.NoShowExtInfo = m.geti(_ACompPropName[15]);
 
     for (int i=0;i<3;i++){
-        String stxy=m.get("ï¿½ï¿½Pad"+IntToStr(i+1)+"xy");
+        String stxy=m.get("ñìPad"+IntToStr(i+1)+"xy");
         if (stxy!=""){
                 TParString ps("",";");
                 ps.SetVal(stxy);
                 for (int j=0;j<8;j++) Pad[i].xy[j]=ps.GetInt(j,0);
         }
-        strncpy(Pad[i].cmd,  m.get("ï¿½ï¿½Pad"+IntToStr(i+1)+"cmd").c_str(),sizeof(Pad[i].cmd));
-        strncpy(Pad[i].param,m.get("ï¿½ï¿½Pad"+IntToStr(i+1)+"param").c_str(),sizeof(Pad[i].param));
+        strncpy(Pad[i].cmd,  m.get("ñìPad"+IntToStr(i+1)+"cmd").c_str(),sizeof(Pad[i].cmd));
+        strncpy(Pad[i].param,m.get("ñìPad"+IntToStr(i+1)+"param").c_str(),sizeof(Pad[i].param));
     }
 
 
 
-    for (int i = 0; i < m.GetItemsCount(); i++) {
-        String stKeys = m.GetKeys(i);
-        if ((stKeys.Length() >= 1) && (m.GetKeys(i)[1] == '$')) {
+    for (int i = 0; i < m.ItemsCount; i++) {
+        String stKeys = m.Keys[i];
+        if ((stKeys.Length() >= 1) && (m.Keys[i][1] == '$')) {
             if (pmRepl == NULL) pmRepl = new TPropMap();
-            pmRepl->put(m.GetKeys(i), m.GetVal(i));
+            pmRepl->put(m.Keys[i], m.Val[i]);
         }
     }
 }
@@ -421,13 +423,21 @@ void AComp::SetPropMap(TPropMap &m)
 
 
 
-const char * AComp::GetImpulsName(char * PropName)
+char * AComp::GetImpulsName(char * PropName)
 {
     static String _S;
+    static TAImpuls _IMP;
     if (_GetSigName_Func == NULL) return "";
+    void *pimp;
     int imp;
-    _S = GetPropEx(PropName, imp);
+    _S = GetPropEx(PropName, &pimp);
+    imp = (int)pimp;
     if (_S == "") return "";
+    /*if (imp==0){
+       _IMP.Parent=this;
+       _IMP.FromString(_S);
+       imp=_IMP.AbsNumber;
+    } */
     _S = _GetSigName_Func(imp);
     return _S.c_str();
 }
@@ -465,8 +475,8 @@ int  AComp::GetImpulsInfo(int aimp, const char* &CnlName, int &RealOffset)
 {
     Station* STAN = this->Stan();
     if (STAN != NULL) {
-        int  ch = abs(aimp / 1000); //ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-        int  im = aimp % 1000; //ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+        int  ch = abs(aimp / 1000); //íîìåð êàíàëà
+        int  im = aimp % 1000; //íîìåð èìï
         if (STAN->ChanelNames[ch][0] != 0) {
             CnlName = STAN->ChanelNames[ch];
             RealOffset = STAN->ChanelOffset[ch] + im;

@@ -4,13 +4,13 @@
 #include "aheaders_cpp.h"
 
 #include "APch.h"
-#include "Scrin.h"
+#include "scrin.h"
 #include "EnergUnit.h"
-#include "Stan.h"
+#include "stan.h"
 #include "Comp.h"
-#include "Elem.h"
+#include "elem.h"
 #include "Lamps.h"
-#include "Polig.h"
+#include "polig.h"
 #include "uImgContainer.h"
 #include "Impuls.h"
 #include "LampExtDraw.h"
@@ -20,7 +20,7 @@
 
 
 
-TEnergLampData * __fastcall GetEnergLampData(TEnergStanLamps * EnergStanLamps, uint16 ObjID)
+TEnergLampData * __fastcall GetEnergLampData(TEnergStanLamps * EnergStanLamps, unsigned __int16 ObjID)
 {
     for (int i = 0; i < _MaxLampsInPacket; i++) {
         if (EnergStanLamps->Lamps[i].ObjID == 0) break;
@@ -30,7 +30,7 @@ TEnergLampData * __fastcall GetEnergLampData(TEnergStanLamps * EnergStanLamps, u
     return NULL;
 }
 
-int __fastcall SetEnergLampData(TEnergStanLamps * EnergStanLamps, uint16 ObjID, TEnergLampData * EnergLampData)
+int __fastcall SetEnergLampData(TEnergStanLamps * EnergStanLamps, unsigned __int16 ObjID, TEnergLampData * EnergLampData)
 {
     int res;
     int exi = -1;
@@ -66,43 +66,43 @@ void __fastcall LoadTEnergStanLamps(char * fn, TEnergStanLamps * EnergStanLamps)
 }
 void __fastcall LampsLSFromNet(Station *Stan)
 {
-    /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ  */
+    /* Подключение буфера энергов  */
     if (GetDatagramData_Func == NULL) return;
     TEnergStanLamps * ESL = (TEnergStanLamps *)GetDatagramData_Func(8, Stan->Dat->filename);
 
     if (ESL != NULL) {
         memset(Stan->EnergStanLamps, 0, sizeof(TEnergStanLamps));
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+        // копируем буфер
         memcpy(Stan->EnergStanLamps, ESL, sizeof(TEnergStanLamps));
     } else {
         
 
     }
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
+    // нулевые не берём
 // if (ESL->T.Val==0) return;
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // сравниваем по времени
     //if ((Stan->EnergStanLamps->T.Val==0)||
     //    (Stan->EnergStanLamps->T<ESL->T)) {
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    // расставляем фишки
 
     TE_OBJ * eo;
     TEnergLampData * ELD;
     for (int j = 0; j < Stan->POLE[WAYS]->GetArraySize(); j++) {
         eo = dynamic_cast<TE_OBJ *>(Stan->POLE[WAYS]->GetObjPtr(j));
         if (eo == NULL) continue;
-        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        // хорошо бы значок какой-нибудь по умолчанию
         if (ESL == NULL) {
-            // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            // нет канала ничего и не трогаем
             //memcpy(&eo->KeySost_current, &eo->KeySost_default, sizeof(TE_KeySost));
             continue;
         }
-        // пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+        // ищем в буфере
         ELD = GetEnergLampData(Stan->EnergStanLamps, eo->GetID());
         if (ELD == NULL) {
-            // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅ
+            // хорошо бы значок какой-нибудь
             memcpy(&eo->KeySost_current, &eo->KeySost_default, sizeof(TE_KeySost));
             continue;
         }
@@ -117,7 +117,7 @@ void __fastcall LampsLSFromNet(Station *Stan)
 
 void __fastcall SaveLampsLS(Station *Stan)
 {
-    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    //заполняем буфер
     int cnt = 0;
     TE_OBJ * eo;
     memset(Stan->EnergStanLamps, 0, sizeof(Stan->EnergStanLamps));
@@ -131,7 +131,7 @@ void __fastcall SaveLampsLS(Station *Stan)
         //memset(&Stan->EnergStanLamps->Lamps[cnt].Reserv,0,sizeof(Stan->EnergStanLamps->Lamps[cnt].Reserv));
         cnt++;
         if (cnt == _MaxLampsInPacket) {
-            ShowMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ " + String(Stan->Dat->filename));
+            ShowMessage("Переполнение буфера энергетиков по станции " + String(Stan->Dat->filename));
             cnt = _MaxLampsInPacket - 1;
         }
     }
@@ -144,7 +144,7 @@ void __fastcall SaveLampsLS(Station *Stan)
 
 void __fastcall LoadLampsLS(Station *Stan)
 {
-    //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    //заполняем буфер
     //int cnt=0;
     TE_OBJ * eo;
     memset(Stan->EnergStanLamps, 0, sizeof(TEnergStanLamps));
@@ -211,26 +211,26 @@ TE_OBJ::TE_OBJ()
 
 
 static String _E_OBJPropName[] = {
-    "пїЅпїЅtype_obj" ,
-    "пїЅпїЅtype_tu" ,
-    "пїЅпїЅFullName" ,
+    "цфtype_obj" ,
+    "цфtype_tu" ,
+    "смFullName" ,
     "FParentName" ,
-    "пїЅпїЅkey_onoff" ,
-    "пїЅпїЅpodlojka"  ,
-    "пїЅпїЅzemlya" ,
-    "пїЅпїЅplakat",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"  ,
-    "пїЅпїЅTypKp"           ,
-    "пїЅпїЅNKp"             ,
-    "пїЅпїЅNGr"             ,
-    "пїЅпїЅNOb"             ,
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ"     ,
-    "пїЅпїЅпїЅпїЅ"    ,
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
-    "пїЅпїЅTI_1",
-    "пїЅпїЅTI_2",
-    "пїЅпїЅTI_3"
+    "цфkey_onoff" ,
+    "цфpodlojka"  ,
+    "цфzemlya" ,
+    "цфplakat",
+    "цфТипВклОКЦ",
+    "цфКолвоСигнВывод"  ,
+    "цфTypKp"           ,
+    "цфNKp"             ,
+    "цфNGr"             ,
+    "цфNOb"             ,
+    "лгТуТолькоВкл"     ,
+    "цфТО"    ,
+    "тсСигналТУ",
+    "смTI_1",
+    "смTI_2",
+    "смTI_3"
 
 };
 
@@ -259,7 +259,7 @@ void TE_OBJ::GetPropMap(TPropMap &m)
     m.put(_E_OBJPropName[ i++],                NOb, 0);
     m.put(_E_OBJPropName[ i++],                bTUOnlyVkl, 0);
     m.put(_E_OBJPropName[ i++],                TO, 0);
-    m.putEx(_E_OBJPropName[ i++], OldImpToNewStr(impulsTU  , this), GetRealImp(impulsTU), OldImpToNewStr(0  , this));
+    m.putEx(_E_OBJPropName[ i++], OldImpToNewStr(impulsTU  , this), (void*)GetRealImp(impulsTU), OldImpToNewStr(0  , this));
     m.put(_E_OBJPropName[ i++], stTI_1.c_str());
     m.put(_E_OBJPropName[ i++], stTI_2.c_str());
     m.put(_E_OBJPropName[ i++], stTI_3.c_str());
@@ -268,7 +268,7 @@ void TE_OBJ::GetPropMap(TPropMap &m)
     char ss[4];
 
     for (int i = 0; i < 10; i++) {
-        PropName = "пїЅпїЅtun_in_csv";
+        PropName = "цфtun_in_csv";
         itoa(i + 1, ss, 10);
         PropName = PropName + ss;
         //if ((tun_in_csv[i]!=0)||(MOD==ED))
@@ -276,18 +276,18 @@ void TE_OBJ::GetPropMap(TPropMap &m)
     }
 
     for (int i = 0; i < MaxAimp; i++) {
-        PropName = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
+        PropName = "тсСигналА";
         itoa(i + 1, ss, 10);
         PropName = PropName + ss;
         //if ((Aimp[i]!=0)||(MOD==ED))
-        m.putEx(PropName.c_str(), OldImpToNewStr(Aimp[i]  , this), GetRealImp(Aimp[i]), OldImpToNewStr(0  , this));
+        m.putEx(PropName.c_str(), OldImpToNewStr(Aimp[i]  , this), (void*)GetRealImp(Aimp[i]), OldImpToNewStr(0  , this));
     }
     for (int i = 0; i < MaxWimp; i++) {
-        PropName = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
+        PropName = "тсСигналП";
         itoa(i + 1, ss, 10);
         PropName = PropName + ss;
         //if ((Wimp[i]!=0)||(MOD==ED))
-        m.putEx(PropName.c_str(), OldImpToNewStr(Wimp[i]  , this), GetRealImp(Wimp[i]), OldImpToNewStr(0  , this));
+        m.putEx(PropName.c_str(), OldImpToNewStr(Wimp[i]  , this), (void*)GetRealImp(Wimp[i]), OldImpToNewStr(0  , this));
     }
 
 
@@ -335,19 +335,19 @@ void TE_OBJ::SetPropMap(TPropMap &m)
     char ss[4];
 
     for (int i = 0; i < 10; i++) {
-        PropName = "пїЅпїЅtun_in_csv";
+        PropName = "цфtun_in_csv";
         itoa(i + 1, ss, 10);
         PropName = PropName + ss;
         tun_in_csv[i] =            m.geti(PropName.c_str());
     }
     for (int i = 0; i < MaxAimp; i++) {
-        PropName = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
+        PropName = "тсСигналА";
         itoa(i + 1, ss, 10);
         PropName = PropName + ss;
         Aimp[i]   = NewStrToOldImp(m.get(PropName.c_str()).c_str());
     }
     for (int i = 0; i < MaxWimp; i++) {
-        PropName = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
+        PropName = "тсСигналП";
         itoa(i + 1, ss, 10);
         PropName = PropName + ss;
         Wimp[i]   = NewStrToOldImp(m.get(PropName.c_str()).c_str());
@@ -395,7 +395,7 @@ void TE_OBJ::UpdateState()
             clrplmp = FON1;
             if (tun_in_csv[0] + tun_in_csv[1] + tun_in_csv[2] + tun_in_csv[3] + tun_in_csv[4] + tun_in_csv[5] + tun_in_csv[6] + tun_in_csv[7] + tun_in_csv[8] + tun_in_csv[9] != 0) clrplmp = C_D;
             if ((st1 == 1) || (st2 == 1) || (st3 == 1) || (st4 == 1) || (CurrentPicture == LT)) clrplmp = C_D;
-            // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ! (пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ' ?)
+            // если мигающий цвет превентивно рисуем ! (что такое 'превентивно' ?)
 
         }
         if (clrplmp == clrblmp)clrplmp = clrblmp + 1;
@@ -412,19 +412,19 @@ void TE_OBJ::UpdateState()
 }
 
 static int UprKlPictNumber0[4] = {
-//     N          пїЅпїЅпїЅпїЅ    пїЅпїЅпїЅпїЅ
-    2  ,  //   0       0    пїЅпїЅпїЅпїЅ.пїЅпїЅпїЅпїЅ  |
-    5  ,  //   0       1    пїЅпїЅпїЅ.пїЅпїЅпїЅпїЅ  |
-    6  ,  //   1       0    пїЅпїЅпїЅпїЅ.пїЅпїЅпїЅпїЅ  |
-    1     //   1       1    пїЅпїЅпїЅ.пїЅпїЅпїЅпїЅ   |
+//     N          ВклП    ВклС
+    2  ,  //   0       0    выкл.прав  |
+    5  ,  //   0       1    вкл.непр  |
+    6  ,  //   1       0    выкл.непр  |
+    1     //   1       1    вкл.прав   |
 };
 
 static int UprKlPictNumber1[4] = {
-//     N           пїЅпїЅпїЅпїЅ    пїЅпїЅпїЅпїЅ
-    1  ,  //   0       0    пїЅпїЅпїЅпїЅ.пїЅпїЅпїЅпїЅ  |
-    6  ,  //   0       1    пїЅпїЅпїЅ.пїЅпїЅпїЅпїЅ  |
-    5  ,  //   1       0    пїЅпїЅпїЅпїЅ.пїЅпїЅпїЅпїЅ  |
-    2     //   1       1    пїЅпїЅпїЅ.пїЅпїЅпїЅпїЅ   |
+//     N           ВклП    ВклС
+    1  ,  //   0       0    выкл.прав  |
+    6  ,  //   0       1    вкл.непр  |
+    5  ,  //   1       0    выкл.непр  |
+    2     //   1       1    вкл.прав   |
 };
 
 
@@ -485,7 +485,7 @@ void TE_OBJ::Show()
     txtclr = C_D;
     if (MOD == ED) {
         KeySost = &KeySost_default;
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ!
+        // проверь на ключ!
         //if (impuls_busi==0) fimpuls_busi=33; else fimpuls_busi=0;
         clrplmp = FON1;
         clrblmp = FON;
@@ -513,15 +513,15 @@ void TE_OBJ::Show()
 
 
     font = Prz[1];//Prz[1] ? Prz[1] : 10u;
-    font_size = Prz[0] ? (uint8)(Prz[0]) : 0;
-    if (CurrentPicture == BG) font_size = Prz[2] ? (uint8)(Prz[2]) : 0;
+    font_size = Prz[0] ? (BYTE)(Prz[0]) : 0;
+    if (CurrentPicture == BG) font_size = Prz[2] ? (BYTE)(Prz[2]) : 0;
     if (font_size == 0) {
         if (type_obj == eng_lmp)
             font_size =    _E_def_FontsSzLmp[CurrentPicture]; else
             font_size = AO->_E_def_FontsSz[CurrentPicture];
 
     }
-    // пїЅпїЅпїЅпїЅпїЅ
+    // текст
     if (TextStr != "") {
         _SetText(font, CENTER_TEXT , CENTER_TEXT);
         _SetTextSize(font_size);
@@ -546,8 +546,8 @@ void TE_OBJ::Show()
 
     SetGridAlignXY(GridAllign, xx, yy, ww, hh);
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // подложки
+    // если есть предупреждения то сначала предупреждение
     if (KeySost->zemlya + KeySost->plakat > 0) {
         /*_xx=xx+ww/2;_yy=yy+hh/2;_ww=ww+ww/2;_hh=hh+hh/2;
         if (_ww %2 !=0)_ww++;
@@ -577,11 +577,11 @@ void TE_OBJ::Show()
     }
 
 
-    // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    // сам обьект
     if (type_obj == eng_key) {
         if (tipVklOkc) {
             if (MOD != ED) {
-                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+                // хитропопость в комбинации
                 if (impuls_busi < 0) {
                     if ((fimpuls_busi == 1) && (fimpuls_plus == 0)) fimpuls_plus = 1; else if ((fimpuls_busi == 0) && (fimpuls_plus == 1)) fimpuls_plus = 1; else if ((fimpuls_busi == 0) && (fimpuls_plus == 0)) fimpuls_plus = 0; else if ((fimpuls_busi == 1) && (fimpuls_plus == 1)) fimpuls_plus = 0;
                 } else {
@@ -589,7 +589,7 @@ void TE_OBJ::Show()
                 }
             }
         }
-        // пїЅпїЅпїЅ
+        // ОКЦ
         if (/*(fAimp0==1)||*/(fimpuls_plus == 1) || ((MOD == ED) && (impuls_plus != 0))) {
             txtclr = 12;
             _xx = xx + ww / 2; _yy = yy + hh / 2; _ww = ww + ww / 2; _hh = hh + hh / 2;
@@ -600,7 +600,7 @@ void TE_OBJ::Show()
             drawemf(&Rect, "ENG_LMP_ERROR", CommonAnimationStep % 4);
 
         }
-        // пїЅпїЅ
+        // МУ
         if (fimpuls_mnus == 1) {
             /*_xx=xx+ww/2;_yy=yy+hh/2;_ww=ww+ww/3;_hh=hh+hh/3;
 
@@ -616,7 +616,7 @@ void TE_OBJ::Show()
             drawemf(&Rect, ss);
 
         }
-        // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
+        // Контр ТС
         if (impuls_mu != 0) {
             if (fimpuls_mu == 0) {
                 int dd = wwhh_podl[CurrentPicture];
@@ -628,12 +628,12 @@ void TE_OBJ::Show()
         }
 
         const char * szimagename = GetEImageName(Picture, fimpuls_busi, KeySost->onoff_ok, impuls_busi);
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        // сначала пробуем готовую с состоянием
         RECT Rect;
         Rect.left = xx; Rect.top = yy; Rect.right = xx + ww; Rect.bottom = yy + hh;
         //int animstep=CommonAnimationStep%4;
         if (!drawemf(&Rect, szimagename, 0)) {
-            // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            // рисум саму и сверху состояние
             if (!drawemf(&Rect, Picture.c_str())) {
                 barx(xx, yy, xx + ww, yy + hh);
                 line(xx, yy, xx + ww, yy + hh);
@@ -642,7 +642,7 @@ void TE_OBJ::Show()
         }
         if (ShowTextMode != 1)
             ShowText();
-        // пїЅпїЅ
+        // ПК
         if (fimpuls_kzm == 1) {
             txtclr = 12;
             _xx = xx + ww / 2; _yy = yy + hh / 2; _ww = ww / 2; _hh = hh / 2;
@@ -656,7 +656,7 @@ void TE_OBJ::Show()
     }
     if (type_obj == eng_lmp) {
          if (Picture.length()>0){
-            // пїЅпїЅпїЅпїЅпїЅ LED
+            // копия LED
             PictureState=0;//sost0;
             if (fAimp0==1) PictureState=100;//sostError;
             TLED::Show();
@@ -694,7 +694,7 @@ void TE_OBJ::Show()
         }
     }
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+    // предупреждения для всех
     if (KeySost->zemlya + KeySost->plakat > 0) {
 
         if (KeySost->zemlya) {

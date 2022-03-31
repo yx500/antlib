@@ -54,7 +54,7 @@ bool TAImpuls::UpdateState()
 
 void TAImpuls::UpdateAbsNumber()
 {
-    // пїЅ пїЅпїЅпїЅпїЅ пїЅ-пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ.пїЅпїЅпїЅпїЅпїЅ
+    // в этой ф-ии зная станцию и канал в ней находим абс.номер
 
     if ((Number == -1) || (Number == -2)) {
         FAbsNumber = Number;
@@ -124,7 +124,7 @@ void TAImpuls::FromString(const char *szSrc)
     if (stSrc == "-2") {
         Chanel = 0; Number = -2; Invers = 0; Value = 0; return;
     }
-    // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ - пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // если просто номер - то просто и присваеваем
     if (stSrc.find(_razd) == std::string::npos) {
         int NN = atoi(stSrc.c_str());
         Invers = 0; Value = 0;
@@ -139,7 +139,7 @@ void TAImpuls::FromString(const char *szSrc)
 
 
     //if ((stSrc.Length()!=_r[3])||(stSrc[_r[0]]!=_razd)||(stSrc[_r[1]]!=_razd)||(stSrc[_r[2]]!=_razd)){
-    //пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    //Если правильно форматнуть, то можно и побыстрее
     /*  int iv=0;
 
       String s="";
@@ -182,7 +182,7 @@ char * OldImpToNewStr(int impnumber, AComp * ac)
         IMP.Number = impnumber % 1000;
     }
     IMP.UpdateAbsNumber();
-    //IMP.UpdateState(); ??? пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+    //IMP.UpdateState(); ??? непонятно зачем
     return IMP.ToString();
 }
 
@@ -215,8 +215,8 @@ void __fastcall TAImpuls::SetAbsNumber(int value)
                 return;
             }
         }
-        //MessageDlg(IntToStr(value)+" пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ", mtError  , TMsgDlgButtons() << mbOK , 0);
-        Qui(" пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ", 1, 1);
+        //MessageDlg(IntToStr(value)+" Не Входит в список каналов станции", mtError  , TMsgDlgButtons() << mbOK , 0);
+        Qui(" Не Входит в список каналов станции", 1, 1);
     } else {
         FAbsNumber = value;
         Number = value;

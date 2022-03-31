@@ -4,12 +4,12 @@
 
 #include "APch.h"
 
-#include "Strel.h"
+#include "strel.h"
 #include "scrin.h"
 #include "col.h"
 #include "f.h"
 #include "Vatempl.h"
-#include "Stan.h"
+#include "stan.h"
 
 #include "propmap.h"
 #include "Y_STREL.h"
@@ -127,7 +127,7 @@ void Lamp::ShowX(int x, int y)
 
     if (AO->TypLamp == 32) {
         if ((AO->TypName == 3) && (MOD == RD) && (masy != 0) && (CurrentPicture == LT)) return;
-        //  пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ !!!
+        //  ПО ОСТУ КРУЖОЧКИ НЕ РИСУЕМ !!!
         if (MUL_Y < 16)  _SetText(F_LITT, CENTER_TEXT, CENTER_TEXT);
         else          _SetText(ARIAL12b, CENTER_TEXT, CENTER_TEXT);
         setcolor(clr);
@@ -203,7 +203,7 @@ void Lamp:: Set()
     Element::Set();
     {
         TLampMEM MM;
-        memcpy(&MM, &MEM.name16, sizeof(TLampMEM)); // name[16]- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+        memcpy(&MM, &MEM.name16, sizeof(TLampMEM)); // name[16]- дурацкий сдвиг
         memcpy(&GrpahExData, &MM.GE, sizeof(GrpahExData));
         TypKp = MM.LD.TypKp;
         NKp =  MM.LD.NKp;
@@ -219,28 +219,28 @@ void Lamp:: Set()
 
 
 static String _LampPropName[22] = {
-    "пїЅпїЅGEEnabled"       ,   // 0
-    "пїЅпїЅGEPictNumber"    ,   // 1
-    "пїЅпїЅGEPictWidthStan" ,   // 2
-    "пїЅпїЅGEPictHeightStan",   // 3
-    "пїЅпїЅGEPictWidthYch"  ,   // 4
-    "пїЅпїЅGEPictHeightYch" ,   // 5
-    "пїЅпїЅGETextFontNStan" ,   // 6
-    "пїЅпїЅGETextFontNYch"  ,   // 7
-    "пїЅпїЅGETextFontColor" ,   // 8
-    "пїЅпїЅGETextPosStan"   ,   // 9
-    "пїЅпїЅGETextPosYch"    ,   //10
-    "пїЅпїЅGETextRotate"    ,   //11
-    "пїЅпїЅGEGridAllign"    ,   //12
-    "пїЅпїЅGETestExSet"     ,   //13
-    "пїЅпїЅTypKp"           ,   //14
-    "пїЅпїЅNKp"             ,   //15
-    "пїЅпїЅNGr"             ,   //16
-    "пїЅпїЅNOb"             ,   //17
-    "пїЅпїЅ_S1"             ,   //18
-    "пїЅпїЅ_S2"             ,   //19
-    "пїЅпїЅ_S3"             ,   //20
-    "пїЅпїЅ_S4"                //21
+    "цфGEEnabled"       ,   // 0
+    "цфGEPictNumber"    ,   // 1
+    "цфGEPictWidthStan" ,   // 2
+    "цфGEPictHeightStan",   // 3
+    "цфGEPictWidthYch"  ,   // 4
+    "цфGEPictHeightYch" ,   // 5
+    "цфGETextFontNStan" ,   // 6
+    "цфGETextFontNYch"  ,   // 7
+    "цфGETextFontColor" ,   // 8
+    "цфGETextPosStan"   ,   // 9
+    "цфGETextPosYch"    ,   //10
+    "цфGETextRotate"    ,   //11
+    "цфGEGridAllign"    ,   //12
+    "цфGETestExSet"     ,   //13
+    "цфTypKp"           ,   //14
+    "цфNKp"             ,   //15
+    "цфNGr"             ,   //16
+    "цфNOb"             ,   //17
+    "цф_S1"             ,   //18
+    "цф_S2"             ,   //19
+    "цф_S3"             ,   //20
+    "цф_S4"                //21
 };
 
 
@@ -334,7 +334,7 @@ void Lamp::Get()
 void Lamp::UpdateState()
 {
     Element::UpdateState();
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // энэнерги
     /*if (LS!=NULL){
        bool bLS=memcmp(LS,&LastLS,sizeof(LastLS));
        StateChanged=StateChanged || bLS;
@@ -350,8 +350,8 @@ void Lam4::UpdateState()
 {
     Strel::UpdateState();
     if (name[0] == '!') {
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
-        if (name[1] == 'пїЅ') StateChanged = true;
+        // счетчик осей
+        if (name[1] == '—') StateChanged = true;
         if (name[1] == 'S') StateChanged = true;
     }
 }
@@ -359,10 +359,10 @@ void Lam4::UpdateState()
 int  Lam4::GetSubType()
 {
     if (name[0] == '!') {
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
-        if (name[1] == 'пїЅ') return 101;
+        // счетчик осей
+        if (name[1] == '—') return 101;
         if (name[1] == 'S') return 102;
-        if (name[1] == 'пїЅ') return 103;
+        if (name[1] == '‡') return 103;
     }
     return 0;
 };
@@ -382,10 +382,10 @@ void Lam4::ShowENG1(int x, int y)
     //if(!Test_strel(c1,c2,0,0,0)&&(MOD==RD))return;
     //
     int prD = 0;
-    if (name[2] == 'пїЅ') prD = 1;
-    if (name[2] == 'пїЅ') prD = 2;
-    if (name[3] == 'пїЅ') prD = 1;
-    if (name[3] == 'пїЅ') prD = 2;
+    if (name[2] == 'А') prD = 1;
+    if (name[2] == 'П') prD = 2;
+    if (name[3] == 'А') prD = 1;
+    if (name[3] == 'П') prD = 2;
     diam  = 15;
     diam2 = 13;
     if (MUL_Y < 16) diam  = 10;
@@ -405,7 +405,7 @@ void Lam4::ShowENG1(int x, int y)
     fillellipse(x, y, diam, diam);
 
 
-// пїЅпїЅпїЅпїЅпїЅ
+// Линия
     setlinestyle(SOLID_LINE, 0, 3);
     if (c2) {
         setcolor(KRA);
@@ -437,10 +437,10 @@ void Lam4::ShowENG1(int x, int y)
 void Lam4::ShowBML(int x, int y)
 {
     //int typi;
-    //if( !strcmp("пїЅпїЅ" ,name))  typi = 0;
-    //if( !strcmp("пїЅпїЅпїЅ" ,name)) typi  = 1;
-    //if( !strcmp("пїЅпїЅпїЅ" ,name)) typi  = 2;
-    //if( !strcmp("пїЅпїЅ" ,name))  typi  = 3;
+    //if( !strcmp("ЉЂ" ,name))  typi = 0;
+    //if( !strcmp("ђЋЌ" ,name)) typi  = 1;
+    //if( !strcmp("ђЋ—" ,name)) typi  = 2;
+    //if( !strcmp("‘“" ,name))  typi  = 3;
     /*
     if (f(impuls_busi)){
        ShowImg(typi,x,y);
@@ -458,7 +458,7 @@ void  Lam4::Show()
 {
     Strel::Show();
 
-    bool sdvig_dla_star_eng = false;
+    byte sdvig_dla_star_eng = 0;
     int cc = 0;
     int FlHid = 0;
     int kv = 0;
@@ -470,29 +470,29 @@ void  Lam4::Show()
     int cx  = 1;//(((set[C_M])/16 /8)/8)%8;
     if (name[0] == '*') {
         if (
-            (!strcmp("*пїЅпїЅ1" , name)) ||
-            (!strcmp("*пїЅпїЅ1" , name)) ||
-            (!strcmp("*пїЅпїЅпїЅ" , name)) ||
-            (!strcmp("*пїЅпїЅпїЅ" , name)) ||
-            (!strcmp("*пїЅпїЅпїЅ " , name)) ||
-            (!strcmp("*пїЅпїЅпїЅ " , name)) ||
-            (!strcmp("*пїЅпїЅпїЅ " , name)) ||
-            (!strcmp("*пїЅпїЅпїЅ " , name)) ||
-            (!strcmp("*пїЅпїЅпїЅ" , name)) ||
-            (!strcmp("*пїЅпїЅпїЅ" , name))
+            (!strcmp("*РА1" , name)) ||
+            (!strcmp("*РП1" , name)) ||
+            (!strcmp("*РАВ" , name)) ||
+            (!strcmp("*РПВ" , name)) ||
+            (!strcmp("*РАВ " , name)) ||
+            (!strcmp("*РПВ " , name)) ||
+            (!strcmp("*РАЗ " , name)) ||
+            (!strcmp("*РПЗ " , name)) ||
+            (!strcmp("*РАЗ" , name)) ||
+            (!strcmp("*РПЗ" , name))
         )  {
             ShowENG1(x, y); return;
         }
         if (
-            (!strcmp("*пїЅпїЅпїЅпїЅ", name)) ||
-            (!strcmp("*пїЅпїЅпїЅ" , name)) ||
-            (!strcmp("*пїЅпїЅпїЅ" , name)) ||
-            (!strcmp("*пїЅпїЅпїЅ" , name)) ||
-            (!strcmp("*пїЅпїЅпїЅ" , name)) ||
-            (!strcmp("*пїЅпїЅпїЅпїЅ", name)) ||
-            (!strcmp("*пїЅпїЅпїЅ" , name)) ||
-            (!strcmp("*пїЅпїЅпїЅ" , name))
-        )  sdvig_dla_star_eng = true ;
+            (!strcmp("*ФАРБ", name)) ||
+            (!strcmp("*МАЗ" , name)) ||
+            (!strcmp("*МАВ" , name)) ||
+            (!strcmp("*МПВ" , name)) ||
+            (!strcmp("*МПЗ" , name)) ||
+            (!strcmp("*Ввод", name)) ||
+            (!strcmp("*ДГА" , name)) ||
+            (!strcmp("*ПТО" , name))
+        )  sdvig_dla_star_eng = 1 ;
         kv = 1;
         c3 = 1;
 
@@ -506,13 +506,13 @@ void  Lam4::Show()
         kv = 1;  /*     y =  65; */
     }
     //  !!!!!!!!!!!!!!!!!!!
-    // ===== пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ ===
+    // ===== для горки ===
 
     if (name[0] == '!') {
-        //  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-        if (name[1] == 'пїЅ') {}
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
-        if (name[1] == 'пїЅ') {
+        //  фотоустройство
+        if (name[1] == '”') {}
+        // счетчик осей
+        if (name[1] == '—') {
             int osi = 0 ;
             char bf[10];
             if (fimpuls_busi == 33) osi = 0; else
@@ -536,7 +536,7 @@ void  Lam4::Show()
             OutTextXY(x + shir / 2, y, bf);
             _SetText(F_DEFAULT, LEFT_TEXT, CENTER_TEXT);
         }
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ
+        // счетчик осей ТТ
         if (name[1] == 'S') {
             int osi = 0 ;
             char bf[10];
@@ -559,8 +559,8 @@ void  Lam4::Show()
             itoa(osi, bf, 10);
             OutTextXY(x, y, bf);
         }
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-        if (name[1] == 'пїЅ') {
+        // замедлитель
+        if (name[1] == '‡') {
             int len = (S_WAY_X + mas) * MUL_X;
             //int swi=c2*2+c1;
             setcolor(LIN_W);
@@ -631,7 +631,7 @@ void  Lam4::Show()
         if (!FlHid)  setcolor(TXT); else
             setcolor(FON);
 
-        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ32
+        //прорисовка ламп по ОСТу32
 
         if ((AO->TypLamp == 32) || (AO->TypLamp == 33)) {
             if ((AO->TypName == 3) && (MOD == RD) && (masy != 0) && (CurrentPicture == LT)) return;
@@ -715,7 +715,7 @@ void  Lam4::Show()
         //
         //if(!Test_strel(clr,c3,c4,0,0)&&(MOD==RD)){ _SetText(F_DEFAULT,CENTER_TEXT,CENTER_TEXT);return;}
         //
-        // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        // вот тееперь я точно ничего не понимаю
         //    priznak_pereris_strel_if_change_mu = 1;
         int st_st = sh_y * masy;
         int len = (WAY_X + mas) * MUL_X;
@@ -771,10 +771,10 @@ SuperLamp2::SuperLamp2()
 #pragma pack(push, 4)
 struct TDatagramPacket2_header {
     uint32        tag;     //
-    uint32        addr;    //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
-    uint32        tick;    //пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    uint32        time;    //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
-    uint32        msec;    //пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ msec
+    uint32        addr;    //адрес от кого
+    uint32        tick;    //кол пришедших ракетов
+    uint32        time;    //время пришедшего пакета
+    uint32        msec;    //время пришедшего пакета msec
 };
 #pragma pack(pop)
 
@@ -813,7 +813,7 @@ void SuperLamp2::SetStateColors()
     int st4 = fimpuls_kzm;
 
     if (masy == 41) {
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!
+        // АВТОПИЛОТ!
         TAVStanInfo* AVStanInfo = EXD.SI_GetStan(pVisibleArray->pStation->Dat->filename);
         if (AVStanInfo == NULL) {
             clr = BIRUZOVIJ;
@@ -834,7 +834,7 @@ void SuperLamp2::SetStateColors()
         if ((st1 == 33) || (st2 == 33) || (st3 == 33) || (st4 == 33)) clr = BIRUZOVIJ; else
             clr = wc_GetColor(TypeLamp, setc);
     }
-    // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ! (пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ' ?)
+    // если мигающий цвет превентивно рисуем ! (что такое 'превентивно' ?)
     if (IsClrMig(clr)) StateChanged = true;
 }
 
@@ -875,18 +875,18 @@ void  ShowAUM(const char *name,int x, int y,  int i1,int i1m,int i2,int i2m)
     int p=0;
     int d=0;
     int b=0;
-    if (strcmp("_пїЅпїЅпїЅпїЅ1_", name) == 0) {d = 0; p=1;} else
-    if (strcmp("_пїЅпїЅпїЅпїЅ2_", name) == 0) {d = 0; p=2;} else
-    if (strcmp("_пїЅпїЅпїЅпїЅ3_", name) == 0) {d = 0; p=3;} else
-    if (strcmp("_пїЅпїЅпїЅпїЅ1_", name) == 0) {d = 1; p=1;} else
-    if (strcmp("_пїЅпїЅпїЅпїЅ2_", name) == 0) {d = 1; p=2;} else
-    if (strcmp("_пїЅпїЅпїЅпїЅ3_", name) == 0) {d = 1; p=3;} else
-    if (strcmp("_пїЅпїЅпїЅпїЅ1пїЅ_", name) == 0) {b=1;d = 0; p=1;} else
-    if (strcmp("_пїЅпїЅпїЅпїЅ2пїЅ_", name) == 0) {b=1;d = 0; p=2;} else
-    if (strcmp("_пїЅпїЅпїЅпїЅ3пїЅ_", name) == 0) {b=1;d = 0; p=3;} else
-    if (strcmp("_пїЅпїЅпїЅпїЅ1пїЅ_", name) == 0) {b=1;d = 1; p=1;} else
-    if (strcmp("_пїЅпїЅпїЅпїЅ2пїЅ_", name) == 0) {b=1;d = 1; p=2;} else
-    if (strcmp("_пїЅпїЅпїЅпїЅ3пїЅ_", name) == 0) {b=1;d = 1; p=3;}
+    if (strcmp("_АУМЧ1_", name) == 0) {d = 0; p=1;} else
+    if (strcmp("_АУМЧ2_", name) == 0) {d = 0; p=2;} else
+    if (strcmp("_АУМЧ3_", name) == 0) {d = 0; p=3;} else
+    if (strcmp("_АУМН1_", name) == 0) {d = 1; p=1;} else
+    if (strcmp("_АУМН2_", name) == 0) {d = 1; p=2;} else
+    if (strcmp("_АУМН3_", name) == 0) {d = 1; p=3;} else
+    if (strcmp("_АУМЧ1Б_", name) == 0) {b=1;d = 0; p=1;} else
+    if (strcmp("_АУМЧ2Б_", name) == 0) {b=1;d = 0; p=2;} else
+    if (strcmp("_АУМЧ3Б_", name) == 0) {b=1;d = 0; p=3;} else
+    if (strcmp("_АУМН1Б_", name) == 0) {b=1;d = 1; p=1;} else
+    if (strcmp("_АУМН2Б_", name) == 0) {b=1;d = 1; p=2;} else
+    if (strcmp("_АУМН3Б_", name) == 0) {b=1;d = 1; p=3;}
     int colp=C_D;
     int colb1=FON;
     int colb2=FON;
@@ -987,7 +987,7 @@ void  SuperLamp2::Show()
         timesec_dt=99;
     }
 
-    // пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ
+    // не рисуем на участке без кму
     if ((CurrentPicture == BG) && (impuls_kmu != 0) && (fimpuls_kmu == 0))
         return;
 
@@ -997,12 +997,12 @@ void  SuperLamp2::Show()
     }
 
 
-    // пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ
+    // не рисуем у ДНЦ
     if ((DNC == 1) && (Prz[2] != 0) && (CurrentPicture == LT))
         return;
 
     unsigned int font = Prz[1] ? Prz[1] : 10u;
-    unsigned int font_size = Prz[0] ? (uint8)(Prz[0]) : 10u;
+    unsigned int font_size = Prz[0] ? (BYTE)(Prz[0]) : 10u;
 
 
 
@@ -1013,16 +1013,16 @@ void  SuperLamp2::Show()
 
     int y1;
     if (mas >= 10) {
-        // yпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+        // yнаходим рамку
         tw = (masx2 + 1) * MUL_X;
         y1 = y - th / 2;
     }
     int r = 7;
     if (MUL_Y < 16) r = 5;
     bool bkpp = false;
-    if (strcmp("_пїЅпїЅпїЅ_", name) == 0) bkpp = true;
+    if (strcmp("_КПП_", name) == 0) bkpp = true;
     bool bzemlya = false;
-    if (strcmp("_пїЅпїЅпїЅпїЅпїЅ_", name) == 0) bzemlya = true;
+    if (strcmp("_ЗЕМЛЯ_", name) == 0) bzemlya = true;
 
 
 
@@ -1115,18 +1115,18 @@ void SuperLamp2::Get()
 }
 
 static String _SuperLamp2PropName[] = {
-    "пїЅпїЅPrz0",          // 0
-    "пїЅпїЅPrz1",          // 1
-    "пїЅпїЅPrz2",          // 2
-    "пїЅпїЅPrz3",          // 3
+    "цфPrz0",          // 0
+    "цфPrz1",          // 1
+    "цфPrz2",          // 2
+    "цфPrz3",          // 3
 
-    "пїЅпїЅNomer",         // 4
-    "пїЅпїЅname_",           //5
-    "пїЅпїЅпїЅпїЅпїЅ",            //6
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",         // 7
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",         // 8
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",         // 9
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"         // 10
+    "цфNomer",         // 4
+    "смname_",           //5
+    "смИМЯ",            //6
+    "лгПроверять",         // 7
+    "лгАвария",         // 8
+    "лгКругПоСетке",         // 9
+    "лгВремя"         // 10
 
 
 };
@@ -1134,7 +1134,7 @@ static String _SuperLamp2PropName[] = {
 
 void SuperLamp2::SetPropMap(TPropMap &m)
 {
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // перекрываю от стрелок
     Ways::SetPropMap(m);
     int _n = 0;
     Prz[0]  = m.geti(_SuperLamp2PropName[_n++]);
@@ -1178,20 +1178,22 @@ void SuperLamp2::GetPropMap(TPropMap &m)
 CommLmp::CommLmp()
 {
     Prz[0] = 22;
+    lComps = new TList();
 }
 CommLmp::~CommLmp()
 {
+    delete lComps;
 }
 
 void CommLmp::CollectComps()
 {
     AComp * ac;
-    vComps.clear();
+    lComps->Clear();
     Station *S = pVisibleArray->pStation ;
     for (int i = 1; i < Units_Size; i++) {
         for (int j = 0; j < S->POLE[i]->GetArraySize(); j++) {
             ac = S->POLE[i]->GetObjPtr(j);
-            if (ac->ExtPriz.UseInCommLmp) vComps.push_back(ac);
+            if (ac->ExtPriz.UseInCommLmp) lComps->Add(ac);
         }
     }
 }
@@ -1201,16 +1203,16 @@ void CommLmp::UpdateState()
     AComp * ac;
     try {
         if (MOD == ED) {
-            vComps.clear();
+            lComps->Clear();
         } else {
-            if (vComps.size() == 0) CollectComps();
-            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+            if (lComps->Count == 0) CollectComps();
+            // находим общее
             int b = 0;
-            for (int i = 0; i < vComps.size(); i++) {
-                ac = vComps[i];
-                ac->UpdateState(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ!
+            for (int i = 0; i < lComps->Count; i++) {
+                ac = (AComp *)lComps->Items[i];
+                ac->UpdateState(); // НЕКРАСИВО ТО КАК!
                 b = ac->IsAlarmState();
-                ac->StateChanged = true; // пїЅпїЅпїЅпїЅ
+                ac->StateChanged = true; // УЖАС
                 if (b != 0) break;
             }
             if (b != impuls_busi) StateChanged = true;
@@ -1220,7 +1222,7 @@ void CommLmp::UpdateState()
             if (fimpuls_busi == 1) {
                 if (this->nomer == 0) clr = RED; else clr = nomer;
             }
-            // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ! (пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ' ?)
+            // если мигающий цвет превентивно рисуем ! (что такое 'превентивно' ?)
             if (IsClrMig(clr)) StateChanged = true;
         }
     } catch (...) {}
@@ -1356,7 +1358,7 @@ void DtgLmp::UpdateState()
                 if (r == 33) clr = BIRUZOVIJ;
             }
 
-            // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ! (пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ' ?)
+            // если мигающий цвет превентивно рисуем ! (что такое 'превентивно' ?)
             if (IsClrMig(clr)) StateChanged = true;
         }
     } catch (...) {}
@@ -1376,11 +1378,11 @@ static String _DtgLmpPropName[] = {
     "PacketType",          // 1
     "ByteOffset",          // 2
     "NumberBit",           // 3
-    "пїЅпїЅByteChecking",      // 4
-    "пїЅпїЅпїЅпїЅпїЅпїЅ2",              // 5
-    "пїЅпїЅпїЅпїЅпїЅпїЅ",               //
-    "пїЅпїЅпїЅпїЅпїЅ",                //
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"                //
+    "лгByteChecking",      // 4
+    "цфЦвет2",              // 5
+    "цфСтрН",               //
+    "стРзд",                //
+    "цфУкВаг"                //
 
 
 
@@ -1397,7 +1399,7 @@ void DtgLmp::Get()
 }
 void DtgLmp::SetPropMap(TPropMap &m)
 {
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // перекрываю от стрелок
     SuperLamp2::SetPropMap(m);
     int _n = 0;
     PacketName = m.get(_DtgLmpPropName[_n++]);
@@ -1457,10 +1459,10 @@ void tLOG_LAMP::UpdateState()
 
 }
 static String _tLOG_LAMPPropName[] = {
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ1",       // 0
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ2",       // 1
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ3",       // 2
-    "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ4"        // 3
+    "фсСигнал1",       // 0
+    "фсСигнал2",       // 1
+    "фсСигнал3",       // 2
+    "фсСигнал4"        // 3
 
 
 };
@@ -1468,7 +1470,7 @@ static String _tLOG_LAMPPropName[] = {
 
 void tLOG_LAMP::SetPropMap(TPropMap &m)
 {
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // перекрываю от стрелок
     SuperLamp2::SetPropMap(m);
     int _n = 0;
     for (int i = 0; i < 4; i++) {

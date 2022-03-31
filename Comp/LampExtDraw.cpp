@@ -62,7 +62,7 @@ int TLED::SetLED_EXT(int xx, int yy, int ww, int hh)
         LEDEXD.hdc = BgiCanvas()->Handle;
 
     LEDEXD.pElement = this;
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // графика
     LEDEXD.X = xx;
     LEDEXD.Y = yy;
     LEDEXD.Width = ww;
@@ -81,7 +81,7 @@ int TLED::SetLED_EXT(int xx, int yy, int ww, int hh)
     LEDEXD.ObjData.imps[4] = this->impuls_mu;
     LEDEXD.ObjData.imps[5] = this->impuls_kmu;
 
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // собственно данные Обьекта для внешней обработки
     LEDEXD.ObjData.ID_OBJ = GetID();
     LEDEXD.ObjData.Type = GetType();
     LEDEXD.ObjData.Tag = Tag;
@@ -144,15 +144,15 @@ void  TLED::Show()
     SetGridAlignXY(GridAllign, xx, yy, ww, hh);
 
     if (LED_EXT_Func == NULL) {
-        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
+        // рисуем сами
         //PictureState=EXD....
         const char * szimagename = GetImageName(Picture, PictureState);
-        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        // сначала пробуем готовую с состоянием
         RECT Rect;
         Rect.left = xx; Rect.top = yy; Rect.right = xx + ww; Rect.bottom = yy + hh;
         int animstep = CommonAnimationStep % 4;
         if (!drawemf(&Rect, szimagename, animstep)) {
-            // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            // рисум саму и сверху состояние
             if (!drawemf(&Rect, Picture.c_str())) {
                 barx(xx, yy, xx + ww, yy + hh);
                 line(xx, yy, xx + ww, yy + hh);
@@ -172,13 +172,13 @@ void  TLED::Show()
             this->PersistVoid = LEDEXD.ObjData.PersistVoid;
         }
     }
-    // пїЅпїЅпїЅпїЅпїЅ
+    // текст
     if (TextStr != "") {
         TSize sz;
         unsigned int font = Prz[1] ? Prz[1] : 10u;
-        unsigned int font_size = Prz[0] ? (uint8)(Prz[0]) : 10u;
+        unsigned int font_size = Prz[0] ? (BYTE)(Prz[0]) : 10u;
         if (CurrentPicture == BG)
-            font_size = Prz[2] ? (uint8)(Prz[2]) : 10u;
+            font_size = Prz[2] ? (BYTE)(Prz[2]) : 10u;
         _SetText(font, LEFT_TEXT , TOP_TEXT);
         _SetTextSize(font_size);
 
@@ -228,18 +228,18 @@ void TLED:: Set()
 
 
 static String _LEDPropName[] = {
-    "пїЅпїЅPictX" ,   // 0
-    "пїЅпїЅPictY" ,   // 1
-    "пїЅпїЅPictWidthStan" ,   // 2
-    "пїЅпїЅPictHeightStan",   // 3
-    "пїЅпїЅPictWidthYch"  ,   // 4
-    "пїЅпїЅPictHeightYch" ,   // 5
-    "пїЅпїЅPictGridAllign",   // 6
-    "пїЅпїЅGrid",             // 7
-    "пїЅпїЅPict",             // 8
-    "пїЅпїЅTextAllign",       // 9
-    "пїЅпїЅText",             // 10
-    "пїЅпїЅPropStr"           // 11
+    "цфPictX" ,   // 0
+    "цфPictY" ,   // 1
+    "цфPictWidthStan" ,   // 2
+    "цфPictHeightStan",   // 3
+    "цфPictWidthYch"  ,   // 4
+    "цфPictHeightYch" ,   // 5
+    "цфPictGridAllign",   // 6
+    "лгGrid",             // 7
+    "смPict",             // 8
+    "цфTextAllign",       // 9
+    "смText",             // 10
+    "смPropStr"           // 11
 };
 
 
@@ -332,11 +332,11 @@ void TLED30::GetPropMap(TPropMap &m)
     TLED::GetPropMap(m);
     char ss[4];
     for (int i = 1; i < 30; i++) {
-        PropName = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
+        PropName = "тсСигнал";
         itoa(i + 1, ss, 10);
         PropName = PropName + ss;
         //if ((MOD==ED)||(imp[i]!=0))
-        m.putEx(PropName.c_str(), OldImpToNewStr(imp[i]  , this), GetRealImp(imp[i]), OldImpToNewStr(0, this));
+        m.putEx(PropName.c_str(), OldImpToNewStr(imp[i]  , this), (void*)GetRealImp(imp[i]), OldImpToNewStr(0, this));
     }
 
 
@@ -349,7 +349,7 @@ void TLED30::SetPropMap(TPropMap &m)
     imp[0] = impuls_busi;
     for (int i = 1; i < 30; i++) {
 
-        PropName = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
+        PropName = "тсСигнал";
         itoa(i + 1, ss, 10);
         PropName = PropName + ss;
         imp[i]   = NewStrToOldImp(m.get(PropName.c_str()).c_str());

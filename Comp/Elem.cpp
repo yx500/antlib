@@ -3,12 +3,12 @@
 #include "APch.h"
 
  
-#include "Elem.h"
+#include "elem.h"
 
 #include "propmap.h"
 #include "Impuls.h"
 #include"out_num.h"
-#include "Stan.h"
+#include "stan.h"
 
 
 void Element:: Set()
@@ -61,12 +61,12 @@ void Element:: Get()
 
 
 static char _ElementPropName[6][20] = {
-    "ï¿½ï¿½impuls_plus",          // 0
-    "ï¿½ï¿½impuls_minus",          // 1
-    "ï¿½ï¿½impuls_kzm" ,          // 2
-    "ï¿½ï¿½impuls_kmu" ,          // 3
-    "ï¿½ï¿½impuls_mu"  ,          // 4
-    "ï¿½ï¿½ï¿½ï¿½ï¿½"                  // 5
+    "òñimpuls_plus",          // 0
+    "òñimpuls_minus",          // 1
+    "òñimpuls_kzm" ,          // 2
+    "òñimpuls_kmu" ,          // 3
+    "òñimpuls_mu"  ,          // 4
+    "ñìÈÌß"                  // 5
 };
 
 
@@ -88,11 +88,11 @@ void Element::GetPropMap(TPropMap &m)
 {
     AComp::GetPropMap(m);
 
-    m.putEx(_ElementPropName[0], OldImpToNewStr(impuls_plus  , this), GetRealImp(impuls_plus),   OldImpToNewStr(0  , this));
-    m.putEx(_ElementPropName[1], OldImpToNewStr(impuls_mnus  , this), GetRealImp(impuls_mnus),   OldImpToNewStr(0  , this));
-    m.putEx(_ElementPropName[2], OldImpToNewStr(impuls_kzm, this), GetRealImp(impuls_kzm),       OldImpToNewStr(0  , this));
-    m.putEx(_ElementPropName[3], OldImpToNewStr(impuls_kmu, this), GetRealImp(impuls_kmu),       OldImpToNewStr(0  , this));
-    m.putEx(_ElementPropName[4], OldImpToNewStr(impuls_mu , this), GetRealImp(impuls_mu),        OldImpToNewStr(0  , this));
+    m.putEx(_ElementPropName[0], OldImpToNewStr(impuls_plus  , this), (void*)GetRealImp(impuls_plus),   OldImpToNewStr(0  , this));
+    m.putEx(_ElementPropName[1], OldImpToNewStr(impuls_mnus  , this), (void*)GetRealImp(impuls_mnus),   OldImpToNewStr(0  , this));
+    m.putEx(_ElementPropName[2], OldImpToNewStr(impuls_kzm, this), (void*)GetRealImp(impuls_kzm),       OldImpToNewStr(0  , this));
+    m.putEx(_ElementPropName[3], OldImpToNewStr(impuls_kmu, this), (void*)GetRealImp(impuls_kmu),       OldImpToNewStr(0  , this));
+    m.putEx(_ElementPropName[4], OldImpToNewStr(impuls_mu , this), (void*)GetRealImp(impuls_mu),        OldImpToNewStr(0  , this));
     m.put(_ElementPropName[5], name);
 }
 
@@ -250,13 +250,13 @@ void Ways::Get()
 void Ways::GetPropMap(TPropMap &m)
 {
     Element::GetPropMap(m);
-    m.putEx("ï¿½ï¿½impuls_svob", OldImpToNewStr(impuls_svob  , this), GetRealImp(impuls_svob),   OldImpToNewStr(0  , this));
-    m.putEx("ï¿½ï¿½impuls_IR", OldImpToNewStr(impuls_IR  , this), GetRealImp(impuls_IR),   OldImpToNewStr(0  , this));
-    m.putEx("ï¿½ï¿½impuls_predSEIR", OldImpToNewStr(impuls_predSEIR  , this), GetRealImp(impuls_predSEIR),   OldImpToNewStr(0  , this));
+    m.putEx("òñimpuls_svob", OldImpToNewStr(impuls_svob  , this), (void*)GetRealImp(impuls_svob),   OldImpToNewStr(0  , this));
+    m.putEx("òñimpuls_IR", OldImpToNewStr(impuls_IR  , this), (void*)GetRealImp(impuls_IR),   OldImpToNewStr(0  , this));
+    m.putEx("òñimpuls_predSEIR", OldImpToNewStr(impuls_predSEIR  , this), (void*)GetRealImp(impuls_predSEIR),   OldImpToNewStr(0  , this));
     String ss;
     for (int d = 0; d < 2; d++) {
         for (int i = 0; i < 2; i++) {
-            ss = "ï¿½ï¿½IDnext" + IntToStr(d) + IntToStr(i);
+            ss = "îáIDnext" + IntToStr(d) + IntToStr(i);
             m.put(ss, IDnext[d][i], 0);
         }
     }
@@ -264,13 +264,13 @@ void Ways::GetPropMap(TPropMap &m)
 void Ways::SetPropMap(TPropMap &m)
 {
     Element::SetPropMap(m);
-    impuls_svob = NewStrToOldImp(m.get("ï¿½ï¿½impuls_svob").c_str());
-    impuls_IR = NewStrToOldImp(m.get("ï¿½ï¿½impuls_IR").c_str());
-    impuls_predSEIR = NewStrToOldImp(m.get("ï¿½ï¿½impuls_predSEIR").c_str());
+    impuls_svob = NewStrToOldImp(m.get("òñimpuls_svob").c_str());
+    impuls_IR = NewStrToOldImp(m.get("òñimpuls_IR").c_str());
+    impuls_predSEIR = NewStrToOldImp(m.get("òñimpuls_predSEIR").c_str());
     String ss;
     for (int d = 0; d < 2; d++) {
         for (int i = 0; i < 2; i++) {
-            ss = "ï¿½ï¿½IDnext" + IntToStr(d) + IntToStr(i);
+            ss = "îáIDnext" + IntToStr(d) + IntToStr(i);
             IDnext[d][i] = m.geti(ss);
             pNext[d][i]=Stan()->GetObjByID(IDnext[d][i]);
 
@@ -331,8 +331,8 @@ void Ways::HideTrainNumber()
 
 void Ways::SetUstIR(int AIR)
 {
-    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
-    // ï¿½ï¿½ï¿½ï¿½ Pol !=1,2,3 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    // óñòàíàâëèâåò ìèãàíèå êîíòóðà ñòðåëêè
+    // åñëè Pol !=1,2,3 ñòèðàåò
     switch (AIR) {
     case 1: bShowUIR=true; break;//SetStrelShowParams(-1,-1,-1,-1,SV_MIG,SV_MIG); break;
     default: bShowUIR=false; break;//SetStrelShowParams(-1,-1,-1,-1,-1,-1); break;

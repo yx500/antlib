@@ -2,14 +2,14 @@
 #include "aheaders_cpp.h"
 #include "APch.h"
 
-#include "Gorl.h"
-#include "Elem.h"
-#include "Strel.h"
+#include "gorl.h"
+#include "elem.h"
+#include "strel.h"
 #include "scrin.h"
 #include "Vatempl.h"
 #include "Stan.h"
 #include "Svet.h"
-#include "F.h"
+#include "f.h"
 
 #include "propmap.h"
 #include "uParString.h"
@@ -46,7 +46,7 @@ char * Gorl::GetName()
 #define TU 1
 
 int Col_Gorl = 0;
-//int  Size_G = 1;  /* 14.02.2003 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ  */
+//int  Size_G = 1;  /* 14.02.2003 перенёс в класс  */
 
 //extern int nm,ng;
 
@@ -59,13 +59,13 @@ int  Test_KSP(int j, int *Flag_KSP, int *mem_KSP, int C_s)
     for (int i = 0; i < C_s; i++) {
         if (
             (Flag_KSP[i] != 0) &&
-            (Flag_KSP[i] == mem_KSP[j])) acc = 1;//пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            (Flag_KSP[i] == mem_KSP[j])) acc = 1;//подняли флаг занятия по маршруту
     }
     if (acc) return 1;
     return 0;
 }
-/*--------------------------------------------------------------------------пїЅ
-пїЅ    пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ                                                    пїЅ
+/*--------------------------------------------------------------------------¬
+¦    Рисование Горловины                                                    ¦
 L--------------------------------------------------------------------------*/
 
 void Gorl::Go()
@@ -78,7 +78,7 @@ void Gorl::UpdateState()
 //PAComp G;
     //Size_G = MEM.mas;
     if (Size_G > _Size_G) return;
-//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+//Подстановка количества стррелок в горловине
     /*    if(Size_G>10) Size_G = 7;   !!!  */
 //-------------------------------------------
 
@@ -124,12 +124,12 @@ void Gorl::UpdateState()
     }
 
 
-    usFindMarshruts(); /*------пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ -----  */
+    usFindMarshruts(); /*------Поиск установленного и устанавливаемого маршрута -----  */
 
-    usOpredKSP();      /* пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ */// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    usOpredKSP();      /* определение флага ксп */// определение запрещенных маршрутов
 
 
-    /*==========пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ ======================================*/
+    /*==========ОСНОВНОЙ БЛОК ======================================*/
     for (int i = 0; i < gorl[0]->Col_Str; i++) {
         for (int j = 0; j < Size_G; j++) {
             ism[j] = D;
@@ -137,11 +137,11 @@ void Gorl::UpdateState()
             if (gorl[j] == NULL) continue;
             if ((nom[j] = gorl[j]->_Strel[i]) == NULL) {
                 clr0[j] = LIN; itis[j] = D; continue;
-            }/*пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ*/
+            }/*если нет стрелки*/
             /*   if(marsh[j]>=gorl[0]->Col_Mar){ clr0[j]=LIN;itis[j]=D; if((gorl[0]->bit_m)==2)   itis[j]=State[i];  } */
             else {
                 clr0[j] = COLOR_S;
-                /*--пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ----*/
+                /*--Положение----*/
                 switch (gorl[j]->bit_m) {
                 case 1:
                     if (marsh[j] >= gorl[0]->Col_Mar)itis[j] = D;
@@ -151,7 +151,7 @@ void Gorl::UpdateState()
                     itis[j] = State[i];
                     break;
                 }
-                /*--пїЅпїЅпїЅ----*/
+                /*--КЗМ----*/
                 switch (gorl[j]->bit_kzm) {
                 case 1:
                     if (f(gorl[j]->impuls_kzm) == 1)clr0[j] = COLOR_SET;
@@ -162,7 +162,7 @@ void Gorl::UpdateState()
                     if (f(nom[j]->impuls_kzm) == 33)clr0[j] = BIRUZOVIJ;
                     break;
                 }
-                /*--пїЅпїЅпїЅ----*/
+                /*--КСП----*/
                 switch (gorl[j]->bit_ksp) {
                 case 1:
                     if (f(gorl[j]->impuls_ksp) == 1) clr0[j] = COLOR_B;
@@ -173,40 +173,40 @@ void Gorl::UpdateState()
                     if (f(nom[j]->impuls_busi) == 33)clr0[j] = BIRUZOVIJ;
                     break;
                 }
-            }  /* пїЅпїЅпїЅпїЅпїЅ else */
+            }  /* конец else */
             if ((marsh_y[j] < gorl[0]->Col_Mar) && (marsh_y[j] >= 0)) ism[j] = gorl[j]->Matr[marsh_y[j]][i];
             else   ism[j] = D;
             if (marsh_u[j] != -1) isu[j] = gorl[j]->Matr[marsh_u[j]][i];
             else   isu[j] = D;
 
-            usFiltrs(i, j); /*=========пїЅпїЅпїЅпїЅпїЅпїЅпїЅ================*/
+            usFiltrs(i, j); /*=========фильтры================*/
 
-        }/* пїЅпїЅпїЅпїЅпїЅ for пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ*/
+        }/* конец for по горловинам*/
 
-        usOutStrel(); /*-----пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ---*/
+        usOutStrel(); /*-----Логическое сложение стрелок ---*/
     }
 
 
-    /*==========пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ==============================*/
+    /*==========ВСЕ ОСНОВНОЙ БЛОК==============================*/
 
-    usOutSvet(); /*----пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ-----------------------------------------*/
+    usOutSvet(); /*----Вывод светофоров-----------------------------------------*/
 
 
-    /*------------пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ----------------------------------------*/
+    /*------------Все Вывод----------------------------------------*/
 }
 
 void Gorl::usFindMarshruts()
 {
-    /*------пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ -----  */
+    /*------Поиск установленного и устанавливаемого маршрута -----  */
     PStrel0 stre;
     int priznak_2_marsh;
     switch (gorl[0]->bit_m) {
     case 1:
         for (int j = 0; j < Size_G; j++) {
-            //   20/03/2000 - пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-            //   пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-            // пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            //   20/03/2000 - решение проблемы если более одного маршрута
+            //   при маршрутном управлении
+            // запоминаем первый в признак
+            // а потм проверяем
             priznak_2_marsh = -1;
             for (marsh[j] = 0; marsh[j] < gorl[0]->Col_Mar; marsh[j]++) {
                 if (f(gorl[j]->impuls_km[marsh[j]]) == 1) {
@@ -239,7 +239,7 @@ void Gorl::usFindMarshruts()
             }
             gorl[j]->tu_marh=0;
             Out_Info_(_Diag, 0,0,0);
-            //          Out_Info_(_Diag, "пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ","пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ",0);
+            //          Out_Info_(_Diag, "Не прошел ","Маршрут ",0);
             }
             */
 
@@ -253,14 +253,14 @@ void Gorl::usFindMarshruts()
         }
         break;
     case 2:
-        /*---пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ State ----*/
+        /*---формирование State ----*/
         for (int i = 0; i < gorl[0]->Col_Str; i++)State[i] = D;
         for (int j = 0; j < Size_G; j++) {
             for (int i = 0; i < gorl[0]->Col_Str; i++) {
                 if (gorl[j] == NULL) continue;
                 if ((stre = gorl[j]->_Strel[i]) == NULL) {
                     continue;
-                }/*пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ*/
+                }/*если нет стрелки*/
                 else {
 
                     if ((stre->GetType() == SzT) || (stre->GetType() == SzB)) {
@@ -276,7 +276,7 @@ void Gorl::usFindMarshruts()
                 }
             }
         }
-        /*--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ State c Matr   ----*/
+        /*--- Сравнение State c Matr   ----*/
         for (int j = 0; j < Size_G; j++) {
             if (gorl[j] == NULL) continue;
             for (marsh[j] = 0; marsh[j] < gorl[0]->Col_Mar; marsh[j]++) {
@@ -287,7 +287,7 @@ void Gorl::usFindMarshruts()
                     if (!((gorl[j]->Matr[marsh[j]][i] == D) ||
                             (gorl[j]->Matr[marsh[j]][i] == H))) {
                         if (State[i] != gorl[j]->Matr[marsh[j]][i])break;
-                    } else/*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ */ Count_empty++;
+                    } else/*пропустить пустую запись */ Count_empty++;
                 }
                 if ((i >= gorl[0]->Col_Str) && (Count_empty != gorl[0]->Col_Str))break;
             }
@@ -302,7 +302,7 @@ void Gorl::usFindMarshruts()
         }
         break;
     };
-    /*______________________пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ_______________________________*/
+    /*______________________все поиск_______________________________*/
 }
 
 void Gorl::usOpredKSP()
@@ -335,7 +335,7 @@ void Gorl::usOpredKSP()
         for (int j = 0; j < Size_G; j++) {
             clr0[j] = 0; itis[j] = D;
             if (gorl[j] == NULL) continue;
-            if ((nom[j] = gorl[j]->_Strel[i]) == NULL)continue;/*пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ*/
+            if ((nom[j] = gorl[j]->_Strel[i]) == NULL)continue;/*если нет стрелки*/
             if (gorl[0]->bit_ksp == 1) {
                 if (f(gorl[j]->impuls_ksp) == 1) busi[j] = 1; continue;
             }
@@ -354,18 +354,18 @@ void Gorl::usOpredKSP()
             }
         }
     }
-// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+// определяем есть ли вообще маршут в горловине
     for (int j = 0; j < Size_G; j++) {
         if (marsh[j] < gorl[0]->Col_Mar)
             priznak_marsh_in_fiz_gorl_for_filter_kzm = 1;
 
     }
 
-    /*------ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ ------*/
+    /*------ конец этого ------*/
 }
 
 void Gorl::usFiltrs(int i, int j)
-/*=========пїЅпїЅпїЅпїЅпїЅпїЅпїЅ================*/
+/*=========фильтры================*/
 {
     PStrel0 stre;
     if (!AO->USE_GORL_OTCECH) {
@@ -380,10 +380,10 @@ void Gorl::usFiltrs(int i, int j)
                  (gorl[j]->bit_ksp == 1))
            )                      clr0[j] = LIN;
 
-           /*пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ=1*/
-        /*пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ(пїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
-        пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ*/
-        // пїЅпїЅ пїЅпїЅ
+           /*Фильтр ксп для м=1*/
+        /*не забудь что возможен только один маршрут в горловине(секущий)
+        в этом случае надо проверить на наличие маршрута*/
+        // ХМ ХМ
         if (
             (marsh[j] >= gorl[0]->Col_Mar) &&
             (gorl[j]->bit_ksp == 2) &&
@@ -401,26 +401,26 @@ void Gorl::usFiltrs(int i, int j)
             (Test_KSP(i, Flag_KSP_, mem_KSP, gorl[0]->Col_Str)) ||
             (((itis[j] == D) || (itis[j] == H)) &&
              (gorl[j]->bit_ksp == 1))
-        )                      clr0[j] = LIN; /*пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ=2*/
+        )                      clr0[j] = LIN; /*Фильтр ксп для м=2*/
 
         if (
             (((itis[j] == D) || (itis[j] == H)) &&
              (gorl[j]->bit_kzm == 1) &&
              (clr0[j] == COLOR_SET))
-            //  пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ  пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-            // пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            //  А вот попробую это исправить
+            // дополнив проверкой  что нет мершрута
+            // что бы при потере маршрута
+            // оставалось замыкание
             && (marsh[j] < gorl[0]->Col_Mar)
-        )clr0[j] = LIN; /*пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ*/
+        )clr0[j] = LIN; /*Фильтр кзп*/
 
         if (
-            //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
-            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
-            // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 25/02/2000
-            // (пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ )
-            //  пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-            // пїЅпїЅ ! пїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+            //попробуем так
+            // попробуем этак
+            // две нижнии строчки закоментарены в Могилеве 25/02/2000
+            // (иначе пропадало занятие при потере маршрута на горке )
+            //  Оно отсекало занятие по другим маршрутам в этой физ горловине
+            // хм ! И так и этак не правильно
             //    /*
 
             (
@@ -437,31 +437,31 @@ void Gorl::usFiltrs(int i, int j)
                 (clr0[j] == COLOR_SET))
         ) clr0[j] = LIN;
 
-        /*пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ */
+        /*Фильтр кзп для Люды */
         if
         (((itis[j] == D) || (itis[j] == H)) &&
                 (gorl[j]->bit_m == 1) &&
                 (clr0[j] == COLOR_S))
-            clr0[j] = LIN; /*пїЅпїЅпїЅпїЅпїЅпїЅ m*/
+            clr0[j] = LIN; /*Фильтр m*/
 
 
-        //  22/10/2002  пїЅпїЅпїЅпїЅпїЅпїЅпїЅ !
+        //  22/10/2002  Горький !
         /*
-        пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ !
-        пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 2-пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-        пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ ;-)
-        пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 2-пїЅ 3-пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ 1пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-        пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ  пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ;-)
-        пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ !
-        пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ! пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.....
-        пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ?
-        пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ?
-        пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ?
-        пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅ  ...   пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 6 пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ?)
-        пїЅпїЅ
-        пїЅпїЅпїЅ
-        пїЅпїЅпїЅ-пїЅпїЅ    пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
-        пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        Вот и ответ !
+        Невозможно при потере маршрута на 2-х путке верно определить
+        что надо отсекать а что нет ;-)
+        все очень просто - представь 2-е 3-х стрелочные секции подряд и после них 1стрелку
+        стрелка потеряла контроль - все невозможно определить как  рисовать секции ;-)
+        задача не имеет решения !
+        Отсечка ! Только отсечка.....
+        вопрос что делать с светофорами отправления ?
+        слежением ?
+        маршрутным управлением ?
+        секционым занятием (ага  ...   нарисуй отсечку на 6 стрелок ?)
+        МУ
+        КМУ
+        эхе-хе    думать надо
+        вот еслиб заменить
         */
 
         if ((marsh[j] >= gorl[0]->Col_Mar) &&
@@ -478,15 +478,15 @@ void Gorl::usFiltrs(int i, int j)
              (gorl[j]->Matr[marsh[j]][i] == H)) &&
 
             ((clr0[j] == COLOR_S) || (clr0[j] == COLOR_SET)))
-            clr0[j] = LIN;/*пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅ=2*/ /*????*/
+            clr0[j] = LIN;/*Фильтр для м=2*/ /*????*/
     } else {
         //     if()
 
 
-        //  пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ !
-        //  пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+        //  Значить так !
+        //  Новый фильтр
 
-        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ.пїЅпїЅ
+        // забыли про МУ.КМ
 
         if ((stre = gorl[j]->_Strel[i]) != NULL) {
             if (stre->nomer == 33) {
@@ -516,7 +516,7 @@ void Gorl::usFiltrs(int i, int j)
         }
     }
 
-    //---------  пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ! -----------------------------
+    //---------  Конец фильтра ! -----------------------------
 }
 
 void Gorl::usOutStrel()
@@ -526,7 +526,7 @@ void Gorl::usOutStrel()
     int clr1 = LIN;
     int is = 1;
     PStrel0 nom_s;
-    /*-----пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ---*/
+    /*-----Логическое сложение стрелок ---*/
     is_D = 0; is_P = 0; is_M = 0; is_W = 0;
     clr1 = 0; st1 = 1; st2 = 1; st3 = 1;
     for (int j = 0; j < Size_G; j++) {
@@ -541,7 +541,7 @@ void Gorl::usOutStrel()
             st2 = 5;
         if (ism[j] == W)
             st3 = 5;
-        //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+        //установка маршрута
         if (isu[j] == P)
             st1 = 6;
         if (isu[j] == M)
@@ -552,7 +552,7 @@ void Gorl::usOutStrel()
     if (is_P != 0)is = P;
     if (is_M != 0)is = M;
     if (is_W != 0)is = W;
-    if ((is_P != 0) && (is_M != 0))is = D;      /*пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ  */
+    if ((is_P != 0) && (is_M != 0))is = D;      /*здесь добавить  */
     if ((is_P == 0) && (is_M == 0) && (is_W == 0))is = D;
     clr1 = Lev_clr(clr1);
     //if((is==D)&&(st1!=1))is=P;
@@ -561,7 +561,7 @@ void Gorl::usOutStrel()
         is = W;/*st2=st3;*/
     }
 //   if((is==D)&&(st3!=1)){is=W;st2=5;}
-    /*---------пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ----------------*/
+    /*---------все сложение----------------*/
     nom_s = NULL;
     for (int j = 0; j < Size_G; j++) {
         if (nom[j] != NULL) {
@@ -577,30 +577,30 @@ void Gorl::usOutStrel()
         nom_s->styll3 = st3;
         //nom_s->StateChanged=true;
 
-        //nom_s->Go();   << пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ !!!
+        //nom_s->Go();   << РИСУЕМСЯ САМИ !!!
     }
-} /* пїЅпїЅпїЅпїЅпїЅ for пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ */
+} /* конец for по стрелкам */
 
 void Gorl::usOutSvet()
 {
 
-    /*----пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ-----------------------------------------*/
+    /*----Вывод светофоров-----------------------------------------*/
     int clr1 = LIN;
     PElement  sgn;
-    /*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ*/
-    int clr_svt[Max_Size_Marsh_];/*пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ  пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ*/
+    /*отправление*/
+    int clr_svt[Max_Size_Marsh_];/*сумматор для светофоров  поттом надо переделать*/
     for (int i = 0; i < gorl[0]->Col_Mar; i++) {
         clr_svt[i] = FON;
         //    clr_svt[i]=Clr_SetC(0,0);
         for (int j = 0; j < Size_G; j++) {
-            ///!!!!!  <пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ!
+            ///!!!!!  <БЛЯЯЯЯЯЯЯЯ!
             if (gorl[j] == NULL) continue;
             if ((gorl[j]->Sign[i].name != 0) &&
                     (gorl[j]->Sign[i].name[0] != 0) &&
                     (gorl[j]->Sign[i].name[0] != ' ')
                ) {
                 clr1 = Clr_SetC((f(gorl[j]->impuls_ks) == 1) && (i == marsh[j]), gorl[j]->Sign[i].name);
-                if (clr_svt[i] != Clr_SetC(1, gorl[j]->Sign[i].name)) clr_svt[i] = clr1; //??? c пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+                if (clr_svt[i] != Clr_SetC(1, gorl[j]->Sign[i].name)) clr_svt[i] = clr1; //??? c маневрами
             }
         }
     }
@@ -610,14 +610,14 @@ void Gorl::usOutSvet()
         for (int i = 0; i < gorl[0]->Col_Mar; i++) {
             if ((sgn = (PElement)(gorl[j]->Sign[i].nomer)) == NULL)continue;
             else {
-                sgn->clr = clr_svt[i];  //  << пїЅпїЅпїЅ !
+                sgn->clr = clr_svt[i];  //  << ВАУ !
                 //sgn->Get();                      29.08.07
                 //if(MEM.impuls_busi==0){
                 if ((sgn->impuls_busi == 0) && (gorl[j]->impuls_ks == 0)) sgn->clr = FON;
                 sgn->Clear();
                 //sign[j]=f(gorl[j]->impuls_ks);
                 //sgn->StateChanged=true;
-                //sgn->Show(); //  << пїЅпїЅпїЅ !
+                //sgn->Show(); //  << ВАУ !
                 //}else{
                 //sign[j]=f(MEM.impuls_busi);
                 //}
@@ -625,7 +625,7 @@ void Gorl::usOutSvet()
         }
     }
     /*---------------------*/
-    /*пїЅпїЅпїЅпїЅпїЅ*/
+    /*прием*/
     for (int j = 0; j < Size_G; j++) {
         if (gorl[j] == NULL) continue;
         if ((sgn = (PElement)(gorl[j]->Sign_i.nomer)) == NULL)continue;
@@ -823,7 +823,7 @@ void Gorl::Load(FILE *file)
 
         /*-------------------------------------------------*/
     } else {
-        if (gorl[0] == NULL) Qui("пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ", 1, 0);
+        if (gorl[0] == NULL) Qui("нет памяти для горловин", 1, 0);
 
         fread(gorl[0], sizeof(Grl), 1, file);
         if (gorl[0]->nom_fiz > Col_Gorl) Col_Gorl = gorl[0]->nom_fiz;
@@ -918,7 +918,7 @@ void Gorl::GetMarsh(int &Marsh, bool &BUSY, bool &KZM, bool &SvOpen0, bool &SvOp
         //PStrel0 nom[_Size_G]= {0,0,0,0,0,0,0,0,0,0};
         PStrel0 str;
         int Count_empty;
-        /*------пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ -----  */
+        /*------Поиск установленного и устанавливаемого маршрута -----  */
         int priznak_2_marsh;
         switch (gorl[0]->bit_m) {
         case 1:
@@ -935,12 +935,12 @@ void Gorl::GetMarsh(int &Marsh, bool &BUSY, bool &KZM, bool &SvOpen0, bool &SvOp
             if (priznak_2_marsh != -1)  Marsh = priznak_2_marsh;
             break;
         case 2:
-            /*---пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ State ----*/
+            /*---формирование State ----*/
             for (int i = 0; i < gorl[0]->Col_Str; i++)State[i] = D;
             for (int i = 0; i < gorl[0]->Col_Str; i++) {
                 if ((str = gorl[0]->_Strel[i]) == NULL) {
                     continue;
-                }/*пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ*/ else {
+                }/*если нет стрелки*/ else {
                     if ((str->GetType() == SzT) || (str->GetType() == SzB)) {
                         State[i] = f(str->impuls_kmu) * 2 + f(str->impuls_mu);
                         if (
@@ -952,7 +952,7 @@ void Gorl::GetMarsh(int &Marsh, bool &BUSY, bool &KZM, bool &SvOpen0, bool &SvOp
                         State[i] = f(str->impuls_plus) * 2 + f(str->impuls_mnus);
                 }
             }
-            /*--- пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ State c Matr   ----*/
+            /*--- Сравнение State c Matr   ----*/
             int i;
             for (int m = 0; m < gorl[0]->Col_Mar; m++) {
                 Count_empty = 0;
@@ -973,7 +973,7 @@ void Gorl::GetMarsh(int &Marsh, bool &BUSY, bool &KZM, bool &SvOpen0, bool &SvOp
         KZM = true;
         for (int i = 0; i < gorl[0]->Col_Str; i++) {
             str = gorl[0]->_Strel[i];
-            if (str == NULL)continue;/*пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ*/
+            if (str == NULL)continue;/*если нет стрелки*/
             if (gorl[0]->bit_ksp == 1) {
                 if (f(gorl[0]->impuls_ksp) == 1) BUSY = true;
             }
@@ -1023,7 +1023,7 @@ unsigned int  Gorl::GetID(void)
 void Gorl::SetID(unsigned int IDn)
 {
     if (bVirtual) return ;
-    if (gorl[0] != NULL) gorl[0]->ID = (uint16)IDn;
+    if (gorl[0] != NULL) gorl[0]->ID = (unsigned __int16)IDn;
 }
 
 
@@ -1031,27 +1031,27 @@ void Gorl::GetPropMap(TPropMap &m)
 {
     AComp::GetPropMap(m);
 
-    m.put("пїЅпїЅпїЅпїЅпїЅ", gorl[0]->name);
+    m.put("смИМЯ", gorl[0]->name);
 
-    m.put("пїЅпїЅCol_Mar", gorl[0]->Col_Mar);
-    m.put("пїЅпїЅCol_Str", gorl[0]->Col_Str);
-    m.put("пїЅпїЅbit_m", gorl[0]->bit_m);
-    m.put("пїЅпїЅbit_ksp", gorl[0]->bit_ksp);
-    m.put("пїЅпїЅbit_kzm", gorl[0]->bit_kzm);
-    m.put("пїЅпїЅnom_fiz", gorl[0]->nom_fiz);
-    m.putEx("пїЅпїЅimpuls_ksp", gorl[0]->impuls_ksp  , GetRealImp(gorl[0]->impuls_ksp));
-    m.putEx("пїЅпїЅimpuls_kzm", gorl[0]->impuls_kzm  , GetRealImp(gorl[0]->impuls_kzm));
-    m.putEx("пїЅпїЅimpuls_ks", gorl[0]->impuls_ks    , GetRealImp(gorl[0]->impuls_ks));
-    m.putEx("пїЅпїЅimpuls_ks_i", gorl[0]->impuls_ks_i, GetRealImp(gorl[0]->impuls_ks_i));
+    m.put("цфCol_Mar", gorl[0]->Col_Mar);
+    m.put("цфCol_Str", gorl[0]->Col_Str);
+    m.put("цфbit_m", gorl[0]->bit_m);
+    m.put("цфbit_ksp", gorl[0]->bit_ksp);
+    m.put("цфbit_kzm", gorl[0]->bit_kzm);
+    m.put("цфnom_fiz", gorl[0]->nom_fiz);
+    m.putEx("тсimpuls_ksp", gorl[0]->impuls_ksp  , (void*)GetRealImp(gorl[0]->impuls_ksp));
+    m.putEx("тсimpuls_kzm", gorl[0]->impuls_kzm  , (void*)GetRealImp(gorl[0]->impuls_kzm));
+    m.putEx("тсimpuls_ks", gorl[0]->impuls_ks    , (void*)GetRealImp(gorl[0]->impuls_ks));
+    m.putEx("тсimpuls_ks_i", gorl[0]->impuls_ks_i, (void*)GetRealImp(gorl[0]->impuls_ks_i));
 
-    m.put("пїЅпїЅSign_i_name", gorl[0]->Sign_i.name);
+    m.put("смSign_i_name", gorl[0]->Sign_i.name);
 
     TParString ps("", ";");
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    // сохраняем номера стрелок
     ps.SetVal("");
     for (int j = 0; j < gorl[0]->Col_Str; j++) ps.SetInt(j, gorl[0]->Strel_N[j]);
-    m.put("пїЅпїЅпїЅ", ps.ResultStr());
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ   +;+;+;пїЅпїЅ;impuls_m;impuls_km
+    m.put("СТР", ps.ResultStr());
+    // сохраняем матрицу   +;+;+;Нд;impuls_m;impuls_km
     int cm = gorl[0]->Col_Mar;
     for (int i = 0; i < cm; i++) {
         ps.SetVal("");
@@ -1069,33 +1069,33 @@ void Gorl::SetPropMap(TPropMap &m)
 {
     AComp::SetPropMap(m);
 
-    strncpy(gorl[0]->name, m.get("пїЅпїЅпїЅпїЅпїЅ").c_str(), 6);
-    int cm = m.geti("пїЅпїЅCol_Mar");
-    int cs = m.geti("пїЅпїЅCol_Str");
+    strncpy(gorl[0]->name, m.get("смИМЯ").c_str(), 6);
+    int cm = m.geti("цфCol_Mar");
+    int cs = m.geti("цфCol_Str");
     if ((gorl[0]->Col_Mar != cm) || (gorl[0]->Col_Str != cs)) {
         Destroy();
         gorl[0]->Col_Mar = cm;
         gorl[0]->Col_Str = cs;
         Creat();
     }
-    // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    gorl[0]->bit_m             = m.geti("пїЅпїЅbit_m");
-    gorl[0]->bit_ksp           = m.geti("пїЅпїЅbit_ksp");
-    gorl[0]->bit_kzm           = m.geti("пїЅпїЅbit_kzm");
-    gorl[0]->nom_fiz           = m.geti("пїЅпїЅnom_fiz");
-    gorl[0]->impuls_ksp        = m.geti("пїЅпїЅimpuls_ksp");
-    gorl[0]->impuls_kzm        = m.geti("пїЅпїЅimpuls_kzm");
-    gorl[0]->impuls_ks         = m.geti("пїЅпїЅimpuls_ks");
-    gorl[0]->impuls_ks_i       = m.geti("пїЅпїЅimpuls_ks_i");
+    // при изменении размеров - пересоздаем
+    gorl[0]->bit_m             = m.geti("цфbit_m");
+    gorl[0]->bit_ksp           = m.geti("цфbit_ksp");
+    gorl[0]->bit_kzm           = m.geti("цфbit_kzm");
+    gorl[0]->nom_fiz           = m.geti("цфnom_fiz");
+    gorl[0]->impuls_ksp        = m.geti("тсimpuls_ksp");
+    gorl[0]->impuls_kzm        = m.geti("тсimpuls_kzm");
+    gorl[0]->impuls_ks         = m.geti("тсimpuls_ks");
+    gorl[0]->impuls_ks_i       = m.geti("тсimpuls_ks_i");
 
-    strncpy(gorl[0]->Sign_i.name, m.get("пїЅпїЅSign_i_name").c_str(), 6);
+    strncpy(gorl[0]->Sign_i.name, m.get("смSign_i_name").c_str(), 6);
 
     TParString ps("", ";");
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
-    ps.SetVal(m.get("пїЅпїЅпїЅ"));
+    // загружаем номера стрелок
+    ps.SetVal(m.get("СТР"));
     for (int j = 0; j < gorl[0]->Col_Str; j++)
         gorl[0]->Strel_N[j] = (char)ps.GetInt(j, 0);
-    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ   +;+;+;пїЅпїЅ;impuls_m;impuls_km
+    // загружаем матрицу   +;+;+;Нд;impuls_m;impuls_km
     for (int i = 0; i < cm; i++) {
         ps.SetVal(m.get("M" + IntToStr(i)));
         for (int j = 0; j < gorl[0]->Col_Str; j++)
