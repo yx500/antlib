@@ -18,8 +18,7 @@ char Root_Dir[256];
 const char* FullYchFileName(const char* fn)
 {
     static string name;
-    name = string(Ych_Dir)
-           + fn + ".ych";
+    name = string(Ych_Dir) + fn + ".ych";
     return name.c_str();
 }
 //---------------------------------------------------------------------------
@@ -32,8 +31,7 @@ void  SetYchDir(const char* dir)
 const char* FullStaFileName(const char* fn)
 {
     static string name;
-    name = string(Sta_Dir)
-           + fn + ".sta";
+    name = string(Sta_Dir) + fn + ".sta";
     return name.c_str();
 }
 //---------------------------------------------------------------------------
@@ -46,8 +44,7 @@ void  SetStaDir(const char* dir)
 const char* FullDatFileName(const char* fn)
 {
     static string name;
-    name = string(Dat_Dir)
-           + fn;
+    name = string(Dat_Dir) + fn;
     return name.c_str();
 }
 //---------------------------------------------------------------------------

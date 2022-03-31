@@ -3,11 +3,11 @@
 #SOURCES += $$files($$PWD/*.cpp)
 
 HEADERS += \
-        bgi.h \
-        winpalet.h \
+        $$PWD/bgi.h \
+        $$PWD/winpalet.h \
 
 
 
 
 SOURCES += \
-        winpalet.cpp \
+        $$PWD/winpalet.cpp \
