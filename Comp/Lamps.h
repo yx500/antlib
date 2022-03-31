@@ -50,10 +50,7 @@ public:
     int8 NKp;
     int8 NGr;
     int8 NOb;
-    //byte MyStat5; //  Выборность
     __tLStat    *LS;
-    //tLStat  LastLS;
-    //tLStat  LSED;
     __tLStat  FirstLS;
     TGrpahExElem GrpahExData;
     Lamp();

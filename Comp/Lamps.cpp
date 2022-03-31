@@ -458,7 +458,7 @@ void  Lam4::Show()
 {
     Strel::Show();
 
-    byte sdvig_dla_star_eng = 0;
+    bool sdvig_dla_star_eng = false;
     int cc = 0;
     int FlHid = 0;
     int kv = 0;
@@ -492,7 +492,7 @@ void  Lam4::Show()
             (!strcmp("*¬‚Ó‰", name)) ||
             (!strcmp("*ƒ√¿" , name)) ||
             (!strcmp("*œ“Œ" , name))
-        )  sdvig_dla_star_eng = 1 ;
+        )  sdvig_dla_star_eng = true ;
         kv = 1;
         c3 = 1;
 

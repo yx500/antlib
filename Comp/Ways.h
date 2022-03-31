@@ -12,14 +12,14 @@ public:
   int LenUV;
   int styll1;
   int clrp;
-  //byte  *YouFishk;
+
   Way();
 
   virtual void UpdateState();
   virtual void  Show();
   virtual void GetNumberPosition(int &X, int &Y, int Width, int Height, int direct);
-  TYP  GetType();//{return  WAY;};
-  UNIT GetUnit();//{return WAYS;};
+  TYP  GetType();
+  UNIT GetUnit();
   virtual void ChangeMarkerXY(int iMarker,int aX,int aY);
   virtual int GetMarkerCount(){return 2;};
   virtual void GetMarkerPoint(int iMarker,int &aX,int &aY);
@@ -65,7 +65,7 @@ class Bl_uh : public Strel {
 public:
   virtual void  Show();
   virtual void GetNumberPosition(int &X, int &Y, int Width, int Height, int direct);
-  TYP  GetType();//{return BL_UH;}
+  TYP  GetType();
   UNIT GetUnit() {
     return STAT ;
   };

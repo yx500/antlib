@@ -81,10 +81,9 @@ const char *GetTypeName(AComp * AC)
         if (B != 0) return _BASHTypeName[B->tip];
     }
     int ind = _CommonTypeInd[AType];
-    if (ind == _ctnon) {
+    if (ind == _ctnon)
         return Com_Nam[AType];
-    }
-    return _CommonTypeName[_CommonTypeInd[AType]];
+    return _CommonTypeName[ind];
 }
 
 const char * GetTypeAndName(AComp * AC)
