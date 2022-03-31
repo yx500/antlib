@@ -55,24 +55,24 @@ void TPropMap::putOEM(const String& stKey, String stVal)
     put(stKey, String(tmp));
 }
 //---------------------------------------------------------------------------
-String TPropMap::getEx(const String& stKey, void ** ptr)
+String TPropMap::getEx(const String& stKey, int& ptr)
 {
     _Props::Elem* i = _p.ElemOf(stKey);
     if (i) {
-        *ptr = i->Obj;
+        ptr = i->Obj;
         return i->lVal;
     }
-    ptr = NULL;
+    ptr = 0;
     return "";
 }
 //---------------------------------------------------------------------------
-void*  TPropMap::getPtr(const String& stKey)
+int  TPropMap::getPtr(const String& stKey)
 {
     _Props::Elem* i = _p.ElemOf(stKey);
-    return i ? i->Obj : NULL;
+    return i ? i->Obj : 0;
 }
 //---------------------------------------------------------------------------
-void TPropMap::putEx(const String& stKey, String stVal, void *ptr)
+void TPropMap::putEx(const String& stKey, String stVal, int ptr)
 {
     _Props::Elem* i = _p.ElemOf(stKey, true);
     i->lKey = stKey;
@@ -80,7 +80,7 @@ void TPropMap::putEx(const String& stKey, String stVal, void *ptr)
     i->Obj = ptr;
 }
 //---------------------------------------------------------------------------
-void TPropMap::putEx(const String& stKey, String stVal, void * ptr, String stValDef)
+void TPropMap::putEx(const String& stKey, String stVal, int ptr, String stValDef)
 {
     if ((bNotPutDefault) && (stVal == stValDef)) {
         _Props::Elem* i = _p.ElemOf(stKey);
@@ -169,8 +169,8 @@ String  TPropMap::GetP(const String& stKey)
 //---------------------------------------------------------------------------
 void TPropMap::addpropmap(TPropMap & pm)
 {
-    for (int i = 0; i < pm.ItemsCount; i++)
-        put(pm.Keys[i], pm.Val[i]);
+    for (int i = 0; i < pm.GetItemsCount(); i++)
+        put(pm.GetKeys(i), pm.GetVal(i));
 }
 //---------------------------------------------------------------------------
 void TPropMap::putpropmapstr(char * sztext)

@@ -77,16 +77,16 @@ void Svet_0::GetPropMap(TPropMap &m)
     m.put(_SvetPropName[ 0], Razmer[0], 0);
     m.put(_SvetPropName[ 1], Razmer[1], 0);
     m.put(_SvetPropName[ 2], Stek, 0);
-    m.putEx(_SvetPropName[3], OldImpToNewStr(impuls_yach, this), (void*)GetRealImp(impuls_yach),  OldImpToNewStr(0, this));
+    m.putEx(_SvetPropName[3], OldImpToNewStr(impuls_yach, this), GetRealImp(impuls_yach),  OldImpToNewStr(0, this));
     m.put(_SvetPropName[ 4], bZAKRKRA,0);
     m.put(_SvetPropName[ 5], yach_sdvig,0);
-    m.putEx(_SvetPropName[6], OldImpToNewStr(impuls_block, this), (void*)GetRealImp(impuls_block),  OldImpToNewStr(0, this));
-    m.putEx(_SvetPropName[7], OldImpToNewStr(impuls_jelt, this), (void*)GetRealImp(impuls_jelt),  OldImpToNewStr(0, this));
-    m.putEx(_SvetPropName[8], OldImpToNewStr(impuls_jeltzel, this), (void*)GetRealImp(impuls_jeltzel),  OldImpToNewStr(0, this));
-    m.putEx(_SvetPropName[9], OldImpToNewStr(impuls_neispr2, this), (void*)GetRealImp(impuls_neispr2),  OldImpToNewStr(0, this));
+    m.putEx(_SvetPropName[6], OldImpToNewStr(impuls_block, this), GetRealImp(impuls_block),  OldImpToNewStr(0, this));
+    m.putEx(_SvetPropName[7], OldImpToNewStr(impuls_jelt, this), GetRealImp(impuls_jelt),  OldImpToNewStr(0, this));
+    m.putEx(_SvetPropName[8], OldImpToNewStr(impuls_jeltzel, this), GetRealImp(impuls_jeltzel),  OldImpToNewStr(0, this));
+    m.putEx(_SvetPropName[9], OldImpToNewStr(impuls_neispr2, this), GetRealImp(impuls_neispr2),  OldImpToNewStr(0, this));
     m.put(_SvetPropName[10], bNiz, 0);
-    m.putEx(_SvetPropName[11], OldImpToNewStr(impuls_aum_a, this), (void*)GetRealImp(impuls_aum_a),  OldImpToNewStr(0, this));
-    m.putEx(_SvetPropName[12], OldImpToNewStr(impuls_aum_ust, this), (void*)GetRealImp(impuls_aum_ust),  OldImpToNewStr(0, this));
+    m.putEx(_SvetPropName[11], OldImpToNewStr(impuls_aum_a, this), GetRealImp(impuls_aum_a),  OldImpToNewStr(0, this));
+    m.putEx(_SvetPropName[12], OldImpToNewStr(impuls_aum_ust, this), GetRealImp(impuls_aum_ust),  OldImpToNewStr(0, this));
 
 
 }

@@ -25,8 +25,8 @@ struct St_Dat {
     short int  Nom;             /*номер станции */
     char filename[13];    /*имя файла     */
     char descriptor[13];  /*имя станции   */
-    byte MUL_X[2];        /*масштабный множитель   по X */
-    byte MUL_Y[2];        /*масштабный множитель   по Y */
+    int8 MUL_X[2];        /*масштабный множитель   по X */
+    int8 MUL_Y[2];        /*масштабный множитель   по Y */
     short int  X_begin[2];      /*привязка по  X  */
     short int  Y_begin[2];      /*привязка по  Y  */
 };

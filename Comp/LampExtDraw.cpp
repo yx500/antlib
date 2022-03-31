@@ -336,7 +336,7 @@ void TLED30::GetPropMap(TPropMap &m)
         itoa(i + 1, ss, 10);
         PropName = PropName + ss;
         //if ((MOD==ED)||(imp[i]!=0))
-        m.putEx(PropName.c_str(), OldImpToNewStr(imp[i]  , this), (void*)GetRealImp(imp[i]), OldImpToNewStr(0, this));
+        m.putEx(PropName.c_str(), OldImpToNewStr(imp[i]  , this), GetRealImp(imp[i]), OldImpToNewStr(0, this));
     }
 
 

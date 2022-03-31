@@ -130,7 +130,7 @@ void tGRC0::GetPropMap(TPropMap &m)
     TY_Strel::GetPropMap(m);
     m.put(_GRC_0_PropName[0], GetGorElemType());
     m.put(_GRC_0_PropName[1], GorElemTypeName[GetGorElemType()].c_str());
-    m.putEx(_GRC_0_PropName[2], OldImpToNewStr(impuls_busi, this), (void*)GetRealImp(impuls_busi));
+    m.putEx(_GRC_0_PropName[2], OldImpToNewStr(impuls_busi, this), GetRealImp(impuls_busi));
 
     m.put(_GRC_0_PropName[3], MinWay);
     m.put(_GRC_0_PropName[4], MaxWay);
@@ -148,8 +148,8 @@ void tGRC0::GetPropMap(TPropMap &m)
     m.put(_GRC_0_PropName[11], bUseGAC);
     m.put(_GRC_0_PropName[12], MinWay1,0);
     m.put(_GRC_0_PropName[13], MaxWay1,0);
-    m.putEx(_GRC_0_PropName[14], OldImpToNewStr(impuls_sv[0], this), (void*)GetRealImp(impuls_sv[0]));
-    m.putEx(_GRC_0_PropName[15], OldImpToNewStr(impuls_sv[1], this), (void*)GetRealImp(impuls_sv[1]));
+    m.putEx(_GRC_0_PropName[14], OldImpToNewStr(impuls_sv[0], this), GetRealImp(impuls_sv[0]));
+    m.putEx(_GRC_0_PropName[15], OldImpToNewStr(impuls_sv[1], this), GetRealImp(impuls_sv[1]));
 
 }
 void tGRC0::SetPropMap(TPropMap &m)
@@ -476,10 +476,10 @@ void tG_Strel_Y::GetPropMap(TPropMap &m)
 {
     //Y_Strel_2.GetPropMap(m);
     tGRC0::GetPropMap(m);
-    m.putEx(_G_Strel_YPropName[0], OldImpToNewStr(impuls_plus, this), (void*)GetRealImp(impuls_plus), OldImpToNewStr(0, this));
-    m.putEx(_G_Strel_YPropName[1], OldImpToNewStr(impuls_mnus, this), (void*)GetRealImp(impuls_mnus), OldImpToNewStr(0, this));
+    m.putEx(_G_Strel_YPropName[0], OldImpToNewStr(impuls_plus, this), GetRealImp(impuls_plus), OldImpToNewStr(0, this));
+    m.putEx(_G_Strel_YPropName[1], OldImpToNewStr(impuls_mnus, this), GetRealImp(impuls_mnus), OldImpToNewStr(0, this));
     for (int i = 0; i < 8; i++)
-        m.putEx(_G_Strel_YPropName[i+2], OldImpToNewStr(impuls_pr[i], this), (void*)GetRealImp(impuls_pr[i]), OldImpToNewStr(0, this));
+        m.putEx(_G_Strel_YPropName[i+2], OldImpToNewStr(impuls_pr[i], this), GetRealImp(impuls_pr[i]), OldImpToNewStr(0, this));
     for (int i = 0; i < 2; i++)
         m.put(_G_Strel_YPropName[i+10], TU_pr[i], 0);
 
@@ -493,8 +493,8 @@ void tG_Strel_Y::GetPropMap(TPropMap &m)
     m.put(_G_Strel_YPropName[18], fevFormula2St(frm_blok), "");
     m.put(_G_Strel_YPropName[19], StrelPrizak[0], 0);
     m.put(_G_Strel_YPropName[20], StrelPrizak[1], 0);
-    m.putEx(_G_Strel_YPropName[21], OldImpToNewStr(impuls_uvk_gac, this), (void*)GetRealImp(impuls_uvk_gac), OldImpToNewStr(0, this));
-    m.putEx(_G_Strel_YPropName[22], OldImpToNewStr(impuls_uvk_str, this), (void*)GetRealImp(impuls_uvk_str), OldImpToNewStr(0, this));
+    m.putEx(_G_Strel_YPropName[21], OldImpToNewStr(impuls_uvk_gac, this), GetRealImp(impuls_uvk_gac), OldImpToNewStr(0, this));
+    m.putEx(_G_Strel_YPropName[22], OldImpToNewStr(impuls_uvk_str, this), GetRealImp(impuls_uvk_str), OldImpToNewStr(0, this));
 
 
 }
@@ -843,8 +843,8 @@ void tG_Strel_1::SetPropMap(TPropMap &m)
 void tG_Strel_1::GetPropMap(TPropMap &m)
 {
     tGRC0::GetPropMap(m);
-    m.putEx(_G_Strel_1PropName[0], OldImpToNewStr(tsMarshrut, this), (void*)GetRealImp(tsMarshrut), OldImpToNewStr(0, this));
-    m.putEx(_G_Strel_1PropName[1],OldImpToNewStr(impuls_mnus,this), (void*)GetRealImp(impuls_mnus),OldImpToNewStr(0,this));
+    m.putEx(_G_Strel_1PropName[0], OldImpToNewStr(tsMarshrut, this), GetRealImp(tsMarshrut), OldImpToNewStr(0, this));
+    m.putEx(_G_Strel_1PropName[1],OldImpToNewStr(impuls_mnus,this), GetRealImp(impuls_mnus),OldImpToNewStr(0,this));
     m.put(_G_Strel_1PropName[2], prSTIK[0], 0);
     m.put(_G_Strel_1PropName[3], prSTIK[1], 0);
     m.put(_G_Strel_1PropName[4], prSTIK[2], 0);
@@ -912,9 +912,9 @@ void tG_Strel_2::SetPropMap(TPropMap &m)
 void tG_Strel_2::GetPropMap(TPropMap &m)
 {
     tG_Strel_1::GetPropMap(m);
-    m.putEx(_G_Strel_2PropName[0], OldImpToNewStr(impuls_plus, this), (void*)GetRealImp(impuls_plus), OldImpToNewStr(0, this));
-    m.putEx(_G_Strel_2PropName[1], OldImpToNewStr(impuls_busy_m[0], this), (void*)GetRealImp(impuls_busy_m[0]), OldImpToNewStr(0, this));
-    m.putEx(_G_Strel_2PropName[2], OldImpToNewStr(impuls_busy_m[1], this), (void*)GetRealImp(impuls_busy_m[1]), OldImpToNewStr(0, this));
+    m.putEx(_G_Strel_2PropName[0], OldImpToNewStr(impuls_plus, this), GetRealImp(impuls_plus), OldImpToNewStr(0, this));
+    m.putEx(_G_Strel_2PropName[1], OldImpToNewStr(impuls_busy_m[0], this), GetRealImp(impuls_busy_m[0]), OldImpToNewStr(0, this));
+    m.putEx(_G_Strel_2PropName[2], OldImpToNewStr(impuls_busy_m[1], this), GetRealImp(impuls_busy_m[1]), OldImpToNewStr(0, this));
 }
 
 
@@ -1488,7 +1488,7 @@ void tG_ZAMI::GetPropMap(TPropMap &m)
     m.put(_GZAM_StrelPropName[i++],  TipStupen);
 
     for (int ii = 0; ii < 11; ii++)
-        m.putEx(_GZAM_StrelPropName[i++], OldImpToNewStr(impuls_zam[ii], this), (void*)GetRealImp(impuls_zam[ii]));
+        m.putEx(_GZAM_StrelPropName[i++], OldImpToNewStr(impuls_zam[ii], this), GetRealImp(impuls_zam[ii]));
 
     m.put(_GZAM_StrelPropName[i++],  DopMashtab);
 
@@ -1754,7 +1754,7 @@ void tG_ZKR::GetPropMap(TPropMap &m)
 {
     tG_RC::GetPropMap(m);
     for (int i = 0; i < _zkr_max_imp; i++)
-        m.putEx(_G_ZKR_PropName[i], OldImpToNewStr(impuls_zkr[i], this), (void*)GetRealImp(impuls_zkr[i]));
+        m.putEx(_G_ZKR_PropName[i], OldImpToNewStr(impuls_zkr[i], this), GetRealImp(impuls_zkr[i]));
     for (int i = 0; i < 13; i++)
         m.put(_G_ZKR_PropName[_zkr_max_imp+i], params_zkr[i]);
 
@@ -1977,9 +1977,9 @@ void tG_OTCLABEL::GetPropMap(TPropMap &m)
     m.put(_G_OTCLABEL_PropName[ii++], Width);
     m.put(_G_OTCLABEL_PropName[ii++], Height);
     for (int i = 0; i < 5; i++)
-        m.putEx(_G_OTCLABEL_PropName[ii++], OldImpToNewStr(imp_descr_start[i], this), (void*)GetRealImp(imp_descr_start[i]));
+        m.putEx(_G_OTCLABEL_PropName[ii++], OldImpToNewStr(imp_descr_start[i], this), GetRealImp(imp_descr_start[i]));
     for (int i = 0; i < 5; i++)
-        m.putEx(_G_OTCLABEL_PropName[ii++], OldImpToNewStr(imp_descr_end[i], this), (void*)GetRealImp(imp_descr_end[i]));
+        m.putEx(_G_OTCLABEL_PropName[ii++], OldImpToNewStr(imp_descr_end[i], this), GetRealImp(imp_descr_end[i]));
 
     m.put(_G_OTCLABEL_PropName[ii++], addr1);
     m.put(_G_OTCLABEL_PropName[ii++], AddrLK1Slot);
@@ -2052,8 +2052,8 @@ void tG_TPLABEL::GetPropMap(TPropMap &m)
     int i = 0;
 
     m.put(_G_TPLABEL_PropName[i++], VesBukv,0);
-    m.putEx(_G_TPLABEL_PropName[i++], OldImpToNewStr(imp_krasn, this), (void*)GetRealImp(imp_krasn),0);
-    m.putEx(_G_TPLABEL_PropName[i++], OldImpToNewStr(imp_krasn_mig, this), (void*)GetRealImp(imp_krasn_mig),0);
+    m.putEx(_G_TPLABEL_PropName[i++], OldImpToNewStr(imp_krasn, this), GetRealImp(imp_krasn),0);
+    m.putEx(_G_TPLABEL_PropName[i++], OldImpToNewStr(imp_krasn_mig, this), GetRealImp(imp_krasn_mig),0);
     m.put(_G_TPLABEL_PropName[i++], ZKR_N,0);
     m.put(_G_TPLABEL_PropName[i++], NoShowVout,0);
     m.put(_G_TPLABEL_PropName[i++], ADAM,"");
@@ -2814,7 +2814,7 @@ void tG_OSY::GetPropMap(TPropMap &m)
     Element::GetPropMap(m);
     int ii = 0;
     m.put(_G_OSY_PropName[ii++], AddrLK);
-    m.putEx(_G_OSY_PropName[ii++], OldImpToNewStr(imp_osy, this), (void*)GetRealImp(imp_osy),       OldImpToNewStr(0, this));
+    m.putEx(_G_OSY_PropName[ii++], OldImpToNewStr(imp_osy, this), GetRealImp(imp_osy),       OldImpToNewStr(0, this));
     m.put(_G_OSY_PropName[ii++], tip);
     m.put(_G_OSY_PropName[ii++], bShowOs);
     m.put(_G_OSY_PropName[ii++], outParam);
@@ -3080,10 +3080,10 @@ void tG_KZP2::GetPropMap(TPropMap &m)
     m.put(_G_KZP2_PropName[ii++], Lmp.Prz[1]);
     m.put(_G_KZP2_PropName[ii++], Lmp.Prz[2]);
 
-    m.putEx(_G_KZP2_PropName[ii++], OldImpToNewStr(Lmp.impuls_busi, this), (void*)GetRealImp(Lmp.impuls_busi),       OldImpToNewStr(0, this));
-    m.putEx(_G_KZP2_PropName[ii++], OldImpToNewStr(Lmp.impuls_plus, this), (void*)GetRealImp(Lmp.impuls_plus),       OldImpToNewStr(0, this));
-    m.putEx(_G_KZP2_PropName[ii++], OldImpToNewStr(Lmp.impuls_mnus, this), (void*)GetRealImp(Lmp.impuls_mnus),       OldImpToNewStr(0, this));
-    m.putEx(_G_KZP2_PropName[ii++], OldImpToNewStr(Lmp.impuls_kzm, this), (void*)GetRealImp(Lmp.impuls_kzm),      OldImpToNewStr(0, this));
+    m.putEx(_G_KZP2_PropName[ii++], OldImpToNewStr(Lmp.impuls_busi, this), GetRealImp(Lmp.impuls_busi),       OldImpToNewStr(0, this));
+    m.putEx(_G_KZP2_PropName[ii++], OldImpToNewStr(Lmp.impuls_plus, this), GetRealImp(Lmp.impuls_plus),       OldImpToNewStr(0, this));
+    m.putEx(_G_KZP2_PropName[ii++], OldImpToNewStr(Lmp.impuls_mnus, this), GetRealImp(Lmp.impuls_mnus),       OldImpToNewStr(0, this));
+    m.putEx(_G_KZP2_PropName[ii++], OldImpToNewStr(Lmp.impuls_kzm, this), GetRealImp(Lmp.impuls_kzm),      OldImpToNewStr(0, this));
 
     m.put(_G_KZP2_PropName[ii++], bOtcMig);
     m.put(_G_KZP2_PropName[ii++], Emask);
@@ -3567,11 +3567,11 @@ void tG_RC_2::GetPropMap(TPropMap &m)
 {
     tG_RC::GetPropMap(m);
     int ii = 0;
-    m.putEx(_tG_RC_2_PropName[ii++], OldImpToNewStr(imp_osy_cnt   , this), (void*)GetRealImp(imp_osy_cnt   ),       OldImpToNewStr(0, this));
-    m.putEx(_tG_RC_2_PropName[ii++], OldImpToNewStr(imp_dso[0], this), (void*)GetRealImp(imp_dso[0]),       OldImpToNewStr(0, this));
-    m.putEx(_tG_RC_2_PropName[ii++], OldImpToNewStr(imp_dso[1], this), (void*)GetRealImp(imp_dso[1]),       OldImpToNewStr(0, this));
-    m.putEx(_tG_RC_2_PropName[ii++], OldImpToNewStr(imp_dso_cnt[0], this), (void*)GetRealImp(imp_dso_cnt[0]),       OldImpToNewStr(0, this));
-    m.putEx(_tG_RC_2_PropName[ii++], OldImpToNewStr(imp_dso_cnt[1], this), (void*)GetRealImp(imp_dso_cnt[1]),       OldImpToNewStr(0, this));
+    m.putEx(_tG_RC_2_PropName[ii++], OldImpToNewStr(imp_osy_cnt   , this), GetRealImp(imp_osy_cnt   ),       OldImpToNewStr(0, this));
+    m.putEx(_tG_RC_2_PropName[ii++], OldImpToNewStr(imp_dso[0], this), GetRealImp(imp_dso[0]),       OldImpToNewStr(0, this));
+    m.putEx(_tG_RC_2_PropName[ii++], OldImpToNewStr(imp_dso[1], this), GetRealImp(imp_dso[1]),       OldImpToNewStr(0, this));
+    m.putEx(_tG_RC_2_PropName[ii++], OldImpToNewStr(imp_dso_cnt[0], this), GetRealImp(imp_dso_cnt[0]),       OldImpToNewStr(0, this));
+    m.putEx(_tG_RC_2_PropName[ii++], OldImpToNewStr(imp_dso_cnt[1], this), GetRealImp(imp_dso_cnt[1]),       OldImpToNewStr(0, this));
 
 }
 void tG_RC_2::SetPropMap(TPropMap &m)

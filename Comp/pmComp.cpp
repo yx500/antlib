@@ -41,11 +41,13 @@ char * __fastcall pmComp::GetProp(char * PropName)
     return S.c_str();
 }
 
-char * __fastcall pmComp::GetPropEx(char * PropName, void ** ptr)
+char * __fastcall pmComp::GetPropEx(char * PropName, int& ptr)
 {
     _m.clear();
     GetPropMap(_m);
-    S = _m.getEx(PropName, ptr);
+    int _ptr;
+    S = _m.getEx(PropName, _ptr);
+    ptr=_ptr;
     return S.c_str();
 }
 

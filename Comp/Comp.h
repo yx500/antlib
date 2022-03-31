@@ -31,7 +31,7 @@ public:
     signed   char  masy;
     signed   char  masx2;
     int            iMacro;
-    int clr, _clr; // используется для прорисовки во многих наследниках
+    int clr, _clr; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     signed   char pr;
     int impuls_busi;
     int fimpuls_busi;
@@ -86,8 +86,8 @@ public:
     int  f(int impls);
     int  GetRealImp(int impls);
     bool  SetNativeImp(int RealImpls, short int &NativeImp);
-    int   GetNativeImp(int RealImpls);
-    char * GetImpulsName(char * PropName);
+    int GetNativeImp(int RealImpls);
+    const char * GetImpulsName(char * PropName);
     //virtual char * GetCompInfo();
 
     virtual void UpdateState();
@@ -102,9 +102,9 @@ public:
 
 
     //virtual int GetUsedImpulsCount();
-    //virtual char *  GetUsedImpulsInfo(int NumImpProp, int &RealOffset); // с 0
+    //virtual char *  GetUsedImpulsInfo(int NumImpProp, int &RealOffset); // пїЅ 0
 
-    //int  GetImpulsInfo(int aimp, const char* &CnlName, int &RealOffset);  // с 0
+    //int  GetImpulsInfo(int aimp, const char* &CnlName, int &RealOffset);  // пїЅ 0
     //char * GetImpulsInfo2(char * PropName, int &RealOffset);
     //char * GetImpulsInfo3(char * PropName, const char* &CnlName, int &RealOffset);
     virtual void ShowTrainNumber();

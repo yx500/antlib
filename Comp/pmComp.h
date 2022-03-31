@@ -24,7 +24,7 @@ public:
     virtual void GetPropMap(TPropMap &m) = 0;
     virtual void SetPropMap(TPropMap &m) = 0;
 
-    char * __fastcall GetPropEx(char * PropName, void ** ptr);
+    char * __fastcall GetPropEx(char * PropName, int& ptr);
     const char * GetPropMapStr(int ver = 1);
     void SetPropMapStr(char * szSrc);
 #ifndef QT_ANTLIB

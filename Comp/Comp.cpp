@@ -273,14 +273,14 @@ void AComp::Go()
     UpdateState();
     Show();
 }
-/*
+
 void AComp::UpdateRCT()
 {
     ClearBgiCoverRect();
     Show();
     RCT = GetBgiCoverRect();
 }
-*/
+
 
 void AComp::Set()
 {
@@ -348,7 +348,7 @@ void AComp::GetPropMap(TPropMap &m)
     m.put(_ACompPropName[4], mas,       0);
     m.put(_ACompPropName[5], masy,      0);
     m.put(_ACompPropName[6], masx2,     0);
-    m.putEx(_ACompPropName[7], OldImpToNewStr(impuls_busi, this), (void*)GetRealImp(impuls_busi), OldImpToNewStr(0, this));
+    m.putEx(_ACompPropName[7], OldImpToNewStr(impuls_busi, this), GetRealImp(impuls_busi), OldImpToNewStr(0, this));
     m.put(_ACompPropName[8], ExtPriz.NoShowYch,       0);
     m.put(_ACompPropName[9], ExtPriz.NoShowStan,      0);
     m.put(_ACompPropName[10], ExtPriz.MEM2,           0);
@@ -365,14 +365,14 @@ void AComp::GetPropMap(TPropMap &m)
            stxy=IntToStr(Pad[i].xy[0]);
            for (int j=1;j<8;j++) stxy=stxy+";"+IntToStr(Pad[i].xy[j]);
         }
-        m.put("ñìPad"+IntToStr(i+1)+"xy",    stxy , "");
+        m.put(String("ñìPad")+IntToStr(i+1)+String("xy"),    stxy , String(""));
         m.put("ñìPad"+IntToStr(i+1)+"cmd",   Pad[i].cmd,    "" );
         m.put("ñìPad"+IntToStr(i+1)+"param", Pad[i].param,  "" );
     }
 
     if (pmRepl != NULL) {
-        for (int i = 0; i < pmRepl->ItemsCount; i++) {
-            m.put(pmRepl->Keys[i], pmRepl->Val[i]);
+        for (int i = 0; i < pmRepl->GetItemsCount(); i++) {
+            m.put(pmRepl->GetKeys(i), pmRepl->GetVal(i));
         }
     }
 
@@ -411,11 +411,11 @@ void AComp::SetPropMap(TPropMap &m)
 
 
 
-    for (int i = 0; i < m.ItemsCount; i++) {
-        String stKeys = m.Keys[i];
-        if ((stKeys.Length() >= 1) && (m.Keys[i][1] == '$')) {
+    for (int i = 0; i < m.GetItemsCount(); i++) {
+        String stKeys = m.GetKeys(i);
+        if ((stKeys.Length() >= 1) && (m.GetKeys(i)[1] == '$')) {
             if (pmRepl == NULL) pmRepl = new TPropMap();
-            pmRepl->put(m.Keys[i], m.Val[i]);
+            pmRepl->put(m.GetKeys(i), m.GetVal(i));
         }
     }
 }
@@ -423,21 +423,13 @@ void AComp::SetPropMap(TPropMap &m)
 
 
 
-char * AComp::GetImpulsName(char * PropName)
+const char * AComp::GetImpulsName(char * PropName)
 {
     static String _S;
-    static TAImpuls _IMP;
     if (_GetSigName_Func == NULL) return "";
-    void *pimp;
     int imp;
-    _S = GetPropEx(PropName, &pimp);
-    imp = (int)pimp;
+    _S = GetPropEx(PropName, imp);
     if (_S == "") return "";
-    /*if (imp==0){
-       _IMP.Parent=this;
-       _IMP.FromString(_S);
-       imp=_IMP.AbsNumber;
-    } */
     _S = _GetSigName_Func(imp);
     return _S.c_str();
 }

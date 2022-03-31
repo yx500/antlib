@@ -17,7 +17,7 @@ public:
     struct Elem {
         String  lKey;
         String  lVal;
-        void*   Obj;
+        int   Obj;
     };
 
 private:
@@ -63,7 +63,7 @@ public:
     void setVal(int i, const String& n) {
         box[i].lVal = n;
     }
-    void setObj(int i, void* o) {
+    void setObj(int i, int o) {
         box[i].Obj = o;
     }
 };
@@ -80,16 +80,28 @@ public:
 
     TPropMap();
     ~TPropMap() {}
+
+    int GetItemsCount() const { return _p.count(); }
+
+    void SetKeys(int i, const String& value);
+    String GetKeys(int i);
+
+    void SetVal(int i, const String& value);
+    String GetVal(int i);
+
+    void SetP(const String& stKey, const String& value);
+    String GetP(const String& stKey);
+
     String get(const String& stKey);
     String getOEM(const String& stKey);
-    String getEx(const String& stKey, void ** ptr);
-    void*   getPtr(const String& stKey);
+    String getEx(const String& stKey, int& ptr);
+    int   getPtr(const String& stKey);
     int geti(const String& stKey) {
         return StrToIntDef(get(stKey), 0);
     }
 
-    void putEx(const String& stKey, String stVal, void * ptr);
-    void putEx(const String& stKey, String stVal, void * ptr, String stValDef);
+    void putEx(const String& stKey, String stVal, int ptr);
+    void putEx(const String& stKey, String stVal, int, String stValDef);
     void putOEM(const String& stKey, String stVal);
 
     void put(const String& stKey, String stVal) {
@@ -141,19 +153,12 @@ public:
     __property String Keys[ int i ]  = { read = GetKeys, write = SetKeys };
     __property String Val[ int i ]  = { read = GetVal, write = SetVal };
     __property String P[String stKey]  = { read = GetP, write = SetP };
+#else
+
 #endif
 
 private:
-    int GetItemsCount() const { return _p.count(); }
 
-    void SetKeys(int i, const String& value);
-    String GetKeys(int i);
-
-    void SetVal(int i, const String& value);
-    String GetVal(int i);
-
-    void SetP(const String& stKey, const String& value);
-    String GetP(const String& stKey);
 };
 
 

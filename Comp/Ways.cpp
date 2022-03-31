@@ -312,13 +312,13 @@ void Plot::SetPropMap(TPropMap &m)
 void Plot::GetPropMap(TPropMap &m)
 {
     Ways::GetPropMap(m);
-    m.putEx("òñimpuls_kzm0", OldImpToNewStr(impuls_kzm0, this), (void*)GetRealImp(impuls_kzm0),       OldImpToNewStr(0, this));
-    m.putEx("òñimpuls_kzm1", OldImpToNewStr(impuls_kzm1, this), (void*)GetRealImp(impuls_kzm1),       OldImpToNewStr(0, this));
-    m.putEx("òñimpuls_svob2", OldImpToNewStr(impuls_svob2, this), (void*)GetRealImp(impuls_svob2),       OldImpToNewStr(0, this));
-    m.putEx("òñimpuls_svob3", OldImpToNewStr(impuls_svob3, this), (void*)GetRealImp(impuls_svob3),       OldImpToNewStr(0, this));
-    m.putEx("òñimpuls_zan4", OldImpToNewStr(impuls_zan4, this), (void*)GetRealImp(impuls_zan4),       OldImpToNewStr(0, this));
-    m.putEx("òñimpuls_zan5", OldImpToNewStr(impuls_zan5, this), (void*)GetRealImp(impuls_zan5),       OldImpToNewStr(0, this));
-    m.putEx("òñimpuls_zan6", OldImpToNewStr(impuls_zan6, this), (void*)GetRealImp(impuls_zan6),       OldImpToNewStr(0, this));
+    m.putEx("òñimpuls_kzm0", OldImpToNewStr(impuls_kzm0, this), GetRealImp(impuls_kzm0),       OldImpToNewStr(0, this));
+    m.putEx("òñimpuls_kzm1", OldImpToNewStr(impuls_kzm1, this), GetRealImp(impuls_kzm1),       OldImpToNewStr(0, this));
+    m.putEx("òñimpuls_svob2", OldImpToNewStr(impuls_svob2, this), GetRealImp(impuls_svob2),       OldImpToNewStr(0, this));
+    m.putEx("òñimpuls_svob3", OldImpToNewStr(impuls_svob3, this), GetRealImp(impuls_svob3),       OldImpToNewStr(0, this));
+    m.putEx("òñimpuls_zan4", OldImpToNewStr(impuls_zan4, this), GetRealImp(impuls_zan4),       OldImpToNewStr(0, this));
+    m.putEx("òñimpuls_zan5", OldImpToNewStr(impuls_zan5, this), GetRealImp(impuls_zan5),       OldImpToNewStr(0, this));
+    m.putEx("òñimpuls_zan6", OldImpToNewStr(impuls_zan6, this), GetRealImp(impuls_zan6),       OldImpToNewStr(0, this));
 }
 
 

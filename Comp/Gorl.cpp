@@ -1039,10 +1039,10 @@ void Gorl::GetPropMap(TPropMap &m)
     m.put("öôbit_ksp", gorl[0]->bit_ksp);
     m.put("öôbit_kzm", gorl[0]->bit_kzm);
     m.put("öônom_fiz", gorl[0]->nom_fiz);
-    m.putEx("òñimpuls_ksp", gorl[0]->impuls_ksp  , (void*)GetRealImp(gorl[0]->impuls_ksp));
-    m.putEx("òñimpuls_kzm", gorl[0]->impuls_kzm  , (void*)GetRealImp(gorl[0]->impuls_kzm));
-    m.putEx("òñimpuls_ks", gorl[0]->impuls_ks    , (void*)GetRealImp(gorl[0]->impuls_ks));
-    m.putEx("òñimpuls_ks_i", gorl[0]->impuls_ks_i, (void*)GetRealImp(gorl[0]->impuls_ks_i));
+    m.putEx("òñimpuls_ksp", gorl[0]->impuls_ksp  , GetRealImp(gorl[0]->impuls_ksp));
+    m.putEx("òñimpuls_kzm", gorl[0]->impuls_kzm  , GetRealImp(gorl[0]->impuls_kzm));
+    m.putEx("òñimpuls_ks", gorl[0]->impuls_ks    , GetRealImp(gorl[0]->impuls_ks));
+    m.putEx("òñimpuls_ks_i", gorl[0]->impuls_ks_i, GetRealImp(gorl[0]->impuls_ks_i));
 
     m.put("ñìSign_i_name", gorl[0]->Sign_i.name);
 
