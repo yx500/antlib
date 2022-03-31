@@ -199,12 +199,12 @@ PAComp VisibleArray::New(TYP type)
 
 
         default:
-            Qui("Неизвестный тип элемента в *.sta ", 1, type);
+            Qui("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ *.sta ", 1, type);
             break;
         }
         if (MakeNewComp && RT) MakeNewComp(RT);
         if (!RT) {
-            Qui("Битый файл или Того не могет быть %)", 1, 0);
+            Qui("пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ %)", 1, 0);
             return NULL;
         } else    {
             RT->pr = 0;
@@ -214,7 +214,7 @@ PAComp VisibleArray::New(TYP type)
         }
 
     } catch (...) {
-        Qui("Ошибка конструктора ", 1, type);
+        Qui("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ", 1, type);
     }
     return NULL;
 }
@@ -227,7 +227,7 @@ VisibleArray::VisibleArray(int ArraySize, Station * pAStation)
     RTGorlCnt = 0;
 }
 
-_fastcall VisibleArray::~VisibleArray()
+VisibleArray::~VisibleArray()
 {
     RemoveAll();
 }
@@ -270,7 +270,7 @@ void VisibleArray::Show(PAComp ac)
 {
     if (((ac->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) ||
             ((ac->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT))) {
-        //ставим точку
+        //пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         tracecoord(ac->X*MUL_X + _X_, ac->Y*MUL_Y + _Y_);
         return;
     }
@@ -346,7 +346,7 @@ void VisibleArray::GoAll()
             continue;
         //if ((ac->ExtPriz.NoShowExtInfo==1)&&(!bShowExtInfo))  continue ;
         if (EachACompPreFun) EachACompPreFun(ac);
-        // злобно будет считать все время!
+        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ!
         ClearBgiCoverRect();
         ac->Go();
         ac->RCT = GetBgiCoverRect();
@@ -398,13 +398,13 @@ int VisibleArray::LoadAll(int NALL, FILE *file, int ut)
         if (ut != GORE) {
             FTellPos = ftell(file);
             fread(&MEM, sizeof(AMemory), 1, file);
-            //дополнительный МЕМ
+            //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
             if ((MEM.ExtPriz.MEM2)) {
                 if (count == NALL) {
                     MEM.ExtPriz.MEM2 = 0;
                 } else {
                     fread(&MEM2, sizeof(AMemory), 1, file);
-                    // проверяем на мусор
+                    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
                     if ((MEM2.type != 29) || (MEM2.name[0] != '~')) {
                         fseek(file, -sizeof(AMemory), SEEK_CUR);
                         memset(&MEM2, 0, sizeof(MEM2));
@@ -448,7 +448,7 @@ int VisibleArray::SaveAll(FILE *file, int ut)
 
 
             fwrite(&MEM, sizeof(AMemory), 1, file);
-            //дополнительный МЕМ
+            //пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
             if ((MEM.ExtPriz.MEM2) && (MEM2.type == 29) && (MEM2.name[0] == '~')) {
                 fwrite(&MEM2, sizeof(AMemory), 1, file);
             }

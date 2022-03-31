@@ -104,7 +104,7 @@ public:
     AComp *  GetObjByName_Unit(const char * CompName, int unit);
     AComp *  GetObjByName_InTypes(const char * CompName, TYP *Types, int TypesCnt);
 
-    const char* Name4Canal(BYTE canal) {
+    const char* Name4Canal(uint8 canal) {
         if (canal > 0 && canal < 255) return ChanelNames[canal];
         else return "none";
     }

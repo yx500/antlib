@@ -513,8 +513,8 @@ void TE_OBJ::Show()
 
 
     font = Prz[1];//Prz[1] ? Prz[1] : 10u;
-    font_size = Prz[0] ? (BYTE)(Prz[0]) : 0;
-    if (CurrentPicture == BG) font_size = Prz[2] ? (BYTE)(Prz[2]) : 0;
+    font_size = Prz[0] ? (uint8)(Prz[0]) : 0;
+    if (CurrentPicture == BG) font_size = Prz[2] ? (uint8)(Prz[2]) : 0;
     if (font_size == 0) {
         if (type_obj == eng_lmp)
             font_size =    _E_def_FontsSzLmp[CurrentPicture]; else

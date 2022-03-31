@@ -1002,7 +1002,7 @@ void  SuperLamp2::Show()
         return;
 
     unsigned int font = Prz[1] ? Prz[1] : 10u;
-    unsigned int font_size = Prz[0] ? (BYTE)(Prz[0]) : 10u;
+    unsigned int font_size = Prz[0] ? (uint8)(Prz[0]) : 10u;
 
 
 

@@ -31,7 +31,7 @@ public:
     int RTGorlCnt;
 
     VisibleArray(int ArraySize, Station * pAStation);
-    _fastcall ~VisibleArray();
+    ~VisibleArray();
 
     PAComp New(TYP type);
     int  Add(PAComp ptr);
