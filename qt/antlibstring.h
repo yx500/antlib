@@ -14,6 +14,7 @@ class AntLibString : public std::string
 public:
   AntLibString():std::string() {}
   AntLibString(const char *s):std::string(s) {}
+  AntLibString(const std::string& s):std::string(s) {}
 
   int Pos(const std::string& subStr) const {
     return this->find_first_of(subStr);
@@ -40,18 +41,21 @@ public:
     }
     return defaultValue;
   }
+
+
+
   AntLibString   UpperCase() const;
   AntLibString   Trim() const;
 
 
 };
-
 using String = AntLibString;
 
-extern String  IntToStr(int Value);
+inline String  IntToStr(int Value) { return std::to_string(Value); }
 extern String  IntToHex(int Value, int Digits);
-extern int  StrToInt(const String& S);
-extern int  StrToIntDef(const String& S, int Default);
+
+inline int StrToInt(const String& s) { return s.ToInt(); }
+inline int StrToIntDef(const String& s, int Default) { return s.ToIntDef(Default); }
 
 
 
