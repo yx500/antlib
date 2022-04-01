@@ -298,6 +298,7 @@ void SwapDACForPrinter()
     DAC[8].pe[0].peBlue = 63;
     Update_DAC();
 }
+
 void RestoreDAC()
 {
     DAC[15] = O15;
@@ -305,10 +306,7 @@ void RestoreDAC()
     Update_DAC();
 }
 
-
-
-
-static __int32   SPPLC[MaxLampType][16] = {
+static int32   SPPLC[MaxLampType][16] = {
     { FON1, FON1, FON1, FON1, FON1, FON1, FON1, FON1,  KRA,  KRA,  KRA,  KRA,   KRA,  KRA, KRA,  KRA},
     { 8   , 9   , 9   , 9   , 9   , 9   , 9   , 9   ,  9  ,  9  ,  2  ,  2  ,   2  ,  2  , 2  ,  2  },
     { 8   , 9   , 9   , 9   , 9   , 9   , 9   , 9   ,  11  , 11  , 11  , 11  ,  11  , 11  , 11  , 11 },

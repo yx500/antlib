@@ -4,8 +4,8 @@
 #include "APch.h"
 
 #include "line.h"
-#include "str_fun.h"
-#include "scrin.h"
+#include "Str_fun.h"
+#include "Scrin.h"
 
 #include "propmap.h"
 
@@ -43,7 +43,7 @@ void Lini::Get()
     MEM.impuls_mnus = 0;
     MEM.impuls_kzm = 0;
     MEM.Nomer = mas_y;
-    memset(MEM.name, '\x0', 16);
+    memset(MEM.name, 0, 16);
     CharToOemBuff(name, MEM.name, 7);
     //strncpy(MEM.name,name,16);
 }

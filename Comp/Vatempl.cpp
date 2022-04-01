@@ -9,16 +9,16 @@
 
 
 
-#include "elem.h"
+#include "Elem.h"
 #include "Ways.h"
 #include "Svet.h"
 #include "Lamps.h"
-#include "strel.h"
+#include "Strel.h"
 #include "static.h"
 #include "line.h"
-#include "gorl.h"
-#include "f.h"
-#include "stan.h"
+#include "Gorl.h"
+#include "F.h"
+#include "Stan.h"
 #include "Polig.h"
 #include "Y_STREL.h"
 #include "Gor_Elem.h"

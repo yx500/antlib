@@ -3,18 +3,20 @@
 
 
 
+#include <cstdint>
+
 typedef struct tagPOINT
 {
-    int  x;
-    int  y;
+    long  x;
+    long  y;
 } POINT;
 
 typedef struct tagRECT
 {
-    int    left;
-    int    top;
-    int    right;
-    int    bottom;
+    long    left;
+    long    top;
+    long    right;
+    long    bottom;
 } RECT;
 
 
@@ -25,6 +27,12 @@ typedef struct tagRGBQUAD {
     uint8_t rgbReserved;
 } RGBQUAD;
 
+
+typedef struct tagSIZE
+{
+  long        cx;
+  long        cy;
+} SIZE;
 
 
 

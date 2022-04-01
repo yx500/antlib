@@ -1,7 +1,7 @@
 //line.h
 #ifndef LINE_H
 #define LINE_H
-#include "comp.h"
+#include "Comp.h"
 
 
 

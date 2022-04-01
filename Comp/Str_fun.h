@@ -15,8 +15,8 @@ extern int sh;
 extern int sh2;
 extern int NomerHeight;
 
-// extern unsigned char *ras;
-// extern unsigned char * ras_6[];
+// extern uint8 *ras;
+// extern uint8 * ras_6[];
 
 int   S(int len);    //смещение
 int   S2(int len);   //----

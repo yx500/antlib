@@ -28,11 +28,11 @@ __fastcall TGmPen::TGmPen(TCanvas* cnv)
               PS_GEOMETRIC | logpen.lopnStyle,//|PS_ENDCAP_FLAT|PS_JOIN_BEVEL,
               //DWORD dwWidth,    // pen width
               1,//logpen.lopnWidth,
-              //CONST LOGBRUSH *lplb, // pointer to structure for brush attributes
+              //const LOGBRUSH *lplb, // pointer to structure for brush attributes
               &lplb,
               //DWORD dwStyleCount,   // length of array containing custom style bits
               0,
-              //CONST DWORD *lpStyle  // optional array of custom style bits
+              //const DWORD *lpStyle  // optional array of custom style bits
               NULL
           );
 

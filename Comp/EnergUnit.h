@@ -1,45 +1,51 @@
-//---------------------------------------------------------------------------
-
 #ifndef EnergUnitH
 #define EnergUnitH
+
 //---------------------------------------------------------------------------
 #include "ACom_T.h"
 #include "Lamps.h"
 #include "LampExtDraw.h"
+
+
 #pragma pack(push,1)
 
 struct TE_KeySost {
-    unsigned onoff_ok: 1;
-    unsigned podlojka: 3;
-    unsigned zemlya: 1;
-    unsigned plakat: 1;
-    unsigned zapas: 2;
+    uint8 onoff_ok: 1;
+    uint8 podlojka: 3;
+    uint8 zemlya: 1;
+    uint8 plakat: 1;
+    uint8 zapas: 2;
 };
 
 struct TEnergLampData {
     uint16 ObjID;
     TE_KeySost KeySost;
 };
-const _MaxLampsInPacket = 490 / sizeof(TEnergLampData);
+
+const int _MaxLampsInPacket = 490 / sizeof(TEnergLampData);
 struct TEnergStanLamps {
     TEnergLampData Lamps[_MaxLampsInPacket];
 };
+
 #pragma pack(pop)
 
-TEnergLampData * __fastcall GetEnergLampData(TEnergStanLamps * EnergStanLamps, uint16 ObjID);
-int __fastcall SetEnergLampData(TEnergStanLamps * EnergStanLamps, uint16 ObjID, TEnergLampData * EnergLampData);
-void __fastcall LoadTEnergStanLamps(char * fn, TEnergStanLamps * EnergStanLamps);
 
-void __fastcall LampsLSFromNet(Station *Stan);
 
-void __fastcall LoadLampsLS(Station *Stan);
-void __fastcall SaveLampsLS(Station *Stan);
+
+TEnergLampData * GetEnergLampData(TEnergStanLamps * EnergStanLamps, uint16 ObjID);
+int SetEnergLampData(TEnergStanLamps * EnergStanLamps, uint16 ObjID, TEnergLampData * EnergLampData);
+void LoadTEnergStanLamps(char * fn, TEnergStanLamps * EnergStanLamps);
+
+void LampsLSFromNet(Station *Stan);
+
+void LoadLampsLS(Station *Stan);
+void SaveLampsLS(Station *Stan);
 
 enum TE_type_obj {eng_key = 1, eng_lmp = 2};
 enum TE_type_tu  {eng_tu_astmu = 0, eng_tu_luch = 1};
 
-const MaxWimp = 30;
-const MaxAimp = 30;
+const int MaxWimp = 30;
+const int MaxAimp = 30;
 
 class TE_OBJ : public TLED
 {

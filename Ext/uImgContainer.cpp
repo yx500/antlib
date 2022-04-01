@@ -103,7 +103,7 @@ TMetafile * LoadMetafileRes(const char* res, const char* type)
 
 
 bool im_drawemf(void * vhdc,
-                CONST RECT *lpRect,
+                const RECT *lpRect,
                 const char * szimagename,
                 int animstep
                )

@@ -5,7 +5,7 @@
 #include "static.h"
 
 
-#include "scrin.h"
+#include "Scrin.h"
 #include "col.h"
 
 #include "propmap.h"

@@ -5,11 +5,11 @@
 #include "APch.h"
 
 #include "Y_STREL.h"
-#include "str_fun.h"
-#include "gorl.h"
-#include "scrin.h"
-#include "elem.h"
-#include "f.h"
+#include "Str_fun.h"
+#include "Gorl.h"
+#include "Scrin.h"
+#include "Elem.h"
+#include "F.h"
 
 //---------------------------------------------------------------------------
 

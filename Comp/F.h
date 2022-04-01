@@ -3,9 +3,9 @@
 int Clr_lev(int clr);
 
 //int Set_Color_by_Num(int n)                                       ;
-//void Out_MY(unsigned char dr,su_st MM,int x ,int y)               ;
-//void Out_TB(unsigned char dr,TAB_SW *W1, TAB_SW *W2,int x ,int y) ;
-//void Out_TB(unsigned char,TAB_SW *,TAB_SW *,int,int) ;
+//void Out_MY(uint8 dr,su_st MM,int x ,int y)               ;
+//void Out_TB(uint8 dr,TAB_SW *W1, TAB_SW *W2,int x ,int y) ;
+//void Out_TB(uint8,TAB_SW *,TAB_SW *,int,int) ;
 //void Box_R(int x1,int y1,int x2,int y2)                           ;
 //void Box_L(int x1,int y1,int x2,int y2)                           ;
 //void Z_E(int x,int y,char *nm)                                    ;

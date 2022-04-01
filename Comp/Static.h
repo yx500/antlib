@@ -1,7 +1,7 @@
 //static.h
 #ifndef STATIC_H
 #define STATIC_H
-#include "comp.h"
+#include "Comp.h"
 
 
 class AText: public AComp

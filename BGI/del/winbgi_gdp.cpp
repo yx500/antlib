@@ -866,7 +866,7 @@ void PolyColor(int iBrushColor, const TPoint *Points, const int * iColors, const
 }
 //----------------------------------------------------------------------------
 // функции для работы с EMF
-bool drawemf(CONST RECT *lpRect,
+bool drawemf(const RECT *lpRect,
              const char * szimagename,
              int animstep
             )

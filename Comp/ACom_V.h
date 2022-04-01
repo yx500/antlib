@@ -10,7 +10,7 @@
 class TAntOpt
 {
 public:
-    unsigned char TW;  //  =1 для энергетиков 0 для ост
+    uint8 TW;  //  =1 для энергетиков 0 для ост
     int    _NAZVA_ ;
     int LUDOCHKA;  //  Линни толстые или тонкие
     int NumTch;   //  Нумеровать ли точки перегона
@@ -100,21 +100,21 @@ extern  bool            bNameBlack;
 
 
 
-extern   unsigned char         *sv_ras_y;
-extern   unsigned char         *ras     ;
-extern   unsigned char         *ras_6   ;
-extern    unsigned char        sv_ras_y_2d[50];
-extern    unsigned char        ras_2d     [50];
-extern    unsigned char        ras_6_2d   [50];
-extern    unsigned char        ras_1d     [50];
-extern    unsigned char        ras_6_1d   [50];
-extern    unsigned char        sv_ras_y_1d[50];
-extern    unsigned char        _sv_ras_y_2d[50];
-extern    unsigned char        _ras_2d     [50];
-extern    unsigned char        _ras_6_2d   [50];
-extern    unsigned char        _ras_1d     [50];
-extern    unsigned char        _ras_6_1d   [50];
-extern    unsigned char        _sv_ras_y_1d[50];
+extern   uint8         *sv_ras_y;
+extern   uint8         *ras     ;
+extern   uint8         *ras_6   ;
+extern    uint8        sv_ras_y_2d[50];
+extern    uint8        ras_2d     [50];
+extern    uint8        ras_6_2d   [50];
+extern    uint8        ras_1d     [50];
+extern    uint8        ras_6_1d   [50];
+extern    uint8        sv_ras_y_1d[50];
+extern    uint8        _sv_ras_y_2d[50];
+extern    uint8        _ras_2d     [50];
+extern    uint8        _ras_6_2d   [50];
+extern    uint8        _ras_1d     [50];
+extern    uint8        _ras_6_1d   [50];
+extern    uint8        _sv_ras_y_1d[50];
 /*-------------------*/
 //   Это переменные для передачи
 //   ту из Сомп в инп_ту
@@ -138,9 +138,9 @@ extern  int             _Y_;
 extern  int                    Current_Name;
 extern int              FLAG_NAPRAVLENIJA_PO_MINSK; //
 extern  int             CurrentPicture;
-extern unsigned char *         sv_ras_y;
-extern unsigned char *         ras     ;
-extern unsigned char *         ras_6   ;
+extern uint8 *         sv_ras_y;
+extern uint8 *         ras     ;
+extern uint8 *         ras_6   ;
 extern  int             sh_y;
 extern  char *          Com_Nam[CompTypeCount+1];
 extern  int             CurrentUCH;

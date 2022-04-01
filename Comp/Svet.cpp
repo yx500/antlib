@@ -8,8 +8,8 @@
 #include "APch.h"
 
 #include "Gorl.h"
-#include "scrin.h"
-#include "f.h"
+#include "Scrin.h"
+#include "F.h"
 #include "Impuls.h"
 //---------------------------------------------------------------------------
 

@@ -2,14 +2,14 @@
 #include "aheaders_cpp.h"
 #include "APch.h"
 
-#include "gorl.h"
-#include "elem.h"
-#include "strel.h"
-#include "scrin.h"
+#include "Gorl.h"
+#include "Elem.h"
+#include "Strel.h"
+#include "Scrin.h"
 #include "Vatempl.h"
 #include "Stan.h"
 #include "Svet.h"
-#include "f.h"
+#include "F.h"
 
 #include "propmap.h"
 #include "uParString.h"
@@ -707,9 +707,9 @@ void Gorl::Get()
     //strcpy(MEM.name,gorl[0]->name);
     CharToOemBuff(gorl[0]->name, MEM.name, 6);
 
-    //memset(MEM.name,'\x0',9);
+    //memset(MEM.name,0,9);
     //memcpy(MEM.name,gorl[0]->name,7);
-    //MEM.name[7]='\x0';
+    //MEM.name[7]=0;
     //memcpy( MEM.name+9  ,&ID      , 2);
 
     MEM.impuls_busi = -1;
@@ -724,9 +724,9 @@ void Gorl::Set()
 {
     AComp::Set();
 
-    //strnset(gorl[0]->name,'\x0',8);
+    //memset(gorl[0]->name,0,8);
     //memcpy(gorl[0]->name,MEM.name,7);
-    //gorl[0]->name[7]='\x0';
+    //gorl[0]->name[7]=0;
     //memcpy(&ID,     MEM.name+9,2);
 };
 
@@ -1023,7 +1023,7 @@ unsigned int  Gorl::GetID(void)
 void Gorl::SetID(unsigned int IDn)
 {
     if (bVirtual) return ;
-    if (gorl[0] != NULL) gorl[0]->ID = (unsigned __int16)IDn;
+    if (gorl[0] != NULL) gorl[0]->ID = (uint16)IDn;
 }
 
 

@@ -1,14 +1,14 @@
-#include <vcl.h>
-#pragma hdrstop
+#include "aheaders_cpp.h"
+
 #include "APch.h"
 
 
-#include "strel.h"
-#include "str_fun.h"
-#include "gorl.h"
-#include "scrin.h"
-#include "elem.h"
-#include "f.h"
+#include "Strel.h"
+#include "Str_fun.h"
+#include "Gorl.h"
+#include "Scrin.h"
+#include "Elem.h"
+#include "F.h"
 #include "Impuls.h"
 #include "Vatempl.h"
 
@@ -106,7 +106,7 @@ void Strel::Set()
     if (MEM.name[0] == '$')
         OemToCharBuff(MEM.name, name, 9);
     else
-        memset(name, '\x0', 9);
+        memset(name, 0, 9);
 
 
 }
@@ -151,7 +151,7 @@ void Strel::SetPropMap(TPropMap &m)
     Prz[3]  = m.geti(_StrelPropName[_n++]);
 
     nomer = m.geti(_StrelPropName[_n++]);
-    memset(name, '\x0', sizeof(name));
+    memset(name, 0, sizeof(name));
     strncpy(name, m.get(_StrelPropName[_n++]).c_str(), sizeof(name));
     _n++; //смИМЯ
 
@@ -256,7 +256,7 @@ void Strel::Get()
     // эмуляция лампочки
     MEM2.type = 29;
     MEM2.X_ = X; MEM2.Y_ = Y; MEM2.masy = 0;
-    memset(MEM2.name, '\x0', sizeof(MEM2.name));
+    memset(MEM2.name, 0, sizeof(MEM2.name));
     CharToOemBuff(name, MEM2.name, 9);
     //memcpy(MEM2.name,name,9);
     MEM2.name[0] = '~';
@@ -264,7 +264,7 @@ void Strel::Get()
 
 
     MEM.Nomer = nomer;
-    memset(MEM.name, '\x0', 10);
+    memset(MEM.name, 0, 10);
     CharToOemBuff(name, MEM.name, 9);
     //memcpy(MEM.name,name,9);
 
@@ -781,7 +781,7 @@ char * Strel::GetName()
 
 
 
-int X_Text(int len, int x, byte prz, int priz1, int ColCifr)
+int X_Text(int len, int x, uint8 prz, int priz1, int ColCifr)
 {
     int sdvig = (4 * ColCifr) + S(len);
     int x_text;
@@ -797,7 +797,7 @@ int X_Text(int len, int x, byte prz, int priz1, int ColCifr)
 
 #define Z66 6
 
-int Y_Text(int len, int y, byte prz, int priz1)
+int Y_Text(int len, int y, uint8 prz, int priz1)
 {
     int y_text;
     if (priz1)

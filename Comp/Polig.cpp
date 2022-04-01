@@ -2,8 +2,8 @@
 #include "aheaders_cpp.h"
 #include "APch.h"
 
-#include "polig.h"
-#include "stan.h"
+#include "Polig.h"
+#include "Stan.h"
 #include "actools.h"
 #include <inifiles.hpp>
 

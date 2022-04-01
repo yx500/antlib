@@ -5,10 +5,10 @@
 
 #include "Marshrut.h"
 #include "uParString.h"
-#include "f.h"
+#include "F.h"
 #include "Strel.h"
 #include "Stan.h"
-#include "elem.h"
+#include "Elem.h"
 #include "col.h"
 #include "common.h"
 

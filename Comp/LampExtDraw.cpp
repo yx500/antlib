@@ -3,11 +3,11 @@
 #include "LampExtDraw.h"
 
 #include "APch.h"
-#include "stan.h"
-#include "strel.h"
-#include "scrin.h"
+#include "Stan.h"
+#include "Strel.h"
+#include "Scrin.h"
 #include "col.h"
-#include "f.h"
+#include "F.h"
 
 #include "propmap.h"
 #include "uImgContainer.h"
@@ -118,7 +118,7 @@ const char * GetImageName(std::string Picture, int  PictureState)
     case sostNoNet      : res=res+"_NONET"; break;
     case sostNotAccept      : res=res+"_NOTACCEPT"; break;
     default        : {
-        char ss[4];
+        char ss[32];
         itoa(PictureState, ss, 10);
         res = res + "_" + ss;
     }; break;
@@ -176,9 +176,9 @@ void  TLED::Show()
     if (TextStr != "") {
         TSize sz;
         unsigned int font = Prz[1] ? Prz[1] : 10u;
-        unsigned int font_size = Prz[0] ? (BYTE)(Prz[0]) : 10u;
+        unsigned int font_size = Prz[0] ? (uint8)(Prz[0]) : 10u;
         if (CurrentPicture == BG)
-            font_size = Prz[2] ? (BYTE)(Prz[2]) : 10u;
+            font_size = Prz[2] ? (uint8)(Prz[2]) : 10u;
         _SetText(font, LEFT_TEXT , TOP_TEXT);
         _SetTextSize(font_size);
 
@@ -330,7 +330,7 @@ void TLED30::GetPropMap(TPropMap &m)
 {
     std::string PropName;
     TLED::GetPropMap(m);
-    char ss[4];
+    char ss[32];
     for (int i = 1; i < 30; i++) {
         PropName = "тс—игнал";
         itoa(i + 1, ss, 10);
@@ -345,7 +345,7 @@ void TLED30::SetPropMap(TPropMap &m)
 {
     std::string PropName;
     TLED::SetPropMap(m);
-    char ss[4];
+    char ss[32];
     imp[0] = impuls_busi;
     for (int i = 1; i < 30; i++) {
 

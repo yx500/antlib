@@ -4,13 +4,13 @@
 
 #include <StrUtils.hpp>
 #include <typeinfo>
-#include "stan.h"
+#include "Stan.h"
 #include "Comp.h"
 
-#include "strel.h"
+#include "Strel.h"
 #include "static.h"
 #include "line.h"
-#include "gorl.h"
+#include "Gorl.h"
 #include "vatempl.h"
 #include "Polig.h"
 #include <inifiles.hpp>

@@ -644,7 +644,7 @@ void setfillpattern(const char* upattern, int color)
         static HBITMAP hFillBitmap;
         static short bitmap_data[8];
         for (int i = 0; i < 8; i++) {
-        bitmap_data[i] = (unsigned char)~upattern[i];
+        bitmap_data[i] = (uint8)~upattern[i];
         userfillpattern[i] = upattern[i];
         }
         HBITMAP h = CreateBitmap(8, 8, 1, 1, bitmap_data);
@@ -1480,7 +1480,7 @@ int GetGradientColor(int Color, float factor)
 }
 
 // функции для работы с EMF
-bool drawemf(CONST RECT *lpRect,
+bool drawemf(const RECT *lpRect,
              const char * szimagename,
              int animstep
             )

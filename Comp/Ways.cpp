@@ -11,9 +11,9 @@
 #include "APch.h"
 
 #include "Lamps.h"
-#include "scrin.h"
+#include "Scrin.h"
 #include "col.h"
-#include "f.h"
+#include "F.h"
 #include "Impuls.h"
 //---------------------------------------------------------------------------
 

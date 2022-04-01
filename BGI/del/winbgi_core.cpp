@@ -167,7 +167,7 @@ void EMF_Delete(void *emf)
 }
 bool EMF_Show(
     void * emf,
-    CONST RECT *lpRect  // pointer to bounding rectangle
+    const RECT *lpRect  // pointer to bounding rectangle
 )
 {
     tracecoord(lpRect->left,        lpRect->top);

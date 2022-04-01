@@ -1,26 +1,24 @@
-//---------------------------------------------------------------------------
-
-
 #include "aheaders_cpp.h"
 
 #include "APch.h"
-#include "scrin.h"
+#include "Scrin.h"
 #include "EnergUnit.h"
-#include "stan.h"
+#include "Stan.h"
 #include "Comp.h"
-#include "elem.h"
+#include "Elem.h"
 #include "Lamps.h"
-#include "polig.h"
+#include "Polig.h"
 #include "uImgContainer.h"
 #include "Impuls.h"
 #include "LampExtDraw.h"
+#include <stdlib.h>
 //---------------------------------------------------------------------------
 
 
 
 
 
-TEnergLampData * __fastcall GetEnergLampData(TEnergStanLamps * EnergStanLamps, unsigned __int16 ObjID)
+TEnergLampData * GetEnergLampData(TEnergStanLamps * EnergStanLamps, uint16 ObjID)
 {
     for (int i = 0; i < _MaxLampsInPacket; i++) {
         if (EnergStanLamps->Lamps[i].ObjID == 0) break;
@@ -30,7 +28,7 @@ TEnergLampData * __fastcall GetEnergLampData(TEnergStanLamps * EnergStanLamps, u
     return NULL;
 }
 
-int __fastcall SetEnergLampData(TEnergStanLamps * EnergStanLamps, unsigned __int16 ObjID, TEnergLampData * EnergLampData)
+int SetEnergLampData(TEnergStanLamps * EnergStanLamps, uint16 ObjID, TEnergLampData * EnergLampData)
 {
     int res;
     int exi = -1;
@@ -55,7 +53,7 @@ int __fastcall SetEnergLampData(TEnergStanLamps * EnergStanLamps, unsigned __int
     return res;
 }
 
-void __fastcall LoadTEnergStanLamps(char * fn, TEnergStanLamps * EnergStanLamps)
+void LoadTEnergStanLamps(char * fn, TEnergStanLamps * EnergStanLamps)
 {
     if (FileExists(fn)) {
         TFileStream * FS = new TFileStream(fn, fmOpenRead);
@@ -64,7 +62,7 @@ void __fastcall LoadTEnergStanLamps(char * fn, TEnergStanLamps * EnergStanLamps)
     }
 
 }
-void __fastcall LampsLSFromNet(Station *Stan)
+void LampsLSFromNet(Station *Stan)
 {
     /* Подключение буфера энергов  */
     if (GetDatagramData_Func == NULL) return;
@@ -115,7 +113,7 @@ void __fastcall LampsLSFromNet(Station *Stan)
 
 
 
-void __fastcall SaveLampsLS(Station *Stan)
+void SaveLampsLS(Station *Stan)
 {
     //заполняем буфер
     int cnt = 0;
@@ -142,7 +140,7 @@ void __fastcall SaveLampsLS(Station *Stan)
 
 }
 
-void __fastcall LoadLampsLS(Station *Stan)
+void LoadLampsLS(Station *Stan)
 {
     //заполняем буфер
     //int cnt=0;
@@ -175,9 +173,6 @@ void __fastcall LoadLampsLS(Station *Stan)
 
 }
 
-//=============================================================================
-
-//int   _E_def_WK[2]={32,16};
 int   _E_def_FontsSzLmp[2] = {18, 14};
 
 TE_OBJ::TE_OBJ()
@@ -513,8 +508,8 @@ void TE_OBJ::Show()
 
 
     font = Prz[1];//Prz[1] ? Prz[1] : 10u;
-    font_size = Prz[0] ? (BYTE)(Prz[0]) : 0;
-    if (CurrentPicture == BG) font_size = Prz[2] ? (BYTE)(Prz[2]) : 0;
+    font_size = Prz[0] ? (uint8)(Prz[0]) : 0;
+    if (CurrentPicture == BG) font_size = Prz[2] ? (uint8)(Prz[2]) : 0;
     if (font_size == 0) {
         if (type_obj == eng_lmp)
             font_size =    _E_def_FontsSzLmp[CurrentPicture]; else

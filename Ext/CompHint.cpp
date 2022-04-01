@@ -6,8 +6,8 @@
 #include <time.h>
 
 #include "CompHint.h"
-#include "stan.h"
-#include "elem.h"
+#include "Stan.h"
+#include "Elem.h"
 #include "APch.h"
 //---------------------------------------------------------------------------
 

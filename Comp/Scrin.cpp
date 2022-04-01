@@ -2,7 +2,7 @@
 #include "aheaders_cpp.h"
 #include "APch.h"
 
-#include "scrin.h"
+#include "Scrin.h"
 
 extern int  MaxX, MaxY, CurrentPicture;
 #define LT  0

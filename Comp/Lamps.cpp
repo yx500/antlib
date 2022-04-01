@@ -4,12 +4,12 @@
 
 #include "APch.h"
 
-#include "strel.h"
-#include "scrin.h"
+#include "Strel.h"
+#include "Scrin.h"
 #include "col.h"
-#include "f.h"
+#include "F.h"
 #include "Vatempl.h"
-#include "stan.h"
+#include "Stan.h"
 
 #include "propmap.h"
 #include "Y_STREL.h"
@@ -458,7 +458,7 @@ void  Lam4::Show()
 {
     Strel::Show();
 
-    byte sdvig_dla_star_eng = 0;
+    uint8 sdvig_dla_star_eng = 0;
     int cc = 0;
     int FlHid = 0;
     int kv = 0;
@@ -1002,7 +1002,7 @@ void  SuperLamp2::Show()
         return;
 
     unsigned int font = Prz[1] ? Prz[1] : 10u;
-    unsigned int font_size = Prz[0] ? (BYTE)(Prz[0]) : 10u;
+    unsigned int font_size = Prz[0] ? (uint8)(Prz[0]) : 10u;
 
 
 
@@ -1142,7 +1142,7 @@ void SuperLamp2::SetPropMap(TPropMap &m)
     Prz[2]  = m.geti(_SuperLamp2PropName[_n++]);
     Prz[3]  = m.geti(_SuperLamp2PropName[_n++]);
     nomer   = m.geti(_SuperLamp2PropName[_n++]);
-    memset(name, '\x0', sizeof(name));
+    memset(name, 0, sizeof(name));
     strncpy(name, m.get(_SuperLamp2PropName[_n++]).c_str(), sizeof(name));
     _n++;
     bCheck   = m.geti(_SuperLamp2PropName[_n++]);
@@ -1260,14 +1260,14 @@ DtgLmp::~DtgLmp()
 {
 }
 struct TPacketData {
-    uint8 byte[490];
+    uint8 uint8[490];
 };
 int GetPacketBit(String PacketName, int PacketType, int ByteOffset, int NumberBit)
 {
     if (GetDatagramData_Func == NULL) return 33;
     TPacketData *DtgData = (TPacketData *) GetDatagramData_Func(PacketType, PacketName.c_str());
     if (DtgData == NULL) return 33;
-    int r = ((DtgData->byte[ByteOffset] >> NumberBit) & 0x01) ? 1 : 0;
+    int r = ((DtgData->uint8[ByteOffset] >> NumberBit) & 0x01) ? 1 : 0;
     return r;
 }
 int GetPacketByte(String PacketName, int PacketType, int ByteOffset)
@@ -1275,7 +1275,7 @@ int GetPacketByte(String PacketName, int PacketType, int ByteOffset)
     if (GetDatagramData_Func == NULL) return 33;
     TPacketData *DtgData = (TPacketData *) GetDatagramData_Func(PacketType, PacketName.c_str());
     if (DtgData == NULL) return 33;
-    int r = DtgData->byte[ByteOffset];
+    int r = DtgData->uint8[ByteOffset];
     return r;
 }
 
@@ -1289,10 +1289,10 @@ char * GetPacketStr(String PacketName, int PacketType, int str_n,char rzd)
     int ib=0;
     int ie=0;
     int n=0;
-    for (int i=0;i<sizeof(DtgData->byte)-1;i++){
+    for (int i=0;i<sizeof(DtgData->uint8)-1;i++){
         ie=i;
-        if (DtgData->byte[i]==0) break;
-        if (DtgData->byte[i]==rzd){
+        if (DtgData->uint8[i]==0) break;
+        if (DtgData->uint8[i]==rzd){
                 n++;
                 if (n==str_n) break;
                 ib=i+1;
@@ -1303,7 +1303,7 @@ char * GetPacketStr(String PacketName, int PacketType, int str_n,char rzd)
     }
     if (ie-ib>=64) ie=ib+63;
     if (ib<ie){
-        memcpy(ss,&DtgData->byte[ib],ie-ib);
+        memcpy(ss,&DtgData->uint8[ib],ie-ib);
     }
     return ss;
 }

@@ -1,6 +1,3 @@
-//---------------------------------------------------------------------------
-
-
 #include "aheaders_cpp.h"
 
 #include <math.h>
@@ -9,14 +6,14 @@
 
 
 #include "common.h"
-#include "comp.h"
+#include "Comp.h"
 #include "Vatempl.h"
-#include "stan.h"
-#include "polig.h"
+#include "Stan.h"
+#include "Polig.h"
 #include "Impuls.h"
 #include "Col.h"
 #include "Gor_Logic.h"
-#include "scrin.h"
+#include "Scrin.h"
 //#include "winbgi_vcl.h"
 #include "bgi.h"
 
@@ -3436,7 +3433,7 @@ void tG_KZP2::Show()
        Lmp.Show();
        if (bOtcMig){
            unsigned int font = Lmp.Prz[1] ? Lmp.Prz[1] : 10u;
-                unsigned int font_size = Lmp.Prz[0] ? (BYTE)(Lmp.Prz[0]) : 10u;
+                unsigned int font_size = Lmp.Prz[0] ? (uint8)(Lmp.Prz[0]) : 10u;
                 _SetText(font, CENTER_TEXT , CENTER_TEXT);
                 _SetTextSize(font_size);
                 int tw = textwidth(Lmp.name)+4;

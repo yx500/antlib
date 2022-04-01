@@ -3,9 +3,9 @@
 
 #include "actools.h"
 #include "common.h"
-#include "polig.h"
-#include "stan.h"
-#include "comp.h"
+#include "Polig.h"
+#include "Stan.h"
+#include "Comp.h"
 
 #include <string>
 #include <fstream>

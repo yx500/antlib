@@ -22,8 +22,8 @@ public:
     int fimpuls_mu;
 
 
-    unsigned char RezBuf[4];
-    unsigned char RezBuf1[2];
+    uint8 RezBuf[4];
+    uint8 RezBuf1[2];
 
 public:
     virtual void Set();

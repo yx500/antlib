@@ -1,4 +1,4 @@
-//strel.h
+//Strel.h
 #ifndef STREL_H
 #define STREL_H
 
@@ -54,7 +54,7 @@ public:
     int fimpuls_otkl_minus;
 
 
-    //unsigned char RezBuf[4];
+    //uint8 RezBuf[4];
 
 
 

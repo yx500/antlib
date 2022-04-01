@@ -30,7 +30,7 @@ int Set_Color_by_Num(int n){
 */
 
 //#ifdef DEBUG_X
-/*void Out_MY(unsigned char dr,su_st MM,int x ,int y){
+/*void Out_MY(uint8 dr,su_st MM,int x ,int y){
  if (!DEBUG_X) return;
  int s=15;
  int d=6;
@@ -55,7 +55,7 @@ void Out_MY(DIRECT ,su_st ,int  ,int ){}
 
 #ifdef DEBUG_X
 */
-/*void Out_TB(unsigned char dr,TAB_SW *W1, TAB_SW *W2,int x ,int y){
+/*void Out_TB(uint8 dr,TAB_SW *W1, TAB_SW *W2,int x ,int y){
 //void Out_TB(DIRECT dr,TAB_SW *W1, TAB_SW *W2,int x ,int y){
  if (!DEBUG_X) return;
 

@@ -3,7 +3,7 @@
 #ifndef Gor_ElemH
 #define Gor_ElemH
 //---------------------------------------------------------------------------
-#include "comp.h"
+#include "Comp.h"
 #include "Y_STREL.h"
 #include "uFormula.h"
 #include "tGorka.h"

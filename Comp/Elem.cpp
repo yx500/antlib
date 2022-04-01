@@ -3,12 +3,12 @@
 #include "APch.h"
 
  
-#include "elem.h"
+#include "Elem.h"
 
 #include "propmap.h"
 #include "Impuls.h"
 #include"out_num.h"
-#include "stan.h"
+#include "Stan.h"
 
 
 void Element:: Set()
@@ -20,11 +20,11 @@ void Element:: Set()
     impuls_kzm = MEM.impuls_kzm;
     impuls_kmu = MEM.impuls_kmu;
     impuls_mu = MEM.impuls_mu;
-    strnset(name, '\x0', sizeof(name));
+    memset(name, 0, sizeof(name));
     OemToCharBuff(MEM.name, name, 7);
 
     //memcpy(name,MEM.name,7);
-    name[7] = '\x0';
+    name[7] = 0;
 
 
     if (MEM.type == PLOT) pr = MEM.masx2;
@@ -46,10 +46,10 @@ void Element:: Get()
     MEM.impuls_kmu = impuls_kmu ;
     MEM.impuls_mu  = impuls_mu ;
     MEM.Nomer = 0;
-    memset(MEM.name, '\x0', sizeof(MEM.name));
+    memset(MEM.name, 0, sizeof(MEM.name));
     CharToOemBuff(name, MEM.name, 7);
     //strncpy(MEM.name,oemname,7);
-    MEM.name[7] = '\x0';
+    MEM.name[7] = 0;
 
     memcpy(MEM.name + 8   , RezBuf  , 4);
     memcpy(MEM.name + 12  , &ID      , 2);
@@ -80,7 +80,7 @@ void Element::SetPropMap(TPropMap &m)
     impuls_kmu = NewStrToOldImp(m.get(_ElementPropName[3]).c_str());
     impuls_mu  = NewStrToOldImp(m.get(_ElementPropName[4]).c_str());
 
-    memset(name, '\x0', sizeof(name));
+    memset(name, 0, sizeof(name));
     strncpy(name, m.get(_ElementPropName[5]).c_str(), sizeof(name));
 }
 

@@ -18,7 +18,7 @@ class Strel0;
 #pragma pack(push,1)
 
 struct ID_ZO {
-    byte b[4];
+    uint8 b[4];
 };
 
 struct Signal {
@@ -33,10 +33,10 @@ struct Grl {
     short int    Col_Str;                   // йнкхвеярбн  ярпекнй
 
     char   name[6];                   // хлъ цнпкнбхмш
-    byte   bit_m;                     // опхгмюй сопюбкемхъ люпьпсрнл
-    byte   bit_ksp;                   // опхгмюй сопюбкемхъ гюмърхел
-    byte   bit_kzm;                   // опхгмюй сопюбкемхъ гюлшйюмхел
-    byte   nom_fiz;                   // мнлеп тхг цнпкнбхмш
+    uint8   bit_m;                     // опхгмюй сопюбкемхъ люпьпсрнл
+    uint8   bit_ksp;                   // опхгмюй сопюбкемхъ гюмърхел
+    uint8   bit_kzm;                   // опхгмюй сопюбкемхъ гюлшйюмхел
+    uint8   nom_fiz;                   // мнлеп тхг цнпкнбхмш
 
     short int    impuls_ksp;                // яхцмюк гюмърхъ
     short int    impuls_kzm;                // яхцмюк гюлшйюмхъ
@@ -50,7 +50,7 @@ struct Grl {
      short int    *impuls_m;             // яхцмюкш мю сярюмнбйс люпьпсрю
      short int    *impuls_km;            // яхцмюкш мю гюмърхе люпьпсрю
 //------------======  якефемхе  =======-----------
-    byte   IN_OUT  ;                 // ОПХЕЛ \НРОПЮБКЕМХЕ  (1)              -╛
+    uint8   IN_OUT  ;                 // ОПХЕЛ \НРОПЮБКЕМХЕ  (1)              -╛
      ID_ZO  *zona_M;              // яохянй оепелеммшу хлем гнм  (4*6=24)  +
     ID_ZO  zona_1    ;               // онярнъмюъ гнмю               (4)      ╕ 133
     short int    tu_marh;

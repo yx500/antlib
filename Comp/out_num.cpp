@@ -4,10 +4,10 @@
 #include"out_num.h"
 
 #include "APch.h"
-#include "comp.h"
-#include "elem.h"
-#include "strel.h"
-#include "stan.h"
+#include "Comp.h"
+#include "Elem.h"
+#include "Strel.h"
+#include "Stan.h"
 #include "Ways.h"
 
 #include "uEXD.h"

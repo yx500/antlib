@@ -4,7 +4,7 @@
 #define Y_STRELH
 //---------------------------------------------------------------------------
 
-#include "strel.h"
+#include "Strel.h"
 struct TFPoint{
        double x,y;
        void S(double ax,double ay){x=ax;y=ay;}
