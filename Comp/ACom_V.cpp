@@ -172,7 +172,7 @@ uint8  _sv_ras_y_1d[50] = { 1, 1, 2, 2, 2, 3, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5
 
 
 int sh_y;
-char *Com_Nam[CompTypeCount+1] = {
+const char *Com_Nam[CompTypeCount+1] = {
     "       ",
     "Путь",
     "Участк",
