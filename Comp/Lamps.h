@@ -144,7 +144,7 @@ public:
     int Clr2;
     bool bByteChecking;
     int str_n;
-    char rzd;
+    String rzd;
     int ukvag;
 
     DtgLmp();

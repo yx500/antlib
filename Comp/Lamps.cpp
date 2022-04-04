@@ -1253,21 +1253,21 @@ DtgLmp::DtgLmp()
     Prz[0] = 22;
     bByteChecking = false;
     str_n=0;
-    rzd=';';
+    rzd=";";
     ukvag=0;
 }
 DtgLmp::~DtgLmp()
 {
 }
 struct TPacketData {
-    uint8 uint8[490];
+    uint8 PacketData[490];
 };
 int GetPacketBit(String PacketName, int PacketType, int ByteOffset, int NumberBit)
 {
     if (GetDatagramData_Func == NULL) return 33;
     TPacketData *DtgData = (TPacketData *) GetDatagramData_Func(PacketType, PacketName.c_str());
     if (DtgData == NULL) return 33;
-    int r = ((DtgData->uint8[ByteOffset] >> NumberBit) & 0x01) ? 1 : 0;
+    int r = ((DtgData->PacketData[ByteOffset] >> NumberBit) & 0x01) ? 1 : 0;
     return r;
 }
 int GetPacketByte(String PacketName, int PacketType, int ByteOffset)
@@ -1275,7 +1275,7 @@ int GetPacketByte(String PacketName, int PacketType, int ByteOffset)
     if (GetDatagramData_Func == NULL) return 33;
     TPacketData *DtgData = (TPacketData *) GetDatagramData_Func(PacketType, PacketName.c_str());
     if (DtgData == NULL) return 33;
-    int r = DtgData->uint8[ByteOffset];
+    int r = DtgData->PacketData[ByteOffset];
     return r;
 }
 
@@ -1289,10 +1289,10 @@ char * GetPacketStr(String PacketName, int PacketType, int str_n,char rzd)
     int ib=0;
     int ie=0;
     int n=0;
-    for (int i=0;i<sizeof(DtgData->uint8)-1;i++){
+    for (int i=0;i<sizeof(DtgData->PacketData)-1;i++){
         ie=i;
-        if (DtgData->uint8[i]==0) break;
-        if (DtgData->uint8[i]==rzd){
+        if (DtgData->PacketData[i]==0) break;
+        if (DtgData->PacketData[i]==rzd){
                 n++;
                 if (n==str_n) break;
                 ib=i+1;
@@ -1303,7 +1303,7 @@ char * GetPacketStr(String PacketName, int PacketType, int str_n,char rzd)
     }
     if (ie-ib>=64) ie=ib+63;
     if (ib<ie){
-        memcpy(ss,&DtgData->uint8[ib],ie-ib);
+        memcpy(ss,&DtgData->PacketData[ib],ie-ib);
     }
     return ss;
 }
@@ -1336,8 +1336,8 @@ void DtgLmp::UpdateState()
             if (bByteChecking) {
 
             } else
-            if (str_n>0){
-                char *ss=GetPacketStr(PacketName,PacketType, str_n, rzd);
+            if ((str_n>0)&&(rzd.Length()>0)){
+                char *ss=GetPacketStr(PacketName,PacketType, str_n, rzd[1]);
                 strncpy(name,ss,sizeof(name)-1);
             }  else
             if (ukvag>0){
@@ -1407,8 +1407,9 @@ void DtgLmp::SetPropMap(TPropMap &m)
     bByteChecking  = m.geti(_DtgLmpPropName[_n++]);
     Clr2  = m.geti(_DtgLmpPropName[_n++]);
     str_n =m.geti(_DtgLmpPropName[_n++]);
-    String srzd=m.get(_DtgLmpPropName[_n++]);
-    if (srzd.Length()>0)  rzd = srzd[1];
+    rzd=m.get(_DtgLmpPropName[_n++]);
+//    String srzd=m.get(_DtgLmpPropName[_n++]);
+//    if (srzd.Length()>0)  rzd = srzd[1];
     ukvag =m.geti(_DtgLmpPropName[_n++]);
 }
 void DtgLmp::GetPropMap(TPropMap &m)
@@ -1423,7 +1424,7 @@ void DtgLmp::GetPropMap(TPropMap &m)
     m.put(_DtgLmpPropName[_n++], bByteChecking);
     m.put(_DtgLmpPropName[_n++], Clr2, 0);
     m.put(_DtgLmpPropName[_n++], str_n );
-    m.put(_DtgLmpPropName[_n++], String(rzd));
+    m.put(_DtgLmpPropName[_n++], rzd);
     m.put(_DtgLmpPropName[_n++], ukvag, 0);
 }
 

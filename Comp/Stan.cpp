@@ -8,10 +8,10 @@
 #include "Comp.h"
 
 #include "Strel.h"
-#include "static.h"
-#include "line.h"
+#include "Static.h"
+#include "Line.h"
 #include "Gorl.h"
-#include "vatempl.h"
+#include "Vatempl.h"
 #include "Polig.h"
 #include <inifiles.hpp>
 #include "YchParams.h"
@@ -820,7 +820,7 @@ void WritePmToIni(TPropMap &pm, TCustomIniFile *FI, String SectionName)
     for (int i = 0; i < SL->Count; i++)
         FI->WriteString(SectionName, SL->Names[i], SL->Values[SL->Names[i]]);
     delete SL;
-//     for ( int i=0; i<pm.GetItemsCount; i++ )
+//     for ( int i=0; i<pm.GetItemsCount(); i++ )
 //         FI->WriteString(SectionName,pm.GetKeys(i),pm.GetVal(i));
 }
 //---------------------------------------------------------------------------
@@ -1319,7 +1319,7 @@ void Replaceactsprop(AComp * ac, int chNFrom, int chNTo, int chD)
                     if (AImpuls.Number >= 0)
                         AImpuls.Number += chD;
                     VALUE = AImpuls.ToString();
-                    m.GetVal(i) = VALUE;
+                    m.SetVal(i,VALUE);
                 }
             }
         }
