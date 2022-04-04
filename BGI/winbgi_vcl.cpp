@@ -1275,7 +1275,7 @@ TColor   Color(int8 palColor)
 
 
 
-void   DrawText(int x, int y, int tw, int th, char* str)
+void   DrawText(int x, int y, int tw, int th, const char* str)
 {
     if (strlen(str) == 0)  return;
     //OemToAnsi( str,n_str );

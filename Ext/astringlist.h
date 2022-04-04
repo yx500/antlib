@@ -2,7 +2,6 @@
 #define ASTRINGLIST_H
 
 
-#include "antlibstring.h"
 
 class AStringList
 {
@@ -15,7 +14,7 @@ public:
     int Add(const String& S);
     int Delete(int idx);
     int Count() const;
-    String& operator[]( size_type pos );
+    String& operator[]( int pos );
 };
 
 

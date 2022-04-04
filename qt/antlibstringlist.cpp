@@ -33,3 +33,5 @@ int TStringList::Add(const String& S)
   append( QString(S.c_str()) );
   return size();
 }
+
+

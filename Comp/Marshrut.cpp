@@ -538,7 +538,7 @@ bool TMarshList::LoadFromCSV(String stFN)
         for (int i = 0; i < MarshrutPropNameCount; i++)
             indMarshrutPropName[i] = PS.GetInd(MarshrutPropName[i]);
         for (int i = 0; i < pcnt; i++) {
-            m.put(PS.GetStr((i), "");
+            m.put(PS.GetStr(i), "");
             if (!IsPropNameStrel(PS[i])) PropStrBegin = i + 1;
         }
         //if (m.GetItemsCount!=pcnt){
@@ -826,7 +826,7 @@ TYP STAStrelTypes[] = {SWRT   , SWLT   , SWLB   , SWRB   ,
                        Y_STREL_1, Y_STREL_2, Y_STREL_3, Y_STREL_4, G_STREL_Y, G_RC, G_RC_2, G_ZAMI, G_ZKR, G_STREL_1, G_ZAMP, G_OSY, G_STREL_2,Y_STREL_5,Y_STREL_6
                       };
 TYP STAWaysTypes[] = {WAY};
-TYP STABlockTypes[] = {PLOT,36};
+TYP STABlockTypes[] = {PLOT,BL_UH};
 
 void TMarshList::ConnectToStanSTA(Station * pS)
 {

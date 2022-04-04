@@ -26,14 +26,14 @@ void pmComp::SetPropMapStr(char * szSrc)
     _m.text(szSrc);
     SetPropMap(_m);
 }
-void __fastcall pmComp::SetProp(char * PropName, char * value)
+void pmComp::SetProp(const char *PropName, const char * value)
 {
     _m.clear();
     GetPropMap(_m);
     _m.put(PropName, value);
     SetPropMap(_m);
 }
-char * __fastcall pmComp::GetProp(char * PropName)
+const char *pmComp::GetProp(const char * PropName)
 {
     _m.clear();
     GetPropMap(_m);
@@ -41,7 +41,7 @@ char * __fastcall pmComp::GetProp(char * PropName)
     return S.c_str();
 }
 
-char * __fastcall pmComp::GetPropEx(char * PropName, int& ptr)
+const char * pmComp::GetPropEx(const char *PropName, int& ptr)
 {
     _m.clear();
     GetPropMap(_m);
@@ -51,11 +51,11 @@ char * __fastcall pmComp::GetPropEx(char * PropName, int& ptr)
     return S.c_str();
 }
 
-void __fastcall pmComp::SetPropInt(char * PropName, int value)
+void pmComp::SetPropInt(const char * PropName, int value)
 {
     SetProp(PropName, IntToStr(value).c_str());
 }
-int __fastcall pmComp::GetPropInt(char * PropName)
+int pmComp::GetPropInt(const char *PropName)
 {
     return StrToIntDef(GetProp(PropName), 0);
 }
