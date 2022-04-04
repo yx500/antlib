@@ -21,10 +21,8 @@ public:
     int FLAG_POINT_REVERS;        // Направление движения
     int MaxX;
     int MaxY;
-
     int Sdv_nazv;
     int SVET_LIM;
-
     bool DNC_ENERG;
     bool TRAINNUM;          //для уч-ка показ номрое
     int  TN_Ver;            // 1 гид, 3 гора
@@ -36,13 +34,9 @@ public:
     int  TypName;
     int  TypRAMK;
 
-
     int DopMashtab;
-
     bool USE_GORL_OTCECH;
-
     bool TRAINNUM_INVERS;           //для уч-ка показ номера в обратную сторону
-
     char ENG_PackName[12];          // имя пакета для участка енергетика
 
     bool bNoShowMSV;
@@ -61,23 +55,16 @@ public:
     int TsOffColor;
     bool bNumStrelColor;
 
-
     char  Name[255];
 
     bool bEmbeddedSubStation;
     int   _E_def_WK[2];
     int   _E_def_FontsSz[2];
-
     char  EttReciveName[64];
 
-    __fastcall TAntOpt();
-
-    void __fastcall SetANTON();
-
-
+    TAntOpt();
+    void SetANTON();
 };
-
-
 
 
 

@@ -42,10 +42,9 @@ typedef tagSIZE  TSize;
 
 
 //todo remove naxyi
-class TFileStream {
-public:
-
-};
+//class TFileStream {
+//public:
+//};
 
 void ShowMessage(const String& txt);
 
