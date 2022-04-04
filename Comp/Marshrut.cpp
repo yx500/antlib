@@ -560,7 +560,7 @@ bool TMarshList::LoadFromCSV(String stFN)
             ps.SetVal(SL->Strings[i]);
             if (ps.GetInt(0, 0) == 0) continue; //строка начинается с цифры
             for (int j = 0; j < pcnt; j++)
-                m.Val[j] = ps[j];
+                m.GetVal(j) = ps[j];
             // добавляем маршрут
             M = new TMarshrut();
             M->SetPropMap(m);
@@ -923,7 +923,7 @@ int TMarshrut::GetMaxORDER(void)
 
 void TMarshList::UpdateState()
 {
-    for (int i = 0; i < getMARSHRUTSCOUNT(); i++) {
+    for (int i = 0; i < GetMARSHRUTSCOUNT(); i++) {
         GetMARSHRUTS(i)->UpdateState();
     }
 }

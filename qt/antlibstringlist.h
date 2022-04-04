@@ -11,6 +11,7 @@ public:
   TStringList();
   void  LoadFromFile(const String& FileName);
   int Add(const String& S);
+  int Count() const;
 };
 
 
