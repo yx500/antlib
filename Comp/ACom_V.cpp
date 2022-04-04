@@ -4,14 +4,8 @@
 #include "ACom_V.h"
 #include "col.h"
 
-//---------------------------------------------------------------------------
 
-
-
-
-
-
-__fastcall TAntOpt::TAntOpt()
+TAntOpt::TAntOpt()
 {
     TW = 0;            //  =1 для энергетиков 0 для ост
     _NAZVA_ = 6 ;
@@ -72,7 +66,7 @@ __fastcall TAntOpt::TAntOpt()
 }
 
 
-void __fastcall TAntOpt::SetANTON()
+void TAntOpt::SetANTON()
 {
     for (int i = 0; i < 50; i++) {
         ras_1d[i] = _ras_1d[i] + DopMashtab;
@@ -98,26 +92,16 @@ void __fastcall TAntOpt::SetANTON()
 
 
 bool CORR = true;
-
-
 int CurrentUCH = 0;
-
 /* only Yura */
-
 bool DNC = false;
 
 bool            bNoEmbeddSubStations = false;
 bool            bShowNumberPosition = false;
 bool            TRAINNUM_SHOW = true; // все номера рисовать
 bool            bNameBlack = false;
-
 bool bShowExtInfo = false;           // рисовать доп.инфо пр, длина путей
-
-
 int              DELTA_CHAN = 0;
-
-
-
 int            CommonAnimationStep = 0; // шаг для прорисовки анимации
 
 /*-------------------*/
@@ -126,15 +110,10 @@ int            CommonAnimationStep = 0; // шаг для прорисовки анимации
 /*-------------------*/
 
 int Tip_Opis_PKS = 0;
-
 int C_M;
-
 int  DELTA_Y = 0;
 int  DELTA_X = 0;
 int  DNC_DC = 0;
-
-
-
 
 int CurrentStation = 0;
 

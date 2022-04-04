@@ -31,7 +31,7 @@ public:
     signed   char  masy;
     signed   char  masx2;
     int            iMacro;
-    int clr, _clr; // ������������ ��� ���������� �� ������ �����������
+    int clr, _clr;
     signed   char pr;
     int impuls_busi;
     int fimpuls_busi;
