@@ -14,7 +14,7 @@
       obj.tmp\LampExtDraw.obj obj.tmp\Impuls.obj obj.tmp\Marshrut.obj 
       obj.tmp\propmap.obj obj.tmp\uParString.obj obj.tmp\Gor_Elem.obj 
       obj.tmp\Gor_Logic.obj obj.tmp\uFormula.obj obj.tmp\EnergUnit.obj 
-      obj.tmp\CompHint.obj obj.tmp\uETTList.obj"/>
+      obj.tmp\CompHint.obj obj.tmp\uETTList.obj obj.tmp\astringlist.obj"/>
     <RESFILES value=""/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -92,6 +92,7 @@
       <FILE FILENAME="Comp\EnergUnit.cpp" FORMNAME="" UNITNAME="EnergUnit" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="Ext\CompHint.cpp" FORMNAME="" UNITNAME="CompHint" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="Ext\uETTList.cpp" FORMNAME="" UNITNAME="uETTList" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Ext\astringlist.cpp" FORMNAME="" UNITNAME="astringlist" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

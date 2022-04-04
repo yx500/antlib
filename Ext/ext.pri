@@ -1,6 +1,8 @@
 
-HEADERS += $$files($$PWD/*.h)
-SOURCES += $$files($$PWD/*.cpp)
+HEADERS += $$files($$PWD/*.h) \
+    $$PWD/astringlist.h
+SOURCES += $$files($$PWD/*.cpp) \
+    $$PWD/astringlist.cpp
 
 
 HEADERS += \

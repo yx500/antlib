@@ -2,19 +2,20 @@
 #define ASTRINGLIST_H
 
 
+#include <string>
+#include <vector>
 
-class AStringList
+class AStringList : public std::vector<std::string>
 {
 public:
-    AStringList();
+    AStringList(){}
 
-    void  LoadFromFile(const String& FileName);
-    void  SaveToFile(const String& FileName);
+    void  LoadFromFile(const std::string& FileName);
+    void  SaveToFile(const std::string& FileName);
 
-    int Add(const String& S);
-    int Delete(int idx);
-    int Count() const;
-    String& operator[]( int pos );
+    int Count() const { return this->size(); }
+    void Add(const std::string& s) { this->push_back(s); }
+    void Delete(size_t idx) { this->erase( this->begin() + idx);  }
 };
 
 
