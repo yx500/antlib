@@ -142,7 +142,7 @@ extern uint8 *         sv_ras_y;
 extern uint8 *         ras     ;
 extern uint8 *         ras_6   ;
 extern  int             sh_y;
-extern  char *          Com_Nam[CompTypeCount+1];
+extern  const char *          Com_Nam[CompTypeCount+1];
 extern  int             CurrentUCH;
 
 

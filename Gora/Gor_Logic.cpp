@@ -25,7 +25,7 @@ double TPVal(uint16 w)
 
 char  ZamPacketName[8][12] = {"mog2_v", "ARS1", "ARS2", "ARS3", "ARS4", "ARS5", "ARS6", "ARS7"};
 
-t_ARSDescrCell*  GetZamDataCell(int AddrLKSlot,           int addr , unsigned int     &biostime)
+t_ARSDescrCell*  GetZamDataCell(int AddrLKSlot,           int addr , uint32    &biostime)
 {
     biostime = 0;
     if (GetDatagramData_Func == NULL) return NULL;

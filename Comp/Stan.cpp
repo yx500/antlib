@@ -820,7 +820,7 @@ void WritePmToIni(TPropMap &pm, TCustomIniFile *FI, String SectionName)
     for (int i = 0; i < SL->Count; i++)
         FI->WriteString(SectionName, SL->Names[i], SL->Values[SL->Names[i]]);
     delete SL;
-//     for ( int i=0; i<pm.ItemsCount; i++ )
+//     for ( int i=0; i<pm.GetItemsCount; i++ )
 //         FI->WriteString(SectionName,pm.Keys[i],pm.Val[i]);
 }
 //---------------------------------------------------------------------------
@@ -1262,7 +1262,7 @@ void Replaceacprop(AComp * ac, TPropMap &mrpl)
 {
     TPropMap m;
     String pmstr = ac->Tagstr.c_str();
-    for (int i = 0; i < mrpl.ItemsCount; i++) {
+    for (int i = 0; i < mrpl.GetItemsCount(); i++) {
         //String stKey=mrpl.Keys[i];
         //if (
         //    if ()
@@ -1275,12 +1275,12 @@ void Replaceacprop(AComp * ac, TPropMap &mrpl)
     //ac->GetPropMap(m);
     if (ac->pmRepl != NULL) {
         String pmReplstr = ac->pmRepl->text();
-        for (int i = 0; i < mrpl.ItemsCount; i++) {
+        for (int i = 0; i < mrpl.GetItemsCount(); i++) {
             pmReplstr = AnsiReplaceStr(pmReplstr, mrpl.Keys[i], mrpl.Val[i]);
         }
         TPropMap m2;
         m2.text(pmReplstr.c_str());
-        for (int i = 0; i < m2.ItemsCount; i++) {
+        for (int i = 0; i < m2.GetItemsCount(); i++) {
             if (m2.Val[i] != "") {
                 String stK = m2.Keys[i];
                 String stV = m2.Val[i];
@@ -1307,7 +1307,7 @@ void Replaceactsprop(AComp * ac, int chNFrom, int chNTo, int chD)
     TAImpuls AImpuls;
     ac->GetPropMap(m);
     bool bChange = false;
-    for (int i = 0; i < m.ItemsCount; i++) {
+    for (int i = 0; i < m.GetItemsCount(); i++) {
         pmNAME = m.Keys[i];
         VALUE = m.Val[i];
         if (pmNAME.Pos("тс") == 1) {

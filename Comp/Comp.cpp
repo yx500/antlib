@@ -371,7 +371,7 @@ void AComp::GetPropMap(TPropMap &m)
     }
 
     if (pmRepl != NULL) {
-        for (int i = 0; i < pmRepl->ItemsCount; i++) {
+        for (int i = 0; i < pmRepl->GetItemsCount(); i++) {
             m.put(pmRepl->Keys[i], pmRepl->Val[i]);
         }
     }
@@ -411,7 +411,7 @@ void AComp::SetPropMap(TPropMap &m)
 
 
 
-    for (int i = 0; i < m.ItemsCount; i++) {
+    for (int i = 0; i < m.GetItemsCount(); i++) {
         String stKeys = m.Keys[i];
         if ((stKeys.Length() >= 1) && (m.Keys[i][1] == '$')) {
             if (pmRepl == NULL) pmRepl = new TPropMap();

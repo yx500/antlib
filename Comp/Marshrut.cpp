@@ -239,7 +239,7 @@ void TMarshrut::SetPropMap(TPropMap &m)
 {
     Clear();                            // Всё старое на свалку
     TStrInMarsh * sim;
-    int cnt = m.ItemsCount;
+    int cnt = m.GetItemsCount();
     String V, K;
     for (int i = 0; i < cnt; i++) {
         K = m.Keys[i];
@@ -540,7 +540,7 @@ bool TMarshList::LoadFromCSV(String stFN)
             m.put(PS[i], "");
             if (!IsPropNameStrel(PS[i])) PropStrBegin = i + 1;
         }
-        //if (m.ItemsCount!=pcnt){
+        //if (m.GetItemsCount!=pcnt){
         //   ShowMessage("Проблемы в шапке "+stFN+"\r совпадают "+IntToStr(pcnt-m.ItemsCount)+" поля(е) !");
         //   return false;
         //}
@@ -720,7 +720,7 @@ bool TMarshList::SaveToCSV(String stFN)
         m.clear();
         MARSHRUTS[i]->GetPropMap(m);
         for (int j = 0; j < PS.ParamsCount; j++) ps.SetStr(j, "");
-        for (int j = 0; j < m.ItemsCount; j++) {
+        for (int j = 0; j < m.GetItemsCount(); j++) {
             ind = PS.GetInd(m.Keys[j]);
             if (ind >= 0)
                 ps.SetStr(ind, m.Val [j]);
