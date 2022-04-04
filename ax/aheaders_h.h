@@ -26,6 +26,8 @@
 
 
 
+#include "astringlist.h"
+
 
 
 
