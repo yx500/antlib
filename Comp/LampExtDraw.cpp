@@ -22,12 +22,12 @@
 
 
 
-const sost0 = 0;
-const sostOk = 1;
-const sostWait = 2;
-const sostError = 100;
-const sostNoNet = -100;
-const sostNotAccept = -101;
+const int sost0 = 0;
+const int sostOk = 1;
+const int sostWait = 2;
+const int sostError = 100;
+const int sostNoNet = -100;
+const int sostNotAccept = -101;
 
 
 static T_LED_EXT_Func LED_EXT_Func = NULL;

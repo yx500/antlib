@@ -821,7 +821,7 @@ void WritePmToIni(TPropMap &pm, TCustomIniFile *FI, String SectionName)
         FI->WriteString(SectionName, SL->Names[i], SL->Values[SL->Names[i]]);
     delete SL;
 //     for ( int i=0; i<pm.GetItemsCount; i++ )
-//         FI->WriteString(SectionName,pm.Keys[i],pm.Val[i]);
+//         FI->WriteString(SectionName,pm.GetKeys(i),pm.GetVal(i));
 }
 //---------------------------------------------------------------------------
 int Station::SaveSTE()
@@ -1308,8 +1308,8 @@ void Replaceactsprop(AComp * ac, int chNFrom, int chNTo, int chD)
     ac->GetPropMap(m);
     bool bChange = false;
     for (int i = 0; i < m.GetItemsCount(); i++) {
-        pmNAME = m.Keys[i];
-        VALUE = m.Val[i];
+        pmNAME = m.GetKeys(i);
+        VALUE = m.GetVal(i);
         if (pmNAME.Pos("тс") == 1) {
             if (VALUE != "000:0000:0:00") {
                 AImpuls.FromString(VALUE.c_str());
@@ -1319,7 +1319,7 @@ void Replaceactsprop(AComp * ac, int chNFrom, int chNTo, int chD)
                     if (AImpuls.Number >= 0)
                         AImpuls.Number += chD;
                     VALUE = AImpuls.ToString();
-                    m.Val[i] = VALUE;
+                    m.GetVal(i) = VALUE;
                 }
             }
         }

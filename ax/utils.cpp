@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdlib.h>
-
+/*
 char* itoa(int num, char* buffer, int base) {
   int curr = 0;
 
@@ -49,7 +49,7 @@ char* itoa(int num, char* buffer, int base) {
   buffer[curr] = '\0';
   return buffer;
 }
-
+*/
 //int main() {
 //  int a = 1234;
 //  char buffer[256];

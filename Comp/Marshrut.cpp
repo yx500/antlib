@@ -242,8 +242,8 @@ void TMarshrut::SetPropMap(TPropMap &m)
     int cnt = m.GetItemsCount();
     String V, K;
     for (int i = 0; i < cnt; i++) {
-        K = m.Keys[i];
-        V = m.Val[i];
+        K = m.GetKeys(i);
+        V = m.GetVal(i);
 
         if (K == MarshrutPropName[indNUMCOM]) NUMCOM = V.ToIntDef(0);else
         if (K == MarshrutPropName[indGROUP ]) GROUP = V.ToIntDef(0); else

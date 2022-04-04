@@ -412,10 +412,10 @@ void AComp::SetPropMap(TPropMap &m)
 
 
     for (int i = 0; i < m.GetItemsCount(); i++) {
-        String stKeys = m.Keys[i];
-        if ((stKeys.Length() >= 1) && (m.Keys[i][1] == '$')) {
+        String stKeys = m.GetKeys(i);
+        if ((stKeys.Length() >= 1) && (m.GetKeys(i)[1] == '$')) {
             if (pmRepl == NULL) pmRepl = new TPropMap();
-            pmRepl->put(m.Keys[i], m.Val[i]);
+            pmRepl->put(m.GetKeys(i), m.GetVal(i));
         }
     }
 }

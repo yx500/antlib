@@ -5,7 +5,7 @@
 #include <cstdint>
 
 //todo !!must deprecated
-char* itoa(int num, char* buffer, int base);
+//char* itoa(int num, char* buffer, int base);
 
 
 
