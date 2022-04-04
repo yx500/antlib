@@ -10,7 +10,7 @@ class AStringList : public std::vector<std::string>
 public:
     AStringList(){}
 
-    void  LoadFromFile(const std::string& FileName);
+    int   LoadFromFile(const std::string& FileName);
     void  SaveToFile(const std::string& FileName);
 
     int Count() const { return this->size(); }

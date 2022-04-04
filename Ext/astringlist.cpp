@@ -1,10 +1,42 @@
 #include "astringlist.h"
+
 #include <fstream>
+#include <iostream>
+#include <algorithm>
+#include <locale>
+#include <cctype>
+#include <functional>
 
 
-void AStringList::LoadFromFile(const std::string &filename)
+static std::string right_crlf_trim(const std::string& s)
 {
-    std::ifstream ifs(filename.c_str());
+  std::string result(s);
+  result.erase(
+      std::find_if(result.rbegin(), result.rend(),
+                   not1( std::bind2nd(std::ptr_fun(&std::isspace<char>), std::locale("")) )
+              ).base(),
+      result.end());
+  return result;
+}
+
+int AStringList::LoadFromFile(const std::string &filename)
+{
+  this->clear();
+
+  std::ifstream ifs(filename.c_str());
+  if (!ifs.is_open()){
+    std::cerr<<"AStringList::LoadFromFile bad!!!" << filename << std::endl;
+    return 0;
+  }
+
+  std::string line;
+  while( getline(ifs,line) ) {
+    if(line.size() and line[0]=='#')
+        continue;
+    this->push_back( right_crlf_trim(line) );
+  }
+
+  return this->size();
 }
 
 
@@ -12,6 +44,9 @@ void AStringList::LoadFromFile(const std::string &filename)
 void AStringList::SaveToFile(const std::string &filename)
 {
     std::ofstream ofs(filename.c_str());
-
+    std::vector<std::string>::const_iterator i = begin();
+    while( i != this->end() ){
+      ofs << *i++ << std::endl;
+    }
 }
 
