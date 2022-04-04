@@ -372,7 +372,7 @@ void AComp::GetPropMap(TPropMap &m)
 
     if (pmRepl != NULL) {
         for (int i = 0; i < pmRepl->GetItemsCount(); i++) {
-            m.put(pmRepl->Keys[i], pmRepl->Val[i]);
+            m.put(pmRepl->GetKeys(i), pmRepl->GetVal(i));
         }
     }
 

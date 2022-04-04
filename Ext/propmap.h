@@ -101,6 +101,9 @@ public:
     void putEx(const String& stKey, String stVal, int ptr);
     void putEx(const String& stKey, String stVal, int, String stValDef);
     void putOEM(const String& stKey, String stVal);
+    void putEx(const String& stKey, int iVal, int ptr){
+        putEx(stKey,IntToStr(iVal),ptr);
+    }
 
     void put(const String& stKey, String stVal) {
         putEx(stKey, stVal, 0);
