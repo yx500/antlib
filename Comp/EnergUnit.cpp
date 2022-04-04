@@ -53,12 +53,11 @@ int SetEnergLampData(TEnergStanLamps * EnergStanLamps, uint16 ObjID, TEnergLampD
     return res;
 }
 
-void LoadTEnergStanLamps(char * fn, TEnergStanLamps * EnergStanLamps)
+void LoadTEnergStanLamps(const char * fn, TEnergStanLamps * EnergStanLamps)
 {
     if (FileExists(fn)) {
-        TFileStream * FS = new TFileStream(fn, fmOpenRead);
-        FS->Read(EnergStanLamps, sizeof(TEnergStanLamps));
-        delete FS;
+        std::ifstream  FS(fn, std::ios::binary);
+        FS.read(reinterpret_cast<char*>(EnergStanLamps), sizeof(TEnergStanLamps));
     }
 
 }
@@ -134,10 +133,9 @@ void SaveLampsLS(Station *Stan)
         }
     }
     String fn = ChangeFileExt(Stan->FullFN(), ".stx");
-    TFileStream * FS = new TFileStream(fn, fmCreate);
-    FS->Write(Stan->EnergStanLamps, sizeof(TEnergStanLamps));
-    delete FS;
 
+    std::ofstream  FS(fn.c_str(), std::ios::binary);
+    FS.write(reinterpret_cast<char*>(Stan->EnergStanLamps), sizeof(TEnergStanLamps));
 }
 
 void LoadLampsLS(Station *Stan)
@@ -149,9 +147,10 @@ void LoadLampsLS(Station *Stan)
     String fn = ChangeFileExt(Stan->FullFN(), ".stx");
     if (!FileExists(fn))
         return;
-    TFileStream * FS = new TFileStream(fn, fmOpenRead);
-    FS->Read(Stan->EnergStanLamps, sizeof(TEnergStanLamps));
-    delete FS;
+
+    std::ifstream  FS(fn.c_str(), std::ios::binary);
+    FS.read(reinterpret_cast<char*>(Stan->EnergStanLamps), sizeof(TEnergStanLamps));
+
     bool ex;
     for (int j = 0; j < Stan->POLE[WAYS]->GetArraySize(); j++) {
         eo = dynamic_cast<TE_OBJ *>(Stan->POLE[WAYS]->GetObjPtr(j));
