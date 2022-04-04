@@ -97,7 +97,8 @@ const char * TPropMap::textext(char rkeyval, char rString)
     if (sz == 0)
         return "";
 
-    static String _stRES = "";
+    static String _stRES;
+    _stRES = "";
     for (int i = 0; i < sz; i++) {
         const _Props::Elem& e = _p.get(i);
         _stRES = _stRES + e.lKey + rkeyval + e.lVal + rString;
@@ -185,7 +186,8 @@ const char * TPropMap::getpropmapstr(char * sztext)
     TPropMap pm;
     pm.text(sztext);
     pm.addpropmap(*this);
-    static String _stRES = pm.text();
+    static String _stRES;
+    _stRES = pm.text();
     return _stRES.c_str();
 }
 //---------------------------------------------------------------------------
