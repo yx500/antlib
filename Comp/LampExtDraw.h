@@ -32,7 +32,6 @@ struct TLED_EXTData {
     AComp* pElement;
     // отображалово
     // графика
-    void* hdc;
     int X;
     int Y;
     int Width;

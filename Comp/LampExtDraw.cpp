@@ -14,8 +14,7 @@
 #include "uEXD.h"
 #include "Impuls.h"
 
-#include "winbgi_vcl.h"
-//#include "bgi.h"
+#include "bgi.h"
 
 //---------------------------------------------------------------------------
 
@@ -58,8 +57,6 @@ TLED::TLED(): SuperLamp2()
 int TLED::SetLED_EXT(int xx, int yy, int ww, int hh)
 {
     memset(&LEDEXD, 0, sizeof(LEDEXD));
-    if (BgiCanvas() != NULL)
-        LEDEXD.hdc = BgiCanvas()->Handle;
 
     LEDEXD.pElement = this;
     // графика
@@ -92,7 +89,7 @@ int TLED::SetLED_EXT(int xx, int yy, int ww, int hh)
     LEDEXD.ObjData.PersistInt = PersistInt;
     LEDEXD.ObjData.PersistVoid = PersistVoid;
 
-    return LEDEXD.hdc != 0;
+    return 1;
 }
 
 void SetGridAlignXY(int GridAllign, int &x, int &y, int WP, int HP);
