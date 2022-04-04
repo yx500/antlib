@@ -240,7 +240,7 @@ struct t_KzpInf {
     long  pred_val_kzp;  // предыдущее значение кзп до сброса в нул
     long  pred_vag_len;       // длина отепа зашедшего на путь
     long points_count;
-    struct Point {
+    struct Point_vt {
         uint16 val;
         uint32 tim;
     } points[16];

@@ -14,6 +14,8 @@
 #include "Gor_Logic.h"
 #include "tGorka.h"
 
+#include"bgi.h"
+
 #define LEFT_        1
 #define _RIGHT       2
 #define _CENTER_     3
@@ -158,13 +160,13 @@ TPoint _points[6];
 int    _clr[6] = {C_D, C_D, C_D, C_D, C_D, C_D};
 int    _clr2[6] = {C_D, C_D, C_D, C_D, C_D, C_D};
 int    _clr2FON[6] = {FON, FON, FON, FON, FON, FON};
-const xx = 6;
+const int xx = 6;
 
 void _MakePoints(int X0, int Y0, int Width, int Height, int direct)
 {
-    _points[0] = Point(X0 + xx, Y0);
-    _points[1] = Point(X0 + Width - xx, Y0);
-    _points[2] = Point(X0 + Width - xx, Y0 + Height / 2);
+    _points[0] = TPoint(X0 + xx, Y0);
+    _points[1] = TPoint(X0 + Width - xx, Y0);
+    _points[2] = TPoint(X0 + Width - xx, Y0 + Height / 2);
     _points[3] = Point(X0 + Width - xx, Y0 + Height - 1);
     _points[4] = Point(X0 + xx, Y0 + Height - 1);
     _points[5] = Point(X0 + xx, Y0 + Height / 2);

@@ -499,7 +499,7 @@ TStrInMarsh * __fastcall TMarshList::GetSTRELS(int Index)
     return vStrels[Index];
 }
 
-int __fastcall TMarshList::GetGetSTRELSCOUNT()
+int __fastcall TMarshList::GetSTRELSCOUNT()
 {
     return vStrels.size();
 }
@@ -534,11 +534,11 @@ bool TMarshList::LoadFromCSV(String stFN)
         TParString ps("", ";,");
         TPropMap m;
         //формируем PropMap
-        int pcnt = PS.ParamsCount;
+        int pcnt = PS.GetParamsCount();
         for (int i = 0; i < MarshrutPropNameCount; i++)
             indMarshrutPropName[i] = PS.GetInd(MarshrutPropName[i]);
         for (int i = 0; i < pcnt; i++) {
-            m.put(PS[i], "");
+            m.put(PS.GetStr((i), "");
             if (!IsPropNameStrel(PS[i])) PropStrBegin = i + 1;
         }
         //if (m.GetItemsCount!=pcnt){
@@ -665,7 +665,7 @@ bool TMarshList::LoadFromCSV(String stFN)
     TStrInMarsh * sim1;
     TStrInMarsh * sim2;
     for (int i = 0; i < MARSHRUTSCOUNT; i++) {
-        M = MARSHRUTS[i];
+        M = GetMARSHRUTS(i);
         // проставляем из листа
         for (int sn1 = 0; sn1 < M->GetSTRELSCOUNT(); sn1++) {
             sim1 = M->STRELS[sn1];
@@ -685,7 +685,7 @@ bool TMarshList::LoadFromCSV(String stFN)
         if (CustomGetPacketOffset != NULL) {
             for (int j = 0; j < 5; j++) {
                 if (abs(M->imp[j]) >= 1000) {
-                    M->imp[j] = CustomGetPacketOffset(1, MARSHRUTS[i]->PacketName.c_str(), 0) * 1000 + M->imp[j] % 1000;
+                    M->imp[j] = CustomGetPacketOffset(1, GetMARSHRUTS(i)->PacketName.c_str(), 0) * 1000 + M->imp[j] % 1000;
                 }
             }
         }
@@ -697,7 +697,7 @@ bool TMarshList::SaveToCSV(String stFN)
 {
     //TMarshrut * M;
 
-    if (MARSHRUTSCOUNT <= 0) return false;
+    if (GetMARSHRUTSCOUNT() <= 0) return false;
     TStringList * SL = new TStringList();
 
     TParString PS("", ";");
@@ -717,14 +717,14 @@ bool TMarshList::SaveToCSV(String stFN)
 
     SL->Add(PS.ResultStr());
     int ind;
-    for (int i = 0; i < MARSHRUTSCOUNT; i++) {
+    for (int i = 0; i < GetMARSHRUTSCOUNT(); i++) {
         m.clear();
-        MARSHRUTS[i]->GetPropMap(m);
-        for (int j = 0; j < PS.ParamsCount; j++) ps.SetStr(j, "");
+        GetMARSHRUTS(i)->GetPropMap(m);
+        for (int j = 0; j < PS.GetParamsCount(); j++) ps.SetStr(j, "");
         for (int j = 0; j < m.GetItemsCount(); j++) {
-            ind = PS.GetInd(m.Keys[j]);
+            ind = PS.GetInd(m.GetKeys(j));
             if (ind >= 0)
-                ps.SetStr(ind, m.Val [j]);
+                ps.SetStr(ind, m.GetVal(j));
         }
         SL->Add(ps.ResultStr());
     }
@@ -742,8 +742,8 @@ bool TMarshList::SaveToCSV(String stFN)
         SL->Add(ST);
     }
     TMarshrut * M;
-    for (int i = 0; i < MARSHRUTSCOUNT; i++) {
-        M = MARSHRUTS[i];
+    for (int i = 0; i < getMARSHRUTSCOUNT(); i++) {
+        M = GetMARSHRUTS(i);
         //M_T;N;MarshSectType
         ST = "M_T;" + IntToStr(i) + ";" + IntToStr(M->MarshSectType); SL->Add(ST);
         // M_SV;_N;name;ObjID;packet_name;busy
@@ -779,7 +779,7 @@ void        TMarshList::AddMarshrut(TMarshrut* M)// добавление нового маршрута
         ex = false;
         N1 = M->GetSTRELS(i)->STRELNAME;
         for (int j = 0; j < GetSTRELSCOUNT(); j++) {
-            N2 = STRELS[j]->STRELNAME;
+            N2 = GetSTRELS(j)->STRELNAME;
             if (N1 == N2) {
                 ex = true;
                 break;
@@ -799,7 +799,8 @@ void        TMarshList::AddMarshrut(TMarshrut* M)// добавление нового маршрута
 void        TMarshList::DelMarshrut(TMarshrut* M)
 {
     // Удаляем маршрут
-    vMarshuts.erase(&M);
+    //vMarshuts.erase(&M);
+    vMarshuts.erase( std::find(vMarshuts.begin(), vMarshuts.end(), M) );
     delete M;
 }
 
@@ -845,8 +846,8 @@ void TMarshList::ConnectToStanSTA(Station * pS)
 
 
 
-    for (int i = 0; i < MARSHRUTSCOUNT; i++) {
-        M = MARSHRUTS[i];
+    for (int i = 0; i < GetMARSHRUTSCOUNT(); i++) {
+        M = GetMARSHRUTS(i);
         M->pSV =    pStan->GetObjByName_Unit(M->SV.c_str(), CEMA);
         M->pSV2 =   pStan->GetObjByName_Unit(M->SV2.c_str(), CEMA);
         if (M->pSV != NULL) {
@@ -874,9 +875,9 @@ void TMarshList::ConnectToStanSTA(Station * pS)
         }
 
         for (int j = 0; j < M->GetSTRELSCOUNT(); j++) {
-            sim = M->STRELS[j];
+            sim = M->GetSTRELS(j);
             for (int k = 0; k < GetSTRELSCOUNT(); k++) {
-                sim2 = STRELS[k];
+                sim2 = GetSTRELS(k);
                 if (strcmp(sim->STRELNAME, sim2->STRELNAME) == 0){
                     sim->pStrel = sim2->pStrel;
                     //sim->ObjID  = sim2->ObjID;
@@ -905,7 +906,7 @@ TStrInMarsh * __fastcall TMarshrut::GetSTRELSORD(int Index)
 {
     if (!Index) return NULL;
     for (int i = 0; i < GetSTRELSCOUNT(); i++) {
-        if (STRELS[ i ]->ORDER == Index) return STRELS[ i ];
+        if (GetSTRELS( i )->ORDER == Index) return GetSTRELS( i );
     }
     return NULL;
 }
@@ -914,7 +915,7 @@ int TMarshrut::GetMaxORDER(void)
 {
     int MX = 0;
     for (int i = 0; i < GetSTRELSCOUNT(); i++)
-        if (STRELS[ i ]->ORDER > MX) MX = STRELS[ i ]->ORDER;
+        if (GetSTRELS( i )->ORDER > MX) MX = GetSTRELS( i )->ORDER;
 
     return MX;
 }
@@ -922,15 +923,15 @@ int TMarshrut::GetMaxORDER(void)
 
 void TMarshList::UpdateState()
 {
-    for (int i = 0; i < MARSHRUTSCOUNT; i++) {
-        MARSHRUTS[i]->UpdateState();
+    for (int i = 0; i < getMARSHRUTSCOUNT(); i++) {
+        GetMARSHRUTS(i)->UpdateState();
     }
 }
 
 /*void TMarshList::UpdateState2()
 {
-    for (int i = 0; i < MARSHRUTSCOUNT; i++) {
-        MARSHRUTS[i]->UpdateState2();
+    for (int i = 0; i < getMARSHRUTSCOUNT(); i++) {
+        GetMARSHRUTS(i)->UpdateState2();
     }
 }
 */
@@ -948,8 +949,8 @@ TStrInMarsh * TMarshList::GetStrelByName(String StrelName)
 
 TMarshrut * TMarshList::GetMarshrutByNum(int Num)
 {
-    for (int i = 0; i < MARSHRUTSCOUNT; i++) {
-        if (MARSHRUTS[i]->NUMCOM == Num) return MARSHRUTS[i];
+    for (int i = 0; i < GetMARSHRUTSCOUNT(); i++) {
+        if (GetMARSHRUTS(i)->NUMCOM == Num) return GetMARSHRUTS(i);
     }
     return NULL;
 }
@@ -999,13 +1000,13 @@ void TMarshList::ShowUstMarsh(bool Only_1)
             S->bShowInSpyMarsh = false;
         }
     }
-    //for(int i=0;i<MARSHRUTSCOUNT;i++){
-    //        MARSHRUTS[i]->SetForShowUst(true);
+    //for(int i=0;i<getMARSHRUTSCOUNT();i++){
+    //        GetMARSHRUTS(i)->SetForShowUst(true);
     //}
 
-    for (int i = 0; i < MARSHRUTSCOUNT; i++) {
-        if (((!Only_1) || (MARSHRUTS[i]->GROUP == 1)) && (MARSHRUTS[i]->IsUstanovlen()))
-            MARSHRUTS[i]->SetForShowUst();
+    for (int i = 0; i < GetMARSHRUTSCOUNT(); i++) {
+        if (((!Only_1) || (GetMARSHRUTS(i)->GROUP == 1)) && (GetMARSHRUTS(i)->IsUstanovlen()))
+            GetMARSHRUTS(i)->SetForShowUst();
     }
 
     for (int i = 0; i < GetSTRELSCOUNT(); i++) {
@@ -1075,26 +1076,26 @@ void TMarshrut::CheckStat(bool &IsOK, bool &BusyOK, bool &KzmOK,bool &SVOk)
 {
     IsOK=true; BusyOK=true;  KzmOK=true; SVOk=false;
     for (int sn=0;sn<GetSTRELSCOUNT();sn++){ // шерстим по стрелкам
-         if ( (STRELS[sn]->DOCHEK!=cNO_CHECK_IS)/*(STRELS[sn]->pStrel!=NULL)*){
+         if ( (GetSTRELS(sn)->DOCHEK!=cNO_CHECK_IS)/*(GetSTRELS(sn)->pStrel!=NULL)*){
                 if (IsOK){
-                        int r=STRELS[sn]->realIS;
-                        int c=STRELS[sn]->IS;
+                        int r=GetSTRELS(sn)->realIS;
+                        int c=GetSTRELS(sn)->IS;
                         if ( (c!=r)||(r==33)||(r==D) ) {
                                 IsOK=false; // положение не то
                         }
                 }
 
          }
-         if ( (STRELS[sn]->DOCHEK!=cNO_CHECK_BUSY)/*&&(STRELS[sn]->pStrel!=NULL) *){
+         if ( (GetSTRELS(sn)->DOCHEK!=cNO_CHECK_BUSY)/*&&(GetSTRELS(sn)->pStrel!=NULL) *){
                 if (BusyOK){
-                        int r=STRELS[sn]->realBUSY;
+                        int r=GetSTRELS(sn)->realBUSY;
                         if (r!=0) BusyOK=false; // занятость есть
                 }
          }
-         if ( (STRELS[sn]->DOCHEK!=cNO_CHECK_BUSY)&&
-                (STRELS[sn]->DOCHEK!=cNO_CHECK_IS)/*&&(STRELS[sn]->pStrel!=NULL)* ){
+         if ( (GetSTRELS(sn)->DOCHEK!=cNO_CHECK_BUSY)&&
+                (GetSTRELS(sn)->DOCHEK!=cNO_CHECK_IS)/*&&(GetSTRELS(sn)->pStrel!=NULL)* ){
                 if (KzmOK){
-                    int r=STRELS[sn]->realKZM;
+                    int r=GetSTRELS(sn)->realKZM;
                     if  (r!=0) KzmOK=false;  // замыкания нет
                 }
          }
@@ -1118,10 +1119,10 @@ void TMarshrut::CheckStatFull(int &Pol, int &Busy, int &Kzm, int &SV)
 {
     Pol = 1; Busy = 0;  Kzm = 0; SV = 0;
     for (int sn = 0; sn < GetSTRELSCOUNT(); sn++) { // шерстим по стрелкам
-        String nn = STRELS[sn]->STRELNAME;
-        if ((STRELS[sn]->DOCHEK != cNO_CHECK_IS)/*(STRELS[sn]->pStrel!=NULL)*/) {
-            int r = STRELS[sn]->realIS;
-            int c = STRELS[sn]->IS;
+        String nn = GetSTRELS(sn)->STRELNAME;
+        if ((GetSTRELS(sn)->DOCHEK != cNO_CHECK_IS)/*(GetSTRELS(sn)->pStrel!=NULL)*/) {
+            int r = GetSTRELS(sn)->realIS;
+            int c = GetSTRELS(sn)->IS;
             if (r == 33 || r == D) {
                 Pol = 33;
             }
@@ -1130,14 +1131,14 @@ void TMarshrut::CheckStatFull(int &Pol, int &Busy, int &Kzm, int &SV)
             }
 
         }
-        if ((STRELS[sn]->DOCHEK != cNO_CHECK_BUSY)/*&&(STRELS[sn]->pStrel!=NULL) */) {
+        if ((GetSTRELS(sn)->DOCHEK != cNO_CHECK_BUSY)/*&&(GetSTRELS(sn)->pStrel!=NULL) */) {
             if (Busy != 33) {
-                int r = STRELS[sn]->realBUSY;
+                int r = GetSTRELS(sn)->realBUSY;
                 if (r == 33) Busy = 33;
                 if (r == 1) Busy = 1; // занятость есть
             }
             if (Kzm != 33) {
-                int r = STRELS[sn]->realKZM;
+                int r = GetSTRELS(sn)->realKZM;
                 if (r == 33) Kzm = 33;
                 if (r == 1) Kzm = 1;  // замыкания ест
             }
@@ -1176,7 +1177,7 @@ String      TMarshrut::GetStateString()
     TStrInMarsh *SIM;
     ST = SV + " " + IntToStr(realbusySV) + " ";
     for (int sn = 0; sn < GetSTRELSCOUNT(); sn++) { // шерстим по стрелкам
-        SIM = STRELS[sn];
+        SIM = GetSTRELS(sn);
         if ((SIM->DOCHEK != cNO_CHECK_IS)) {
             ST = ST + "[" + SIM->STRELNAME + " " + SIM->ToString() + GetIsStr(SIM->realIS) + "]";
         }
@@ -1191,7 +1192,7 @@ String      TMarshrut::GetUsedDataStr()
     String ST = "";
     /*TStrInMarsh *SIM;
     for (int sn = 0; sn < GetSTRELSCOUNT(); sn++) { // шерстим по стрелкам
-        SIM = STRELS[sn];
+        SIM = GetSTRELS(sn);
 
         for (int i = 0; i < 4; i++)
             if (SIM->imp[i] > 1000)
@@ -1209,9 +1210,9 @@ bool TMarshrut::CommonSections(TMarshrut * M)
     TStrInMarsh *SIM1;
     TStrInMarsh *SIM2;
     for (int sn1 = 0; sn1 < GetSTRELSCOUNT(); sn1++) { // шерстим по стрелкам
-        SIM1 = STRELS[sn1];
+        SIM1 = GetSTRELS(sn1);
         for (int sn2 = 0; sn2 < M->GetSTRELSCOUNT(); sn2++) { // шерстим по стрелкам
-            SIM2 = M->STRELS[sn2];
+            SIM2 = M->GetSTRELS(sn2);
             if (strcmp(SIM1->STRELNAME, SIM2->STRELNAME) == 0) return true;
         }
     }
@@ -1219,7 +1220,7 @@ bool TMarshrut::CommonSections(TMarshrut * M)
     return false;
 }
 
-const ParNameCnt = 15;
+const int ParNameCnt = 15;
 
 String ParName[ParNameCnt] = {
     "NUMCOM",          // 0
@@ -1241,21 +1242,21 @@ String ParName[ParNameCnt] = {
 };
 
 
-const mNUMCOM       = 0;
-const mGROUP        = 1;
-const mNAME         = 2;
-const mSNAME        = 3;
-const mM1           = 4;
-const mS1           = 5;
-const mG1           = 6;
-const mC1           = 7;
-const mN1           = 8;
-const mM2           = 9;
-const mS2           = 10;
-const mG2           = 11;
-const mC2           = 12;
-const mN2           = 13;
-const mNETNAME      = 14;
+const int mNUMCOM       = 0;
+const int mGROUP        = 1;
+const int mNAME         = 2;
+const int mSNAME        = 3;
+const int mM1           = 4;
+const int mS1           = 5;
+const int mG1           = 6;
+const int mC1           = 7;
+const int mN1           = 8;
+const int mM2           = 9;
+const int mS2           = 10;
+const int mG2           = 11;
+const int mC2           = 12;
+const int mN2           = 13;
+const int mNETNAME      = 14;
 
 int _CurHeadInd[ParNameCnt];
 
@@ -1317,9 +1318,10 @@ bool TMarshList::LoadTUFromCSV(String stFN)
 
 TMarshrut * TMarshList::GetMarshrutByTU(_tTU * TUCmd)
 {
-    for (int i = 0; i < MARSHRUTSCOUNT; i++) {
-        if (memcmp(&MARSHRUTS[i]->TUCmd, TUCmd, sizeof(MARSHRUTS[i]->TUCmd)) == 0)
-            return MARSHRUTS[i];
+    for (int i = 0; i < GetMARSHRUTSCOUNT(); i++) {
+        TMarshrut *M=GetMARSHRUTS(i);
+        if (memcmp(&M->TUCmd, TUCmd, sizeof(M->TUCmd)) == 0)
+            return M;
     }
     return NULL;
 

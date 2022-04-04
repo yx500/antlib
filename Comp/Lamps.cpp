@@ -1,5 +1,5 @@
 #include "aheaders_cpp.h"
-
+#include <time.h>
 #include "Lamps.h"
 
 #include "APch.h"
@@ -785,7 +785,7 @@ void SuperLamp2::UpdateState()
     if (bTime){
         if (impuls_busi>=1000){
 
-                long timesecD=0;
+                time_t timesecD=0;
                 if (GetDatagramPacket2_Func!=NULL){
                         TDatagramPacket2_header *DatagramPacket2=(TDatagramPacket2_header *)GetDatagramPacket2_Func(1,Stan()->ChanelNames[impuls_busi/1000]);
                         if (DatagramPacket2!=NULL) {

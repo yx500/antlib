@@ -75,11 +75,7 @@ public:
 class TMarshrut
 {
 private:
-    void          __fastcall SetSTRELS(int Index, TStrInMarsh * value);
-    TStrInMarsh * __fastcall GetSTRELS(int Index);
-    int           __fastcall GetSTRELSCOUNT();
-    void          __fastcall SetSTRELSORD(int Index, TStrInMarsh * value);
-    TStrInMarsh * __fastcall GetSTRELSORD(int Index);
+
 
 protected:
     std::vector<TStrInMarsh*> vStrels;   // вектор не катит.
@@ -103,7 +99,11 @@ public:
     String impname[5];  // названия импов храненые в csv
     int    ObjID[3];    // храненые в csv
     */
-
+       void          __fastcall SetSTRELS(int Index, TStrInMarsh * value);
+    TStrInMarsh * __fastcall GetSTRELS(int Index);
+    int           __fastcall GetSTRELSCOUNT();
+    void          __fastcall SetSTRELSORD(int Index, TStrInMarsh * value);
+    TStrInMarsh * __fastcall GetSTRELSORD(int Index);
     // инициируются при подключени к станции
     AComp*  pSV;
     AComp*  pSV2;
@@ -194,11 +194,7 @@ public:
 class TMarshList
 {
 private:
-    void          __fastcall SetSTRELS(int Index, TStrInMarsh * value);
-    TStrInMarsh * __fastcall GetSTRELS(int Index);
-    int           __fastcall GetSTRELSCOUNT();
-    TMarshrut*    __fastcall GetMARSHRUTS(int Index);
-    int           __fastcall GetMARSHRUTSCOUNT();
+
 
 protected:
 
@@ -213,6 +209,12 @@ public:
     TMarshList();
     void Clear();
     virtual ~TMarshList();
+
+    void          __fastcall SetSTRELS(int Index, TStrInMarsh * value);
+    TStrInMarsh * __fastcall GetSTRELS(int Index);
+    int           __fastcall GetSTRELSCOUNT();
+    TMarshrut*    __fastcall GetMARSHRUTS(int Index);
+    int           __fastcall GetMARSHRUTSCOUNT();
 
     void        ConnectToStanSTA(Station * pS);
     void        ConnectToStanBD(Station * pS);

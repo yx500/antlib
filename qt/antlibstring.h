@@ -47,6 +47,8 @@ public:
   AntLibString   UpperCase() const;
   AntLibString   Trim() const;
 
+  AntLibString    SubString(int b,int n) const;
+
 
 };
 using String = AntLibString;
