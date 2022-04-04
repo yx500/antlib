@@ -169,8 +169,8 @@ public:
 
 
 
-const _strel_d_x_t = 2; // размер щели по x
-const _strel_d_y_t = 2; // размер щели по y
+const int _strel_d_x_t = 2; // размер щели по x
+const int _strel_d_y_t = 2; // размер щели по y
 
 
 

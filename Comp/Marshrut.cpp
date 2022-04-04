@@ -396,9 +396,10 @@ void TMarshrut::AddStrInMarsh(TStrInMarsh *sim)
 
 void TMarshrut::DelStrInMarsh(TStrInMarsh *sim)
 {
-    vStrels.erase( &sim);
-    //int i = FStrels->IndexOf(sim);
-    //if (i >= 0) FStrels->Delete(i);
+//    std::vector<TStrInMarsh*>::iterator f = std::find(vStrels.begin(),vStrels.end(),sim);
+//    if( f != vStrels.end() )
+//        vStrels.erase(f);
+    vStrels.erase( std::find(vStrels.begin(), vStrels.end(), sim) );
 }
 
 
@@ -498,7 +499,7 @@ TStrInMarsh * __fastcall TMarshList::GetSTRELS(int Index)
     return vStrels[Index];
 }
 
-int __fastcall TMarshList::GetGetSTRELSCOUNT()()
+int __fastcall TMarshList::GetGetSTRELSCOUNT()
 {
     return vStrels.size();
 }
