@@ -8,18 +8,13 @@
 
 namespace alib {
 
-
-//todo !!must deprecated
-//char* itoa(int num, char* buffer, int base);
-
-
-
 //winuser.h
 void OemToAnsi(const char* in, char* out);
 void OemToCharBuff(const char* in, char* out, size_t s);
 void CharToOemBuff(const char* in, char* out, size_t s);
 
-
+//todo !!must deprecated
+char* itoa(int num, char* buffer, int base);
 
 //strings
 typedef std::vector<std::string>     stringvector;

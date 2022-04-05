@@ -1,9 +1,7 @@
 #ifndef uParStringH
 #define uParStringH
 //---------------------------------------------------------------------------
-#ifdef QT_ANTLIB
 #include "aheaders_h.h"
-#endif
 
 #include <string>
 #include <vector>
@@ -45,9 +43,9 @@ public:
     String operator [](int i) { return GetStr(i); }
     TParString& operator = (const String& st) { SetVal(st); return *this; }
 
-#ifndef QT_ANTLIB
-    __property int ParamsCount  = { read = GetParamsCount };
-#endif
+// #ifndef QT_ANTLIB
+//     __property int ParamsCount  = { read = GetParamsCount };
+// #endif
 };
 
 

@@ -817,7 +817,7 @@ void WritePmToIni(TPropMap &pm, TCustomIniFile *FI, String SectionName)
 {
     AStringList *SL = pm.createStringList();
     SL->Sort();
-    for (int i = 0; i < SL->Count; i++)
+    for (int i = 0; i < SL->Count(); i++)
         FI->WriteString(SectionName, SL->Names(i), SL->Values[SL->Names(i)]);
     delete SL;
 //     for ( int i=0; i<pm.GetItemsCount(); i++ )

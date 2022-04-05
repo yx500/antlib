@@ -13,7 +13,6 @@ namespace alib {
 
 using namespace std;
 
-/*
 char* itoa(int num, char* buffer, int base) {
   int curr = 0;
 
@@ -59,7 +58,6 @@ char* itoa(int num, char* buffer, int base) {
   buffer[curr] = '\0';
   return buffer;
 }
-*/
 
 int string_split(const string & text, const string& separators, stringvector & words)
 {
