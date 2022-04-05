@@ -149,21 +149,16 @@ public:
     };
     void clear() { _p.clear(); }
 
+    void AddToStringList(AStringList *SL);
+    
 
 #ifdef __BORLANDC__
-void AddToStringList(TStringList *SL);
-#else
-void AddToStringList(AStringList *SL);
-#endif
-
-#ifdef __BORLANDC__
+    void AddToStringList(TStringList *SL);
     __property int ItemsCount  = { read = GetItemsCount };
     __property String Keys[ int i ]  = { read = GetKeys, write = SetKeys };
     __property String Val[ int i ]  = { read = GetVal, write = SetVal };
     __property String P[String stKey]  = { read = GetP, write = SetP };
 #endif
-
-private:
 
 };
 

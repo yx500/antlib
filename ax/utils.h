@@ -5,13 +5,13 @@
 #include  <stddef.h>
 
 
-
-namespace alib {
-
 //winuser.h
 void OemToAnsi(const char* in, char* out);
 void OemToCharBuff(const char* in, char* out, size_t s);
 void CharToOemBuff(const char* in, char* out, size_t s);
+
+
+namespace alib {
 
 //todo !!must deprecated
 char* itoa(int num, char* buffer, int base);

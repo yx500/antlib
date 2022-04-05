@@ -5,36 +5,6 @@
 
 using namespace std;
 
-// int TParString::string_split(const string & text, const string& separators, stringvector & words)
-// {
-//     string::size_type n = text.size();
-//     string::size_type start, stop;
-//     start = text.find_first_not_of(separators);
-//     while (start != string::npos) {
-//         stop = text.find_first_of(separators, start);
-//         if (stop == string::npos)
-//             stop = n;
-//         words.push_back(text.substr(start, stop - start));
-//         start = text.find_first_not_of(separators, stop + 1);
-//     }
-//     return words.size();
-// }
-// //---------------------------------------------------------------------------
-// int TParString::string_splitex(const string & text, const string& separators, stringvector & words)
-// {
-//     string::size_type n = text.size();
-//     string::size_type start = 0;
-//     string::size_type stop = n;
-//     while ((start >= 0) && (start <= n)) {
-//         stop = text.find_first_of(separators, start);
-//         if (stop == string::npos)
-//             stop = n;
-//         words.push_back(text.substr(start, stop - start));
-//         start = stop + 1;
-//     }
-//     return words.size();
-// }
-//---------------------------------------------------------------------------
 TParString::TParString(const String& ASTR, const String& achr, bool acont)
         : words()
 {
@@ -128,7 +98,7 @@ void SplitString(const String &ST, AStringList *SL, const String &chBreak)
             s = "";
         } else s = s + ST[i];
     }
-    s = s.TrimLeft(); s = s.TrimRight();
+    s = s.Trim();
     if (s != "")SL->Add(s);
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -137,14 +107,19 @@ String  MakeSplitString(AStringList *SL, char chBreak)
     String s = "";
     for (int i = 0; i < SL->Size() - 1; i++)
         s = s + SL->At(i) + chBreak;
-    if (SL->Size() >= 1)s = s + SL->Strings[SL->Size()-1];
+    if (SL->Size() >= 1)
+        s = s + SL->Strings[SL->Size()-1];
     return s;
 }
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+
+
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #ifdef __BORLANDC__
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void SplitString(const String &ST, TStringList *SL, const String &chBreak)
 {
     String s = "";
@@ -156,17 +131,18 @@ void SplitString(const String &ST, TStringList *SL, const String &chBreak)
             s = "";
         } else s = s + ST[i];
     }
-    s = s.TrimLeft(); s = s.TrimRight();
-    if (s != "")SL->Add(s);
+    s = s.Trim();
+    if (s != "")
+        SL->Add(s);
 }
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 String  MakeSplitString(TStringList *SL, char chBreak)
 {
     String s = "";
     for (int i = 0; i < SL->Count - 1; i++)
         s = s + SL->Strings[i] + chBreak;
-    if (SL->Count >= 1)s = s + SL->Strings[SL->Count-1];
+    if (SL->Count >= 1)
+        s = s + SL->Strings[SL->Count-1];
     return s;
 }
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #endif

@@ -14,9 +14,6 @@ class TParString
 {
 private:
     typedef std::vector<std::string>     stringvector;
-    // static int string_split(const std::string & text, const std::string& separators, stringvector & words);
-    // static int string_splitex(const std::string & text, const std::string& separators, stringvector & words);
-
     stringvector words;
     std::string  separators;       // строка разделителей.
     // Разделитель - 1 символ.При формирования резулт. строки исп. первый символ.
@@ -48,14 +45,15 @@ public:
  #endif
 };
 
+void SplitString(const String& ST, AStringList *SL, const String& chBreak);
+String  MakeSplitString(AStringList *SL, char chBreak);
+
 
 #ifdef __BORLANDC__
 void SplitString(const String& ST, TStringList *SL, const String& chBreak);
 String  MakeSplitString(TStringList *SL, char chBreak);
-#else
-void SplitString(const String& ST, AStringList *SL, const String& chBreak);
-String  MakeSplitString(AStringList *SL, char chBreak);
 #endif
 
-//---------------------------------------------------------------------------
+
+
 #endif
