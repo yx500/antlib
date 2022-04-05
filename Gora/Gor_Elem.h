@@ -276,7 +276,7 @@ public:
     {
         return STRE;
     };
-    virtual char *GetName()
+    virtual const char *GetName()
     {
         return Name.c_str();
     };

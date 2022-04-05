@@ -8,7 +8,6 @@
 #include <inifiles.hpp>
 class AIniFile : public TMemIniFile
 {
-  //  virtual void __fastcall ReadSection(const AnsiString Section, AStringList* Strings);
 };
 
 #else
