@@ -12,17 +12,16 @@
 class AntLibString : public std::string
 {
 public:
+
   AntLibString():std::string() {}
-  AntLibString(const char *s):std::string(s) {}
-  AntLibString(const std::string& s):std::string(s) {}
+  AntLibString(const char *s) : std::string(s) {}
+  AntLibString(const std::string& s) : std::string(s) {}
 
-  int Pos(const std::string& subStr) const {
-    return this->find_first_of(subStr);
-  }
+  int Pos(const std::string& subStr) const { return this->find_first_of(subStr); }
 
-  int Length() const {
-    return size();
-  }
+  bool IsEmpty() const { return this->empty(); }
+
+  int Length() const { return size(); }
 
   int ToInt() const {
     try {
@@ -31,7 +30,6 @@ public:
       std::cerr<<__FUNCTION__<<e.what()<<std::endl;
     }
     return 0;
-    //return std::atoi( this->c_str() );
   }
 
   int ToIntDef(int defaultValue) const {
@@ -43,15 +41,17 @@ public:
   }
 
 
+  AntLibString UpperCase() const;
 
-  AntLibString   UpperCase() const;
-  AntLibString   Trim() const;
+  AntLibString Trim() const;
 
-  AntLibString    SubString(int b,int n) const;
+  AntLibString SubString(int b,int n) const;
 
 
 };
 using String = AntLibString;
+
+
 
 inline String  IntToStr(int Value) { return std::to_string(Value); }
 extern String  IntToHex(int Value, int Digits);

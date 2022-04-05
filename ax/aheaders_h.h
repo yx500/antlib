@@ -4,29 +4,29 @@
 
 
 #ifdef __BORLANDC__
-#include <systypes.h>
-#include <system.hpp>
-#include <Classes.hpp>
+  #include <systypes.h>
+  #include <system.hpp>
+  #include <Classes.hpp>
+
 #else //QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT
-
-//#define QT_ANTLIB
-#define __fastcall
-
-#include "systypes.h"
-#include "utils.h"
-#include "win/w32defs.h"
-#include "antlibstring.h"
-#include "antlibstringlist.h"
-#include "antlibgraphics.h"
-#include "vcllib.h"
-
-
+  //#define QT_ANTLIB
+  #define __fastcall
+  #include "systypes.h"
+  #include "win/w32defs.h"
+  #include "antlibstring.h"
+  #include "antlibstringlist.h"
+  #include "antlibgraphics.h"
+  #include "vcllib.h"
 
 #endif
 
 
 
 #include "astringlist.h"
+#include "utils.h"
+
+
+
 
 
 

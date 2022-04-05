@@ -136,12 +136,12 @@ public:
         return (_p.ElemOf(stKey) != 0);
     }
     //---------------------------------------------------------------------------
-    TStringList* createStringList();
+    AStringList* createStringList();
 
     void addpropmap(TPropMap & pm);
     void putpropmapstr(char * sztext);
     const char * getpropmapstr(char * sztext);
-    void AddToStringList(TStringList * SL);
+    void AddToStringList(AStringList *SL);
     void putkeyvalst(String S);
 
     String operator [](int i) {

@@ -605,7 +605,7 @@ bool Station::OpenIniFile()
         TIniFile * FI = new TIniFile(FN);
         ID_RP = FI->ReadInteger("MAIN", "ID_RP", 0);
 
-        TStringList * SLChanels = new TStringList();
+        AStringList *SLChanels = new AStringList();
         FI->ReadSectionValues("CHANELS", SLChanels);
         ReadChanelsInfo(SLChanels);
         delete SLChanels;
@@ -815,10 +815,10 @@ const String _objprzF = "End_object ";
 
 void WritePmToIni(TPropMap &pm, TCustomIniFile *FI, String SectionName)
 {
-    TStringList *SL = pm.createStringList();
+    AStringList *SL = pm.createStringList();
     SL->Sort();
     for (int i = 0; i < SL->Count; i++)
-        FI->WriteString(SectionName, SL->Names[i], SL->Values[SL->Names[i]]);
+        FI->WriteString(SectionName, SL->Names(i), SL->Values[SL->Names(i)]);
     delete SL;
 //     for ( int i=0; i<pm.GetItemsCount(); i++ )
 //         FI->WriteString(SectionName,pm.GetKeys(i),pm.GetVal(i));
@@ -830,7 +830,7 @@ int Station::SaveSTE()
     pm.bNotPutDefault = true;
     AComp * ac;
 
-    //TStringList * SL=new TStringList();
+    //AStringList *SL=new AStringList();
     //int oldmod=MOD;
     //MOD=RD; // надо чтоб лишнее не писалось
 
@@ -875,7 +875,7 @@ int Station::SaveSTE()
     return 1;
 }
 //---------------------------------------------------------------------------
-void ReadPmFromIni(TPropMap &pm, TCustomIniFile * FI, String SectionName, TStrings * SL)
+void ReadPmFromIni(TPropMap &pm, TCustomIniFile * FI, String SectionName, TStrings *SL)
 {
     SL->Clear();
     FI->ReadSectionValues(SectionName, SL);
@@ -886,12 +886,12 @@ void ReadPmFromIni(TPropMap &pm, TCustomIniFile * FI, String SectionName, TStrin
     }
 }
 
-void Station::ReadChanelsInfo(TStringList * SL)
+void Station::ReadChanelsInfo(AStringList *SL)
 {
     String stK, PacketName;
     TUseChanelName uname;
-    for (int i = 0; i < SL->Count; i++) {
-        String ST = SL->Strings[i];
+    for (int i = 0; i < SL->Count(); i++) {
+        String ST = SL->Strings(i);
         stK = "";
         PacketName = "";
         int p1 = ST.Pos("=");
@@ -933,8 +933,8 @@ int Station::LoadSTE()
     TPropMap pm;
     AComp * ac;
 
-    TStringList * SL = new TStringList();
-    TStringList * SLsect = new TStringList();
+    AStringList *SL = new AStringList();
+    AStringList *SLsect = new AStringList();
     String FN = FullFN();
     //SL->LoadFromFile(FN);
     TMemIniFile * FI = new TMemIniFile(FN);
@@ -948,7 +948,7 @@ int Station::LoadSTE()
 
     /* ----  */
 
-    TStringList * SLChanels = new TStringList();
+    AStringList *SLChanels = new AStringList();
     FI->ReadSectionValues("STATION", SLChanels);
     ReadChanelsInfo(SLChanels);
     
@@ -962,8 +962,8 @@ int Station::LoadSTE()
 
     FI->ReadSections(SLsect);
     String SectName;
-    for (int i = 0; i < SLsect->Count; i++) {
-        SectName = SLsect->Strings[i];
+    for (int i = 0; i < SLsect->Count(); i++) {
+        SectName = SLsect->Strings(i);
         if (SectName.Pos("Comp_") != 1) continue;
         pm.clear();
         ReadPmFromIni(pm, FI, SectName, SL);

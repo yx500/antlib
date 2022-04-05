@@ -19,8 +19,10 @@ public:
 
     std::string& Strings(size_t idx) { return this->at(idx); }
 
+    void Sort();
     std::string& Names(size_t idx);
-    std::string& Values(const std::string& s);
+    std::string& Values(size_t idx);
+    //std::string& Values(const std::string& s);
 };
 
 

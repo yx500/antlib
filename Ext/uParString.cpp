@@ -115,7 +115,7 @@ int TParString::GetInd(const String &stPar)
 }
 //---------------------------------------------------------------------------
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void SplitString(const String &ST, TStringList * SL, const String &chBreak)
+void SplitString(const String &ST, AStringList *SL, const String &chBreak)
 {
     String s = "";
     SL->Clear();
@@ -130,12 +130,12 @@ void SplitString(const String &ST, TStringList * SL, const String &chBreak)
     if (s != "")SL->Add(s);
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-String  MakeSplitString(TStringList * SL, char chBreak)
+String  MakeSplitString(AStringList *SL, char chBreak)
 {
     String s = "";
-    for (int i = 0; i < SL->Count - 1; i++)
-        s = s + SL->Strings[i] + chBreak;
-    if (SL->Count >= 1)s = s + SL->Strings[SL->Count-1];
+    for (int i = 0; i < SL->Count() - 1; i++)
+        s = s + SL->Strings(i) + chBreak;
+    if (SL->Count() >= 1)s = s + SL->Strings[SL->Count()-1];
     return s;
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

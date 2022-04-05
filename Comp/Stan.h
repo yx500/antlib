@@ -93,7 +93,7 @@ public:
     int Open(const char *fn);
     int LoadSTA();
     int LoadSTE();
-    void ReadChanelsInfo(TStringList * SL);
+    void ReadChanelsInfo(AStringList *SL);
     void ConnectGorls();
 
     void SetMas(int imul_x, int imul_y);
