@@ -574,7 +574,7 @@ int  GetPacketOffset(int PacketType, String PacketName, String PathNBDRV)
                 char str[20];
                 fil >> std::setw(19) >> str; str[19] = 0;
                 S = String(str).UpperCase();
-                if ((S.AnsiCompare(PacketName) == 0) && (PacketType == typ))
+                if ((S==PacketName) && (PacketType == typ))
                     return j + 1;
             }
         }
@@ -1232,7 +1232,7 @@ void Replaceacprop(AComp * ac, TPropMap &mrpl)
     TPropMap m;
     String pmstr = ac->Tagstr.c_str();
     for (int i = 0; i < mrpl.GetItemsCount(); i++) {
-        //String stKey=mrpl.Keys[i];
+        //String stKey=mrpl.GetKey(i);
         //if (
         //    if ()
         std::string s=pmstr.c_str();
@@ -1256,9 +1256,9 @@ void Replaceacprop(AComp * ac, TPropMap &mrpl)
         TPropMap m2;
         m2.text(pmReplstr.c_str());
         for (int i = 0; i < m2.GetItemsCount(); i++) {
-            if (m2.Val[i] != "") {
-                String stK = m2.Keys[i];
-                String stV = m2.Val[i];
+            if (m2.GetVal(i) != "") {
+                String stK = m2.GetKeys(i);
+                String stV = m2.GetVal(i);
                 // а фдруг формула
                 if ((stV.Pos("+") > 1) ||
                         (stV.Pos("+") > 1) ||
