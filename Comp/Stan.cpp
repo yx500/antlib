@@ -849,7 +849,7 @@ void ReadPmFromIni(TPropMap &pm, AIniFile * FI, String SectionName)
     FI->ReadSectionValues(SectionName, SL);
     String ST;
     for (int i = 0; i < SL->Size(); i++) {
-        ST = SL->at(i);
+        ST = SL->At(i);
         pm.putkeyvalst(ST);
     }
     delete SL;
@@ -905,8 +905,6 @@ int Station::LoadSTE()
     AStringList *SL = new AStringList();
     AStringList *SLsect = new AStringList();
     String FN = FullFN();
-    //SL->LoadFromFile(FN);
-    AIniFile * FI = new AIniFile(FN);
     pm.clear();
     int type;
     UNIT unit;

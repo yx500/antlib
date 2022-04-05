@@ -107,7 +107,7 @@ public:
     {
         return TY_Strel::GetUnit();
     };
-    char *GetName()
+    const char *GetName()
     {
         return TY_Strel::GetName();
     }
@@ -142,7 +142,7 @@ public:
     {
         return TY_Strel::GetUnit();
     };
-    char *GetName()
+    const char *GetName()
     {
         return TY_Strel::GetName();
     }
@@ -205,7 +205,7 @@ public:
     {
         return TY_Strel::GetUnit();
     };
-    char *GetName()
+    const char *GetName()
     {
         return TY_Strel::GetName();
     }
@@ -373,7 +373,7 @@ public:
     {
         return tG_RC::GetUnit();
     };
-    char *GetName()
+    const char *GetName()
     {
         return TY_Strel::GetName();
     }
@@ -460,7 +460,7 @@ public:
     {
         return tG_RC::GetUnit();
     };
-    char *GetName()
+    const char *GetName()
     {
         return TY_Strel::GetName();
     }
@@ -497,7 +497,7 @@ public:
     {
         return STRE;
     };
-    virtual char *GetName()
+    virtual const char *GetName()
     {
         return Name.c_str();
     };
@@ -594,7 +594,7 @@ public:
     {
         return tG_RC::GetUnit();
     };
-    char *GetName()
+    const char *GetName()
     {
         return TY_Strel::GetName();
     }
