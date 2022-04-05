@@ -2,7 +2,7 @@
 #include "aheaders_cpp.h"
 #include "APch.h"
 
-#include "static.h"
+#include "Static.h"
 
 
 #include "Scrin.h"

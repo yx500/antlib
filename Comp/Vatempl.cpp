@@ -14,7 +14,7 @@
 #include "Svet.h"
 #include "Lamps.h"
 #include "Strel.h"
-#include "static.h"
+#include "Static.h"
 #include "Line.h"
 #include "Gorl.h"
 #include "F.h"
