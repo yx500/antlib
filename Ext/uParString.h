@@ -43,9 +43,9 @@ public:
     String operator [](int i) { return GetStr(i); }
     TParString& operator = (const String& st) { SetVal(st); return *this; }
 
-// #ifndef QT_ANTLIB
-//     __property int ParamsCount  = { read = GetParamsCount };
-// #endif
+#ifdef __BORLANDC__
+     __property int ParamsCount  = { read = GetParamsCount };
+ #endif
 };
 
 
