@@ -7,7 +7,7 @@
 
 
 
-
+/*
 
 void  SetYchDir(const char* dir);
 void  SetStaDir(const char* dir);
@@ -17,11 +17,9 @@ const char* FullStaFileName(const char* fn);
 const char* FullDatFileName(const char* fn);
 void  SetRootDir(const char* dir);
 
-
 extern char Root_Dir[256];
-
-extern const char* CommitFile(const char* file);
-
+*/
+inline const char* CommitFile(const char* file){return file;}
 
 
 

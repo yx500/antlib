@@ -349,7 +349,7 @@ void Poligon::SaveYCE()
         String SectName = "STATION_" + IntToStr(i + 1);
         Dat = ST[i]->Dat;
         Dat->Nom = i;
-        FI->WriteString(SectName, "ñìFullFileName", ExtractRelativePath(FullFileName, ST[i]->filename));
+        FI->WriteString(SectName, "ñìFullFileName",  ST[i]->filename);
 
         FI->WriteString(SectName, "ñìfilename", ExtractFileName(ST[i]->filename));
         FI->WriteString(SectName, "ñìdescriptor", Dat->descriptor);

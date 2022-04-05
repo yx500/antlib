@@ -10,7 +10,7 @@
 #include <string>
 #include <fstream>
 #include <map>
-
+/*
 using namespace std;
 
 char Root_Dir[256];
@@ -68,7 +68,9 @@ const char* CommitFile(const char* file)
     return file;
 #else
     return _AntCommitFile(file);
-#endif /* ! USING_ANT_EXTENSION_LIB */
-}
+#endif
+*/
+/* ! USING_ANT_EXTENSION_LIB */
+//}
 //---------------------------------------------------------------------------
 

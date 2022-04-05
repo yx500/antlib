@@ -4,7 +4,7 @@
 
 #include "Str_fun.h"
 //#include<math.h>
-#include<fastmath.h>
+#include<math.h>
 #include "Strel.h"
 
 
@@ -332,7 +332,7 @@ void   _fillpoly_(int sw_tip, int  kr[], int dr, bool bShowIsNormalMnus, int  cl
 }
 // ограничение масштаба после которого по€вл€ютс€ номера стрелок
 // #define Lim _NAZVA_
-const sdv_nazv = 0;
+const int sdv_nazv = 0;
 //    sdv_nazv =  -11;
 void  Strel0::Strelka(int is, int sw_tip, int styll1, int styll2, int clr, int nm, int x_text, int y_text, char *name, bool InvresPol, int cbord1, int cbord2, bool bShowPol)
 {

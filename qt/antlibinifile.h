@@ -1,6 +1,8 @@
-#pragma once
+//#pragma once
 
 #include <QSettings>
+#include "astring.h"
+#include "antlibstringlist.h"
 class AIniFile : public QSettings
 {
 public:
@@ -29,7 +31,7 @@ public:
   void ReadSection(const String &Section, AStringList *Strings) ;
   void ReadSections(AStringList *Strings);
   void ReadSectionValues(const String &Section, AStringList *Strings);
-//  void EraseSection(const String &Section);
+  void EraseSection(const String &Section);
 //  void DeleteKey(const String &Section, const String &Ident);
   void UpdateFile(void);
 //  bool ValueExists(const String &Section, const String &Ident);

@@ -202,12 +202,12 @@ void  TY_Strel::CalcStrelY(/*,
     TPoint M[7] ;
     // приводим к нормальному виду
     M[0]=YP.M[0];
-    M[1]=Point(M[0].x-L1,M[0].y+DH1);
-    M[2]=Point(M[0].x+L2,M[0].y);
-    M[3]=Point(M[0].x+DX,M[0].y-DH);
-    M[4]=Point(M[3].x+L3,M[3].y);
-    M[5]=Point(M[0].x+DX,M[0].y+DH);
-    M[6]=Point(M[3].x+L3_,M[5].y);
+    M[1]=TPoint(M[0].x-L1,M[0].y+DH1);
+    M[2]=TPoint(M[0].x+L2,M[0].y);
+    M[3]=TPoint(M[0].x+DX,M[0].y-DH);
+    M[4]=TPoint(M[3].x+L3,M[3].y);
+    M[5]=TPoint(M[0].x+DX,M[0].y+DH);
+    M[6]=TPoint(M[3].x+L3_,M[5].y);
 
 
     int SH = YP.sh_y;
@@ -408,7 +408,7 @@ void  TY_Strel::CalcStrelY(/*,
         fT[0] = fT[16] ; fT[11] = fT[17] ; fT[12] = fT[17]; fT[13] = fT[17];
     }
 
-    if ((CurrentPicture == LT) ) _SetText(ARIAL12, x_n, y_n); else
+    if (CurrentPicture == LT ) _SetText(ARIAL12, x_n, y_n); else
         _SetText(F_LITT, x_n, y_n);
     if (NomerHeight == 1) {
         if (num_font_sz!=0) _SetTextSize(num_font_sz); else
@@ -518,22 +518,22 @@ void TY_Strel::SetYPM()
 
 
 
-    YP.M[0] = Point(XX + M0X, YY);
-    YP.M[1] = Point(YP.M[0].x - L1, YP.M[0].y+M1Y*MUL_Y);
-    if (DH<0) YP.M[1] = Point(YP.M[0].x - L1, YP.M[0].y-M1Y*MUL_Y);
-    YP.M[2] = Point(XX + L2,       YP.M[0].y);
-    YP.M[3] = Point(XX + DX + M3X,       YY - DH);
-    YP.M[4] = Point(YP.M[3].x + L3, YP.M[3].y);
-    YP.M[5] = Point(XX + DX,       YY + DH);
-    YP.M[6] = Point(YP.M[5].x + L2, YP.M[5].y);
+    YP.M[0] = TPoint(XX + M0X, YY);
+    YP.M[1] = TPoint(YP.M[0].x - L1, YP.M[0].y+M1Y*MUL_Y);
+    if (DH<0) YP.M[1] = TPoint(YP.M[0].x - L1, YP.M[0].y-M1Y*MUL_Y);
+    YP.M[2] =TPoint(XX + L2,       YP.M[0].y);
+    YP.M[3] = TPoint(XX + DX + M3X,       YY - DH);
+    YP.M[4] = TPoint(YP.M[3].x + L3, YP.M[3].y);
+    YP.M[5] = TPoint(XX + DX,       YY + DH);
+    YP.M[6] = TPoint(YP.M[5].x + L2, YP.M[5].y);
     //YP.M0X=M0X*MUL_X;YP.M0Y=M0Y*MUL_Y;
     //YP.M3X=M3X*MUL_X;YP.M3Y=M3Y*MUL_Y;
     if (DX < 0) {
-        YP.M[1] = Point(YP.M[0].x + L1, YP.M[0].y+M1Y*MUL_Y);
-        if (DH<0) YP.M[1] = Point(YP.M[0].x + L1, YP.M[0].y-M1Y*MUL_Y);
-        YP.M[2] = Point(XX - L2,       YP.M[0].y);
-        YP.M[4] = Point(YP.M[3].x - L3, YP.M[3].y);
-        YP.M[6] = Point(YP.M[5].x - L2, YP.M[5].y);
+        YP.M[1] = TPoint(YP.M[0].x + L1, YP.M[0].y+M1Y*MUL_Y);
+        if (DH<0) YP.M[1] = TPoint(YP.M[0].x + L1, YP.M[0].y-M1Y*MUL_Y);
+        YP.M[2] = TPoint(XX - L2,       YP.M[0].y);
+        YP.M[4] = TPoint(YP.M[3].x - L3, YP.M[3].y);
+        YP.M[6] = TPoint(YP.M[5].x - L2, YP.M[5].y);
         //YP.M0X=-M0X*MUL_X;YP.M3X=-M3X*MUL_X;
     }
     YP.tpriz = tpriz;
@@ -1093,22 +1093,22 @@ void TY_Strel_6::SetYPM()
     DX = mas * MUL_X/2;
     // подготавливаем данные для расчета стрелки
     // инициализируем вторые понятные для меня переменные
-    YP.M[0] = Point(XX + M0X, YY);
-    YP.M[1] = Point(YP.M[0].x - L1, YP.M[0].y+M1Y*MUL_Y/2);
-    if (DH<0) YP.M[1] = Point(YP.M[0].x - L1, YP.M[0].y-M1Y*MUL_Y/2);
-    YP.M[2] = Point(XX + L2,       YP.M[0].y);
-    YP.M[3] = Point(XX + DX + M3X,       YY - DH);
-    YP.M[4] = Point(YP.M[3].x + L3, YP.M[3].y);
-    YP.M[5] = Point(XX + DX,       YY + DH);
-    YP.M[6] = Point(YP.M[5].x + L2, YP.M[5].y);
+    YP.M[0] = TPoint(XX + M0X, YY);
+    YP.M[1] = TPoint(YP.M[0].x - L1, YP.M[0].y+M1Y*MUL_Y/2);
+    if (DH<0) YP.M[1] = TPoint(YP.M[0].x - L1, YP.M[0].y-M1Y*MUL_Y/2);
+    YP.M[2] = TPoint(XX + L2,       YP.M[0].y);
+    YP.M[3] = TPoint(XX + DX + M3X,       YY - DH);
+    YP.M[4] = TPoint(YP.M[3].x + L3, YP.M[3].y);
+    YP.M[5] = TPoint(XX + DX,       YY + DH);
+    YP.M[6] = TPoint(YP.M[5].x + L2, YP.M[5].y);
     //YP.M0X=M0X*MUL_X;YP.M0Y=M0Y*MUL_Y;
     //YP.M3X=M3X*MUL_X;YP.M3Y=M3Y*MUL_Y;
     if (DX < 0) {
-        YP.M[1] = Point(YP.M[0].x + L1, YP.M[0].y+M1Y*MUL_Y/2);
-        if (DH<0) YP.M[1] = Point(YP.M[0].x + L1, YP.M[0].y-M1Y*MUL_Y/2);
-        YP.M[2] = Point(XX - L2,       YP.M[0].y);
-        YP.M[4] = Point(YP.M[3].x - L3, YP.M[3].y);
-        YP.M[6] = Point(YP.M[5].x - L2, YP.M[5].y);
+        YP.M[1] = TPoint(YP.M[0].x + L1, YP.M[0].y+M1Y*MUL_Y/2);
+        if (DH<0) YP.M[1] = TPoint(YP.M[0].x + L1, YP.M[0].y-M1Y*MUL_Y/2);
+        YP.M[2] = TPoint(XX - L2,       YP.M[0].y);
+        YP.M[4] = TPoint(YP.M[3].x - L3, YP.M[3].y);
+        YP.M[6] = TPoint(YP.M[5].x - L2, YP.M[5].y);
     }
 }
 
