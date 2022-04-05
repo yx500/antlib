@@ -5,10 +5,12 @@
 #include  <stddef.h>
 
 
+#ifndef __BORLANDC__
 //winuser.h
 void OemToAnsi(const char* in, char* out);
 void OemToCharBuff(const char* in, char* out, size_t s);
 void CharToOemBuff(const char* in, char* out, size_t s);
+#endif
 
 
 namespace alib {
