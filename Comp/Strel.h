@@ -79,7 +79,7 @@ public:
     virtual void Go();
 
     virtual TYP  GetType() = 0;
-    virtual char * GetName();
+    virtual const char * GetName();
 
     virtual void UpdateState();
 
@@ -343,7 +343,7 @@ public:
     int clrt;
     int clrz;
     void  Show();
-    virtual char * GetName();
+    virtual const char * GetName();
     TYP  GetType() {
         return P_SVE;
     };
@@ -362,7 +362,7 @@ public:
     Bash();
     void  Show();
     virtual void UpdateState();
-    virtual char * GetName();
+    virtual const char * GetName();
     TYP  GetType() {
         return BASH ;
     };

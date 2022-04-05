@@ -18,7 +18,7 @@ public:
     //virtual void  Show()=0;
     virtual void Show();
     virtual void Go();
-    virtual char * GetName();
+    virtual const char * GetName();
     virtual void UpdateState();
 
     virtual void GetPropMap(TPropMap &m);

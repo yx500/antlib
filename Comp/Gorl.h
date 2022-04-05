@@ -108,7 +108,7 @@ public:
     int   TU[_Size_G];
     Gorl  *comp[_Size_G];
     bool bVirtual;
-    virtual char * GetName();
+    virtual const char * GetName();
     virtual void Show();
     virtual void Set();
     virtual void Get();

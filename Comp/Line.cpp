@@ -54,7 +54,7 @@ void Lini::Get()
 
 
 
-char * Lini::GetName()
+const char * Lini::GetName()
 {
     return name;
 }
@@ -600,7 +600,7 @@ void Lini2::GetPropMap(TPropMap &m)
 }
 
 
-char * Lini2::GetName()
+const char * Lini2::GetName()
 {
     return name;
 }

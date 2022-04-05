@@ -56,7 +56,7 @@ public:
     virtual void Get();
     virtual void GetPropMap(TPropMap &m);
     virtual void SetPropMap(TPropMap &m);
-    virtual char * GetName();
+    virtual const char * GetName();
     void ShowX(int ix, int iy);
     void ShowX1(int ix, int iy);
     void ShowEX(int ix, int iy);

@@ -25,7 +25,7 @@ public:
     virtual void Go();
     virtual TYP  GetType() = 0;
     virtual UNIT GetUnit() = 0;
-    virtual char * GetName();
+    virtual const char * GetName();
     Lini() {
         mas_y = 0; clr = 7;
     };
@@ -133,7 +133,7 @@ public:
     virtual void Go();
     virtual TYP  GetType();
     virtual UNIT GetUnit();
-    virtual char * GetName();
+    virtual const char * GetName();
     Lini2();
     ~Lini2() {};
 

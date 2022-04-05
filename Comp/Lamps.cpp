@@ -216,7 +216,7 @@ int Lamp::GetSubType()
     return 0;
 };
 
-char *Lamp::GetName()
+const char *Lamp::GetName()
 {
     if (name[0] == '&')
     {

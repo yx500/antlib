@@ -10,7 +10,7 @@
 class AIniFile : public TMemIniFile
 {
 public:
-         AIniFile(const String &FileName): TMemIniFile(FileName){}
+         AIniFile(const String &FileName): TMemIniFile(FileName) {}
 };
 
 #else
@@ -23,7 +23,7 @@ public:
   String FileName;
 
   AIniFile(const String &FileName);
-//  bool SectionExists(const String &Section);
+  bool SectionExists(const String &Section);
   String ReadString(const String &Section, const String &Ident, const String &Default);
   void WriteString(const String &Section, const String &Ident, const String &Value);
   int ReadInteger(const String &Section, const String &Ident, int Default);

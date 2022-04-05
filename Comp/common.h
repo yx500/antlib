@@ -13,7 +13,7 @@ class AComp;
 extern  void Color_Off(void);
 extern  void Color_On(void) ;
 
-extern  void Qui(char*, int, int);
+extern  void Qui(const char*, int, int);
 void WriteToLog(const std::string& Str);
 void WriteToErr(const std::string& Str);
 

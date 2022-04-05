@@ -2,7 +2,7 @@
 #include "aheaders_cpp.h"
 #include "APch.h"
 
-#include <StrUtils.hpp>
+
 #include <typeinfo>
 #include "Stan.h"
 #include "Comp.h"
@@ -906,7 +906,7 @@ int Station::LoadSTE()
     AStringList *SLsect = new AStringList();
     String FN = FullFN();
     //SL->LoadFromFile(FN);
-
+    AIniFile * FI = new AIniFile(FN);
     pm.clear();
     int type;
     UNIT unit;

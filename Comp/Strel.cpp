@@ -753,7 +753,7 @@ void  Strel0::Show2()
 
 
 
-char * Strel::GetName()
+const char * Strel::GetName()
 {
     static char nname[sizeof(name)];
     memset(nname, 0, sizeof(nname));
@@ -1875,7 +1875,7 @@ long Sicl = 0;
 
 extern T_GetSigName_Func _GetSigName_Func;
 static String _PerName = "";
-char * P_Sve::GetName()
+const char * P_Sve::GetName()
 {
     _PerName = Strel::GetName();
     if (_PerName != "") return _PerName.c_str();

@@ -13,7 +13,7 @@
 
 
 //---------------------------------------------------------------------------
-void Qui(char *bf, int, int)
+void Qui(const char *bf, int, int)
 {
     //throw(const char*)bf;
     WriteToErr(bf);

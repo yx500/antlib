@@ -56,7 +56,7 @@ void AText::GetPropMap(TPropMap &m)
 
 
 
-char * AText::GetName()
+const char * AText::GetName()
 {
     return name;
 }
