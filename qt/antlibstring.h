@@ -41,6 +41,7 @@ public:
   AString UpperCase() const;
   AString Trim() const;
   AString SubString(int b,int n) const;
+  AString Delete(int b, int n) const ;
 
 
 };

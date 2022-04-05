@@ -116,7 +116,7 @@ const char *TPropMap::textext(char rkeyval, char rString)
     return _stRES.c_str();
 }
 
-void TPropMap::textext(char *szText, char rkeyval, char rString, bool clr)
+void TPropMap::textext(const char *szText, char rkeyval, char rString, bool clr)
 {
     if (clr)
         props.clear();

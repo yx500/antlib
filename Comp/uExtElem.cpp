@@ -63,7 +63,7 @@ void SetTextAlignXY(int tp, int &tx, int &ty, int x, int y, int WP, int HP, TSiz
 }
 
 
-void ShowPictText(int x, int y, void * AGE, char * szText, int YS)
+void ShowPictText(int x, int y, void * AGE, const char * szText, int YS)
 {
 
 

@@ -137,12 +137,12 @@ public:
     {
         return this->textext('=', '\n');
     }
-    void text(char *szText)
+    void text(const char *szText)
     {
         this->textext(szText, '=', '\n');
     }
 
-    void textext(char *szText, char rkeyval = '=', char rString = '\n', bool clr = true);
+    void textext(const char *szText, char rkeyval = '=', char rString = '\n', bool clr = true);
     const char *textext(char rkeyval = '=', char rString = '\n');
 
     bool KeyExists(const String &stKey)

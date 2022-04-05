@@ -509,7 +509,6 @@ Station::~Station()
         delete Dat;
         Dat = NULL;
     }
-    if (ETTList!=NULL) delete ETTList;
     if (EnergStanLamps != NULL) delete EnergStanLamps;
 }
 //---------------------------------------------------------------------------
@@ -1382,17 +1381,17 @@ void SubStation::SetPropMap(TPropMap &m)
         for (int i = 0; i < Units_Size; i++) {
             for (int j = 0; j < substan->POLE[i]->GetArraySize(); j++) {
                 ac = substan->POLE[i]->GetObjPtr(j);
-                boundRCT.Left = ac->X; boundRCT.Top = ac->Y; boundRCT.Right = ac->X; boundRCT.Bottom = ac->Y;
+                boundRCT.left = ac->X; boundRCT.top = ac->Y; boundRCT.right = ac->X; boundRCT.bottom = ac->Y;
                 break;
             }
         }
         for (int i = 0; i < Units_Size; i++) {
             for (int j = 0; j < substan->POLE[i]->GetArraySize(); j++) {
                 ac = substan->POLE[i]->GetObjPtr(j);
-                if (boundRCT.Left < ac->X)boundRCT.Left = ac->X;
-                if (boundRCT.Right > ac->X)boundRCT.Right = ac->X;
-                if (boundRCT.Top < ac->Y)boundRCT.Top = ac->Y;
-                if (boundRCT.Bottom > ac->Y)boundRCT.Bottom = ac->Y;
+                if (boundRCT.left < ac->X)boundRCT.left = ac->X;
+                if (boundRCT.right > ac->X)boundRCT.right = ac->X;
+                if (boundRCT.top < ac->Y)boundRCT.top = ac->Y;
+                if (boundRCT.bottom > ac->Y)boundRCT.bottom = ac->Y;
                 ac->X += X;
                 ac->Y += Y;
                 if (bNoRebuildID)
