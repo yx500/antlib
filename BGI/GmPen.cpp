@@ -5,16 +5,15 @@
 #include <limits.h>
 
 #include "GmPen.h"
-//---------------------------------------------------------------------------
-
 
 
 /* TODO : !!! Cashing pens */
 extern bool NoGmPen;
-__fastcall TGmPen::TGmPen(TCanvas* cnv)
-        : canvas(cnv)
+__fastcall TGmPen::TGmPen(TCanvas *cnv)
+    : canvas(cnv)
 {
-    if (NoGmPen) return;
+    if (NoGmPen)
+        return;
     LOGPEN logpen;
     int err = GetObject(canvas->Pen->Handle, sizeof(logpen), &logpen);
 
@@ -24,22 +23,21 @@ __fastcall TGmPen::TGmPen(TCanvas* cnv)
     lplb.lbHatch = HS_BDIAGONAL;
 
     pen = ::ExtCreatePen(
-              //DWORD dwPenStyle, // pen style
-              PS_GEOMETRIC | logpen.lopnStyle,//|PS_ENDCAP_FLAT|PS_JOIN_BEVEL,
-              //DWORD dwWidth,    // pen width
-              1,//logpen.lopnWidth,
-              //const LOGBRUSH *lplb, // pointer to structure for brush attributes
-              &lplb,
-              //DWORD dwStyleCount,   // length of array containing custom style bits
-              0,
-              //const DWORD *lpStyle  // optional array of custom style bits
-              NULL
-          );
+        // DWORD dwPenStyle, // pen style
+        PS_GEOMETRIC | logpen.lopnStyle, //|PS_ENDCAP_FLAT|PS_JOIN_BEVEL,
+        // DWORD dwWidth,    // pen width
+        1, // logpen.lopnWidth,
+        // const LOGBRUSH *lplb, // pointer to structure for brush attributes
+        &lplb,
+        // DWORD dwStyleCount,   // length of array containing custom style bits
+        0,
+        // const DWORD *lpStyle  // optional array of custom style bits
+        NULL);
 
     old = ::SelectObject(
-              canvas->Handle,//  HDC hdc,           // handle of device context
-              pen         //  HGDIOBJ hgdiobj   // handle of object
-          );
+        canvas->Handle, //  HDC hdc,           // handle of device context
+        pen             //  HGDIOBJ hgdiobj   // handle of object
+    );
 
 #ifdef _DEBUG
     /*
@@ -52,8 +50,8 @@ __fastcall TGmPen::TGmPen(TCanvas* cnv)
 
 __fastcall TGmPen::~TGmPen()
 {
-    if (NoGmPen) return;
+    if (NoGmPen)
+        return;
     ::SelectObject(canvas->Handle, old);
     ::DeleteObject(pen);
 }
-
