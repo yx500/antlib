@@ -19,19 +19,18 @@ public:
   //  int ReadBinaryStream(const String& Section, const String& Name, Classes::TStream* Value);
   //  System::TDateTime ReadDate(const String& Section, const String& Name, System::TDateTime Default);
   //  System::TDateTime ReadDateTime(const String& Section, const String& Name, System::TDateTime Default);
-//  double ReadFloat(const String &Section, const String &Name, double Default);
+  //  double ReadFloat(const String &Section, const String &Name, double Default);
   //  System::TDateTime ReadTime(const String& Section, const String& Name, System::TDateTime Default);
   //  void WriteBinaryStream(const String& Section, const String& Name, Classes::TStream* Value);
   //  void WriteDate(const String& Section, const String& Name, System::TDateTime Value);
   //  void WriteDateTime(const String& Section, const String& Name, System::TDateTime Value);
-//  void WriteFloat(const String &Section, const String &Name, double Value);
+  //  void WriteFloat(const String &Section, const String &Name, double Value);
   //  void WriteTime(const String& Section, const String& Name, System::TDateTime Value);
-  void ReadSection(const String &Section, AStringList *Strings) ;
+  void ReadSection(const String &Section, AStringList *Strings);
   void ReadSections(AStringList *Strings);
   void ReadSectionValues(const String &Section, AStringList *Strings);
-//  void EraseSection(const String &Section);
-//  void DeleteKey(const String &Section, const String &Ident);
+  //  void EraseSection(const String &Section);
+  //  void DeleteKey(const String &Section, const String &Ident);
   void UpdateFile(void);
-//  bool ValueExists(const String &Section, const String &Ident);
+  //  bool ValueExists(const String &Section, const String &Ident);
 };
-

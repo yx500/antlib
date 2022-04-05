@@ -2,7 +2,6 @@
 #include "aheaders_cpp.h"
 #include "APch.h"
 
-
 #include <typeinfo>
 #include "Stan.h"
 #include "Comp.h"
@@ -29,38 +28,37 @@
 
 extern bool DescrCached;
 
-TAntOpt AntOpt0;                    // используется если нет участка( для станции 1ой)
-TAntOpt *UsedAntOpt = &AntOpt0;     // для редактора
+TAntOpt AntOpt0;                // используется если нет участка( для станции 1ой)
+TAntOpt *UsedAntOpt = &AntOpt0; // для редактора
 
-TEachStan EachStanPostShow=NULL; // внешняя функция для дополнительной прорисовки станции
+TEachStan EachStanPostShow = NULL; // внешняя функция для дополнительной прорисовки станции
 
-TAntOpt * GetUsedAntOpt()
+TAntOpt *GetUsedAntOpt()
 {
     return UsedAntOpt;
 }
 //---------------------------------------------------------------------------
-const char* Station::FullFN()
+const char *Station::FullFN()
 {
     static char FULL_PATH[255];
     memset(FULL_PATH, 0, sizeof(FULL_PATH));
     strncat(FULL_PATH, Sta_Dir, strlen(Sta_Dir));
     strncat(FULL_PATH, Dat->filename, 8);
     strcat(FULL_PATH, ".sta");
-    return (filename[0] != 0) ? filename : FULL_PATH ;
+    return (filename[0] != 0) ? filename : FULL_PATH;
 }
 
-FILE* Station::_fopen(char *mod)
+FILE *Station::_fopen(char *mod)
 {
     const char *FN = FullFN();
     return fopen(CommitFile(FN), mod);
 }
 
-
-FILE* Station::_fopenTu(char *mod)
+FILE *Station::_fopenTu(char *mod)
 {
     String FN = FullFN();
     FN = ChangeFileExt(FN, ".tu");
-    FILE* fileTU = fopen(CommitFile(FN.c_str()) , mod);
+    FILE *fileTU = fopen(CommitFile(FN.c_str()), mod);
     return fileTU;
 }
 //---------------------------------------------------------------------------
@@ -69,107 +67,128 @@ void Station::Adapter()
 
     /* set ych params */
 
-    if (pPoligon != NULL) AO = &pPoligon->AO; else
+    if (pPoligon != NULL)
+        AO = &pPoligon->AO;
+    else
         AO = &AntOpt0;
 
     UsedAntOpt = AO;
     AO->SetANTON();
 
-    MUL_X =   Dat->MUL_X[CurrentPicture];
-    MUL_Y =   Dat->MUL_Y[CurrentPicture];
+    MUL_X = Dat->MUL_X[CurrentPicture];
+    MUL_Y = Dat->MUL_Y[CurrentPicture];
     DELTA_Y = 0;
     DELTA_X = 0;
-    if (AO->_2X2_) {
-        sv_ras_y = sv_ras_y_2d ;
-        ras      = ras_2d      ;
-        ras_6    = ras_6_2d    ;
-        BLOK_Y   = 16;
-        SH_WAY   =  6;
-        STREL_X  =  8;
-        STREL_Y  =  3;
+    if (AO->_2X2_)
+    {
+        sv_ras_y = sv_ras_y_2d;
+        ras = ras_2d;
+        ras_6 = ras_6_2d;
+        BLOK_Y = 16;
+        SH_WAY = 6;
+        STREL_X = 8;
+        STREL_Y = 3;
         //   STREL_y  =  2;
-        WAY_X    = 24;
-        WAY_Y    =  6;
-        DL_US    =  4;
-        S_WAY_X  =  6;
-        S_WAY_Y  =  4;
-        SIG_X    = 18;
-        SIG_Y    = 20;
-    } else {
-        sv_ras_y = sv_ras_y_1d ;
-        ras      = ras_1d      ;
-        ras_6    = ras_6_1d    ;
-        BLOK_Y   =  8;
-        SH_WAY   =  3;
-        STREL_X  =  4;
-        STREL_Y  =  3;
-        //      STREL_y  =  1;
-        WAY_X    = 12;
-        WAY_Y    =  3;
-        DL_US    =  2;
-        S_WAY_X  =  3;
-        S_WAY_Y  =  2;
-        SIG_X    =  9;
-        SIG_Y    = 10;
+        WAY_X = 24;
+        WAY_Y = 6;
+        DL_US = 4;
+        S_WAY_X = 6;
+        S_WAY_Y = 4;
+        SIG_X = 18;
+        SIG_Y = 20;
     }
-    if (AO->MaxY > 351) DELTA_Y = 135;                       // NB 480
-    if ((AO->MaxY > 351) && (AO->MaxY < 470)) DELTA_Y -= 480 - AO->MaxY;        // NB 460
-    if (AO->MaxY > 481) {
-        DELTA_Y += 121; DELTA_X = (800 - 640 - 10) / 2;
-    }// NB  600
-    if ((AO->MaxY > 481) && (AO->MaxY < 590)) DELTA_Y -= 600 - AO->MaxY;        // NB 580
+    else
+    {
+        sv_ras_y = sv_ras_y_1d;
+        ras = ras_1d;
+        ras_6 = ras_6_1d;
+        BLOK_Y = 8;
+        SH_WAY = 3;
+        STREL_X = 4;
+        STREL_Y = 3;
+        //      STREL_y  =  1;
+        WAY_X = 12;
+        WAY_Y = 3;
+        DL_US = 2;
+        S_WAY_X = 3;
+        S_WAY_Y = 2;
+        SIG_X = 9;
+        SIG_Y = 10;
+    }
+    if (AO->MaxY > 351)
+        DELTA_Y = 135; // NB 480
+    if ((AO->MaxY > 351) && (AO->MaxY < 470))
+        DELTA_Y -= 480 - AO->MaxY; // NB 460
+    if (AO->MaxY > 481)
+    {
+        DELTA_Y += 121;
+        DELTA_X = (800 - 640 - 10) / 2;
+    } // NB  600
+    if ((AO->MaxY > 481) && (AO->MaxY < 590))
+        DELTA_Y -= 600 - AO->MaxY; // NB 580
 
-    if (AO->MaxY > 601) {
-        DELTA_Y += 168; DELTA_X = (1024 - 640 - 10) / 2;
-    }  //NB 768
-    if ((AO->MaxY > 601) && (AO->MaxY < 760)) DELTA_Y -= 768 - AO->MaxY; //NB 738
+    if (AO->MaxY > 601)
+    {
+        DELTA_Y += 168;
+        DELTA_X = (1024 - 640 - 10) / 2;
+    } // NB 768
+    if ((AO->MaxY > 601) && (AO->MaxY < 760))
+        DELTA_Y -= 768 - AO->MaxY; // NB 738
 
-    if (AO->MaxY == 769) {
-        DELTA_Y = DELTA_Y - 100; DELTA_X = (1024 - 640 - 10) / 2;
-    }  //NB 768
+    if (AO->MaxY == 769)
+    {
+        DELTA_Y = DELTA_Y - 100;
+        DELTA_X = (1024 - 640 - 10) / 2;
+    } // NB 768
 
-    if ((AO->MaxY > 769) && (AO->MaxY < 1025)) {
-        DELTA_Y += (1024 - 768);          //NB 738
-        DELTA_Y -= 1024 - AO->MaxY;          //NB 738
-//        DELTA_Y = 770;            //NB 738
+    if ((AO->MaxY > 769) && (AO->MaxY < 1025))
+    {
+        DELTA_Y += (1024 - 768);    // NB 738
+        DELTA_Y -= 1024 - AO->MaxY; // NB 738
+        //        DELTA_Y = 770;            //NB 738
         DELTA_X = (1280 - 640 - 10) / 2;
     }
-    if (AO->MaxY > 1025) {
-        DELTA_Y += (1024 - 768);          //NB 738
-        DELTA_Y -= 1024 - AO->MaxY + 40;        //NB 738
-//        DELTA_Y = 770;            //NB 738
+    if (AO->MaxY > 1025)
+    {
+        DELTA_Y += (1024 - 768);         // NB 738
+        DELTA_Y -= 1024 - AO->MaxY + 40; // NB 738
+        //        DELTA_Y = 770;            //NB 738
         DELTA_X = (AO->MaxX - 640 - 10) / 2;
     }
 
-    if (AO->MaxY < 430) {
+    if (AO->MaxY < 430)
+    {
         if (CurrentPicture == LT)
-            MUL_Y =  MUL_Y * 2 / 3 ;
+            MUL_Y = MUL_Y * 2 / 3;
         else
-            MUL_Y =  MUL_Y - 1;
+            MUL_Y = MUL_Y - 1;
     }
-    _X_   =   Dat->X_begin[CurrentPicture];
-    _Y_   =   Dat->Y_begin[CurrentPicture];
-    if (AO->MaxY < 430) {
+    _X_ = Dat->X_begin[CurrentPicture];
+    _Y_ = Dat->Y_begin[CurrentPicture];
+    if (AO->MaxY < 430)
+    {
         if (CurrentPicture == LT)
-            _Y_ =  _Y_ * 2 / 3 ;
+            _Y_ = _Y_ * 2 / 3;
         else
             _Y_ = (int)((((long)_Y_) * 350L) / 480L);
     }
-    //void Init_strel(void)
-    if (AO->MaxX > 641)sh_y = ras[MUL_Y]; else
+    // void Init_strel(void)
+    if (AO->MaxX > 641)
+        sh_y = ras[MUL_Y];
+    else
         sh_y = ras_6[MUL_Y];
     sh2 = MUL_Y * STREL_Y + sh_y;
     sh = sh2;
     EXD.TN_Ver = AO->TN_Ver;
     DescrCached = false;
-
 }
 //---------------------------------------------------------------------------
 void Station::Show()
 {
     Adapter();
     GoEachACompStanPreFun();
-    for (int i = Units_Size - 1; i >= 0; i--) {
+    for (int i = Units_Size - 1; i >= 0; i--)
+    {
         POLE[i]->ShowAll();
     }
     GoEachACompStanPostFun();
@@ -179,7 +198,8 @@ void Station::Show()
 void Station::Hide()
 {
     Adapter();
-    for (int i = Units_Size - 1; i >= 0; i--) {
+    for (int i = Units_Size - 1; i >= 0; i--)
+    {
         POLE[i]->HideAll();
     }
 }
@@ -199,14 +219,14 @@ void Station::Go()
     Adapter();
 
     GoEachACompStanPreFun();
-    extern  int  priznak_pereris_strel_if_change_mu ;
+    extern int priznak_pereris_strel_if_change_mu;
     priznak_pereris_strel_if_change_mu = 0;
     // стираем старые номера
     ShowTrainNumbers(true);
 
-
     // забираем ключи новые
-    if (AO->ENERG != 0) {
+    if (AO->ENERG != 0)
+    {
         LampsLSFromNet(this);
     }
 
@@ -216,7 +236,8 @@ void Station::Go()
     ShowTextMode = 1;
     for (int i = Units_Size - 1; i >= 1; i--)
         POLE[i]->ShowLayer(-1);
-    for (int i = Units_Size - 1; i >= 1; i--) {
+    for (int i = Units_Size - 1; i >= 1; i--)
+    {
         POLE[i]->GoAll();
     }
     for (int i = Units_Size - 1; i >= 1; i--)
@@ -228,10 +249,13 @@ void Station::Go()
         MARSHLIST.ShowUstMarsh(AO->bShowUstETTMarshrutsOnly_1);
 
     // приходится отдельно рисовать стыки сверху
-    if (CurrentPicture == LT) {
-        for (int j = 0; j < POLE[CIFR]->GetArraySize(); j++) {
-            AComp * ac = POLE[CIFR]->GetObjPtr(j);
-            if (ac->GetType() == STIK) {
+    if (CurrentPicture == LT)
+    {
+        for (int j = 0; j < POLE[CIFR]->GetArraySize(); j++)
+        {
+            AComp *ac = POLE[CIFR]->GetObjPtr(j);
+            if (ac->GetType() == STIK)
+            {
                 ac->StateChanged = true;
                 ac->Go();
             }
@@ -242,29 +266,35 @@ void Station::Go()
     ShowTrainNumbers(false);
 
     // приходится отдельно рисовать text сверху
-    for (int j = 0; j < POLE[WAYS]->GetArraySize(); j++) {
-        AComp * ac = POLE[WAYS]->GetObjPtr(j);
-        if (ac->GetType() == E_OBJ) {
-            ((TE_OBJ*) ac)->ShowText();
+    for (int j = 0; j < POLE[WAYS]->GetArraySize(); j++)
+    {
+        AComp *ac = POLE[WAYS]->GetObjPtr(j);
+        if (ac->GetType() == E_OBJ)
+        {
+            ((TE_OBJ *)ac)->ShowText();
         }
     }
 
     GoEachACompStanPostFun();
     ShowElemsSost();
-    //ShowElemsTagStr();
-    // рисуем сверху Хинты!
+    // ShowElemsTagStr();
+    //  рисуем сверху Хинты!
     ACOMPHINT.ShowHints(this);
 }
 //---------------------------------------------------------------------------
 void Station::ShowActives()
 {
-// жестко прорисовываем активные эл-ты
+    // жестко прорисовываем активные эл-ты
     Adapter();
     GoEachACompStanPreFun();
-    POLE[0]->ClearAll(); POLE[0]->GoAll();
-    POLE[WAYS]->ClearAll(); POLE[WAYS]->GoAll();
-    POLE[STRE]->ClearAll(); POLE[STRE]->GoAll();
-    POLE[STRE]->ClearAll(); POLE[STRE]->GoAll();
+    POLE[0]->ClearAll();
+    POLE[0]->GoAll();
+    POLE[WAYS]->ClearAll();
+    POLE[WAYS]->GoAll();
+    POLE[STRE]->ClearAll();
+    POLE[STRE]->GoAll();
+    POLE[STRE]->ClearAll();
+    POLE[STRE]->GoAll();
     GoEachACompStanPostFun();
     ShowElemsSost();
 }
@@ -272,26 +302,30 @@ void Station::ShowActives()
 void Station::Clear()
 {
     for (int i = Units_Size - 1; i >= 0; i--)
-        if (POLE[i]) POLE[i]->ClearAll();
+        if (POLE[i])
+            POLE[i]->ClearAll();
 }
 //---------------------------------------------------------------------------
-int  Station::Open(const char *fn)
+int Station::Open(const char *fn)
 {
-//  Close();
+    //  Close();
     strncpy(filename, fn, sizeof(filename) - 1);
     strncpy(Dat->filename,
             ChangeFileExt(ExtractFileName(fn), "").c_str(),
             sizeof(Dat->filename) - 1);
 
     String FN = FullFN();
-    if (FN.UpperCase().Pos(".STE") == FN.Length() - 3) {
+    if (FN.UpperCase().Pos(".STE") == FN.Length() - 3)
+    {
         return LoadSTE();
-    } else {
+    }
+    else
+    {
         return LoadSTA();
     }
 }
 //---------------------------------------------------------------------------
-void  Station::Close()
+void Station::Close()
 {
     memset(filename, 0, sizeof(filename));
     memset(name, 0, sizeof(name));
@@ -299,57 +333,66 @@ void  Station::Close()
     memset(ChanelOffset, 0, sizeof(ChanelOffset));
     memset(ChanelNames, 0, sizeof(ChanelNames));
     vUseChanelNames.clear();
-    //memset(UseChanelNames,0,sizeof(UseChanelNames));
+    // memset(UseChanelNames,0,sizeof(UseChanelNames));
     ID_RP = 0;
     memset(Dat->descriptor, 0, sizeof(Dat->descriptor));
     memset(Dat->filename, 0, sizeof(Dat->filename));
-    for (int i = 0; i < Units_Size; i++) {
-        if (POLE[i]) delete POLE[i];
+    for (int i = 0; i < Units_Size; i++)
+    {
+        if (POLE[i])
+            delete POLE[i];
         POLE[i] = NULL;
     }
-
-
 }
 //--------------------------------------------------------------------------
-String  GetStrParam(String st, int ind, String DefaultStr);
+String GetStrParam(String st, int ind, String DefaultStr);
 
-void  Station::ConnectGorls()
+void Station::ConnectGorls()
 {
     int G_NALL = POLE[GORE]->GetArraySize();
     POLE[GORE]->ConnectAll();
-    if ((G_NALL != 0) && (MOD == RD)) {
-        PGorl Even_Gorl = (PGorl) POLE[GORE]->New(GORL);
-        PGorl Odd_Gorl  = (PGorl) POLE[GORE]->New(GORL);
+    if ((G_NALL != 0) && (MOD == RD))
+    {
+        PGorl Even_Gorl = (PGorl)POLE[GORE]->New(GORL);
+        PGorl Odd_Gorl = (PGorl)POLE[GORE]->New(GORL);
         Even_Gorl->bVirtual = true;
         Odd_Gorl->bVirtual = true;
         PGorl G;
-//   delete Even_Gorl->gorl[0];
-//   delete Odd_Gorl->gorl[0];
+        //   delete Even_Gorl->gorl[0];
+        //   delete Odd_Gorl->gorl[0];
         Even_Gorl->gorl[0] = NULL;
         Odd_Gorl->gorl[0] = NULL;
         int Even_co = 0;
         int Odd_co = 0;
         //   int _co_=0;
-        for (int i = 0; i < G_NALL; i++) {
+        for (int i = 0; i < G_NALL; i++)
+        {
             G = (PGorl)POLE[GORE]->GetObjPtr(i);
 
-            if (Def_gr(G->gorl[0]->name) == 1) {
+            if (Def_gr(G->gorl[0]->name) == 1)
+            {
                 Even_Gorl->gorl[Even_co] = G->gorl[0];
                 Even_Gorl->comp[Even_co] = G;
                 Even_co++;
-            } else {
+            }
+            else
+            {
                 Odd_Gorl->gorl[Odd_co] = G->gorl[0];
                 Odd_Gorl->comp[Odd_co] = G;
                 Odd_co++;
             }
         }
-        Even_Gorl->Size_G=Even_co;//  mas = Even_co;
-        Odd_Gorl->Size_G=Odd_co;// mas = Odd_co;
-        if (Even_co) {
-            POLE[GORE]->Add(Even_Gorl); POLE[GORE]->RTGorlCnt++;
+        Even_Gorl->Size_G = Even_co; //  mas = Even_co;
+        Odd_Gorl->Size_G = Odd_co;   // mas = Odd_co;
+        if (Even_co)
+        {
+            POLE[GORE]->Add(Even_Gorl);
+            POLE[GORE]->RTGorlCnt++;
         }
-        if (Odd_co) {
-            POLE[GORE]->Add(Odd_Gorl); POLE[GORE]->RTGorlCnt++;
+        if (Odd_co)
+        {
+            POLE[GORE]->Add(Odd_Gorl);
+            POLE[GORE]->RTGorlCnt++;
         }
     }
 }
@@ -362,28 +405,38 @@ int Station::LoadSTA()
     Col_Gorl = 0;
     St_Dat A;
 
-    if ((file = this->_fopen("rb")) == NULL) {
+    if ((file = this->_fopen("rb")) == NULL)
+    {
         Qui((String("No file: ") + FullFN()).c_str(), 1, 0);
         return -1;
     }
     fread(&A, sizeof(St_Dat), 1, file);
-    if (Dat->descriptor[0] == 0) memcpy(Dat , &A, sizeof(A));
+    if (Dat->descriptor[0] == 0)
+        memcpy(Dat, &A, sizeof(A));
 
     OpenIniFile();
 
-    for (i = 0; i < Units_Size; i++) {
-        if (feof(file)) NALL = 0;
-        else   fread(&NALL, sizeof(short int), 1, file);
-        if (feof(file)) NALL = 0;
+    for (i = 0; i < Units_Size; i++)
+    {
+        if (feof(file))
+            NALL = 0;
+        else
+            fread(&NALL, sizeof(short int), 1, file);
+        if (feof(file))
+            NALL = 0;
 
-        if (POLE[i])  delete POLE[i];
-        if ((!((i == GORE) && (MOD == RD)))) {
+        if (POLE[i])
+            delete POLE[i];
+        if ((!((i == GORE) && (MOD == RD))))
+        {
             POLE[i] = new VisibleArray(NALL, this);
         }
-        if ((i == GORE) && (MOD == RD)) {
+        if ((i == GORE) && (MOD == RD))
+        {
             POLE[i] = new VisibleArray(NALL + 2, this);
         }
-        if (POLE[i]->LoadAll(NALL, file, i) < 0) {
+        if (POLE[i]->LoadAll(NALL, file, i) < 0)
+        {
             WriteToErr((String("Bad file: ") + FullFN()).c_str());
             return -1;
         }
@@ -394,10 +447,10 @@ int Station::LoadSTA()
     fclose(file);
     file = NULL;
 
-// Пытаемся открыть маршруты
+    // Пытаемся открыть маршруты
     String stFN = FullFN();
     String stDir = ExtractFileDir(stFN);
-    stFN =  stDir + "\\..\\ETT\\" + ExtractFileName(stFN);
+    stFN = stDir + "\\..\\ETT\\" + ExtractFileName(stFN);
     stFN = ChangeFileExt(stFN, ".csv");
     MARSHLIST.LoadFromCSV(stFN);
     MARSHLIST.ConnectToStanSTA(this);
@@ -405,7 +458,7 @@ int Station::LoadSTA()
     return 1;
 };
 //---------------------------------------------------------------------------
-int Station::SaveAs(const char * NewFileName)
+int Station::SaveAs(const char *NewFileName)
 {
     strncpy(filename, NewFileName, sizeof(filename) - 1);
     strncpy(Dat->filename,
@@ -418,9 +471,12 @@ int Station::Save()
 {
     String FN = FullFN();
     FN = FN.UpperCase();
-    if (FN.Pos(".STE") == FN.Length() - 3) {
+    if (FN.Pos(".STE") == FN.Length() - 3)
+    {
         return SaveSTE();
-    } else {
+    }
+    else
+    {
         return SaveSTA();
     }
 }
@@ -429,16 +485,21 @@ int Station::SaveSTA()
 {
     int NALL = 0;
     FILE *file = this->_fopen("wb");
-    if (file == NULL) return -1;
+    if (file == NULL)
+        return -1;
     fwrite(Dat, sizeof(St_Dat), 1, file);
-    for (int i = 0; i < Units_Size; i++) {
+    for (int i = 0; i < Units_Size; i++)
+    {
         NALL = POLE[i]->GetArraySize();
-        if ((NALL >= 2) && (i == GORE)) NALL = NALL - POLE[i]->RTGorlCnt;
+        if ((NALL >= 2) && (i == GORE))
+            NALL = NALL - POLE[i]->RTGorlCnt;
 
         // увеличиваем NALL на кол-во МЕМ2
-        if (i != GORE) {
+        if (i != GORE)
+        {
             int cnt = POLE[i]->GetArraySize();
-            for (int count = 0; count < cnt;   count++) {
+            for (int count = 0; count < cnt; count++)
+            {
                 POLE[i]->GetObjPtr(count)->Get();
                 if ((MEM.ExtPriz.MEM2))
                     NALL++;
@@ -469,21 +530,21 @@ void Station::SetBegin(int x_, int y_)
 //---------------------------------------------------------------------------
 Station::Station(char *ifilename)
 {
-    memset(ElemsSostPacketName,0,sizeof(ElemsSostPacketName));
-    memset(ChanelOffset,0,sizeof(ChanelOffset));
-    memset(ChanelNames,0,sizeof(ChanelNames));
-    ID_RP=0;
-    memset(filename,0,sizeof(filename));
-    memset(name,0,sizeof(name));
-
+    memset(ElemsSostPacketName, 0, sizeof(ElemsSostPacketName));
+    memset(ChanelOffset, 0, sizeof(ChanelOffset));
+    memset(ChanelNames, 0, sizeof(ChanelNames));
+    ID_RP = 0;
+    memset(filename, 0, sizeof(filename));
+    memset(name, 0, sizeof(name));
 
     Dat = new St_Dat;
     AO = &AntOpt0;
     memset(Dat, 0, sizeof(St_Dat));
-    for (int i = 0; i < Units_Size; i++)  POLE[i] = NULL;
+    for (int i = 0; i < Units_Size; i++)
+        POLE[i] = NULL;
 
-    //EnergStanLamps=NULL;
-    //if (ENERG2) {
+    // EnergStanLamps=NULL;
+    // if (ENERG2) {
     EnergStanLamps = new TEnergStanLamps;
     memset(EnergStanLamps, 0, sizeof(TEnergStanLamps));
     //}
@@ -492,92 +553,116 @@ Station::Station(char *ifilename)
     pPoligon = NULL;
     memset(name, 0, sizeof(name));
     ID_RP = 0;
-//  memset(Dat->descriptor,0,sizeof(Dat->descriptor));
-//  memset(Dat->filename,0,sizeof(Dat->filename));
-    if (ifilename) strncpy(Dat->filename, ifilename, 12);
-    ETTList=NULL;
-    bETTListNotFound=false;
-
-
-
+    //  memset(Dat->descriptor,0,sizeof(Dat->descriptor));
+    //  memset(Dat->filename,0,sizeof(Dat->filename));
+    if (ifilename)
+        strncpy(Dat->filename, ifilename, 12);
+    ETTList = NULL;
+    bETTListNotFound = false;
 }
 //---------------------------------------------------------------------------
 Station::~Station()
 {
     Close();
-    if (Dat) {
+    if (Dat)
+    {
         delete Dat;
         Dat = NULL;
     }
-    if (EnergStanLamps != NULL) delete EnergStanLamps;
+    if (ETTList != NULL)
+        delete ETTList;
+    if (EnergStanLamps != NULL)
+        delete EnergStanLamps;
 }
 //---------------------------------------------------------------------------
-AComp *  Station::GetObjByID(unsigned int ObjID)
+AComp *Station::GetObjByID(unsigned int ObjID)
 {
-    for (int i = 0; i < Units_Size; i++) {
-        for (int j = 0; j < POLE[i]->GetArraySize(); j++) if (POLE[i]->GetObjPtr(j)->GetID() == ObjID) return POLE[i]->GetObjPtr(j);
+    for (int i = 0; i < Units_Size; i++)
+    {
+        for (int j = 0; j < POLE[i]->GetArraySize(); j++)
+            if (POLE[i]->GetObjPtr(j)->GetID() == ObjID)
+                return POLE[i]->GetObjPtr(j);
     }
     return NULL;
 }
-AComp *  Station::GetObjByID_Imp(unsigned int ObjID, int Imp)
+AComp *Station::GetObjByID_Imp(unsigned int ObjID, int Imp)
 {
-    AComp * ac;
+    AComp *ac;
     int ii = Imp % 1000;
-    for (int i = 0; i < Units_Size; i++) {
-        for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
+    for (int i = 0; i < Units_Size; i++)
+    {
+        for (int j = 0; j < POLE[i]->GetArraySize(); j++)
+        {
             ac = POLE[i]->GetObjPtr(j);
-            if ((ObjID != 0) && (ac->GetID() == ObjID)) return ac;
-            if ((ac->GetID() == 0) && (ac->impuls_busi % 1000 == ii))return ac;
+            if ((ObjID != 0) && (ac->GetID() == ObjID))
+                return ac;
+            if ((ac->GetID() == 0) && (ac->impuls_busi % 1000 == ii))
+                return ac;
         }
     }
     return NULL;
-
 }
 //---------------------------------------------------------------------------
-AComp * Station::Trans(char *uk, int unit)
+AComp *Station::Trans(char *uk, int unit)
 {
-    Strel * pStrel = NULL;
-    Element * pElement = NULL;
-    if (uk == NULL)return NULL;
-    for (int i = 0; i < POLE[unit]->GetArraySize(); i++) {
-        if (unit == STRE) {
+    Strel *pStrel = NULL;
+    Element *pElement = NULL;
+    if (uk == NULL)
+        return NULL;
+    for (int i = 0; i < POLE[unit]->GetArraySize(); i++)
+    {
+        if (unit == STRE)
+        {
             pStrel = (Strel *)POLE[STRE]->GetObjPtr(i);
-            if (pStrel->nomer == *uk) return pStrel;
+            if (pStrel->nomer == *uk)
+                return pStrel;
         }
-        if (unit == CEMA) {
+        if (unit == CEMA)
+        {
             pElement = (Element *)POLE[CEMA]->GetObjPtr(i);
-            if (!strcmp(pElement->name, uk))return pElement;
+            if (!strcmp(pElement->name, uk))
+                return pElement;
         }
     }
     return NULL;
-
 }
 //---------------------------------------------------------------------------
 /*  1..256 (+1)        */
-int  GetPacketOffset(int PacketType, String PacketName, String PathNBDRV)
+int GetPacketOffset(int PacketType, String PacketName, String PathNBDRV)
 {
     int num, typ, CountWatch, Len;
     String S;
-    try {
+    try
+    {
         PacketName = PacketName.UpperCase();
-        if (!FileExists(PathNBDRV))return 0;
+        if (!FileExists(PathNBDRV))
+            return 0;
         std::ifstream fil(PathNBDRV.c_str());
-        if (!fil.is_open())  return 0;
+        if (!fil.is_open())
+            return 0;
         fil >> num;
-        for (int i = 0; i < num && fil.good(); i++)  {
+        for (int i = 0; i < num && fil.good(); i++)
+        {
             fil >> typ;
             fil >> CountWatch >> Len;
-            if ((typ < 0) || (typ >= 256))  return -1;
-            if (CountWatch >= 256) return -1;
-            for (int j = 0; j < CountWatch; j++)  {
+            if ((typ < 0) || (typ >= 256))
+                return -1;
+            if (CountWatch >= 256)
+                return -1;
+            for (int j = 0; j < CountWatch; j++)
+            {
                 char str[20];
-                fil >> std::setw(19) >> str; str[19] = 0;
+                fil >> std::setw(19) >> str;
+                str[19] = 0;
                 S = String(str).UpperCase();
-                if ((S==PacketName) && (PacketType == typ))
+                if ((S == PacketName) && (PacketType == typ))
                     return j + 1;
             }
         }
-    } catch (...) {}
+    }
+    catch (...)
+    {
+    }
     return 0;
 }
 
@@ -586,12 +671,14 @@ TGetPacketOffset CustomGetPacketOffset = 0;
 bool Station::OpenIniFile()
 {
     memset(ChanelNames, 0, sizeof(ChanelNames));
-    try {
+    try
+    {
         String FN = FullFN();
         FN = ChangeFileExt(FN, ".ini");
         FN = CommitFile(FN.c_str());
-        if (!FileExists(FN)) return false;
-        AIniFile * FI = new AIniFile(FN);
+        if (!FileExists(FN))
+            return false;
+        AIniFile *FI = new AIniFile(FN);
         ID_RP = FI->ReadInteger("MAIN", "ID_RP", 0);
 
         AStringList *SLChanels = new AStringList();
@@ -601,7 +688,10 @@ bool Station::OpenIniFile()
 
         delete FI;
         return true;
-    } catch (...) {}
+    }
+    catch (...)
+    {
+    }
     return false;
 }
 //---------------------------------------------------------------------------
@@ -609,16 +699,19 @@ bool Station::OpenIniFile()
 int Station::UpdateState()
 {
     int res = 0;
-    AComp * ac;
+    AComp *ac;
     // забираем ключи новые
-    if (AO->ENERG != 0) {
+    if (AO->ENERG != 0)
+    {
         LampsLSFromNet(this);
     }
     /* Сначала считаем горловины  */
     POLE[0]->GoAll();
 
-    for (int i = 1; i < Units_Size; i++) {
-        for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
+    for (int i = 1; i < Units_Size; i++)
+    {
+        for (int j = 0; j < POLE[i]->GetArraySize(); j++)
+        {
             ac = POLE[i]->GetObjPtr(j);
             ac->StateChanged = false;
             ac->UpdateState();
@@ -629,37 +722,46 @@ int Station::UpdateState()
     return res;
 }
 //---------------------------------------------------------------------------
-AComp *  Station::GetObjByName_Unit(const char * CompName, int unit)
+AComp *Station::GetObjByName_Unit(const char *CompName, int unit)
 {
-    if (strlen(CompName) == 0) return NULL;
-    AComp * ac;
-    const char * cn;
-    for (int i = 0; i < Units_Size; i++) {
-        if ((unit == -1) || (unit == i)) {
-            for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
+    if (strlen(CompName) == 0)
+        return NULL;
+    AComp *ac;
+    const char *cn;
+    for (int i = 0; i < Units_Size; i++)
+    {
+        if ((unit == -1) || (unit == i))
+        {
+            for (int j = 0; j < POLE[i]->GetArraySize(); j++)
+            {
                 ac = POLE[i]->GetObjPtr(j);
                 cn = ac->GetName();
-                if (strcmp(CompName, cn) == 0) return ac;
+                if (strcmp(CompName, cn) == 0)
+                    return ac;
             }
         }
     }
     return NULL;
-
 }
 //---------------------------------------------------------------------------
-AComp *  Station::GetObjByName_InTypes(const char * CompName, TYP *Types, int TypesCnt)
+AComp *Station::GetObjByName_InTypes(const char *CompName, TYP *Types, int TypesCnt)
 {
-    AComp * ac;
+    AComp *ac;
     TYP t;
-    const char * cn;
-    for (int i = 0; i < Units_Size; i++) {
-        for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
+    const char *cn;
+    for (int i = 0; i < Units_Size; i++)
+    {
+        for (int j = 0; j < POLE[i]->GetArraySize(); j++)
+        {
             ac = POLE[i]->GetObjPtr(j);
             cn = ac->GetName();
             t = ac->GetType();
-            for (int k = 0; k < TypesCnt; k++) {
-                if (t == Types[k]) {
-                    if ((CompName == 0) || (strcmp(CompName, cn) == 0)) return ac;
+            for (int k = 0; k < TypesCnt; k++)
+            {
+                if (t == Types[k])
+                {
+                    if ((CompName == 0) || (strcmp(CompName, cn) == 0))
+                        return ac;
                     break;
                 }
             }
@@ -670,17 +772,21 @@ AComp *  Station::GetObjByName_InTypes(const char * CompName, TYP *Types, int Ty
 //---------------------------------------------------------------------------
 void Station::ShowTrainNumbers(bool bHide)
 {
-    //Adapter();
-    // стираем пропавшие номера
-    if ((TRAINNUM_SHOW) && (AO->TRAINNUM)) {
+    // Adapter();
+    //  стираем пропавшие номера
+    if ((TRAINNUM_SHOW) && (AO->TRAINNUM))
+    {
         EXD.TN_PrepareDoublTNFilter();
 
-        AComp * ac;
-        for (int i = 1; i < Units_Size; i++) {
-            for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
+        AComp *ac;
+        for (int i = 1; i < Units_Size; i++)
+        {
+            for (int j = 0; j < POLE[i]->GetArraySize(); j++)
+            {
                 ac = POLE[i]->GetObjPtr(j);
                 if (bHide)
-                    ac->HideTrainNumber(); else
+                    ac->HideTrainNumber();
+                else
                     ac->ShowTrainNumber();
             }
         }
@@ -716,20 +822,20 @@ bool Station::GetObjByImpulsName(String &impname, String & respropname, int &res
 */
 //---------------------------------------------------------------------------
 static String _StanPropName[14] = {
-    "цфNom"   ,          // 0
-    "смfilename" ,       // 1
-    "смdescriptor"   ,   // 2
-    "цфMUL_X1"   ,       // 3
-    "цфMUL_Y1"  ,        // 4
-    "цфX_begin1" ,       // 5
-    "цфY_begin1",        // 6
-    "цфMUL_X2"   ,       // 7
-    "цфMUL_Y2"  ,        // 8
-    "цфX_begin2" ,       // 9
-    "цфY_begin2" ,       // 10
-    "цфObjCnt",          // 11
-    "смFullName",         // 12
-    "смElemsSostPacketName",         // 13
+    "цфNom",                 // 0
+    "смfilename",            // 1
+    "смdescriptor",          // 2
+    "цфMUL_X1",              // 3
+    "цфMUL_Y1",              // 4
+    "цфX_begin1",            // 5
+    "цфY_begin1",            // 6
+    "цфMUL_X2",              // 7
+    "цфMUL_Y2",              // 8
+    "цфX_begin2",            // 9
+    "цфY_begin2",            // 10
+    "цфObjCnt",              // 11
+    "смFullName",            // 12
+    "смElemsSostPacketName", // 13
 };
 
 void Station::GetPropMap(TPropMap &m)
@@ -737,9 +843,11 @@ void Station::GetPropMap(TPropMap &m)
     // считаем обьекты
     int NALL = 0;
     int cnt = 0;
-    for (int i = 0; i < Units_Size; i++) {
+    for (int i = 0; i < Units_Size; i++)
+    {
         NALL = POLE[i]->GetArraySize();
-        if ((NALL >= 2) && (i == GORE)) NALL = NALL - POLE[i]->RTGorlCnt;
+        if ((NALL >= 2) && (i == GORE))
+            NALL = NALL - POLE[i]->RTGorlCnt;
         cnt += NALL;
     }
     m.put(_StanPropName[0], Dat->Nom);
@@ -756,27 +864,24 @@ void Station::GetPropMap(TPropMap &m)
     m.put(_StanPropName[11], cnt);
     m.put(_StanPropName[12], name);
     m.put(_StanPropName[13], ElemsSostPacketName);
-
 }
 
 void Station::SetPropMap(TPropMap &m)
 {
-    Dat->Nom           = m.geti(_StanPropName[0]);
+    Dat->Nom = m.geti(_StanPropName[0]);
     strncpy(Dat->filename, m.get(_StanPropName[1]).c_str(), 13);
     strncpy(Dat->descriptor, m.getOEM(_StanPropName[2]).c_str(), 13);
-    Dat->MUL_X[0]      = m.geti(_StanPropName[3]);
-    Dat->MUL_Y[0]      = m.geti(_StanPropName[4]);
-    Dat->X_begin[0]    = m.geti(_StanPropName[5]);
-    Dat->Y_begin[0]    = m.geti(_StanPropName[6]);
-    Dat->MUL_X[1]      = m.geti(_StanPropName[7]);
-    Dat->MUL_Y[1]      = m.geti(_StanPropName[8]);
-    Dat->X_begin[1]    = m.geti(_StanPropName[9]);
-    Dat->Y_begin[1]    = m.geti(_StanPropName[10]);
+    Dat->MUL_X[0] = m.geti(_StanPropName[3]);
+    Dat->MUL_Y[0] = m.geti(_StanPropName[4]);
+    Dat->X_begin[0] = m.geti(_StanPropName[5]);
+    Dat->Y_begin[0] = m.geti(_StanPropName[6]);
+    Dat->MUL_X[1] = m.geti(_StanPropName[7]);
+    Dat->MUL_Y[1] = m.geti(_StanPropName[8]);
+    Dat->X_begin[1] = m.geti(_StanPropName[9]);
+    Dat->Y_begin[1] = m.geti(_StanPropName[10]);
     strncpy(name, m.get(_StanPropName[12]).c_str(), 255);
     strncpy(ElemsSostPacketName, m.get(_StanPropName[13]).c_str(), 12);
-
 }
-
 
 const String _objprzS = "Object ";
 const String _objprzF = "End_object ";
@@ -788,45 +893,50 @@ void WritePmToIni(TPropMap &pm, AIniFile *FI, String SectionName)
     for (int i = 0; i < SL->Size(); i++)
         FI->WriteString(SectionName, SL->Name(i), SL->Value(i));
     delete SL;
-//     for ( int i=0; i<pm.GetItemsCount(); i++ )
-//         FI->WriteString(SectionName,pm.GetKeys(i),pm.GetVal(i));
+    //     for ( int i=0; i<pm.GetItemsCount(); i++ )
+    //         FI->WriteString(SectionName,pm.GetKeys(i),pm.GetVal(i));
 }
 //---------------------------------------------------------------------------
 int Station::SaveSTE()
 {
     TPropMap pm;
     pm.bNotPutDefault = true;
-    AComp * ac;
+    AComp *ac;
 
-    //AStringList *SL=new AStringList();
-    //int oldmod=MOD;
-    //MOD=RD; // надо чтоб лишнее не писалось
+    // AStringList *SL=new AStringList();
+    // int oldmod=MOD;
+    // MOD=RD; // надо чтоб лишнее не писалось
 
     String FN = FullFN();
     if (FileExists(FN))
         unlink(FN.c_str());
-    AIniFile * FI = new AIniFile(FN);
+    AIniFile *FI = new AIniFile(FN);
 
     // Сверху пишем свое
     GetPropMap(pm);
     WritePmToIni(pm, FI, "STATION");
 
-    for (int i = 1; i < 255; i++) {
+    for (int i = 1; i < 255; i++)
+    {
         if (ChanelNames[i][0] != 0)
             FI->WriteString("STATION", "Chanel_" + IntToStr(i), ChanelNames[i]);
     }
-    for (unsigned int i = 0; i < vUseChanelNames.size(); i++) {
-        //if (UseChanelNames[i][0]!=0)
+    for (unsigned int i = 0; i < vUseChanelNames.size(); i++)
+    {
+        // if (UseChanelNames[i][0]!=0)
         FI->WriteString("STATION", "UseChanel_" + IntToStr(i + 1), IntToStr(vUseChanelNames[i].type) + ";" + String(vUseChanelNames[i].name));
     }
 
     // пишем обьекты
     int NALL = 0;
     String SectName;
-    for (int i = 0; i < Units_Size; i++) {
+    for (int i = 0; i < Units_Size; i++)
+    {
         NALL = POLE[i]->GetArraySize();
-        if ((NALL >= 2) && (i == GORE)) NALL = NALL - POLE[i]->RTGorlCnt;
-        for (int j = 0; j < NALL; j++) {
+        if ((NALL >= 2) && (i == GORE))
+            NALL = NALL - POLE[i]->RTGorlCnt;
+        for (int j = 0; j < NALL; j++)
+        {
             ac = POLE[i]->GetObjPtr(j);
             pm.clear();
             ac->GetPropMap(pm);
@@ -838,17 +948,18 @@ int Station::SaveSTE()
 
     FI->UpdateFile();
     delete FI;
-    //MOD=oldmod;
+    // MOD=oldmod;
 
     return 1;
 }
 //---------------------------------------------------------------------------
-void ReadPmFromIni(TPropMap &pm, AIniFile * FI, String SectionName)
+void ReadPmFromIni(TPropMap &pm, AIniFile *FI, String SectionName)
 {
-    AStringList *SL=new AStringList();
+    AStringList *SL = new AStringList();
     FI->ReadSectionValues(SectionName, SL);
     String ST;
-    for (int i = 0; i < SL->Size(); i++) {
+    for (int i = 0; i < SL->Size(); i++)
+    {
         ST = SL->At(i);
         pm.putkeyvalst(ST);
     }
@@ -859,40 +970,54 @@ void Station::ReadChanelsInfo(AStringList *SL)
 {
     String stK, PacketName;
     TUseChanelName uname;
-    for (int i = 0; i < SL->Size(); i++) {
+    for (int i = 0; i < SL->Size(); i++)
+    {
         String ST = SL->At(i);
         stK = "";
         PacketName = "";
         int p1 = ST.Pos("=");
-        if (p1 > 1) {
+        if (p1 > 1)
+        {
             stK = ST.SubString(1, p1 - 1);
             PacketName = ST.SubString(p1 + 1, ST.Length() - p1);
         }
 
-        if (stK.Pos("UseChanel_") == 1) {
+        if (stK.Pos("UseChanel_") == 1)
+        {
             int p = PacketName.Pos(";");
-            if (p > 1) {
+            if (p > 1)
+            {
                 uname.type = PacketName.SubString(1, p - 1).ToIntDef(-1);
                 PacketName = PacketName.SubString(p + 1, PacketName.Length() - p);
                 strncpy(uname.name, PacketName.c_str(), 12);
                 vUseChanelNames.push_back(uname);
-                if (CustomGetPacketOffset != NULL) CustomGetPacketOffset(uname.type, uname.name, 0);
+                if (CustomGetPacketOffset != NULL)
+                    CustomGetPacketOffset(uname.type, uname.name, 0);
             }
-        } else if (stK.Pos("Chanel_") == 1) {
+        }
+        else if (stK.Pos("Chanel_") == 1)
+        {
             int i = stK.SubString(7 + 1, stK.Length() - 7).ToIntDef(-1);
             strncpy(ChanelNames[i], PacketName.c_str(), 12);
-            if (CustomGetPacketOffset != NULL) ChanelOffset[i] = CustomGetPacketOffset(1, PacketName.c_str(), i) * 1000; else
+            if (CustomGetPacketOffset != NULL)
+                ChanelOffset[i] = CustomGetPacketOffset(1, PacketName.c_str(), i) * 1000;
+            else
                 ChanelOffset[i] = GetPacketOffset(1, PacketName, NBDRV_Path) * 1000;
             if (MOD == ED)
-                if (ChanelOffset[i] == 0) ChanelOffset[i] = i * 1000;
-        } else if (stK.ToIntDef(-1) > 0) {
+                if (ChanelOffset[i] == 0)
+                    ChanelOffset[i] = i * 1000;
+        }
+        else if (stK.ToIntDef(-1) > 0)
+        {
             int i = stK.ToInt();
             strncpy(ChanelNames[i], PacketName.c_str(), 12);
-            if (CustomGetPacketOffset != NULL) ChanelOffset[i] = CustomGetPacketOffset(1, PacketName.c_str(), i) * 1000; else
+            if (CustomGetPacketOffset != NULL)
+                ChanelOffset[i] = CustomGetPacketOffset(1, PacketName.c_str(), i) * 1000;
+            else
                 ChanelOffset[i] = GetPacketOffset(1, PacketName, NBDRV_Path) * 1000;
             if (MOD == ED)
-                if (ChanelOffset[i] == 0) ChanelOffset[i] = i * 1000;
-
+                if (ChanelOffset[i] == 0)
+                    ChanelOffset[i] = i * 1000;
         }
     }
 }
@@ -900,7 +1025,7 @@ void Station::ReadChanelsInfo(AStringList *SL)
 int Station::LoadSTE()
 {
     TPropMap pm;
-    AComp * ac;
+    AComp *ac;
 
     AStringList *SL = new AStringList();
     AStringList *SLsect = new AStringList();
@@ -909,7 +1034,7 @@ int Station::LoadSTE()
     int type;
     UNIT unit;
     // ищем сверху свое
-    AIniFile * FI = new AIniFile(FN);
+    AIniFile *FI = new AIniFile(FN);
     ReadPmFromIni(pm, FI, "STATION");
 
     SetPropMap(pm);
@@ -919,20 +1044,22 @@ int Station::LoadSTE()
     AStringList *SLChanels = new AStringList();
     FI->ReadSectionValues("STATION", SLChanels);
     ReadChanelsInfo(SLChanels);
-    
+
     delete SLChanels;
 
     // читаем обьекты
-    //cnt=pm.geti(_StanPropName[11]);
+    // cnt=pm.geti(_StanPropName[11]);
     // создаем ватеры
     for (int i = 0; i < Units_Size; i++)
         POLE[i] = new VisibleArray(0, this);
 
     FI->ReadSections(SLsect);
     String SectName;
-    for (int i = 0; i < SLsect->Size(); i++) {
+    for (int i = 0; i < SLsect->Size(); i++)
+    {
         SectName = SLsect->At(i);
-        if (SectName.Pos("Comp_") != 1) continue;
+        if (SectName.Pos("Comp_") != 1)
+            continue;
         pm.clear();
         ReadPmFromIni(pm, FI, SectName);
         type = pm.geti("цфtype");
@@ -949,25 +1076,30 @@ int Station::LoadSTE()
 
     // Пытаемся открыть маршруты
     String stFN = FullFN();
-    String stDir = ExtractFileDir(stFN);//GetPrevDirStr(stFN);
-    stFN =  stDir + "\\..\\ETT\\" + ExtractFileName(stFN);
+    String stDir = ExtractFileDir(stFN); // GetPrevDirStr(stFN);
+    stFN = stDir + "\\..\\ETT\\" + ExtractFileName(stFN);
     stFN = ChangeFileExt(stFN, ".csv");
     MARSHLIST.LoadFromCSV(stFN);
     MARSHLIST.ConnectToStanSTA(this);
     Connect_stNext();
 
-    if (AO->ENERG != 0) {
-        LoadLampsLS(this) ;
+    if (AO->ENERG != 0)
+    {
+        LoadLampsLS(this);
     }
 
     return 1;
 }
 //---------------------------------------------------------------------------
-AComp * Station::SetFocus(unsigned int ObjID, int focus)
+AComp *Station::SetFocus(unsigned int ObjID, int focus)
 {
-    AComp * ac = GetObjByID(ObjID);
-    if (ac != NULL) {
-        if (focus == 1) ac->ExtFocus = 1; else ac->ExtFocus = 2;
+    AComp *ac = GetObjByID(ObjID);
+    if (ac != NULL)
+    {
+        if (focus == 1)
+            ac->ExtFocus = 1;
+        else
+            ac->ExtFocus = 2;
         ac->Show();
         return ac;
     }
@@ -976,25 +1108,35 @@ AComp * Station::SetFocus(unsigned int ObjID, int focus)
 //---------------------------------------------------------------------------
 void Station::Connect_stNext()
 {
-    AComp * ac;
-    tGRC0 * rc;
-    for (int i = 0; i < Units_Size; i++) {
-        for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
+    AComp *ac;
+    tGRC0 *rc;
+    for (int i = 0; i < Units_Size; i++)
+    {
+        for (int j = 0; j < POLE[i]->GetArraySize(); j++)
+        {
             ac = POLE[i]->GetObjPtr(j);
-            Ways *w=dynamic_cast<Ways *>(ac);
-            if (w==0)  continue;
-            for (int d=0;d<2;d++)
-                for (int m=0;m<2;m++) {
-                        w->pNext[d][m] =0;
-                        if (w->IDnext[d][m]!=0) w->pNext[d][m]=GetObjByID(w->IDnext[d][m]);
+            Ways *w = dynamic_cast<Ways *>(ac);
+            if (w == 0)
+                continue;
+            for (int d = 0; d < 2; d++)
+                for (int m = 0; m < 2; m++)
+                {
+                    w->pNext[d][m] = 0;
+                    if (w->IDnext[d][m] != 0)
+                        w->pNext[d][m] = GetObjByID(w->IDnext[d][m]);
                 }
 
             rc = dynamic_cast<tGRC0 *>(ac);
-            if (rc == NULL) continue;
-            if (rc->stNext[0][0] != "") rc->pNext[0][0] = GetObjByName_Unit(rc->stNext[0][0].c_str() , -1);
-            if (rc->stNext[0][1] != "") rc->pNext[0][1] = GetObjByName_Unit(rc->stNext[0][1].c_str() , -1);
-            if (rc->stNext[1][0] != "") rc->pNext[1][0] = GetObjByName_Unit(rc->stNext[1][0].c_str() , -1);
-            if (rc->stNext[1][1] != "") rc->pNext[1][1] = GetObjByName_Unit(rc->stNext[1][1].c_str() , -1);
+            if (rc == NULL)
+                continue;
+            if (rc->stNext[0][0] != "")
+                rc->pNext[0][0] = GetObjByName_Unit(rc->stNext[0][0].c_str(), -1);
+            if (rc->stNext[0][1] != "")
+                rc->pNext[0][1] = GetObjByName_Unit(rc->stNext[0][1].c_str(), -1);
+            if (rc->stNext[1][0] != "")
+                rc->pNext[1][0] = GetObjByName_Unit(rc->stNext[1][0].c_str(), -1);
+            if (rc->stNext[1][1] != "")
+                rc->pNext[1][1] = GetObjByName_Unit(rc->stNext[1][1].c_str(), -1);
             /*if (rc->pNext[0][0]!=NULL)  rc->IDnext[0][0]=rc->pNext[0][0]->ID;
             if (rc->pNext[1][0]!=NULL)  rc->IDnext[1][0]=rc->pNext[1][0]->ID;
             if (rc->pNext[0][1]!=NULL)  rc->IDnext[0][1]=rc->pNext[0][1]->ID;
@@ -1005,10 +1147,13 @@ void Station::Connect_stNext()
 //---------------------------------------------------------------------------
 void Station::GoEachACompStanPreFun()
 {
-    if (!EachACompStanPreFun) return;
-    AComp * ac;
-    for (int i = 0; i < Units_Size; i++) {
-        for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
+    if (!EachACompStanPreFun)
+        return;
+    AComp *ac;
+    for (int i = 0; i < Units_Size; i++)
+    {
+        for (int j = 0; j < POLE[i]->GetArraySize(); j++)
+        {
             ac = POLE[i]->GetObjPtr(j);
             EachACompStanPreFun(ac);
         }
@@ -1016,45 +1161,57 @@ void Station::GoEachACompStanPreFun()
 }
 void Station::GoEachACompStanPostFun()
 {
-    if (EachStanPostShow!=NULL)
-       EachStanPostShow(this);
-    if (!EachACompStanPostFun) return;
-    AComp * ac;
-    for (int i = 0; i < Units_Size; i++) {
-        for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
+    if (EachStanPostShow != NULL)
+        EachStanPostShow(this);
+    if (!EachACompStanPostFun)
+        return;
+    AComp *ac;
+    for (int i = 0; i < Units_Size; i++)
+    {
+        for (int j = 0; j < POLE[i]->GetArraySize(); j++)
+        {
             ac = POLE[i]->GetObjPtr(j);
             EachACompStanPostFun(ac);
         }
     }
 }
 //---------------------------------------------------------------------------
-const char * GetImageName(std::string Picture, int  PictureState);
+const char *GetImageName(std::string Picture, int PictureState);
 void Station::ShowElemsSost()
 {
-    if (!AO->bShowInfStatAll) return;
-    AComp * ac;
-    char * packetname=Dat->filename;
-    if (strlen(ElemsSostPacketName)!=0) packetname=ElemsSostPacketName;
-    for (int i = 0; i < Units_Size; i++) {
-        for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
+    if (!AO->bShowInfStatAll)
+        return;
+    AComp *ac;
+    char *packetname = Dat->filename;
+    if (strlen(ElemsSostPacketName) != 0)
+        packetname = ElemsSostPacketName;
+    for (int i = 0; i < Units_Size; i++)
+    {
+        for (int j = 0; j < POLE[i]->GetArraySize(); j++)
+        {
             ac = POLE[i]->GetObjPtr(j);
-            if (ac->GetType() == LED) continue;
+            if (ac->GetType() == LED)
+                continue;
             //---
-            if (((ac->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) || ((ac->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT))) continue;
+            if (((ac->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) || ((ac->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT)))
+                continue;
             //---
-            TElemCheckState * EI = EXD.EI_GetEI(packetname, ac->GetID());
-            if ((EI != NULL) && (EI->state != 0)) {
+            TElemCheckState *EI = EXD.EI_GetEI(packetname, ac->GetID());
+            if ((EI != NULL) && (EI->state != 0))
+            {
                 const char *szimagename = GetImageName("DEFAULT", EI->state);
-                TRect RCT=ac->RCT;
-                if (RCT.Width()>40){
-                   int w=RCT.Width()-40;
-                   RCT.left+=w/2;
-                   RCT.right-=w/2;
+                TRect RCT = ac->RCT;
+                if (RCT.Width() > 40)
+                {
+                    int w = RCT.Width() - 40;
+                    RCT.left += w / 2;
+                    RCT.right -= w / 2;
                 }
-                if (RCT.Height()>40){
-                   int w=RCT.Height()-40;
-                   RCT.top+=w/2;
-                   RCT.bottom-=w/2;
+                if (RCT.Height() > 40)
+                {
+                    int w = RCT.Height() - 40;
+                    RCT.top += w / 2;
+                    RCT.bottom -= w / 2;
                 }
                 drawemf(&RCT, szimagename, CommonAnimationStep % 4);
             }
@@ -1064,20 +1221,25 @@ void Station::ShowElemsSost()
 
 void Station::ShowElemsTagStr()
 {
-    AComp * ac;
+    AComp *ac;
 
-    for (int i = 0; i < Units_Size; i++) {
-        for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
+    for (int i = 0; i < Units_Size; i++)
+    {
+        for (int j = 0; j < POLE[i]->GetArraySize(); j++)
+        {
             ac = POLE[i]->GetObjPtr(j);
-            if (ac->GetType() == LED) continue;
+            if (ac->GetType() == LED)
+                continue;
             //---
-            if (((ac->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) || ((ac->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT))) continue;
+            if (((ac->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) || ((ac->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT)))
+                continue;
             //---
-            if (!ac->Tagstr.empty()){
-                String SS=String(ac->Tagstr.c_str());
+            if (!ac->Tagstr.empty())
+            {
+                String SS = String(ac->Tagstr.c_str());
                 setcolor(TXT);
-                TRect RCT=ac->RCT;
-                OutTextXY(RCT.left,RCT.top,SS.c_str());
+                TRect RCT = ac->RCT;
+                OutTextXY(RCT.left, RCT.top, SS.c_str());
             }
         }
     }
@@ -1087,26 +1249,35 @@ void Station::ShowElemsTagStr()
 uint16 Station::SetUnicalID(uint16 ID)
 {
     // уже уникум?
-    AComp * ac;
+    AComp *ac;
     bool unic = true;
-    for (int i = 0; i < Units_Size; i++) {
-        for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
+    for (int i = 0; i < Units_Size; i++)
+    {
+        for (int j = 0; j < POLE[i]->GetArraySize(); j++)
+        {
             ac = POLE[i]->GetObjPtr(j);
-            if (ac->GetID() == ID) {
-                unic = false; break;
+            if (ac->GetID() == ID)
+            {
+                unic = false;
+                break;
             }
         }
     }
-    if (unic)  return ID;
+    if (unic)
+        return ID;
     // Ищем макс за стартом
     uint16 maxID = 0;
-    for (int i = 0; i < Units_Size; i++) {
-        for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
+    for (int i = 0; i < Units_Size; i++)
+    {
+        for (int j = 0; j < POLE[i]->GetArraySize(); j++)
+        {
             ac = POLE[i]->GetObjPtr(j);
-            if (ac->GetID() > maxID) maxID = ac->GetID();
+            if (ac->GetID() > maxID)
+                maxID = ac->GetID();
         }
     }
-    if (maxID >= 0xFFFF) {
+    if (maxID >= 0xFFFF)
+    {
         ShowMessage("Максимальное кол-во!");
         return 0;
     }
@@ -1116,38 +1287,46 @@ uint16 Station::SetUnicalID(uint16 ID)
 void Station::for_each_chanel(TGetPacketOffset f)
 {
     for (int i = 1; i < 255; i++)
-        if (strlen(ChanelNames[i]) != 0) f(1, ChanelNames[i], i);
+        if (strlen(ChanelNames[i]) != 0)
+            f(1, ChanelNames[i], i);
     for (int i = 0; i < vUseChanelNames.size(); i++)
-        f(vUseChanelNames[i].type , vUseChanelNames[i].name, i + 1);
+        f(vUseChanelNames[i].type, vUseChanelNames[i].name, i + 1);
     // добавляем 11
     if (AO->TRAINNUM)
         for (int i = 1; i < 255; i++)
-            if (strlen(ChanelNames[i]) != 0) f(11, ChanelNames[i], i);
+            if (strlen(ChanelNames[i]) != 0)
+                f(11, ChanelNames[i], i);
 
     // добавляем ENRG
     String STAFN = String(Dat->filename);
 
     if (AO->ENERG != 0)
-        f(8 , STAFN.c_str(), 1);
+        f(8, STAFN.c_str(), 1);
     // добавляем DIAG
     STAFN = STAFN.UpperCase();
-    if (AO->bShowInfStat) {
+    if (AO->bShowInfStat)
+    {
         STAFN = STAFN + "_0";
-        f(31 , STAFN.c_str(), 1);
+        f(31, STAFN.c_str(), 1);
     }
 }
 //---------------------------------------------------------------------------
 
 void Station::reassignChanelOffset()
 {
-     for (int i = 1; i < 255; i++){
-        if (strlen(ChanelNames[i]) != 0) {
-           if (CustomGetPacketOffset != NULL) ChanelOffset[i] = CustomGetPacketOffset(1, ChanelNames[i], i) * 1000; else
-                                              ChanelOffset[i] = GetPacketOffset(1, ChanelNames[i], NBDRV_Path) * 1000;
-           if (MOD == ED)
-                if (ChanelOffset[i] == 0) ChanelOffset[i] = i * 1000;
+    for (int i = 1; i < 255; i++)
+    {
+        if (strlen(ChanelNames[i]) != 0)
+        {
+            if (CustomGetPacketOffset != NULL)
+                ChanelOffset[i] = CustomGetPacketOffset(1, ChanelNames[i], i) * 1000;
+            else
+                ChanelOffset[i] = GetPacketOffset(1, ChanelNames[i], NBDRV_Path) * 1000;
+            if (MOD == ED)
+                if (ChanelOffset[i] == 0)
+                    ChanelOffset[i] = i * 1000;
         }
-     }
+    }
 }
 
 //-------------------------
@@ -1155,12 +1334,16 @@ void Station::reassignChanelOffset()
 int Station::GetStrelkiCount()
 {
     int count = 0;
-    AComp * ac;
-    for (int i = 0; i < Units_Size; i++) {
-        for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
+    AComp *ac;
+    for (int i = 0; i < Units_Size; i++)
+    {
+        for (int j = 0; j < POLE[i]->GetArraySize(); j++)
+        {
             ac = POLE[i]->GetObjPtr(j);
-            switch (ac->GetType()) {
-            default: break;
+            switch (ac->GetType())
+            {
+            default:
+                break;
             case Y_STREL_1:
             case Y_STREL_2:
             case Y_STREL_3:
@@ -1186,18 +1369,17 @@ int Station::GetStrelkiCount()
 //---------------------------------------------------------------------------
 
 SubStation::SubStation()
-        : Element()
+    : Element()
 {
     substan = NULL;
     bAlreadyEmbedded = false;
-    bNoRebuildID=false;
+    bNoRebuildID = false;
 }
 
 void SubStation::UpdateState()
 {
     if (substan != NULL)
         substan->UpdateState();
-
 }
 
 void SubStation::Set()
@@ -1205,74 +1387,73 @@ void SubStation::Set()
     Element::Set();
 }
 
-
 void SubStation::Get()
 {
     Element::Get();
 }
 
 static String _SubStationPropName[12] = {
-    "смSTE_FN",          // 0
-    "лгНе_пересч_ID",    // 1
-    "смЗам1",            // 2
-    "смЗам2",            // 3
-    "смЗам3",            // 4
-    "смЗам4",            // 5
-    "смЗам5",            // 6
-    "смЗам6",            // 7
-    "смЗам7",            // 8
-    "смЗам8",            // 9
-    "смЗам9",            // 1
-    "смЗам10"            // 11
+    "смSTE_FN",       // 0
+    "лгНе_пересч_ID", // 1
+    "смЗам1",         // 2
+    "смЗам2",         // 3
+    "смЗам3",         // 4
+    "смЗам4",         // 5
+    "смЗам5",         // 6
+    "смЗам6",         // 7
+    "смЗам7",         // 8
+    "смЗам8",         // 9
+    "смЗам9",         // 1
+    "смЗам10"         // 11
 };
 
-void Replaceacprop(AComp * ac, TPropMap &mrpl)
+void Replaceacprop(AComp *ac, TPropMap &mrpl)
 {
     TPropMap m;
     String pmstr = ac->Tagstr.c_str();
-    for (int i = 0; i < mrpl.GetItemsCount(); i++) {
-        //String stKey=mrpl.GetKey(i);
-        //if (
-        //    if ()
-        std::string s=pmstr.c_str();
+    alib::string_replace(s, mrpl.GetKeys(i).c_str(), mrpl.GetVal(i).c_str());
+    pmstr = s.c_str();
+    // pmstr = AnsiReplaceStr(pmstr, mrpl.Keys[i], mrpl.Val[i]);
+    // ac->Tagstr.replace() ()
+}
+m.text(pmstr.c_str());
+// ac->SetPropMap(m);
+//  хитрозамена
+// ac->GetPropMap(m);
+if (ac->pmRepl != NULL)
+{
+    String pmReplstr = ac->pmRepl->text();
+    for (int i = 0; i < mrpl.GetItemsCount(); i++)
+    {
+        std::string s = pmReplstr.c_str();
         alib::string_replace(s, mrpl.GetKeys(i).c_str(), mrpl.GetVal(i).c_str());
-        pmstr=s.c_str();
-        //pmstr = AnsiReplaceStr(pmstr, mrpl.Keys[i], mrpl.Val[i]);
-        //ac->Tagstr.replace() ()
+        pmReplstr = s.c_str();
+        // pmReplstr = AnsiReplaceStr(pmReplstr, mrpl.Keys[i], mrpl.Val[i]);
     }
-    m.text(pmstr.c_str());
-    //ac->SetPropMap(m);
-    // хитрозамена
-    //ac->GetPropMap(m);
-    if (ac->pmRepl != NULL) {
-        String pmReplstr = ac->pmRepl->text();
-        for (int i = 0; i < mrpl.GetItemsCount(); i++) {
-            std::string s=pmReplstr.c_str();
-            alib::string_replace(s, mrpl.GetKeys(i).c_str(), mrpl.GetVal(i).c_str());
-             pmReplstr=s.c_str();
-            //pmReplstr = AnsiReplaceStr(pmReplstr, mrpl.Keys[i], mrpl.Val[i]);
-        }
-        TPropMap m2;
-        m2.text(pmReplstr.c_str());
-        for (int i = 0; i < m2.GetItemsCount(); i++) {
-            if (m2.GetVal(i) != "") {
-                String stK = m2.GetKeys(i);
-                String stV = m2.GetVal(i);
-                // а фдруг формула
-                if ((stV.Pos("+") > 1) ||
-                        (stV.Pos("+") > 1) ||
-                        (stV.Pos("*") > 1) ||
-                        (stV.Pos("/") > 1)) stV = IntToStr(feFormulaResult(stV.c_str()));
-                stK = stK.Delete(1, 1);
+    TPropMap m2;
+    m2.text(pmReplstr.c_str());
+    for (int i = 0; i < m2.GetItemsCount(); i++)
+    {
+        if (m2.Val[i] != "")
+        {
+            String stK = m2.Keys[i];
+            String stV = m2.Val[i];
+            // а фдруг формула
+            if ((stV.Pos("+") > 1) ||
+                (stV.Pos("+") > 1) ||
+                (stV.Pos("*") > 1) ||
+                (stV.Pos("/") > 1))
+                stV = IntToStr(feFormulaResult(stV.c_str()));
+            stK = stK.Delete(1, 1);
 
-                m.put(stK, stV);
-            }
+            m.put(stK, stV);
         }
     }
-    ac->SetPropMap(m);
+}
+ac->SetPropMap(m);
 }
 
-void Replaceactsprop(AComp * ac, int chNFrom, int chNTo, int chD)
+void Replaceactsprop(AComp *ac, int chNFrom, int chNTo, int chD)
 {
     TPropMap m;
     String pmstr = ac->Tagstr.c_str();
@@ -1281,28 +1462,29 @@ void Replaceactsprop(AComp * ac, int chNFrom, int chNTo, int chD)
     TAImpuls AImpuls;
     ac->GetPropMap(m);
     bool bChange = false;
-    for (int i = 0; i < m.GetItemsCount(); i++) {
+    for (int i = 0; i < m.GetItemsCount(); i++)
+    {
         pmNAME = m.GetKeys(i);
         VALUE = m.GetVal(i);
-        if (pmNAME.Pos("тс") == 1) {
-            if (VALUE != "000:0000:0:00") {
+        if (pmNAME.Pos("тс") == 1)
+        {
+            if (VALUE != "000:0000:0:00")
+            {
                 AImpuls.FromString(VALUE.c_str());
-                if ((AImpuls.Chanel > 0) && (chNFrom > 0) && (AImpuls.Chanel == chNFrom)) {
+                if ((AImpuls.Chanel > 0) && (chNFrom > 0) && (AImpuls.Chanel == chNFrom))
+                {
                     bChange = true;
                     AImpuls.Chanel = chNTo;
                     if (AImpuls.Number >= 0)
                         AImpuls.Number += chD;
                     VALUE = AImpuls.ToString();
-                    m.SetVal(i,VALUE);
+                    m.SetVal(i, VALUE);
                 }
             }
         }
     }
     if (bChange)
         ac->SetPropMap(m);
-
-
-
 }
 
 void SubStation::GetPropMap(TPropMap &m)
@@ -1321,41 +1503,44 @@ void SubStation::SetPropMap(TPropMap &m)
         return;
     Element::SetPropMap(m);
     int _n = 0;
-    char newfilename[13]; memset(newfilename, 0, 13);
+    char newfilename[13];
+    memset(newfilename, 0, 13);
     strncpy(newfilename, m.get(_SubStationPropName[_n++]).c_str(), 12);
 
-    bNoRebuildID=m.geti(_SubStationPropName[_n++]);
+    bNoRebuildID = m.geti(_SubStationPropName[_n++]);
 
     for (int i = 0; i < 10; i++)
         strncpy(repl[i], m.get(_SubStationPropName[_n++]).c_str(), 64);
 
-    if (strcmp(newfilename, filename) != 0) {
-        strncpy(filename, newfilename,12);
+    if (strcmp(newfilename, filename) != 0)
+    {
+        strncpy(filename, newfilename, 12);
         TGetPacketOffset ACustomGetPacketOffset = CustomGetPacketOffset;
         CustomGetPacketOffset = 0;
         LoadSTE();
         CustomGetPacketOffset = ACustomGetPacketOffset;
     }
     if (substan == NULL)
-            return;
+        return;
 
     TPropMap mrpl;
     for (int i = 0; i < 10; i++)
         if (strlen(repl[i]) >= 3)
             mrpl.putkeyvalst(repl[i]);
-    AComp * ac;
-
+    AComp *ac;
 
     int ChanelN;
     int ChanelOffset;
-    for (int i = 0; i < Units_Size; i++) {
-        for (int j = 0; j < substan->POLE[i]->GetArraySize(); j++) {
+    for (int i = 0; i < Units_Size; i++)
+    {
+        for (int j = 0; j < substan->POLE[i]->GetArraySize(); j++)
+        {
             ac = substan->POLE[i]->GetObjPtr(j);
             Replaceacprop(ac, mrpl);
             ChanelN = impuls_busi / 1000;
             ChanelOffset = impuls_busi % 1000;
             if (ChanelN != 0)
-               Replaceactsprop(ac, 1, ChanelN, ChanelOffset);
+                Replaceactsprop(ac, 1, ChanelN, ChanelOffset);
             ChanelN = impuls_plus / 1000;
             ChanelOffset = impuls_plus % 1000;
             if (ChanelN != 0)
@@ -1375,41 +1560,53 @@ void SubStation::SetPropMap(TPropMap &m)
                 Replaceactsprop(ac, 5, ChanelN, ChanelOffset);
         }
     }
-    if ((!bNoEmbeddSubStations) && (AO->bEmbeddedSubStation)) {
+    if ((!bNoEmbeddSubStations) && (AO->bEmbeddedSubStation))
+    {
         bAlreadyEmbedded = true;
         ac = NULL;
-        for (int i = 0; i < Units_Size; i++) {
-            for (int j = 0; j < substan->POLE[i]->GetArraySize(); j++) {
+        for (int i = 0; i < Units_Size; i++)
+        {
+            for (int j = 0; j < substan->POLE[i]->GetArraySize(); j++)
+            {
                 ac = substan->POLE[i]->GetObjPtr(j);
-                boundRCT.left = ac->X; boundRCT.top = ac->Y; boundRCT.right = ac->X; boundRCT.bottom = ac->Y;
+                boundRCT.Left = ac->X;
+                boundRCT.Top = ac->Y;
+                boundRCT.Right = ac->X;
+                boundRCT.Bottom = ac->Y;
                 break;
             }
         }
-        for (int i = 0; i < Units_Size; i++) {
-            for (int j = 0; j < substan->POLE[i]->GetArraySize(); j++) {
+        for (int i = 0; i < Units_Size; i++)
+        {
+            for (int j = 0; j < substan->POLE[i]->GetArraySize(); j++)
+            {
                 ac = substan->POLE[i]->GetObjPtr(j);
-                if (boundRCT.left < ac->X)boundRCT.left = ac->X;
-                if (boundRCT.right > ac->X)boundRCT.right = ac->X;
-                if (boundRCT.top < ac->Y)boundRCT.top = ac->Y;
-                if (boundRCT.bottom > ac->Y)boundRCT.bottom = ac->Y;
+                if (boundRCT.Left < ac->X)
+                    boundRCT.Left = ac->X;
+                if (boundRCT.Right > ac->X)
+                    boundRCT.Right = ac->X;
+                if (boundRCT.Top < ac->Y)
+                    boundRCT.Top = ac->Y;
+                if (boundRCT.Bottom > ac->Y)
+                    boundRCT.Bottom = ac->Y;
                 ac->X += X;
                 ac->Y += Y;
                 if (bNoRebuildID)
-                   ac->ID = Stan()->SetUnicalID(ac->ID); else
-                   ac->ID = Stan()->SetUnicalID(10000 + (this->ID % 200) * 200 + ac->ID % 200);
+                    ac->ID = Stan()->SetUnicalID(ac->ID);
+                else
+                    ac->ID = Stan()->SetUnicalID(10000 + (this->ID % 200) * 200 + ac->ID % 200);
                 Stan()->POLE[i]->Add(ac);
                 ac->AO = AO;
                 ac->pVisibleArray = Stan()->POLE[i];
-
             }
         }
-        for (int i = 0; i < Units_Size; i++) {
+        for (int i = 0; i < Units_Size; i++)
+        {
             substan->POLE[i]->vObjPtr.clear();
         }
         delete substan;
         substan = NULL;
     }
-
 }
 
 void SubStation::LoadSTE()
@@ -1419,17 +1616,20 @@ void SubStation::LoadSTE()
     if (substan != NULL)
         delete substan;
     substan = NULL;
-    if (!FileExists(sFN)) return;
+    if (!FileExists(sFN))
+        return;
 
     substan = new Station("");
 
     substan->Open(sFN.c_str());
-    //substan->Dat=Stan()->Dat;
+    // substan->Dat=Stan()->Dat;
     substan->AO = Stan()->AO;
     // пересчитываемммммм
-    AComp * ac;
-    for (int i = 0; i < Units_Size; i++) {
-        for (int j = 0; j < substan->POLE[i]->GetArraySize(); j++) {
+    AComp *ac;
+    for (int i = 0; i < Units_Size; i++)
+    {
+        for (int j = 0; j < substan->POLE[i]->GetArraySize(); j++)
+        {
             ac = substan->POLE[i]->GetObjPtr(j);
             break;
         }
@@ -1438,24 +1638,22 @@ void SubStation::LoadSTE()
     int y0 = ac->Y;
     // сводим к 0
     TPropMap m;
-    for (int i = 0; i < Units_Size; i++) {
-        for (int j = 0; j < substan->POLE[i]->GetArraySize(); j++) {
+    for (int i = 0; i < Units_Size; i++)
+    {
+        for (int j = 0; j < substan->POLE[i]->GetArraySize(); j++)
+        {
             ac = substan->POLE[i]->GetObjPtr(j);
             ac->X -= x0;
             ac->Y -= y0;
             m.clear();
-            //ac->Tagstr = m.text();
+            // ac->Tagstr = m.text();
             ac->GetPropMap(m);
             ac->Tagstr = m.text();
-
         }
     }
-
-
-
 }
 
-TYP  SubStation::GetType()
+TYP SubStation::GetType()
 {
     return SUBSTATION;
 }
@@ -1464,21 +1662,24 @@ UNIT SubStation::GetUnit()
     return NITK;
 }
 
-void  SubStation::Show()
+void SubStation::Show()
 {
     int xx = X * MUL_X + _X_;
     int yy = Y * MUL_Y + _Y_;
 
-
-    if (substan == NULL) {
-
-
-    } else {
-        if ((!bNoEmbeddSubStations) && (AO->bEmbeddedSubStation)) {
+    if (substan == NULL)
+    {
+    }
+    else
+    {
+        if ((!bNoEmbeddSubStations) && (AO->bEmbeddedSubStation))
+        {
             setcolor(FON);
-            line(xx + boundRCT.left*MUL_X, yy + boundRCT.top*MUL_Y, xx + boundRCT.left*MUL_X, yy + boundRCT.top*MUL_Y);
-            line(xx + boundRCT.right*MUL_X, yy + boundRCT.bottom*MUL_Y, xx + boundRCT.right*MUL_X, yy + boundRCT.bottom*MUL_Y);
-        } else {
+            line(xx + boundRCT.left * MUL_X, yy + boundRCT.top * MUL_Y, xx + boundRCT.left * MUL_X, yy + boundRCT.top * MUL_Y);
+            line(xx + boundRCT.right * MUL_X, yy + boundRCT.bottom * MUL_Y, xx + boundRCT.right * MUL_X, yy + boundRCT.bottom * MUL_Y);
+        }
+        else
+        {
 
             substan->Clear();
             int _X_0 = _X_;
@@ -1490,16 +1691,22 @@ void  SubStation::Show()
 
             substan->GoEachACompStanPreFun();
             /* Выводим всё ! */
-            for (int i = Units_Size - 1; i >= 1; i--) {
-                for (int i = 0; i < Units_Size; i++) {
-                    for (int j = 0; j < substan->POLE[i]->GetArraySize(); j++) {
+            for (int i = Units_Size - 1; i >= 1; i--)
+            {
+                for (int i = 0; i < Units_Size; i++)
+                {
+                    for (int j = 0; j < substan->POLE[i]->GetArraySize(); j++)
+                    {
                         ac = substan->POLE[i]->GetObjPtr(j);
                         if (((ac->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) ||
-                                ((ac->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT))) continue;
-                        //if ((ExtPriz.NoShowExtInfo==1)&&(!bShowExtInfo))  continue ;
-                        if (EachACompPreFun) EachACompPreFun(ac);
+                            ((ac->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT)))
+                            continue;
+                        // if ((ExtPriz.NoShowExtInfo==1)&&(!bShowExtInfo))  continue ;
+                        if (EachACompPreFun)
+                            EachACompPreFun(ac);
                         ac->Go();
-                        if (EachACompPostFun) EachACompPostFun(ac);
+                        if (EachACompPostFun)
+                            EachACompPostFun(ac);
                     }
                 }
             }
@@ -1508,8 +1715,6 @@ void  SubStation::Show()
         }
     }
 }
-
-
 
 /*
 bool Station::GetParamsEttItem(unsigned int EventType_ID,int ID_OBJ,int &Visible,int &Act,int &TOShow)
@@ -1538,4 +1743,3 @@ bool Station::GetParamsEttItem(unsigned int EventType_ID,int ID_OBJ,int &Visible
      return true;
 }
 */
-
