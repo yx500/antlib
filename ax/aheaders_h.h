@@ -13,8 +13,8 @@
   #define __fastcall
   #include "systypes.h"
   #include "win/w32defs.h"
-  #include "antlibstring.h"
-  #include "antlibstringlist.h"
+//  #include "antlibstring.h"
+//  #include "antlibstringlist.h"
   #include "antlibgraphics.h"
   #include "vcllib.h"
 
@@ -22,6 +22,7 @@
 
 
 
+#include "astring.h"
 #include "astringlist.h"
 #include "utils.h"
 

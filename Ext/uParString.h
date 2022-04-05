@@ -14,8 +14,8 @@ class TParString
 {
 private:
     typedef std::vector<std::string>     stringvector;
-    static int string_split(const std::string & text, const std::string& separators, stringvector & words);
-    static int string_splitex(const std::string & text, const std::string& separators, stringvector & words);
+    // static int string_split(const std::string & text, const std::string& separators, stringvector & words);
+    // static int string_splitex(const std::string & text, const std::string& separators, stringvector & words);
 
     stringvector words;
     std::string  separators;       // строка разделителей.

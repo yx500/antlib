@@ -519,8 +519,8 @@ bool TMarshList::LoadFromCSV(String stFN)
         SL->LoadFromFile(stFN);
         //ищем шапку
         String stSH, S;
-        for (int i = 0; i < SL->Count(); i++) {
-            stSH = SL->Strings(i);
+        for (int i = 0; i < SL->Size(); i++) {
+            stSH = SL->At(i);
             if (stSH.Pos(MarshrutPropName[ 0]) == 1) {
                 SL->Delete(i);
                 break;
@@ -556,8 +556,8 @@ bool TMarshList::LoadFromCSV(String stFN)
             vStrels.push_back(mes);
         }
 
-        for (int i = 0; i < SL->Count(); i++) {
-            ps.SetVal(SL->Strings(i));
+        for (int i = 0; i < SL->Size(); i++) {
+            ps.SetVal(SL->At(i));
             if (ps.GetInt(0, 0) == 0) continue; //строка начинается с цифры
             for (int j = 0; j < pcnt; j++)
                 m.SetVal(j,ps[j]);
@@ -570,15 +570,15 @@ bool TMarshList::LoadFromCSV(String stFN)
      /*
         // закачиваем храненые импы
         TStrInMarsh * SIM;
-        for (int i = 0; i < SL->Count(); i++) {
-            ps.SetVal(SL->Strings(i));
+        for (int i = 0; i < SL->Size(); i++) {
+            ps.SetVal(SL->At(i));
             if (ps[0] == "СТР") {
                 // СТР;_N;name;ObjID,inv;packet_name;busy;plus;minus;kzm
                 //  0   1  2    3    4         5      67  89   1011  1213
                 int ii = ps.GetInt(1);
                 SIM = STRELS[ii];
                 if ((SIM == NULL) || (String(SIM->STRELNAME) != ps[2])) {
-                    WriteToLog(("Проблемы загрузки данных из " + stFN + "\r" + SL->Strings(i)).c_str());
+                    WriteToLog(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str());
                     break;
                 }
                 SIM->ObjID = ps.GetInt(3, 0);
@@ -593,7 +593,7 @@ bool TMarshList::LoadFromCSV(String stFN)
             if (ps[0] == "M_T") {
                 int ii = ps.GetInt(1); M = MARSHRUTS[ii];
                 if ((M == NULL)) {
-                    WriteToLog(("Проблемы загрузки данных из " + stFN + "\r" + SL->Strings(i)).c_str()); break;
+                    WriteToLog(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str()); break;
                 }
                 M->MarshSectType = (TMarshSectType)ps.GetInt(2, 0);
             }
@@ -604,7 +604,7 @@ bool TMarshList::LoadFromCSV(String stFN)
             if (ps[0] == "M_SV") {
                 int ii = ps.GetInt(1); M = MARSHRUTS[ii];
                 if ((M == NULL) || (M->SV != ps[2])) {
-                    WriteToLog(("Проблемы загрузки данных из " + stFN + "\r" + SL->Strings(i)).c_str()); break;
+                    WriteToLog(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str()); break;
                 }
                 M->ObjID[ii_busySV] = ps.GetInt(3, 0);
                 M->PacketName = ps[4];
@@ -614,7 +614,7 @@ bool TMarshList::LoadFromCSV(String stFN)
             if (ps[0] == "M_S_PRED") {
                 int ii = ps.GetInt(1); M = MARSHRUTS[ii];
                 if ((M == NULL) || (M->S_PRED != ps[2])) {
-                    WriteToLog(("Проблемы загрузки данных из " + stFN + "\r" + SL->Strings(i)).c_str()); break;
+                    WriteToLog(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str()); break;
                 }
                 M->ObjID[ii_busyS_PRED] = ps.GetInt(3, 0);
                 if (M->PacketName == "")M->PacketName = ps[4];
@@ -626,7 +626,7 @@ bool TMarshList::LoadFromCSV(String stFN)
             if (ps[0] == "M_S_PAST") {
                 int ii = ps.GetInt(1); M = MARSHRUTS[ii];
                 if ((M == NULL) || (M->S_PAST != ps[2])) {
-                    WriteToLog(("Проблемы загрузки данных из " + stFN + "\r" + SL->Strings(i)).c_str()); break;
+                    WriteToLog(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str()); break;
                 }
                 M->ObjID[2] = ps.GetInt(3, 0);
                 if (M->PacketName == "")M->PacketName = ps[4];
@@ -1277,8 +1277,8 @@ bool TMarshList::LoadTUFromCSV(String stFN)
         SL->LoadFromFile(stFN);
         /* Ищем шапку  */
         TParString PS("", ";,");
-        for (int i = 0; i < SL->Count(); i++) {
-            PS.SetVal(SL->Strings(i));
+        for (int i = 0; i < SL->Size(); i++) {
+            PS.SetVal(SL->At(i));
             if ((PS.GetInd("NUMCOM") >= 0) || (PS.GetInd("Уникальный номер") >= 0)) {
                 SL->Delete(i);
                 break;
@@ -1291,8 +1291,8 @@ bool TMarshList::LoadTUFromCSV(String stFN)
         MakeHeadInd(&PS);
         TParString ps("", ";,");
         int NUMCOM;
-        for (int i = 0; i < SL->Count(); i++) {
-            ps.SetVal(SL->Strings(i));
+        for (int i = 0; i < SL->Size(); i++) {
+            ps.SetVal(SL->At(i));
             NUMCOM = ps.GetInt(_CurHeadInd[mNUMCOM]);
             M = GetMarshrutByNum(NUMCOM);
             if (M == NULL) continue;

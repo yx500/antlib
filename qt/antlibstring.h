@@ -9,20 +9,17 @@
 
 
 
-class AntLibString : public std::string
+class AString : public std::string
 {
 public:
 
-  AntLibString():std::string() {}
-  AntLibString(const char *s) : std::string(s) {}
-  AntLibString(const std::string& s) : std::string(s) {}
+  AString() : std::string() {}
+  AString(const char *s) : std::string(s) {}
+  AString(const std::string& s) : std::string(s) {}
 
   int Pos(const std::string& subStr) const { return this->find_first_of(subStr); }
-
   bool IsEmpty() const { return this->empty(); }
-
   int Length() const { return size(); }
-
   int ToInt() const {
     try {
       return std::stoi(*this);
@@ -41,23 +38,16 @@ public:
   }
 
 
-  AntLibString UpperCase() const;
-
-  AntLibString Trim() const;
-
-  AntLibString SubString(int b,int n) const;
+  AString UpperCase() const;
+  AString Trim() const;
+  AString SubString(int b,int n) const;
 
 
 };
-using String = AntLibString;
 
 
+inline AString  IntToStr(int Value) { return std::to_string(Value); }
+extern AString  IntToHex(int Value, int Digits);
 
-inline String  IntToStr(int Value) { return std::to_string(Value); }
-extern String  IntToHex(int Value, int Digits);
-
-inline int StrToInt(const String& s) { return s.ToInt(); }
-inline int StrToIntDef(const String& s, int Default) { return s.ToIntDef(Default); }
-
-
-
+inline int StrToInt(const AString& s) { return s.ToInt(); }
+inline int StrToIntDef(const AString& s, int Default) { return s.ToIntDef(Default); }
