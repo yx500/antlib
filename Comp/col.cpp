@@ -2,9 +2,7 @@
 
 #include "col.h"
 #include "winpalet.h"
-#ifndef QT_ANTLIB
 #include "ainifile.h"
-#endif
 
 
 
@@ -372,7 +370,7 @@ bool wc_LoadIniFile()
         String FN = String(DACCfgFileName);
         FN = ChangeFileExt(FN, ".ini");
         if (!FileExists(FN)) return false;
-        TMemIniFile * FI = new TMemIniFile(FN);
+        AIniFile * FI = new AIniFile(FN);
         String ST, S, Sect;
         char s[10];
         for (int i = 0; i < MaxLampType; i++) {

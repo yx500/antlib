@@ -23,7 +23,7 @@ bool bLoadYchParams = true;
 bool __fastcall AOReadFromIni(void * pFI, String Sect, TAntOpt * AO)
 {
 
-    TMemIniFile * FI = (TMemIniFile *)pFI;
+    AIniFile * FI = (AIniFile *)pFI;
 
     TAntOpt AA;
     if (FI == NULL) return false;
@@ -103,7 +103,7 @@ bool __fastcall AOReadFromIni(void * pFI, String Sect, TAntOpt * AO)
 
 bool __fastcall AOWriteToIni(void * pFI, String Sect, TAntOpt * AO)
 {
-    TMemIniFile * FI = (TMemIniFile *)pFI;
+    AIniFile * FI = (AIniFile *)pFI;
     TAntOpt AA;
     if (FI == NULL) return false;
     if (Sect == "") Sect = "ANTHONY";
@@ -186,7 +186,7 @@ bool LoadYchParams(String FileName, TAntOpt * AO)
             FileName = ExtractFileDir(FileName) + "\\default.ych.ini";
             if (!FileExists(FileName)) return false;
         }
-        TMemIniFile * FI = new TMemIniFile(FileName);
+        AIniFile * FI = new AIniFile(FileName);
         b = AOReadFromIni(FI, "", AO);
         if (FI) delete FI;
     } catch (...) {
@@ -198,7 +198,7 @@ bool SaveYchParams(String FileName, TAntOpt * AO)
 {
     bool b = false;
     try {
-        TMemIniFile * FI = new TMemIniFile(FileName);
+        AIniFile * FI = new AIniFile(FileName);
         b = AOWriteToIni(FI, "", AO);
         if (FI) delete FI;
     } catch (...) {

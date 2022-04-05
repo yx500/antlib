@@ -109,7 +109,7 @@ int Poligon::LoadYCH(const char *filename)
 
 int Poligon::LoadYCE(const char *filename)
 {
-    TMemIniFile *FI = new TMemIniFile(filename);
+    AIniFile *FI = new AIniFile(filename);
     /* --- */
     if (!AOReadFromIni(FI, "", &AO))
         AO = AntOpt0;
@@ -340,7 +340,7 @@ void Poligon::SaveYCE()
     // strcat(FULL_PATH,filename);
 
     // SaveYchParams(FullFileName,&AO);
-    TMemIniFile *FI = new TMemIniFile(FullFileName);
+    AIniFile *FI = new AIniFile(FullFileName);
     St_Dat *Dat;
 
     for (int i = 0; i < Col_ST; i++)
