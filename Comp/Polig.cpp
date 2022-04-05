@@ -131,12 +131,13 @@ int Poligon::LoadYCE(const char *filename)
 
         SS = FI->ReadString(SectName, "ñìfilename", tmpStan->Dat->filename);
         strncpy(tmpStan->Dat->filename, ChangeFileExt(SS, "").c_str(), sizeof(tmpStan->Dat->filename));
-
-        SS = FI->ReadString(SectName, "ñìFullFileName", ExpandFileName(ExtractFileDir(filename) + "\\..\\" + Sta_Dir + "\\") + SS);
-        oldcd = GetCurrentDir();
-        SetCurrentDir(ExtractFileDir(filename));
-        SS = ExpandFileName(SS);
-        SetCurrentDir(oldcd);
+        String staFN=ExtractFileDir(filename) + "\\..\\" + Sta_Dir + "\\"+ SS;
+        SS = FI->ReadString(SectName, "ñìFullFileName", staFN);
+        SS=staFN;
+        //oldcd = GetCurrentDir();
+        //SetCurrentDir(ExtractFileDir(filename));
+        //SS = ExpandFileName(SS);
+        //SetCurrentDir(oldcd);
         strncpy(tmpStan->filename, SS.c_str(), sizeof(tmpStan->filename) - 1);
 
         if (tmpStan->Open(tmpStan->FullFN()) == -1)
@@ -371,7 +372,7 @@ void Poligon::SaveYCE()
 int Poligon::GetNumStanFor(int x, int y)
 {
     static int ddd[256];
-    for (int i = 0; i < ARRAYSIZE(ddd); i++)
+    for (int i = 0; i < 256; i++)
         ddd[i] = 2147483647;
     PAComp P = NULL;
     int sx, sy, mx, my;
@@ -414,7 +415,7 @@ int Poligon::GetNumStanFor(int x, int y)
 
     int iii = -1;
     int _min = 2147483647;
-    for (int i = 0; i < ARRAYSIZE(ddd); i++)
+    for (int i = 0; i < 256; i++)
         if (ddd[i] < _min)
         {
             _min = ddd[i];

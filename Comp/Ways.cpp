@@ -18,7 +18,7 @@
 //---------------------------------------------------------------------------
 
 
-void ShowPictText(int x, int y, void * AGE, char * szText, int YS);
+void ShowPictText(int x, int y, void * AGE, const char * szText, int YS);
 /*  ========================= Way ==================*/
 
 Way:: Way()

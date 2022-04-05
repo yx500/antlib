@@ -19,7 +19,7 @@
 using namespace alib;
 #endif
 
-void ShowPictText(int x, int y, void *AGE, char *szText, int YS);
+void ShowPictText(int x, int y, void *AGE, const char *szText, int YS);
 bool ExShowLamp(int x, int y, Lamp *AL, int YS);
 
 Lamp::Lamp()
