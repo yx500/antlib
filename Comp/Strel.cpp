@@ -2204,7 +2204,7 @@ Bash::Bash()
 }
 
 static String _BashName = "";
-char * Bash::GetName()
+const char * Bash::GetName()
 {
     if (_GetSigName_Func != NULL) {
         if (impuls_busi > 1000) _BashName = _GetSigName_Func(GetRealImp(impuls_busi)); else if (impuls_plus > 1000) _BashName = _GetSigName_Func(GetRealImp(impuls_plus));

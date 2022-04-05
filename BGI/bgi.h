@@ -139,7 +139,7 @@ void  _SetText(unsigned int font, int d1, int d2);
 void  _SetTextSize(int charsize);
 int   textheight(const char  *__textstring);
 int   textwidth(const char  *__textstring);
-void  OutTextXY(int x, int y, char* str);
+void  OutTextXY(int x, int y, const char* str);
 void  DrawText(int x, int y, int tw, int th, const char* str);
 void  initgraph(int* device, int* mode, const char* p);
 

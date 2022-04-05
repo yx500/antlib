@@ -1,4 +1,5 @@
-#pragma once
+#ifndef utilsH
+#define utilsH
 
 #include <string>
 #include <vector>
@@ -35,3 +36,6 @@ std::string& strings_merge(const stringvector & words, const std::string& separa
 
 
 } //namespace
+
+
+#endif 

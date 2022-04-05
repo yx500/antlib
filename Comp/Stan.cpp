@@ -25,6 +25,7 @@
 #include "Impuls.h"
 #include "uFormula.h"
 #include "CompHint.h"
+#include "utils.h"
 
 extern bool DescrCached;
 
@@ -1234,7 +1235,10 @@ void Replaceacprop(AComp * ac, TPropMap &mrpl)
         //String stKey=mrpl.Keys[i];
         //if (
         //    if ()
-        pmstr = AnsiReplaceStr(pmstr, mrpl.Keys[i], mrpl.Val[i]);
+        std::string s=pmstr.c_str();
+        alib::string_replace(s, mrpl.GetKeys(i).c_str(), mrpl.GetVal(i).c_str());
+        pmstr=s.c_str();
+        //pmstr = AnsiReplaceStr(pmstr, mrpl.Keys[i], mrpl.Val[i]);
         //ac->Tagstr.replace() ()
     }
     m.text(pmstr.c_str());
@@ -1244,7 +1248,10 @@ void Replaceacprop(AComp * ac, TPropMap &mrpl)
     if (ac->pmRepl != NULL) {
         String pmReplstr = ac->pmRepl->text();
         for (int i = 0; i < mrpl.GetItemsCount(); i++) {
-            pmReplstr = AnsiReplaceStr(pmReplstr, mrpl.Keys[i], mrpl.Val[i]);
+            std::string s=pmReplstr.c_str();
+            alib::string_replace(s, mrpl.GetKeys(i).c_str(), mrpl.GetVal(i).c_str());
+             pmReplstr=s.c_str();
+            //pmReplstr = AnsiReplaceStr(pmReplstr, mrpl.Keys[i], mrpl.Val[i]);
         }
         TPropMap m2;
         m2.text(pmReplstr.c_str());

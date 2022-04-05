@@ -942,7 +942,7 @@ void _SetText(unsigned int font, int d1, int d2)
     settextjustify(d1, d2);
 }
 
-void OutTextXY(int x, int y, char* str)
+void OutTextXY(int x, int y, const char* str)
 {
     if (strlen(str) == 0)  return;
     int dy = 0;//ptm->tmInternalLeading;
