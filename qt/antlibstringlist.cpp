@@ -6,6 +6,7 @@
 #include <locale>
 #include <cctype>
 #include <functional>
+#include "utils.h"
 
 int is_crlf( int ch ){
   return ch=='\r' || ch=='\n';
@@ -14,13 +15,7 @@ int is_crlf( int ch ){
 static std::string right_crlf_trim(const std::string& s)
 {
   std::string result(s);
-  result.erase(find_if(result.rbegin(), result.rend(), not1(std::ptr_fun(is_crlf))).base(), result.end());
-  //  result.erase(
-  //      std::find_if(result.rbegin(), result.rend(),
-  //                   not1( std::bind2nd(std::ptr_fun(&std::isspace<char>), std::locale("")) )
-  //              ).base(),
-  //      result.end());
-  return result;
+  return result.erase(find_if(result.rbegin(), result.rend(), not1(std::ptr_fun(is_crlf))).base(), result.end());
 }
 
 int AStringList::LoadFromFile(const std::string &filename)
@@ -61,15 +56,16 @@ void AStringList::Sort()
 
 std::string& AStringList::Names(size_t idx)
 {
-  std::string  l = this->at(idx);
-
+  alib::stringvector w;
+  alib::string_split(this->at(idx), "=", w);
+  return w.size()>1 ? alib::trim(w[0]) : "";
 }
 
 std::string& AStringList::Values(size_t idx)
 {
-  std::string  l = this->at(idx);
-
+  alib::stringvector w;
+  alib::string_split(this->at(idx), "=", w);
+  return w.size()>1 ? alib::trim(w[1]) : "";
 }
 
-//std::string& AStringList::Values(const std::string &s){}
 
