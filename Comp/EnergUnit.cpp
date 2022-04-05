@@ -15,9 +15,7 @@
 //---------------------------------------------------------------------------
 
 #ifndef _WIN32
-
-using namespace alib;
-
+    using namespace alib;
 #endif
 
 TEnergLampData *GetEnergLampData(TEnergStanLamps *EnergStanLamps, uint16 ObjID)

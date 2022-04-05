@@ -3,7 +3,7 @@
 #include <math.h>
 #include "APch.h"
 
-#include "line.h"
+#include "Line.h"
 #include "Str_fun.h"
 #include "Scrin.h"
 
