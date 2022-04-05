@@ -14,8 +14,9 @@
     #endif
 #else
 
-
-
+    #ifndef _WIN32
+        using namespace alib;
+    #endif
 
 
 #endif

@@ -13,7 +13,7 @@
 #include "Gorl.h"
 #include "Vatempl.h"
 #include "Polig.h"
-#include <inifiles.hpp>
+#include "ainifile.h"
 #include "YchParams.h"
 #include "uEXD.h"
 #include "actools.h"

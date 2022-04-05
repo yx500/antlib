@@ -14,9 +14,6 @@
 #include "bgi.h"
 
 //---------------------------------------------------------------------------
-#ifndef _WIN32
-using namespace alib;
-#endif
 
 const int sost0 = 0;
 const int sostOk = 1;

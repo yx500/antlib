@@ -4,7 +4,7 @@
 #include "aheaders_cpp.h"
 #include "APch.h"
 
-#include <inifiles.hpp>
+#include "ainifile.h"
 #include "YchParams.h"
 #include "actools.h"
 #include "CompHint.h"

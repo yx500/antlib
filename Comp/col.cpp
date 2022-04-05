@@ -3,7 +3,7 @@
 #include "col.h"
 #include "winpalet.h"
 #ifndef QT_ANTLIB
-#include <inifiles.hpp>
+#include "ainifile.h"
 #endif
 
 
