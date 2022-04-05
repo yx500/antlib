@@ -26,7 +26,6 @@
 #include "uFormula.h"
 #include "CompHint.h"
 
-void Init_strel(void);
 extern bool DescrCached;
 
 TAntOpt AntOpt0;                    // используется если нет участка( для станции 1ой)
@@ -310,17 +309,7 @@ void  Station::Close()
 
 
 }
-//---------------------------------------------------------------------------
-String GetPrevDirStr(String FName)    //функция развращает пред.каталог файла
-{
-    FName = ExtractFileDir(FName);
-    ExcludeTrailingBackslash(FName);
-    while ((FName.Length() > 0) && (FName[FName.Length()] != '\\')) {
-        FName.Delete(FName.Length(), 1);
-    }
-    return FName;
-}
-//---------------------------------------------------------------------------
+//--------------------------------------------------------------------------
 String  GetStrParam(String st, int ind, String DefaultStr);
 
 void  Station::ConnectGorls()
@@ -406,8 +395,8 @@ int Station::LoadSTA()
 
 // Пытаемся открыть маршруты
     String stFN = FullFN();
-    String stDir = GetPrevDirStr(stFN);
-    stFN =  stDir + "ETT\\" + ExtractFileName(stFN);
+    String stDir = ExtractFileDir(stFN);
+    stFN =  stDir + "\\..\\ETT\\" + ExtractFileName(stFN);
     stFN = ChangeFileExt(stFN, ".csv");
     MARSHLIST.LoadFromCSV(stFN);
     MARSHLIST.ConnectToStanSTA(this);
@@ -602,7 +591,7 @@ bool Station::OpenIniFile()
         FN = ChangeFileExt(FN, ".ini");
         FN = CommitFile(FN.c_str());
         if (!FileExists(FN)) return false;
-        TMemIniFile * FI = new TMemIniFile(FN);
+        AIniFile * FI = new AIniFile(FN);
         ID_RP = FI->ReadInteger("MAIN", "ID_RP", 0);
 
         AStringList *SLChanels = new AStringList();
@@ -610,34 +599,13 @@ bool Station::OpenIniFile()
         ReadChanelsInfo(SLChanels);
         delete SLChanels;
 
-        /*if (FI->SectionExists("CHANELS")){
-           //* Грузим смещения  *
-           String PacketName;
-           for (int i=1;i<255;i++){
-               PacketName=FI->ReadString("CHANELS",IntToStr(i),"");
-               if (PacketName!=""){
-                  strncpy(ChanelNames[i], PacketName.c_str(),11);
-                  if (CustomGetPacketOffset!=NULL) ChanelOffset[i]=CustomGetPacketOffset(1,PacketName.c_str(),i)*1000; else
-                                                   ChanelOffset[i]=GetPacketOffset(1,PacketName,NBDRV_Path)*1000;
-                  //* если не можем найти смещение  *
-                  if (MOD==ED)
-                     if (ChanelOffset[i]==0) ChanelOffset[i]=i*1000;
-
-
-               }
-           }
-        }   */
         delete FI;
         return true;
     } catch (...) {}
     return false;
 }
-bool GetNumberRct(AComp *AC, int &X, int &Y, int Width, int Height, int direct);// out_num.cpp
-TColor GetTNBrushClr(int NUMBER);           // out_num.cpp
-
-void GenerateTN(int NUMBER, int X, int Y, TColor TNCOLOR, int direct, AComp * AC);
-void * GetTNData(const char * StaFN);
 //---------------------------------------------------------------------------
+
 int Station::UpdateState()
 {
     int res = 0;
@@ -665,7 +633,7 @@ AComp *  Station::GetObjByName_Unit(const char * CompName, int unit)
 {
     if (strlen(CompName) == 0) return NULL;
     AComp * ac;
-    char * cn;
+    const char * cn;
     for (int i = 0; i < Units_Size; i++) {
         if ((unit == -1) || (unit == i)) {
             for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
@@ -683,7 +651,7 @@ AComp *  Station::GetObjByName_InTypes(const char * CompName, TYP *Types, int Ty
 {
     AComp * ac;
     TYP t;
-    char * cn;
+    const char * cn;
     for (int i = 0; i < Units_Size; i++) {
         for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
             ac = POLE[i]->GetObjPtr(j);
@@ -813,7 +781,7 @@ void Station::SetPropMap(TPropMap &m)
 const String _objprzS = "Object ";
 const String _objprzF = "End_object ";
 
-void WritePmToIni(TPropMap &pm, TCustomIniFile *FI, String SectionName)
+void WritePmToIni(TPropMap &pm, AIniFile *FI, String SectionName)
 {
     AStringList *SL = pm.createStringList();
     SL->Sort();
@@ -837,7 +805,7 @@ int Station::SaveSTE()
     String FN = FullFN();
     if (FileExists(FN))
         unlink(FN.c_str());
-    TMemIniFile * FI = new TMemIniFile(FN);
+    AIniFile * FI = new AIniFile(FN);
 
     // Сверху пишем свое
     GetPropMap(pm);
@@ -875,15 +843,16 @@ int Station::SaveSTE()
     return 1;
 }
 //---------------------------------------------------------------------------
-void ReadPmFromIni(TPropMap &pm, TCustomIniFile * FI, String SectionName, TStrings *SL)
+void ReadPmFromIni(TPropMap &pm, AIniFile * FI, String SectionName)
 {
-    SL->Clear();
+    AStringList *SL=new AStringList();
     FI->ReadSectionValues(SectionName, SL);
     String ST;
-    for (int i = 0; i < SL->Count; i++) {
-        ST = SL->Strings[i];
+    for (int i = 0; i < SL->Size(); i++) {
+        ST = SL->at(i);
         pm.putkeyvalst(ST);
     }
+    delete SL;
 }
 
 void Station::ReadChanelsInfo(AStringList *SL)
@@ -937,12 +906,13 @@ int Station::LoadSTE()
     AStringList *SLsect = new AStringList();
     String FN = FullFN();
     //SL->LoadFromFile(FN);
-    TMemIniFile * FI = new TMemIniFile(FN);
+
     pm.clear();
     int type;
     UNIT unit;
     // ищем сверху свое
-    ReadPmFromIni(pm, FI, "STATION", SL);
+    AIniFile * FI = new AIniFile(FN);
+    ReadPmFromIni(pm, FI, "STATION");
 
     SetPropMap(pm);
 
@@ -966,7 +936,7 @@ int Station::LoadSTE()
         SectName = SLsect->At(i);
         if (SectName.Pos("Comp_") != 1) continue;
         pm.clear();
-        ReadPmFromIni(pm, FI, SectName, SL);
+        ReadPmFromIni(pm, FI, SectName);
         type = pm.geti("цфtype");
         ac = POLE[0]->New((TYP)type);
         ac->SetPropMap(pm);
@@ -981,8 +951,8 @@ int Station::LoadSTE()
 
     // Пытаемся открыть маршруты
     String stFN = FullFN();
-    String stDir = GetPrevDirStr(stFN);
-    stFN =  stDir + "ETT\\" + ExtractFileName(stFN);
+    String stDir = ExtractFileDir(stFN);//GetPrevDirStr(stFN);
+    stFN =  stDir + "\\..\\ETT\\" + ExtractFileName(stFN);
     stFN = ChangeFileExt(stFN, ".csv");
     MARSHLIST.LoadFromCSV(stFN);
     MARSHLIST.ConnectToStanSTA(this);

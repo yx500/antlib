@@ -360,7 +360,6 @@ void _SetCol(int T, int N, String S)
         SPPLC[T][N] = -S.ToIntDef(0); else
         SPPLC[T][N] = S.ToIntDef(0);
 }
-#ifndef QT_ANTLIB
 
 bool wc_LoadIniFile()
 {
@@ -401,7 +400,6 @@ bool wc_LoadIniFile()
     wc_loaded=true;
     return true;
 }
-#endif
 
 void wc_SetColorByT_N(int T, int N)
 {
