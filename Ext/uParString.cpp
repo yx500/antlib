@@ -114,6 +114,8 @@ int TParString::GetInd(const String &stPar)
     return -1;
 }
 //---------------------------------------------------------------------------
+
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void SplitString(const String &ST, AStringList *SL, const String &chBreak)
 {
@@ -140,3 +142,31 @@ String  MakeSplitString(AStringList *SL, char chBreak)
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+#ifdef __BORLANDC__
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+void SplitString(const String &ST, TStringList *SL, const String &chBreak)
+{
+    String s = "";
+    SL->Clear();
+    for (int i = 1; i <= ST.Length(); i++) {
+        if (chBreak.Pos(ST[i]) != 0) {
+            s = s.TrimLeft(); s = s.TrimRight();
+            SL->Add(s);
+            s = "";
+        } else s = s + ST[i];
+    }
+    s = s.TrimLeft(); s = s.TrimRight();
+    if (s != "")SL->Add(s);
+}
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+String  MakeSplitString(TStringList *SL, char chBreak)
+{
+    String s = "";
+    for (int i = 0; i < SL->Count - 1; i++)
+        s = s + SL->Strings[i] + chBreak;
+    if (SL->Count >= 1)s = s + SL->Strings[SL->Count-1];
+    return s;
+}
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#endif

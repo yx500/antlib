@@ -191,15 +191,7 @@ const char * TPropMap::getpropmapstr(char * sztext)
     return _stRES.c_str();
 }
 //---------------------------------------------------------------------------
-void TPropMap::AddToStringList(AStringList *SL)
-{
-    int sz = _p.count();
-    for (int i = 0; i < sz; i++) {
-        const _Props::Elem& e = _p.get(i);
-        SL->Add(e.lKey + "=" + e.lVal);
-    }
-}
-//---------------------------------------------------------------------------
+
 void TPropMap::putkeyvalst(String S)
 {
     textext(S.c_str(), '=', '\n', false);
@@ -212,4 +204,23 @@ AStringList* TPropMap::createStringList()
     return SL;
 }
 //---------------------------------------------------------------------------
-
+#ifdef __BORLANDC__
+void TPropMap::AddToStringList(TStringList *SL)
+{
+    int sz = _p.count();
+    for (int i = 0; i < sz; i++) {
+        const _Props::Elem& e = _p.get(i);
+        SL->Add(e.lKey + "=" + e.lVal);
+    }
+}
+#else
+void TPropMap::AddToStringList(AStringList *SL)
+{
+    int sz = _p.count();
+    for (int i = 0; i < sz; i++) {
+        const _Props::Elem& e = _p.get(i);
+        SL->Add(e.lKey + "=" + e.lVal);
+    }
+}
+//---------------------------------------------------------------------------
+#endif

@@ -49,9 +49,13 @@ public:
 };
 
 
-
+#ifdef __BORLANDC__
+void SplitString(const String& ST, TStringList *SL, const String& chBreak);
+String  MakeSplitString(TStringList *SL, char chBreak);
+#else
 void SplitString(const String& ST, AStringList *SL, const String& chBreak);
 String  MakeSplitString(AStringList *SL, char chBreak);
+#endif
 
 //---------------------------------------------------------------------------
 #endif
