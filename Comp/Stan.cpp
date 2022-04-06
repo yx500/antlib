@@ -1605,7 +1605,7 @@ void SubStation::SetPropMap(TPropMap &m)
         }
         for (int i = 0; i < Units_Size; i++)
         {
-            substan->POLE[i]->vObjPtr.clear();
+            substan->POLE[i]->data.clear();
         }
         delete substan;
         substan = NULL;

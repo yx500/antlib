@@ -1,5 +1,5 @@
-#ifndef VatemplxH
-#define VatemplxH
+#ifndef Vatempl_H
+#define Vatempl_H
 //---------------------------------------------------------------------------
 #include "aheaders_h.h"
 #include <stdio.h>
@@ -15,8 +15,8 @@ class VisibleArray
 {
 
 public:
-    typedef std::vector<PAComp> TvObjPtr;
-    TvObjPtr vObjPtr;
+    typedef std::vector<PAComp> data_type;
+    TvObjPtr data;
 
     Station *pStation;
     int RTGorlCnt;
