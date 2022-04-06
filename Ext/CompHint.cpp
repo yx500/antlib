@@ -1,5 +1,6 @@
 #include "aheaders_cpp.h"
 
+#include "APch.h"
 #include <algorithm>
 #include <string>
 #include <vector>
@@ -8,7 +9,6 @@
 #include "CompHint.h"
 #include "Stan.h"
 #include "Elem.h"
-#include "APch.h"
 //---------------------------------------------------------------------------
 
 TACOMPHINT ACOMPHINT;
@@ -22,39 +22,38 @@ TACOMPHINT::TACOMPHINT()
 
 void TACOMPHINT::AddHint(const char *sta_filename, int ID, const char *stHint, int Type, int TOsec, const char *Dest)
 {
-    HintItem ACHintItem;
+    HintItem item;
     // считаем что обьект есть
-    strncpy(ACHintItem.filename, sta_filename, 13);
-    ACHintItem.stHint = stHint;
-    ACHintItem.ID = ID;
-    ACHintItem.Type = Type; // 1 А, 2 П , 3Н
-    ACHintItem.TOsec = TOsec;
-    ACHintItem.Time_Begin = time(NULL);
-    ACHintItem.ac = NULL;
-    ACHintItem.acX = 0, ACHintItem.acY = 0;
-    ACHintItem.stDest = Dest;
-
-    items.push_back(ACHintItem);
+    strncpy(item.filename, sta_filename, 13);
+    item.stHint = stHint;
+    item.ID = ID;
+    item.Type = Type; // 1 А, 2 П , 3Н
+    item.TOsec = TOsec;
+    time( &item.Time_Begin );
+    item.ac = NULL;
+    item.acX = 0;
+    item.acY = 0;
+    item.stDest = Dest;
+    items.push_back(item);
 }
 
 /*void TACOMPHINT::AddEttHint(char * sta_filename,int ID,int EventType_ID,const char *stHint,int Type,int TOsec,char * Dest)
 {
-     HintItem ACHintItem;
+     HintItem item;
      // считаем что обьект есть
-     strncpy(ACHintItem.filename,sta_filename,13);
-     ACHintItem.stHint=stHint;
-     ACHintItem.stDest=Dest;
-     ACHintItem.ID=ID;
-     ACHintItem.Type=Type; // 1 А, 2 П , 3Н
-     ACHintItem.TOsec=TOsec;
-     ACHintItem.Time_Begin=time(NULL);
-     ACHintItem.ac=NULL;
-     ACHintItem.acX=0,ACHintItem.acY=0;
-     //ACHintItem.bUseEttSettings=true;
-     //ACHintItem.bEttSettingsLoaded=false;
-     ACHintItem.EventType_ID=EventType_ID;
-
-     items.push_back(ACHintItem);
+     strncpy(item.filename,sta_filename,13);
+     item.stHint=stHint;
+     item.stDest=Dest;
+     item.ID=ID;
+     item.Type=Type; // 1 А, 2 П , 3Н
+     item.TOsec=TOsec;
+     item.Time_Begin=time(NULL);
+     item.ac=NULL;
+     item.acX=0,item.acY=0;
+     //item.bUseEttSettings=true;
+     //item.bEttSettingsLoaded=false;
+     item.EventType_ID=EventType_ID;
+     items.push_back(item);
 }
 */
 
