@@ -7,9 +7,6 @@
 
 #include "Comp.h"
 
-const int AllocError = -1;
-const int Ok = 0;
-
 class Station;
 class VisibleArray
 {
@@ -59,6 +56,6 @@ extern TEachAComp EachACompStanPreFun;
 extern TEachAComp EachACompStanPostFun;
 extern TEachAComp MakeNewComp;
 
-extern FILE *CurStanFile;
+// extern FILE *CurStanFile;
 
 #endif
