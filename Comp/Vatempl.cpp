@@ -235,33 +235,33 @@ VisibleArray::~VisibleArray()
 
 int VisibleArray::Add(PAComp ptr)
 {
-    vObjPtr.push_back(ptr);
+    data.push_back(ptr);
     ptr->pVisibleArray = this;
-    return vObjPtr.size();
+    return data.size();
 }
 int  VisibleArray::Insert(PAComp ptr, int p)
 {
-    vObjPtr.insert(vObjPtr.begin() + p, ptr);
+    data.insert(data.begin() + p, ptr);
     ptr->pVisibleArray = this;
-    return vObjPtr.size();
+    return data.size();
 }
 
 int VisibleArray::Remove(int p)
 {
-    if (vObjPtr.size() <= p) return 0;
-    PAComp ac =   vObjPtr.at(p);
+    if (data.size() <= p) return 0;
+    PAComp ac =   data.at(p);
     if (ac != NULL) {
         delete ac;
     }
-    vObjPtr.erase(vObjPtr.begin() + p);
+    data.erase(data.begin() + p);
     return 1;
 }
 
 
 void VisibleArray::RemoveAll()
 {
-    for (TvObjPtr::iterator i = vObjPtr.begin(); i != vObjPtr.end(); ++i) delete(*i);
-    vObjPtr.clear();
+    for (data_type::iterator i = data.begin(); i != data.end(); ++i) delete(*i);
+    data.clear();
 
 }
 
@@ -284,26 +284,26 @@ void VisibleArray::Show(PAComp ac)
 /*
 void VisibleArray::Get(int Number)
 {
-if(Number<1 || Number>vObjPtr->Count)
+if(Number<1 || Number>data->Count)
   return;
-((PAComp)vObjPtr->Items[Number-1])->Get();
+((PAComp)data->Items[Number-1])->Get();
 }
 void VisibleArray::Set(int Number)
 {
-if(Number<1 || Number>vObjPtr->Count)
+if(Number<1 || Number>data->Count)
   return;
-((PAComp)vObjPtr->Items[Number-1])->Set();
+((PAComp)data->Items[Number-1])->Set();
 }
 */
 PAComp VisibleArray::GetObjPtr(int p)
 {
-    if (p < 0 || p >= vObjPtr.size())  return NULL;
-    return vObjPtr.at(p);
+    if (p < 0 || p >= data.size())  return NULL;
+    return data.at(p);
 }
 PAComp VisibleArray::SetObjPtr(int p, PAComp ac)
 {
-    PAComp ac2 = vObjPtr.at(p);
-    vObjPtr.at(p) = ac;
+    PAComp ac2 = data.at(p);
+    data.at(p) = ac;
     return ac2;
 }
 
@@ -315,7 +315,7 @@ void VisibleArray::Move(PAComp ac, int DeltaX, int DeltaY)
 void VisibleArray::ShowAll()
 {
     PAComp ac;
-    for (TvObjPtr::iterator i = vObjPtr.begin(); i != vObjPtr.end(); ++i) {
+    for (data_type::iterator i = data.begin(); i != data.end(); ++i) {
         ac = (*i);
         if (((ac->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG))) continue;
         Show((ac));
@@ -325,7 +325,7 @@ void VisibleArray::ShowAll()
 void VisibleArray::ShowLayer(int Layer)
 {
     PAComp ac;
-    for (TvObjPtr::iterator i = vObjPtr.begin(); i != vObjPtr.end(); ++i) {
+    for (data_type::iterator i = data.begin(); i != data.end(); ++i) {
         ac = (*i);
         if (((ac->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) || ((ac->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT))) continue;
         ac->ShowLayer(Layer);
@@ -333,13 +333,13 @@ void VisibleArray::ShowLayer(int Layer)
 }
 void VisibleArray::GoAll()
 {
-    if (vObjPtr.size() == 0) return;
-    TvObjPtr::iterator b = vObjPtr.begin();
-    TvObjPtr::iterator e = vObjPtr.end();
+    if (data.size() == 0) return;
+    data_type::iterator b = data.begin();
+    data_type::iterator e = data.end();
     PAComp ac;
 
     if ((*b)->GetType() == GORL)b = e - RTGorlCnt;
-    for (TvObjPtr::iterator i = b; i != e; ++i) {
+    for (data_type::iterator i = b; i != e; ++i) {
         ac = (*i);
         if (((ac->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) ||
                 ((ac->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT)))
@@ -358,9 +358,9 @@ void VisibleArray::GoAll()
 
 int VisibleArray::TstXY(int x, int y)
 {
-    if (vObjPtr.size() == 0) return 0;
+    if (data.size() == 0) return 0;
 
-    for (TvObjPtr::iterator i = vObjPtr.begin(); i != vObjPtr.end(); ++i)(*i)->TstXY(x, y);
+    for (data_type::iterator i = data.begin(); i != data.end(); ++i)(*i)->TstXY(x, y);
     return 0;
 }
 
@@ -368,7 +368,7 @@ int VisibleArray::TstXY(int x, int y)
 void VisibleArray::ConnectAll()
 {
     PGorl G;
-    for (TvObjPtr::iterator i = vObjPtr.begin(); i != vObjPtr.end(); ++i) {
+    for (data_type::iterator i = data.begin(); i != data.end(); ++i) {
         G = dynamic_cast<PGorl>((*i));
         G->Connect();
     }
@@ -376,15 +376,15 @@ void VisibleArray::ConnectAll()
 
 void VisibleArray::HideAll()
 {
-    for (TvObjPtr::iterator i = vObjPtr.begin(); i != vObjPtr.end(); ++i)(*i)->Hide();
+    for (data_type::iterator i = data.begin(); i != data.end(); ++i)(*i)->Hide();
 }
 void VisibleArray::MoveAll(int DeltaX, int DeltaY)
 {
-    for (TvObjPtr::iterator i = vObjPtr.begin(); i != vObjPtr.end(); ++i) Move((*i), DeltaX, DeltaY);
+    for (data_type::iterator i = data.begin(); i != data.end(); ++i) Move((*i), DeltaX, DeltaY);
 }
 int VisibleArray::GetArraySize()
 {
-    return vObjPtr.size();
+    return data.size();
 }
 
 
@@ -435,11 +435,11 @@ int VisibleArray::SaveAll(FILE *file, int ut)
     PGorl Member;
 //Lamp *Lmp;
     PAComp G;
-    int cnt = vObjPtr.size();
-    TvObjPtr::iterator b = vObjPtr.begin();
-    TvObjPtr::iterator e = vObjPtr.end();
+    int cnt = data.size();
+    data_type::iterator b = data.begin();
+    data_type::iterator e = data.end();
     if ((cnt >= 2) && (ut == GORE)) e = e - RTGorlCnt;
-    for (TvObjPtr::iterator i = b; i != e; ++i) {
+    for (data_type::iterator i = b; i != e; ++i) {
         if (ut != GORE) {
             G = (*i);
             memset(&MEM, 0, sizeof(MEM));
@@ -471,7 +471,7 @@ void VisibleArray::ClearAll(void)
 {
     PAComp ac;
 
-    for (TvObjPtr::iterator i = vObjPtr.begin(); i != vObjPtr.end(); ++i) {
+    for (data_type::iterator i = data.begin(); i != data.end(); ++i) {
         ac = (*i);
         //if (ac->GetType() != ASN)
         ac->Clear();
@@ -480,9 +480,9 @@ void VisibleArray::ClearAll(void)
 
 int VisibleArray::IndexOf(PAComp ac)
 {
-    TvObjPtr::iterator i = std::find(vObjPtr.begin(), vObjPtr.end(), ac);
-    if (i == vObjPtr.end()) return -1;
-    return i - vObjPtr.begin();
+    data_type::iterator i = std::find(data.begin(), data.end(), ac);
+    if (i == data.end()) return -1;
+    return i - data.begin();
 
 
 }
