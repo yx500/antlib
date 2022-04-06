@@ -15,7 +15,8 @@ int is_crlf( int ch ){
 static std::string right_crlf_trim(const std::string& s)
 {
   std::string result(s);
-  return result.erase(find_if(result.rbegin(), result.rend(), not1(std::ptr_fun(is_crlf))).base(), result.end());
+  result.erase( std::find_if( result.rbegin(), result.rend(), not1(std::ptr_fun(is_crlf))).base(), result.end() );
+  return result;
 }
 
 int AStringList::LoadFromFile(const std::string &filename)
@@ -54,14 +55,14 @@ void AStringList::Sort()
   std::sort(this->begin(), this->end());
 }
 
-std::string& AStringList::Names(size_t idx)
+std::string AStringList::Name(size_t idx)
 {
   alib::stringvector w;
   alib::string_split(this->at(idx), "=", w);
   return w.size()>1 ? alib::trim(w[0]) : "";
 }
 
-std::string& AStringList::Values(size_t idx)
+std::string AStringList::Value(size_t idx)
 {
   alib::stringvector w;
   alib::string_split(this->at(idx), "=", w);

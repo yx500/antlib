@@ -18,6 +18,7 @@ public:
   AString(const std::string& s) : std::string(s) {}
 
   int Pos(const std::string& subStr) const { return this->find_first_of(subStr); }
+  int Pos(char ch) const { return this->find_first_of(ch); }
   bool IsEmpty() const { return this->empty(); }
   int Length() const { return size(); }
   int ToInt() const {

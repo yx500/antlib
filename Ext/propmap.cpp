@@ -10,11 +10,8 @@ void PropertyMapDetails::reindex()
 {
     index.clear();
     std::vector<Elem>::iterator i = box.begin();
-    while (i != box.end())
-    {
-        index[i->lKey] = i;
-        ++i;
-    }
+    for (size_t i = 0; i < box.size(); ++i)
+        index[ box[i].lKey ] = &box[i];
 }
 
 void PropertyMapDetails::erase(const String &key)
@@ -143,7 +140,7 @@ void TPropMap::textext(const char *szText, char rkeyval, char rString, bool clr)
             PropertyMapDetails::Elem *i = props.ElemOf(String(key.c_str()), true);
             i->lKey = key.c_str();
             i->lVal = val.c_str();
-            i->lVal = i->lVal.TrimRight();
+            i->lVal = i->lVal.Trim();
         }
     }
 }
