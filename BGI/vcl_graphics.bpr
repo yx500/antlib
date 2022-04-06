@@ -20,7 +20,7 @@
       inetdbbde.bpi inetdbxpress.bpi inetdb.bpi nmfast.bpi webdsnap.bpi 
       bcbie.bpi websnap.bpi soaprtl.bpi dclocx.bpi dbexpress.bpi dbxcds.bpi 
       indy.bpi bcb2kaxserver.bpi fc4000v6.bpi"/>
-    <PATHCPP value=".;..\Ext"/>
+    <PATHCPP value=".;"/>
     <PATHPAS value=".;"/>
     <PATHRC value=".;"/>
     <PATHASM value=".;"/>
@@ -54,7 +54,7 @@
       <FILE FILENAME="winpalet.cpp" FORMNAME="" UNITNAME="WinPalet" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="winbgi_vcl.cpp" FORMNAME="" UNITNAME="winbgi_vcl" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="GmPen.cpp" FORMNAME="" UNITNAME="GMPEN" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="..\Ext\uImgContainer.cpp" FORMNAME="" UNITNAME="uImgContainer" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="uImgContainer.cpp" FORMNAME="" UNITNAME="uImgContainer" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>
