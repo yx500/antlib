@@ -1411,6 +1411,9 @@ void Replaceacprop(AComp *ac, TPropMap &mrpl)
 {
     TPropMap m;
     String pmstr = ac->Tagstr.c_str();
+    std::string s=pmstr.c_str();
+    for (int i = 0; i < mrpl.GetItemsCount(); i++) {
+
     alib::string_replace(s, mrpl.GetKeys(i).c_str(), mrpl.GetVal(i).c_str());
     pmstr = s.c_str();
     // pmstr = AnsiReplaceStr(pmstr, mrpl.Keys[i], mrpl.Val[i]);
