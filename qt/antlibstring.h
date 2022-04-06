@@ -71,3 +71,6 @@ extern AString  IntToHex(int Value, int Digits);
 
 inline int StrToInt(const AString& s) { return s.ToInt(); }
 inline int StrToIntDef(const AString& s, int Default) { return s.ToIntDef(Default); }
+
+extern void OemToChar(const char *src, char * dst);
+extern void CharToOem(const char *src, char * dst);

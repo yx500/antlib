@@ -99,8 +99,9 @@ void SplitString(const String &ST, AStringList *SL, const String &chBreak)
     {
         if (chBreak.Pos(ST[i]) != 0)
         {
-            s = s.TrimLeft();
-            s = s.TrimRight();
+//            s = s.TrimLeft();
+//            s = s.TrimRight();
+            s = s.Trim();
             SL->Add(s);
             s = "";
         }
@@ -118,7 +119,7 @@ String MakeSplitString(AStringList *SL, char chBreak)
     for (int i = 0; i < SL->Size() - 1; i++)
         s = s + SL->At(i) + chBreak;
     if (SL->Size() >= 1)
-        s = s + SL->Strings[SL->Size() - 1];
+        s = s + SL->At(SL->Size() - 1);
     return s;
 }
 
