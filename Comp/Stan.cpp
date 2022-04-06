@@ -1,11 +1,10 @@
-
 #include "aheaders_cpp.h"
+
 #include "APch.h"
 
 #include <typeinfo>
 #include "Stan.h"
 #include "Comp.h"
-
 #include "Strel.h"
 #include "Static.h"
 #include "Line.h"
@@ -16,7 +15,6 @@
 #include "YchParams.h"
 #include "uEXD.h"
 #include "actools.h"
-
 #include "EnergUnit.h"
 #include "Str_fun.h"
 #include "Gor_Elem.h"

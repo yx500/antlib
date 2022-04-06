@@ -17,6 +17,7 @@
 //  #include "antlibstringlist.h"
   #include "antlibgraphics.h"
   #include "vcllib.h"
+  #include <unistd.h>
 
 #endif
 

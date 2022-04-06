@@ -1,19 +1,11 @@
-//---------------------------------------------------------------------------
-
-
 #include "aheaders_cpp.h"
-#include "APch.h"
 
+#include "APch.h"
 #include "uExtElem.h"
 #include "Elem.h"
 #include "Lamps.h"
-#include "WinPalet.h"
+#include "winpalet.h"
 #include "F.h"
-
-
-
-//---------------------------------------------------------------------------
-
 
 
 
