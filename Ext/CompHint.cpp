@@ -32,7 +32,8 @@ struct tACHintItem{
        int EventType_ID;
 };
 
-std::vector <tACHintItem> vACHintItems;
+typedef std::vector <tACHintItem> TvACHintItems;
+TvACHintItems vACHintItems;
 
 TACOMPHINT::TACOMPHINT()
 {
@@ -103,26 +104,26 @@ void TACOMPHINT::ShowHints(Station * stan)
      // сначала уберем старье
      time_t now;
      now = time(NULL);
-     for (unsigned int i=0;i<vACHintItems.size();i++){
-         tACHintItem *hi=&vACHintItems[i];
+     for (TvACHintItems::iterator hi = vACHintItems.begin(); hi != vACHintItems.end(); ++hi) {
          if (now-hi->Time_Begin>=hi->TOsec){
             // затираем фоном
             if (hi->ac!=NULL)
                _ShowHint(hi->ac,hi,true);
-            vACHintItems.erase(hi);
-            i--;
+           vACHintItems.erase(hi);
+           // vACHintItems.erase( std::find(vACHintItems.begin(), vACHintItems.end(), hi) );
+            hi--;
          }
      }
 
      // проставим параметры не из ETT, а сравнивая EttReciveName
 
      std::string stDestYch=stan->AO->EttReciveName;
-     for (unsigned int i=0;i<vACHintItems.size();i++){
-         tACHintItem *hi=&vACHintItems[i];
+     for (TvACHintItems::iterator hi = vACHintItems.begin(); hi != vACHintItems.end(); ++hi) {
          if (hi->stDest!="*"){
             if ((stDestYch.length()!=0)&&(hi->stDest.find(stDestYch)==std::string::npos)){
                   vACHintItems.erase(hi);
-                  i--;
+                  //vACHintItems.erase( std::find(vACHintItems.begin(), vACHintItems.end(), hi) );
+                  hi--;
             }
          }
      }
@@ -177,7 +178,7 @@ void TACOMPHINT::_ShowHint(AComp* ac,tACHintItem *hi,bool bFON)
         ac->Show();
         hi->acRECT=GetBgiCoverRect();
      }
-     if (hi->acRECT.left==MaxInt) return; // типа нет на экране
+     if (hi->acRECT.left==0x7fffffff) return; // типа нет на экране
      int pallign=1;
      int X=(hi->acRECT.left+hi->acRECT.right)/2;
      int Y=(hi->acRECT.top+hi->acRECT.bottom)/2;
