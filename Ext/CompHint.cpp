@@ -108,7 +108,7 @@ void TACOMPHINT::ShowHints(Station * stan)
          if (now-hi->Time_Begin>=hi->TOsec){
             // затираем фоном
             if (hi->ac!=NULL)
-               _ShowHint(hi->ac,hi,true);
+               _ShowHint(hi->ac,(tACHintItem*)hi,true);
            vACHintItems.erase(hi);
            // vACHintItems.erase( std::find(vACHintItems.begin(), vACHintItems.end(), hi) );
             hi--;
