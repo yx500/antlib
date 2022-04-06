@@ -1416,7 +1416,7 @@ void Replaceacprop(AComp *ac, TPropMap &mrpl)
 
     alib::string_replace(s, mrpl.GetKeys(i).c_str(), mrpl.GetVal(i).c_str());
     pmstr = s.c_str();
-    // pmstr = AnsiReplaceStr(pmstr, mrpl.Keys[i], mrpl.Val[i]);
+    // pmstr = AnsiReplaceStr(pmstr, mrpl.Keys[i], mrpl.GetVal(i));
     // ac->Tagstr.replace() ()
 }
 m.text(pmstr.c_str());
@@ -1431,16 +1431,16 @@ if (ac->pmRepl != NULL)
         std::string s = pmReplstr.c_str();
         alib::string_replace(s, mrpl.GetKeys(i).c_str(), mrpl.GetVal(i).c_str());
         pmReplstr = s.c_str();
-        // pmReplstr = AnsiReplaceStr(pmReplstr, mrpl.Keys[i], mrpl.Val[i]);
+        // pmReplstr = AnsiReplaceStr(pmReplstr, mrpl.GetKeys(i), mrpl.GetVal(i));
     }
     TPropMap m2;
     m2.text(pmReplstr.c_str());
     for (int i = 0; i < m2.GetItemsCount(); i++)
     {
-        if (m2.Val[i] != "")
+        if (m2.GetVal(i) != "")
         {
-            String stK = m2.Keys[i];
-            String stV = m2.Val[i];
+            String stK = m2.GetKeys(i);
+            String stV = m2.GetVal(i);
             // а фдруг формула
             if ((stV.Pos("+") > 1) ||
                 (stV.Pos("+") > 1) ||
