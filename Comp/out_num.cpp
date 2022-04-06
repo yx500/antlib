@@ -170,7 +170,7 @@ void _MakePoints(int X0, int Y0, int Width, int Height, int direct)
     _points[3] = TPoint(X0 + Width - xx, Y0 + Height - 1);
     _points[4] = TPoint(X0 + xx, Y0 + Height - 1);
     _points[5] = TPoint(X0 + xx, Y0 + Height / 2);
-    //_points[6] = Point(X0+xx,Y0);
+    //_points[6] = TPoint(X0+xx,Y0);
     if (direct == 3) {
         _points[2] = TPoint(X0 + Width, Y0 + Height / 2);
         _points[5] = TPoint(X0, Y0 + Height / 2);

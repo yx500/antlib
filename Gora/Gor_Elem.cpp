@@ -11,7 +11,7 @@
 #include "Stan.h"
 #include "Polig.h"
 #include "Impuls.h"
-#include "Col.h"
+#include "col.h"
 #include "Gor_Logic.h"
 #include "Scrin.h"
 //#include "winbgi_vcl.h"
@@ -536,23 +536,23 @@ void tG_Strel_Y::CalcPRRTDS()
     if (DX < 0) {
         n = -n;//dx0=-dx0;dx1=-dx1;dx2=-dx2;shpr=-shpr;Prdx=-Prdx;
     }
-    Mr[0] = Point(YP.M[0].x + dx0 * n, YP.M[0].y);
-    Mr[1] = Point(YP.M[0].x + dx0 * n, YP.M[0].y - rr);
-    Mr[2] = Point(YP.M[0].x + dx0 * n, YP.M[0].y + rr);
+    Mr[0] = TPoint(YP.M[0].x + dx0 * n, YP.M[0].y);
+    Mr[1] = TPoint(YP.M[0].x + dx0 * n, YP.M[0].y - rr);
+    Mr[2] = TPoint(YP.M[0].x + dx0 * n, YP.M[0].y + rr);
 
-    Tr[0] = Point(Mr[0].x + dx1 * n, Mr[0].y - shpr);
-    Tr[1] = Point(Tr[0].x + dx2 * n, Tr[0].y);
-    Tr[2] = Point(Tr[1].x      , Tr[1].y - shpr2);
-    Tr[3] = Point(Tr[2].x + dx22 * n, Mr[0].y);
-    Tr[6] = Point(Mr[0].x + dx1 * n, Mr[0].y + shpr);
-    Tr[5] = Point(Tr[6].x + dx2 * n, Tr[6].y);
-    Tr[4] = Point(Tr[5].x      , Tr[5].y + shpr2);
+    Tr[0] = TPoint(Mr[0].x + dx1 * n, Mr[0].y - shpr);
+    Tr[1] = TPoint(Tr[0].x + dx2 * n, Tr[0].y);
+    Tr[2] = TPoint(Tr[1].x      , Tr[1].y - shpr2);
+    Tr[3] = TPoint(Tr[2].x + dx22 * n, Mr[0].y);
+    Tr[6] = TPoint(Mr[0].x + dx1 * n, Mr[0].y + shpr);
+    Tr[5] = TPoint(Tr[6].x + dx2 * n, Tr[6].y);
+    Tr[4] = TPoint(Tr[5].x      , Tr[5].y + shpr2);
 
 
-    Pr[0] = Point(Mr[0].x - (rr + prd) * n, Mr[1].y - prd);
-    Pr[1] = Point(Tr[1].x + prd * n, Pr[0].y);
-    Pr[2] = Point(Pr[1].x, Mr[2].y + prd);
-    Pr[3] = Point(Pr[0].x, Pr[2].y);
+    Pr[0] = TPoint(Mr[0].x - (rr + prd) * n, Mr[1].y - prd);
+    Pr[1] = TPoint(Tr[1].x + prd * n, Pr[0].y);
+    Pr[2] = TPoint(Pr[1].x, Mr[2].y + prd);
+    Pr[3] = TPoint(Pr[0].x, Pr[2].y);
 
     //rotate_points(M_PI_4,Mr[0],Mr,3);
     //rotate_points(-M_PI_4,Mr[0],Mr,3);
@@ -1045,9 +1045,9 @@ void ShowTR1(int x, int y, int clrp, int clrb, int napr, ttrchast trchast = _trf
 
     TPoint Tr[3];
 
-    Tr[0] = Point(x, y);
-    Tr[1] = Point(Tr[0].x - sh_y / 2 * napr, Tr[0].y - sh_y * napr);
-    Tr[2] = Point(Tr[0].x + sh_y / 2 * napr, Tr[0].y - sh_y * napr);
+    Tr[0] = TPoint(x, y);
+    Tr[1] = TPoint(Tr[0].x - sh_y / 2 * napr, Tr[0].y - sh_y * napr);
+    Tr[2] = TPoint(Tr[0].x + sh_y / 2 * napr, Tr[0].y - sh_y * napr);
     if (trchast == _trhalf) clrp = TXT;//Tr[2].x=Tr[0].x+sh_y/2*napr/2;
     int clr1[3] = {clrp, clrp, clrp};
     PolyColor(clrb, Tr, clr1, 3);
@@ -1218,20 +1218,20 @@ void tG_ZAMI::ShowZAM(float stupen)
         yTR[1] = T[13].y + ddy + shzam + ddyTR;
     }
 
-    ZT[0][0] = Point(T[0].x + ddx, T[0].y - ddy - shzam);
-    ZT[0][1] = Point(T[5].x - ddx, T[5].y - ddy - shzam);
-    ZT[1][0] = Point(T[13].x + ddx, T[13].y + ddy + shzam);
-    ZT[1][1] = Point(T[6].x - ddx, T[6].y + ddy + shzam);
+    ZT[0][0] = TPoint(T[0].x + ddx, T[0].y - ddy - shzam);
+    ZT[0][1] = TPoint(T[5].x - ddx, T[5].y - ddy - shzam);
+    ZT[1][0] = TPoint(T[13].x + ddx, T[13].y + ddy + shzam);
+    ZT[1][1] = TPoint(T[6].x - ddx, T[6].y + ddy + shzam);
     int hpodl = shzam + sh_y + ddyTR + (sh_y) / 2;
     if (stupen == -2) { //ситрание фоном
         int clr1[4] = {FON, FON, FON, FON};
-        ZTr[0] = Point(ZT[0][0].x - 2, T[0].y - 1);
-        ZTr[1] = Point(ZT[0][0].x - 2, ZTr[0].y - hpodl);
-        ZTr[2] = Point(ZT[0][1].x + 2, ZTr[1].y); ZTr[3] = Point(ZT[0][1].x + 2, ZTr[0].y);
+        ZTr[0] = TPoint(ZT[0][0].x - 2, T[0].y - 1);
+        ZTr[1] = TPoint(ZT[0][0].x - 2, ZTr[0].y - hpodl);
+        ZTr[2] = TPoint(ZT[0][1].x + 2, ZTr[1].y); ZTr[3] = TPoint(ZT[0][1].x + 2, ZTr[0].y);
         PolyColor(FON, ZTr, clr1, 4);
-        ZTr[0] = Point(ZT[1][0].x - 2, T[13].y + 1);
-        ZTr[1] = Point(ZT[1][0].x - 2, ZTr[0].y + hpodl);
-        ZTr[2] = Point(ZT[1][1].x + 2, ZTr[1].y); ZTr[3] = Point(ZT[1][1].x + 2, ZTr[0].y);
+        ZTr[0] = TPoint(ZT[1][0].x - 2, T[13].y + 1);
+        ZTr[1] = TPoint(ZT[1][0].x - 2, ZTr[0].y + hpodl);
+        ZTr[2] = TPoint(ZT[1][1].x + 2, ZTr[1].y); ZTr[3] = TPoint(ZT[1][1].x + 2, ZTr[0].y);
         PolyColor(FON, ZTr, clr1, 4);
         return;
     }
@@ -1239,13 +1239,13 @@ void tG_ZAMI::ShowZAM(float stupen)
 
     if ((clrbPP != FON) || (clrpPP != FON)) {
         setfillstyle(SOLID_FILL, clrbPP); setcolor(clrpPP);
-        ZTr[0] = Point(ZT[0][0].x - 2, T[0].y - 1);
-        ZTr[1] = Point(ZT[0][0].x - 2, ZTr[0].y - hpodl);
-        ZTr[2] = Point(ZT[0][1].x + 3, ZTr[1].y); ZTr[3] = Point(ZT[0][1].x + 2, ZTr[0].y);
+        ZTr[0] = TPoint(ZT[0][0].x - 2, T[0].y - 1);
+        ZTr[1] = TPoint(ZT[0][0].x - 2, ZTr[0].y - hpodl);
+        ZTr[2] = TPoint(ZT[0][1].x + 3, ZTr[1].y); ZTr[3] = TPoint(ZT[0][1].x + 2, ZTr[0].y);
         roundrect(ZTr[0].x, ZTr[0].y, ZTr[2].x, ZTr[2].y, sh_y, sh_y);
-        ZTr[0] = Point(ZT[1][0].x - 2, T[13].y + 1);
-        ZTr[1] = Point(ZT[1][0].x - 2, ZTr[0].y + hpodl);
-        ZTr[2] = Point(ZT[1][1].x + 3, ZTr[1].y); ZTr[3] = Point(ZT[1][1].x + 2, ZTr[0].y);
+        ZTr[0] = TPoint(ZT[1][0].x - 2, T[13].y + 1);
+        ZTr[1] = TPoint(ZT[1][0].x - 2, ZTr[0].y + hpodl);
+        ZTr[2] = TPoint(ZT[1][1].x + 3, ZTr[1].y); ZTr[3] = TPoint(ZT[1][1].x + 2, ZTr[0].y);
         roundrect(ZTr[0].x, ZTr[0].y, ZTr[2].x, ZTr[2].y, sh_y, sh_y);
     }
 
@@ -1253,8 +1253,8 @@ void tG_ZAMI::ShowZAM(float stupen)
     // колбаска
     for (int d = 0; d < 2; d++) {
         ZTr[0] = ZT[d][0]; ZTr[1] = ZT[d][1];
-        ZTr[2] = Point(ZT[d][1].x, ZT[d][1].y + shzam * naprK[d]);
-        ZTr[3] = Point(ZT[d][0].x, ZT[d][0].y + shzam * naprK[d]);
+        ZTr[2] = TPoint(ZT[d][1].x, ZT[d][1].y + shzam * naprK[d]);
+        ZTr[3] = TPoint(ZT[d][0].x, ZT[d][0].y + shzam * naprK[d]);
         int clr1[4] = {clrpK, clrpK, clrpK, clrpK};
         PolyColor(clrbK, ZTr, clr1, 4);
 
@@ -1297,7 +1297,7 @@ void tG_ZAMI::ShowZAM(float stupen)
 
     // focused
     if (ExtFocus > 0) {
-        int clp = clInfoBk;
+        int clp = 0x80000018;
         if (ExtFocus == 2) clp = FON;
         //if (ExtFocus==2) ExtFocus=0;
         setcolor(clp);
@@ -1810,30 +1810,30 @@ void tG_OTCLABEL::Show()
     int H_2 = Height / 2;
     int HH1 = Height - 4; // размер квадрата категории
     TPoint T[4];
-    T[0] = Point(x, y - H_2);
-    T[1] = Point(T[0].x + Width, T[0].y);
-    T[2] = Point(T[1].x, T[0].y + Height);
-    T[3] = Point(T[0].x, T[2].y);
+    T[0] = TPoint(x, y - H_2);
+    T[1] = TPoint(T[0].x + Width, T[0].y);
+    T[2] = TPoint(T[1].x, T[0].y + Height);
+    T[3] = TPoint(T[0].x, T[2].y);
 
     TPoint TT[4];
-    TT[0] = Point(T[0].x + 2, T[0].y + 3);
-    TT[1] = Point(T[1].x - 2, TT[0].y);
-    TT[2] = Point(TT[1].x, T[2].y - 2);
-    TT[3] = Point(TT[0].x, TT[2].y);
+    TT[0] = TPoint(T[0].x + 2, T[0].y + 3);
+    TT[1] = TPoint(T[1].x - 2, TT[0].y);
+    TT[2] = TPoint(TT[1].x, T[2].y - 2);
+    TT[3] = TPoint(TT[0].x, TT[2].y);
 
-    int clrP = clInfoBk;
-    int clrB = clInfoBk;
+    int clrP = 0x80000018;
+    int clrB = 0x80000018;
 
 
     //Stupen = Descr->st;  // типа реальная ступень какаято 06 08 2007
 
 
     if (mar_f <= 0) {
-        clrP = FON;//clInfoBk;
-        clrB = FON;//clSilver;
+        clrP = FON;//0x80000018;
+        clrB = FON;//0xc0c0c0;
     } else if (V_out != 0) {
-        clrB = clSilver;
-        clrP = clSilver;
+        clrB = 0xc0c0c0;
+        clrP = 0xc0c0c0;
     }
 
 
@@ -1847,8 +1847,8 @@ void tG_OTCLABEL::Show()
         SS = IntToStr(mar_f);
     if (MOD == ED) {
         SS = IntToStr(AddrLK1Slot) + " " + IntToStr(addr1);
-        clrB = clSilver;
-        clrP = clSilver;
+        clrB = 0xc0c0c0;
+        clrP = 0xc0c0c0;
     }
     settextjustify(CENTER_TEXT, CENTER_TEXT);
     settextstyle(1, HORIZ_DIR, HH1 - 4);
@@ -2089,29 +2089,29 @@ void tG_TPLABEL::Show()
     int HH1 = Height - 4; // размер квадрата категории
     int HH2 = (Width - HH1) / 2 - 8;//HH1;      // размер квадрата зад скорости
     TPoint T[4];
-    T[0] = Point(x, y - H_2);
-    T[1] = Point(T[0].x + Width, T[0].y);
-    T[2] = Point(T[1].x, T[0].y + Height);
-    T[3] = Point(T[0].x, T[2].y);
+    T[0] = TPoint(x, y - H_2);
+    T[1] = TPoint(T[0].x + Width, T[0].y);
+    T[2] = TPoint(T[1].x, T[0].y + Height);
+    T[3] = TPoint(T[0].x, T[2].y);
 
 
     TPoint TZ[4];
-    TZ[0] = Point(T[1].x - HH2 - 2, T[0].y + 3);
-    TZ[1] = Point(TZ[0].x + HH2, TZ[0].y);
-    TZ[2] = Point(TZ[1].x, T[2].y - 2);
-    TZ[3] = Point(TZ[0].x, TZ[2].y);
+    TZ[0] = TPoint(T[1].x - HH2 - 2, T[0].y + 3);
+    TZ[1] = TPoint(TZ[0].x + HH2, TZ[0].y);
+    TZ[2] = TPoint(TZ[1].x, T[2].y - 2);
+    TZ[3] = TPoint(TZ[0].x, TZ[2].y);
 
     TPoint TF[4];
-    TF[0] = Point(T[0].x + 2, T[0].y + 3);
-    TF[1] = Point(TZ[0].x - HH1 - 2 - 2, TF[0].y);
-    TF[2] = Point(TF[1].x, T[2].y - 2);
-    TF[3] = Point(TF[0].x, TF[2].y);
+    TF[0] = TPoint(T[0].x + 2, T[0].y + 3);
+    TF[1] = TPoint(TZ[0].x - HH1 - 2 - 2, TF[0].y);
+    TF[2] = TPoint(TF[1].x, T[2].y - 2);
+    TF[3] = TPoint(TF[0].x, TF[2].y);
 
     TPoint TV[4];
-    TV[0] = Point(T[0].x + 2, T[0].y + 3);
-    TV[1] = Point(TZ[0].x - HH1 - 2 - 2, TF[0].y);
-    TV[2] = Point(TV[1].x, T[2].y - 2);
-    TV[3] = Point(TV[0].x, TF[2].y);
+    TV[0] = TPoint(T[0].x + 2, T[0].y + 3);
+    TV[1] = TPoint(TZ[0].x - HH1 - 2 - 2, TF[0].y);
+    TV[2] = TPoint(TV[1].x, T[2].y - 2);
+    TV[3] = TPoint(TV[0].x, TF[2].y);
 
 
     double w1 = TPVal(V1);
@@ -2132,11 +2132,11 @@ void tG_TPLABEL::Show()
 
 
     double dV_Zad = V_Zad / 10.;
-    int clrP = clBlack;
-    int clrB = clInfoBk;
+    int clrP = 0x0;
+    int clrB = 0x80000018;
     if (w <= 2) w = 0; //  Anton Minsk 29.03.07
     if ((w == 0) && (Stupen <= 0) && (V_Zad == 0)) {
-        clrP = FON;////clInfoBk;
+        clrP = FON;////0x80000018;
         clrB = FON;
     }
     // выход
@@ -2144,8 +2144,8 @@ void tG_TPLABEL::Show()
 
     if ((w == 0) && (V_out != 0) && (V_out!=65535)) {
        if (!NoShowVout) {
-          clrP = FON;////clInfoBk;
-          clrB = clSilver;
+          clrP = FON;////0x80000018;
+          clrB = 0xc0c0c0;
           if (provV!=0){
                 if (V_out-V_Zad>provV) colV=RED;
           }
@@ -2166,12 +2166,11 @@ void tG_TPLABEL::Show()
             SS.printf("%2.1f", w);
     }
 
-
     if (MOD == ED) {
         SS = IntToStr(addr1);
         stV_Zad = IntToStr(AddrLK1Slot);
-        clrP = clBlack;
-        clrB = clInfoBk;
+        clrP = 0x0;
+        clrB = 0x80000018;
         Stupen = 2;
         w = 5;
         p_rzp=mas;
@@ -2180,17 +2179,17 @@ void tG_TPLABEL::Show()
     if (masy == 0) {
 
         if ((VesBukv != 0) && (w <= 2) && (Stupen <= 0)) {
-            int c1[4] = {   clrP, clrP, clrP, clrP/*clSilver, clSilver, clSilver, clSilver*/};
+            int c1[4] = {   clrP, clrP, clrP, clrP/*0xc0c0c0, 0xc0c0c0, 0xc0c0c0, 0xc0c0c0*/};
             PolyColor(clrB, T, c1, 4);
         } else {
-            int c1[4] = {   clSilver, clSilver, clSilver, clSilver};
+            int c1[4] = {   0xc0c0c0, 0xc0c0c0, 0xc0c0c0, 0xc0c0c0};
             PolyColor(clrB, T, c1, 4);
 
-            //int cF[4]={   clSilver, clSilver, clSilver, clSilver};
-            //PolyColor(clSilver,TF,cF,4);
+            //int cF[4]={   0xc0c0c0, 0xc0c0c0, 0xc0c0c0, 0xc0c0c0};
+            //PolyColor(0xc0c0c0,TF,cF,4);
             if (VesBukv != 0) {
-                int cZ[4] = {   clSilver, clSilver, clSilver, clSilver};
-                PolyColor(clSilver, TZ, cZ, 4);
+                int cZ[4] = {   0xc0c0c0, 0xc0c0c0, 0xc0c0c0, 0xc0c0c0};
+                PolyColor(0xc0c0c0, TZ, cZ, 4);
             }
 
 
@@ -2260,20 +2259,20 @@ void tG_TPLABEL::Show()
         if (ZKR_N==0){
             if ((w <= 2) && (Stupen <= 0)) {
                 clrP = FON1;
-                clrB = FON;//clSilver;
+                clrB = FON;//0xc0c0c0;
             } else {
-                clrP = clBlack;
+                clrP = 0x0;
             }
         } else {
             if (MOD==ED){
-               clrB = clInfoBk;
+               clrB = 0x80000018;
                SS="ZKR"+IntToStr(ZKR_N);
             } else {
               if (fves_osi==-33){
                  clrB = BIRUZOVIJ;
                  SS="--";
               } else {
-                 clrB = clInfoBk;
+                 clrB = 0x80000018;
                  //SS.printf("%2.1f", w);
                  SS.printf("%2.1f", (1.*fves_osi/10));
               }
@@ -2281,32 +2280,32 @@ void tG_TPLABEL::Show()
         }
         if (ADAM!=""){
              if (MOD==ED){
-               clrB = clInfoBk;
+               clrB = 0x80000018;
                SS=ADAM;
             } else {
                 SS=FADAV_val;
-                clrB = clInfoBk;
+                clrB = 0x80000018;
             }
         }
         if (ADK3!=""){
              if (MOD==ED){
-               clrB = clInfoBk;
+               clrB = 0x80000018;
                SS=/*ADK3+"_"+*/IntToStr(AddrLK1Slot)+"-"+IntToStr(addr1);
             } else {
                 SS=FADK3_val;
                 if (SS=="") clrB = BIRUZOVIJ; else
-                clrB = clInfoBk;
+                clrB = 0x80000018;
             }
         }
 
-        TF[0] = Point(T[0].x + 2, T[0].y + 3);
-        TF[1] = Point(T[1].x - 2, T[1].y + 3);
-        TF[2] = Point(TF[1].x, T[2].y - 3);
-        TF[3] = Point(TF[0].x, TF[2].y);
+        TF[0] = TPoint(T[0].x + 2, T[0].y + 3);
+        TF[1] = TPoint(T[1].x - 2, T[1].y + 3);
+        TF[2] = TPoint(TF[1].x, T[2].y - 3);
+        TF[3] = TPoint(TF[0].x, TF[2].y);
 
 
-        //int c1[4]={   clSilver, clSilver, clSilver, clSilver};
-        //PolyColor(clSilver,TF,c1,4);
+        //int c1[4]={   0xc0c0c0, 0xc0c0c0, 0xc0c0c0, 0xc0c0c0};
+        //PolyColor(0xc0c0c0,TF,c1,4);
         int cF[4] = {   clrP, clrP, clrP, clrP};
         PolyColor(clrB, TF, cF, 4);
 
@@ -2645,58 +2644,58 @@ void tG_KZP::Show()
     int clrbD = 210;
     String SS;
     if ((E != 0)) {
-        clrbPodl = clTeal;
+        clrbPodl = 0x808000;//clTeal;
         xx = -1; xx1 = -1;
     }
     if (MOD == ED) {
-        clrbPodl = clSilver;
+        clrbPodl = 0xc0c0c0;
         xx = -1; xx1 = -1;
     }
-    TPoint Tpr = Point(x, y);
-    TPoint Ttxt = Point(x + Width + dxT, y);
+    TPoint Tpr = TPoint(x, y);
+    TPoint Ttxt = TPoint(x + Width + dxT, y);
     // переворот
     if (Direct == 1) {
-        Ttxt = Point(x, y);
-        Tpr = Point(x + WidthT + dxT, y);
+        Ttxt = TPoint(x, y);
+        Tpr = TPoint(x + WidthT + dxT, y);
         xx = W - xx; xx1 = W - xx1;
     }
     if (W > 0) {
         // Подложка
         TPoint T[4];
-        T[0] = Point(Tpr.x, Tpr.y - H_2); T[1] = Point(T[0].x + Width, T[0].y);
-        T[2] = Point(T[1].x, T[0].y + Height); T[3] = Point(T[0].x, T[2].y);
+        T[0] = TPoint(Tpr.x, Tpr.y - H_2); T[1] = TPoint(T[0].x + Width, T[0].y);
+        T[2] = TPoint(T[1].x, T[0].y + Height); T[3] = TPoint(T[0].x, T[2].y);
         int c1[4] = {   clrbPodl, clrbPodl, clrbPodl, clrbPodl};
         PolyColor(clrbPodl, T, c1, 4);
         Draw_Ramka(T[0].x, T[0].y, T[2].x + 1, T[2].y + 1, EDGE_BUMP);
         // реальная величина
         if (xx >= 0) {
             if (Direct == 0) {
-                T[0] = Point(Tpr.x + xx, T[0].y); T[3] = Point(Tpr.x + xx, T[3].y);
+                T[0] = TPoint(Tpr.x + xx, T[0].y); T[3] = TPoint(Tpr.x + xx, T[3].y);
             } else {
-                T[1] = Point(Tpr.x + xx, T[1].y); T[2] = Point(Tpr.x + xx, T[2].y);
+                T[1] = TPoint(Tpr.x + xx, T[1].y); T[2] = TPoint(Tpr.x + xx, T[2].y);
             }
             int c1[4] = {   clrbD, clrbD, clrbD, clrbD};
             PolyColor(clrbD, T, c1, 4);
         }
         /* // прошлая
         if (xx1>=0){
-           if (Direct==0) {T[0]=Point(Tpr.x+xx1,T[0].y);T[3]=Point(Tpr.x+xx1,T[3].y);} else
-                          {T[1]=Point(Tpr.x+xx1,T[1].y);T[2]=Point(Tpr.x+xx1,T[2].y);}
+           if (Direct==0) {T[0]=TPoint(Tpr.x+xx1,T[0].y);T[3]=TPoint(Tpr.x+xx1,T[3].y);} else
+                          {T[1]=TPoint(Tpr.x+xx1,T[1].y);T[2]=TPoint(Tpr.x+xx1,T[2].y);}
            int c1[4]={   clrbD1, clrbD1, clrbD1, clrbD1};
            PolyColor(clrbD1,T,c1,4);
         }
         */
 
-        T[0] = Point(Tpr.x, Tpr.y - H_2); T[1] = Point(T[0].x + Width, T[0].y);
-        T[2] = Point(T[1].x, T[0].y + Height); T[3] = Point(T[0].x, T[2].y);
+        T[0] = TPoint(Tpr.x, Tpr.y - H_2); T[1] = TPoint(T[0].x + Width, T[0].y);
+        T[2] = TPoint(T[1].x, T[0].y + Height); T[3] = TPoint(T[0].x, T[2].y);
         Draw_Ramka(T[0].x, T[0].y, T[2].x + 1, T[2].y + 1, EDGE_BUMP);
     }
 
     TPoint TT[4];
-    TT[0] = Point(Ttxt.x, Ttxt.y - H_2T);
-    TT[1] = Point(TT[0].x + WidthT, TT[0].y);
-    TT[2] = Point(TT[1].x, TT[0].y + HeightT);
-    TT[3] = Point(TT[0].x, TT[2].y);
+    TT[0] = TPoint(Ttxt.x, Ttxt.y - H_2T);
+    TT[1] = TPoint(TT[0].x + WidthT, TT[0].y);
+    TT[2] = TPoint(TT[1].x, TT[0].y + HeightT);
+    TT[3] = TPoint(TT[0].x, TT[2].y);
 
     int clrP = clrbPodl;
     int clrB = clrbPodl;
@@ -3178,8 +3177,8 @@ void tG_KZP2::UpdateState()
 
 
 }
-const _dd = 2;// отступ от края
-const _ddNP = 8;// отступ от края для NP
+const int _dd = 2;// отступ от края
+const int _ddNP = 8;// отступ от края для NP
 
 uint16 delta_time(uint32 t2, uint32 t1)
 {
@@ -3257,7 +3256,7 @@ void tG_KZP2::Show()
     setcolor(C_D);
     int H_2 = szAll.cy / 2;
     int D, UD, V, Z, ZV, ZV1, ZZ;
-    clr_podl = clSilver;  // цвет подложки
+    clr_podl = 0xc0c0c0;  // цвет подложки
     clr_Z = COLOR_B;//210;  // цвет занятости
     clr_S = COLOR_F_P;  // цвет свободности
     clr_US = 77;  // цвет усл свободности
@@ -3513,7 +3512,7 @@ void tG_KZP2::Show()
             //if ((dV_Zad>4.5) && (dV_Zad<30))
             stV.printf("%2.1f", dV_Zad);
             int cV[4] = {   C_D, C_D, C_D, C_D};
-            PolyColor(clInfoBk, TV, cV, 4);
+            PolyColor(0x80000018, TV, cV, 4);
             setcolor(C_D);
             settextjustify(CENTER_TEXT, CENTER_TEXT);
             settextstyle(1, HORIZ_DIR, szV.cy);

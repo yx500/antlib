@@ -7,7 +7,6 @@
 
 #include <algorithm>
 #include <iterator>
-#include <mem>
 #include "Impuls.h"
 #include "Comp.h"
 //---------------------------------------------------------------------------

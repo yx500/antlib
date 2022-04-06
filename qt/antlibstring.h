@@ -43,6 +43,25 @@ public:
   AString SubString(int b,int n) const;
   AString Delete(int b, int n) const ;
 
+  void printf(const char * f,float v){
+      static char _buf[64];
+      sprintf(_buf, f, v);
+      this->clear();
+      this->append(_buf);
+  }
+  void printf(const char * f,int v){
+      static char _buf[64];
+      sprintf(_buf, f, v);
+      this->clear();
+      this->append(_buf);
+  }
+  void printf(const char * f,double v){
+      static char _buf[64];
+      sprintf(_buf, f, v);
+      this->clear();
+      this->append(_buf);
+  }
+
 
 };
 
