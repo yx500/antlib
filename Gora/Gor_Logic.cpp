@@ -9,13 +9,13 @@
 
 typedef void *(*T_GetDatagramData_Func)(int typ, const char * PacketName);
 extern T_GetDatagramData_Func GetDatagramData_Func;
-const VMetrPacketType = 4;
-const OsyPacketType = 17;
-const KzpCellsPacketType = 5;
-const DescrPacketType = 9;
-const MaxDescrPacketCount = 99;
-const MaxtVMetrCell = 480 / sizeof(t_VMetrCell);
-const MaxtOsyCell = 480 / sizeof(t_OsyCell);
+const int VMetrPacketType = 4;
+const int OsyPacketType = 17;
+const int KzpCellsPacketType = 5;
+const int DescrPacketType = 9;
+const int MaxDescrPacketCount = 99;
+const int MaxtVMetrCell = 480 / sizeof(t_VMetrCell);
+const int MaxtOsyCell = 480 / sizeof(t_OsyCell);
 
 double TPVal(uint16 w)
 {
@@ -295,7 +295,7 @@ String GetADAM_val(String packetName)
     }
     return "--";
 }
-const MaxADK3Cell=490/sizeof(tADK3Cell);
+const int MaxADK3Cell=490/sizeof(tADK3Cell);
 tADK3Cell* GetADK3Cell(int AddrLKSlot, int addr, uint32     &biostime)
                              // 1Ц 1 байт Ц собственный адрес, должен совпадать с запросом.
                              // 2Ц 2 байт Ц уровн€ давлени€ в ¬”ѕ« є1.
