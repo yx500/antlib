@@ -1,8 +1,6 @@
-//---------------------------------------------------------------------------
-
-
 #include "aheaders_cpp.h"
 
+#include <algorithm>
 #include "Marshrut.h"
 #include "uParString.h"
 #include "F.h"
