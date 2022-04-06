@@ -13,7 +13,7 @@ class VisibleArray
 
 public:
     typedef std::vector<PAComp> data_type;
-    TvObjPtr data;
+    data_type data;
 
     Station *pStation;
     int RTGorlCnt;
