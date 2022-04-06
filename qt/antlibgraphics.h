@@ -33,12 +33,7 @@
 
 
 
-
-#include <QPoint>
-#include <QRect>
-
 #include "vcllib.h"
-
 
 
 #endif // ANTLIBGRAPHICS_H
