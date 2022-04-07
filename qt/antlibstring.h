@@ -5,8 +5,9 @@
 #include <stdexcept>
 #include <string>
 
-class AString : public std::string {
- public:
+class AString : public std::string
+{
+public:
   AString() : std::string() {}
   AString(const char* s) : std::string(s) {}
   AString(const std::string& s) : std::string(s) {}
@@ -15,7 +16,8 @@ class AString : public std::string {
   int Pos(char ch) const { return this->find_first_of(ch); }
   bool IsEmpty() const { return this->empty(); }
   int Length() const { return size(); }
-  int ToInt() const {
+  int ToInt() const
+  {
     try {
       return std::stoi(*this);
     } catch (const std::invalid_argument& e) {
@@ -24,7 +26,8 @@ class AString : public std::string {
     return 0;
   }
 
-  int ToIntDef(int defaultValue) const {
+  int ToIntDef(int defaultValue) const
+  {
     try {
       return std::stoi(*this);
     } catch (...) {
@@ -37,19 +40,22 @@ class AString : public std::string {
   AString SubString(int b, int n) const;
   AString Delete(int b, int n) const;
 
-  void printf(const char* f, float v) {
+  void printf(const char* f, float v)
+  {
     static char _buf[64];
     sprintf(_buf, f, v);
     this->clear();
     this->append(_buf);
   }
-  void printf(const char* f, int v) {
+  void printf(const char* f, int v)
+  {
     static char _buf[64];
     sprintf(_buf, f, v);
     this->clear();
     this->append(_buf);
   }
-  void printf(const char* f, double v) {
+  void printf(const char* f, double v)
+  {
     static char _buf[64];
     sprintf(_buf, f, v);
     this->clear();

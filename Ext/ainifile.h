@@ -1,8 +1,8 @@
 #ifndef AIniFile_H
 #define AIniFile_H
 
-#include "astringlist.h"
 #include "astring.h"
+#include "astringlist.h"
 
 #ifdef __BORLANDC__
 
@@ -10,15 +10,13 @@
 class AIniFile : public TMemIniFile
 {
 public:
-         AIniFile(const String &FileName): TMemIniFile(FileName) {}
+  AIniFile(const String& FileName) : TMemIniFile(FileName) {}
 };
 
 #else
 
-  #include "antlibinifile.h"
-
+#include "antlibinifile.h"
 
 #endif
-
 
 #endif

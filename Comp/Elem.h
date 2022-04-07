@@ -2,108 +2,98 @@
 #define ELEM_H
 
 #include "Comp.h"
-#include "uEXD.h"
 #include "out_num.h"
+#include "uEXD.h"
 
-
-class Element: public AComp
+class Element : public AComp
 {
 public:
+  int impuls_plus;
+  int impuls_mnus;
+  int impuls_kzm;
+  int impuls_kmu;
+  int impuls_mu;
+  int fimpuls_plus;
+  int fimpuls_mnus;
+  int fimpuls_kzm;
+  int fimpuls_kmu;
+  int fimpuls_mu;
 
-    int impuls_plus;
-    int impuls_mnus;
-    int impuls_kzm;
-    int impuls_kmu;
-    int impuls_mu;
-    int fimpuls_plus;
-    int fimpuls_mnus;
-    int fimpuls_kzm;
-    int fimpuls_kmu;
-    int fimpuls_mu;
-
-
-    uint8 RezBuf[4];
-    uint8 RezBuf1[2];
+  uint8 RezBuf[4];
+  uint8 RezBuf1[2];
 
 public:
-    virtual void Set();
-    virtual void Get();
-    virtual void Go();
+  virtual void Set();
+  virtual void Get();
+  virtual void Go();
 
-    virtual void UpdateState();
+  virtual void UpdateState();
 
-    virtual void GetPropMap(TPropMap &m);
-    virtual void SetPropMap(TPropMap &m);
+  virtual void GetPropMap(TPropMap& m);
+  virtual void SetPropMap(TPropMap& m);
 
-    Element();
-    ~Element() {}
+  Element();
+  ~Element() {}
 };
 
 typedef Element* PElement;
 
-
 class Gorl_L : public Element
 {
 public:
-    TYP  GetType();//{return GORL_L;};
-    UNIT GetUnit();//{return WAYS;};
-    virtual void  Show();
+  TYP GetType();  //{return GORL_L;};
+  UNIT GetUnit(); //{return WAYS;};
+  virtual void Show();
 };
 class Gorl_R : public Element
 {
 public:
-    TYP  GetType();//{return GORL_R;};
-    UNIT GetUnit();//{return WAYS;};
-    virtual void  Show();
+  TYP GetType();  //{return GORL_R;};
+  UNIT GetUnit(); //{return WAYS;};
+  virtual void Show();
 };
-
-
 
 // ����������� ����� � �������� ����������� ��� �������� ��
 
 class Ways : public Element
 {
 public:
+  int impuls_IR;
+  int fimpuls_IR;
+  int impuls_predSEIR;
+  int fimpuls_predSEIR;
 
-    int impuls_IR;
-    int fimpuls_IR;
-    int impuls_predSEIR;
-    int fimpuls_predSEIR;
+  int impuls_svob;
+  int fimpuls_svob;
 
-    int impuls_svob;
-    int fimpuls_svob;
+  int8 MyFishk;
 
-    int8   MyFishk;
+  bool bShowUIR;
 
-    bool bShowUIR;
+  TTrainInfo TrainInfo;
+  int is, _is;         // ���������
+  uint16 IDnext[2][2]; // ������ �� ���� �������� ��� ����
 
-    TTrainInfo TrainInfo;
-    int                     is, _is;        // ���������
-    uint16 IDnext[2][2]; // ������ �� ���� �������� ��� ����
+  Ways();
 
-    Ways();
+  // virtual char * GetCompInfo();
 
-    //virtual char * GetCompInfo();
+  virtual void UpdateState();
 
-    virtual void UpdateState();
+  virtual void ShowTrainNumber();
+  virtual void HideTrainNumber();
 
-    virtual void ShowTrainNumber();
-    virtual void HideTrainNumber();
+  virtual void Set();
+  virtual void Get();
 
-    virtual void Set();
-    virtual void Get();
+  virtual void GetPropMap(TPropMap& m);
+  virtual void SetPropMap(TPropMap& m);
 
-    virtual void GetPropMap(TPropMap &m);
-    virtual void SetPropMap(TPropMap &m);
+  void SetUstIR(int AIR);
 
-    void SetUstIR(int AIR);
-
-    virtual bool isBusy();
-    virtual bool isKzm();
-    virtual bool isBusyKzmAccepted();
+  virtual bool isBusy();
+  virtual bool isKzm();
+  virtual bool isBusyKzmAccepted();
 };
-
-
-
 
 #endif

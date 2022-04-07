@@ -2,6 +2,7 @@
 #define COMMON_H
 
 #include "ACom_V.h"
+
 #include <string>
 
 class AComp;
@@ -10,10 +11,10 @@ class AComp;
 //                 œ–Œ“Œ“»œ€ ‘”Õ ÷»…
 //-------------------------------------------------------------------
 
-extern  void Color_Off(void);
-extern  void Color_On(void) ;
+extern void Color_Off(void);
+extern void Color_On(void);
 
-extern  void Qui(const char*, int, int);
+extern void Qui(const char*, int, int);
 void WriteToLog(const std::string& Str);
 void WriteToErr(const std::string& Str);
 
@@ -28,8 +29,7 @@ struct TImpPropNamesInfo {
 };
 void  _GetImpPropNamesInfo(AComp * ac , TImpPropNamesInfo &I);
 */
-const char * GetTypeName(AComp * AC);
-const char * GetTypeAndName(AComp * AC);
+const char* GetTypeName(AComp* AC);
+const char* GetTypeAndName(AComp* AC);
 
 #endif
-

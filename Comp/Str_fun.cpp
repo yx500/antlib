@@ -1,10 +1,10 @@
-#include "aheaders_cpp.h"
-
 #include "Str_fun.h"
-#include <math.h>
 
 #include "APch.h"
 #include "Strel.h"
+#include "aheaders_cpp.h"
+
+#include <math.h>
 
 #define SW 9
 #define SZ 7
@@ -23,24 +23,27 @@ int NomerHeight = 0;
 #define As1 120
 #define As2 100
 
-int S(int len);   //смещение
-int S2(int len);  //----
-int S3(int len);  // обратная корректировккка
-int S4(int len);  // отраженная ширина
+int S(int len);  //смещение
+int S2(int len); //----
+int S3(int len); // обратная корректировккка
+int S4(int len); // отраженная ширина
 int S5(int len);
 
-int S(int len) {
+int S(int len)
+{
   //     return sh_y/3;
   return S2(len) / 2;
 }
 
-int S5(int len) {
+int S5(int len)
+{
   return S2(len);
   //     return sh_y*2/3;
   //     return S2(len)/2;
 }
 
-int S4(int len) {
+int S4(int len)
+{
   return S2(len);
   // БЛИН ЧТО-Ж  Я СДЕЛАЛ-ТО
   /*
@@ -54,25 +57,28 @@ int S4(int len) {
   //    return S(len);
 }
 
-int S2(int len) {
+int S2(int len)
+{
   //     return sh_y/3;
-  unsigned long A = len - len_4 * 2;  // len -2*len_4   похоже на правду
+  unsigned long A = len - len_4 * 2; // len -2*len_4   похоже на правду
   unsigned long B = sh2 - 2 * sh_y;
   int a;
   a = sh_y * As1 * sqrt(1 + (A * A) / (B * B)) / As2;
   return a;
 }
 
-int S3(int len) {
+int S3(int len)
+{
   //  return 0;
-  unsigned long A = len - 2 * len_4;  // len -2*len_4   похоже на правду
+  unsigned long A = len - 2 * len_4; // len -2*len_4   похоже на правду
   unsigned long B = sh2 - 2 * sh_y;
   int a;
   a = (sh_y * As1 * A) / (B * As2);
   return a;
 }
 
-void L(int x, int y, int len) {
+void L(int x, int y, int len)
+{
   int sl = len;
   len += mas__;
 
@@ -87,33 +93,34 @@ void L(int x, int y, int len) {
   pr1[3] = y + sh_y;
 }
 
-void KT(int x, int y, int len, int sw, int ll2) {
+void KT(int x, int y, int len, int sw, int ll2)
+{
   //   int sl =len;
   int len2 = len + mas__;
   int x3 = x;
 
   switch (sw) {
-    case 1:
-      if (mas__ < 0) {
-        x3 = x;
-        len2 = len;
+  case 1:
+    if (mas__ < 0) {
+      x3 = x;
+      len2 = len;
 
-      } else {
-        x3 = x;
-        //           len2=len;
-      }
-      x3 -= ll2;
-      break;
-    case 0:
-      if (len2 < 0) {
-        x3 = x + len2;
-        len2 = len;
-      } else {
-        x3 = x;
-        len2 = len;
-      }
-      len2 += ll2;
-      break;
+    } else {
+      x3 = x;
+      //           len2=len;
+    }
+    x3 -= ll2;
+    break;
+  case 0:
+    if (len2 < 0) {
+      x3 = x + len2;
+      len2 = len;
+    } else {
+      x3 = x;
+      len2 = len;
+    }
+    len2 += ll2;
+    break;
   }
 
   int y1, x1;
@@ -144,31 +151,32 @@ void KT(int x, int y, int len, int sw, int ll2) {
   kr[17] = y1;
 }
 
-void KB(int x, int y, int len, int sw, int ll2) {
+void KB(int x, int y, int len, int sw, int ll2)
+{
   // int sl =len;
   int len2 = len + mas__;
   int x3 = x;
 
   switch (sw) {
-    case 1:
-      if (mas__ < 0) {
-        x3 = x;
-        len2 = len;
-      } else {
-        x3 = x;
-      }
-      x3 -= ll2;
-      break;
-    case 0:
-      if (len2 < 0) {
-        x3 = x + len2;
-        len2 = len;
-      } else {
-        x3 = x;
-        len2 = len;
-      }
-      len2 += ll2;
-      break;
+  case 1:
+    if (mas__ < 0) {
+      x3 = x;
+      len2 = len;
+    } else {
+      x3 = x;
+    }
+    x3 -= ll2;
+    break;
+  case 0:
+    if (len2 < 0) {
+      x3 = x + len2;
+      len2 = len;
+    } else {
+      x3 = x;
+      len2 = len;
+    }
+    len2 += ll2;
+    break;
   }
   int y1, x1;
   y1 = y;
@@ -199,7 +207,8 @@ void KB(int x, int y, int len, int sw, int ll2) {
   kr[17] = y1;
 }
 
-void _bar3d_(int x1, int y1, int x2, int y2, int bord, int clr) {
+void _bar3d_(int x1, int y1, int x2, int y2, int bord, int clr)
+{
   bord = bord;
   clr = clr;
   bar(x1, y1 + 1, x2, y2 - 1);
@@ -207,7 +216,8 @@ void _bar3d_(int x1, int y1, int x2, int y2, int bord, int clr) {
   line(x1, y2, x2, y2);
 }
 
-int linec(int x2, int y2, int x1, int y1, int h, int direct) {
+int linec(int x2, int y2, int x1, int y1, int h, int direct)
+{
   int xx1, yy1, xx2, yy2;
   int xxx;
   if (!direct) {
@@ -226,17 +236,19 @@ int linec(int x2, int y2, int x1, int y1, int h, int direct) {
     yy2 = yy1 + sh_y;
   }
   int absy2_y1 = abs(y2 - y1);
-  if (absy2_y1 == 0) absy2_y1 = 1;
+  if (absy2_y1 == 0)
+    absy2_y1 = 1;
   if (x2 < x1) {
-    xx2 = x1 - abs(x2 - x1) * h / absy2_y1;  // * h;
+    xx2 = x1 - abs(x2 - x1) * h / absy2_y1; // * h;
   } else {
-    xx2 = x1 + abs(x2 - x1) * h / absy2_y1;  // * h;
+    xx2 = x1 + abs(x2 - x1) * h / absy2_y1; // * h;
   }
   line(xx1, yy1, xx2, yy2);
   return 1;
 }
 
-int linec2(int x2, int y2, int x1, int y1, int h, int direct, int h1, int dx, int dy) {
+int linec2(int x2, int y2, int x1, int y1, int h, int direct, int h1, int dx, int dy)
+{
   int yy1, xx2, yy2, xx3, yy3;
   int xxx;
   if (!direct) {
@@ -257,19 +269,21 @@ int linec2(int x2, int y2, int x1, int y1, int h, int direct, int h1, int dx, in
     yy2 = yy1 + h;
     yy3 = yy1 + h1;
   }
-  if (y2 == y1) y2 = y1 + 1;  // деление на 0!
+  if (y2 == y1)
+    y2 = y1 + 1; // деление на 0!
   if (x2 < x1) {
-    xx2 = x1 - abs(x2 - x1) * h / abs(y2 - y1);   // * h;
-    xx3 = x1 - abs(x2 - x1) * h1 / abs(y2 - y1);  // * h;
+    xx2 = x1 - abs(x2 - x1) * h / abs(y2 - y1);  // * h;
+    xx3 = x1 - abs(x2 - x1) * h1 / abs(y2 - y1); // * h;
   } else {
-    xx2 = x1 + abs(x2 - x1) * h / abs(y2 - y1);   // * h;
-    xx3 = x1 + abs(x2 - x1) * h1 / abs(y2 - y1);  // * h;
+    xx2 = x1 + abs(x2 - x1) * h / abs(y2 - y1);  // * h;
+    xx3 = x1 + abs(x2 - x1) * h1 / abs(y2 - y1); // * h;
   }
   line(xx2, yy2, xx3, yy3);
   return 1;
 }
 
-void _fillpoly_(int sw_tip, int kr[], int dr, bool bShowIsNormalMnus, int clr, int clrfill) {
+void _fillpoly_(int sw_tip, int kr[], int dr, bool bShowIsNormalMnus, int clr, int clrfill)
+{
   int t1 = 0, t2;
   int c = 1;
   int s = 1;
@@ -349,7 +363,8 @@ const int sdv_nazv = 0;
 //    sdv_nazv =  -11;
 void Strel0::Strelka(int is, int sw_tip, int styll1, int styll2, int clr, int nm, int x_text,
                      int y_text, char* name, bool InvresPol, int cbord1, int cbord2,
-                     bool bShowPol) {
+                     bool bShowPol)
+{
   //   int is = _is;
   // это инверсия стрели
   bool bShowIsNormalPlus = true;
@@ -372,7 +387,8 @@ void Strel0::Strelka(int is, int sw_tip, int styll1, int styll2, int clr, int nm
 
   char nom_sw[32] = "      ";
   int cvet = LIN;
-  if (clr == FON) cvet = FON;
+  if (clr == FON)
+    cvet = FON;
   int bord_act = BLUE_m;
   itoa(nm, nom_sw, 10);
   setcolor(BLUE_m);
@@ -433,8 +449,10 @@ void Strel0::Strelka(int is, int sw_tip, int styll1, int styll2, int clr, int nm
   shi = S2(Len) + 1;
 
   if (sw_tip == SW) {
-    if (t1 == 6) sd = 0;
-    if (t1 == 2) sd = 1;
+    if (t1 == 6)
+      sd = 0;
+    if (t1 == 2)
+      sd = 1;
     if (((t1 == 2) && (kr[1] < kr[3])) || ((t1 == 6) && (kr[1] > kr[3])))
       sdy = 1;
     else
@@ -456,120 +474,122 @@ void Strel0::Strelka(int is, int sw_tip, int styll1, int styll2, int clr, int nm
   }
 
   switch (is) {
-    case 2:
-      // установка цвета заполнения для минуса
-      setfillstyle(styll2, cvet);
-      setcolor(cbord2);
-      if (sh_y <= 0)
-        drawpoly(sw_tip - 1, kr);
-      else
-        _fillpoly_(sw_tip, kr, pr1[1], bShowIsNormalMnus, cbord2, cvet);
-      setfillstyle(styll1, clr);
-      if (sh_y <= 0) {
-        line(pr1[0], pr1[1], pr1[2], pr1[3]);
-      } else {
-        // setcolor(bord_act);
-        setcolor(cbord1);
-        _bar3d_(pr1[0], pr1[1], pr1[2], pr1[3], 0, 0);
-        setcolor(C_D);
+  case 2:
+    // установка цвета заполнения для минуса
+    setfillstyle(styll2, cvet);
+    setcolor(cbord2);
+    if (sh_y <= 0)
+      drawpoly(sw_tip - 1, kr);
+    else
+      _fillpoly_(sw_tip, kr, pr1[1], bShowIsNormalMnus, cbord2, cvet);
+    setfillstyle(styll1, clr);
+    if (sh_y <= 0) {
+      line(pr1[0], pr1[1], pr1[2], pr1[3]);
+    } else {
+      // setcolor(bord_act);
+      setcolor(cbord1);
+      _bar3d_(pr1[0], pr1[1], pr1[2], pr1[3], 0, 0);
+      setcolor(C_D);
 
-        setcolor(FON);
-        line(kr[t1 * 2] - shi * (1 - sd), kr[t1 * 2 + 1] + sdy, kr[t1 * 2] + shi * sd,
-             kr[t1 * 2 + 1] + sdy);
+      setcolor(FON);
+      line(kr[t1 * 2] - shi * (1 - sd), kr[t1 * 2 + 1] + sdy, kr[t1 * 2] + shi * sd,
+           kr[t1 * 2 + 1] + sdy);
+      setcolor(bord_act);
+      line(kr[t1 * 2] - shi * (1 - sd) + 1 * sd, kr[t1 * 2 + 1] + sdy * 2,
+           kr[t1 * 2] + shi * sd - 1 * (1 - sd), kr[t1 * 2 + 1] + sdy * 2);
+    }
+    break;
+  case 1:
+
+    setfillstyle(styll1, cvet);
+    setcolor(cbord1);
+    _bar3d_(pr1[0], pr1[1], pr1[2], pr1[3], 0, 0);
+    setfillstyle(styll2, clr);
+    // setcolor(bord_act);
+    setcolor(cbord2);
+    _fillpoly_(sw_tip, kr, pr1[1], bShowIsNormalMnus, cbord2, clr);
+
+    break;
+  case 3:
+
+    //  здесь идет дублирование того что
+    // сделано по росечке
+    // вообще-то надо переделать рисование стрелки вообще
+    setfillstyle(styll1, clr);
+    setcolor(cbord1);
+    if (sh_y <= 0) {
+      drawpoly(sw_tip - 1, kr);
+      line(pr1[0], pr1[1], pr1[2], pr1[3]);
+    } else {
+      // setcolor(bord_act);
+      setcolor(cbord1);
+      //           setcolor(COLOR_B); // ПКС  БЛИН БЛИН БЛИН
+
+      setfillstyle(styll1, clr);
+      _bar3d_(pr1[0], pr1[1], pr1[2], pr1[3], 0, 0);
+      setfillstyle(styll2, clr);
+      _fillpoly_(sw_tip, kr, pr1[1], bShowIsNormalMnus, cbord1, clr);
+      setfillstyle(styll1, clr);
+      bar(pr1[0] + 1, pr1[1] + 1, pr1[2] - 1, pr1[3] - 1);
+      setcolor(FON);
+      setfillstyle(1, FON);
+
+      int t1;
+      if (!((kr[1] != pr1[1]) && (kr[1] != (pr1[1] + sh_y)))) {
+        t1 = 2;
+      } else {
+        if (sw_tip == SW)
+          t1 = 6;
+        else
+          t1 = 5;
+      }
+      int shi;
+      shi = S2(Len) + 1;
+      setcolor(FON);
+      if (sw_tip == SW) {
+        if (t1 == 6)
+          sd = 0;
+        if (t1 == 2)
+          sd = 1;
+        if (((t1 == 2) && (kr[1] < kr[3])) || ((t1 == 6) && (kr[1] > kr[3])))
+          sdy = 1;
+        else
+          sdy = -1;
+      } else {
+        if (sw_tip == SZ) {
+          if (kr[1] < kr[7]) {
+            t1 += 3;
+            sdy = 1;
+          } else {
+            sdy = -1;
+          }
+          if (kr[0] < kr[6]) {
+            sd = 1;
+          } else {
+            sd = 0;
+          }
+        }
+      }
+      if (Tip_Opis_PKS == 1) {
+        bar(kr[t1 * 2] - shi * (1 - sd), pr1[1] - 1, kr[t1 * 2] + shi * sd, pr1[3] + 1);
         setcolor(bord_act);
         line(kr[t1 * 2] - shi * (1 - sd) + 1 * sd, kr[t1 * 2 + 1] + sdy * 2,
              kr[t1 * 2] + shi * sd - 1 * (1 - sd), kr[t1 * 2 + 1] + sdy * 2);
+        line(kr[t1 * 2] - shi * (1 - sd), pr1[1], kr[t1 * 2] - shi * (1 - sd), pr1[3]);
+        line(kr[t1 * 2] + shi * sd, pr1[1], kr[t1 * 2] + shi * sd, pr1[3]);
       }
-      break;
-    case 1:
+    }
 
-      setfillstyle(styll1, cvet);
-      setcolor(cbord1);
-      _bar3d_(pr1[0], pr1[1], pr1[2], pr1[3], 0, 0);
-      setfillstyle(styll2, clr);
-      // setcolor(bord_act);
-      setcolor(cbord2);
-      _fillpoly_(sw_tip, kr, pr1[1], bShowIsNormalMnus, cbord2, clr);
+    break;
+  case 0:
+    //    default:
 
-      break;
-    case 3:
+    setcolor(COLOR_B);
+    setfillstyle(1, cvet);
+    _bar3d_(pr1[0], pr1[1], pr1[2], pr1[3], 0, 0);
+    _fillpoly_(sw_tip, kr, pr1[1], bShowIsNormalMnus, COLOR_B, cvet);
 
-      //  здесь идет дублирование того что
-      // сделано по росечке
-      // вообще-то надо переделать рисование стрелки вообще
-      setfillstyle(styll1, clr);
-      setcolor(cbord1);
-      if (sh_y <= 0) {
-        drawpoly(sw_tip - 1, kr);
-        line(pr1[0], pr1[1], pr1[2], pr1[3]);
-      } else {
-        // setcolor(bord_act);
-        setcolor(cbord1);
-        //           setcolor(COLOR_B); // ПКС  БЛИН БЛИН БЛИН
-
-        setfillstyle(styll1, clr);
-        _bar3d_(pr1[0], pr1[1], pr1[2], pr1[3], 0, 0);
-        setfillstyle(styll2, clr);
-        _fillpoly_(sw_tip, kr, pr1[1], bShowIsNormalMnus, cbord1, clr);
-        setfillstyle(styll1, clr);
-        bar(pr1[0] + 1, pr1[1] + 1, pr1[2] - 1, pr1[3] - 1);
-        setcolor(FON);
-        setfillstyle(1, FON);
-
-        int t1;
-        if (!((kr[1] != pr1[1]) && (kr[1] != (pr1[1] + sh_y)))) {
-          t1 = 2;
-        } else {
-          if (sw_tip == SW)
-            t1 = 6;
-          else
-            t1 = 5;
-        }
-        int shi;
-        shi = S2(Len) + 1;
-        setcolor(FON);
-        if (sw_tip == SW) {
-          if (t1 == 6) sd = 0;
-          if (t1 == 2) sd = 1;
-          if (((t1 == 2) && (kr[1] < kr[3])) || ((t1 == 6) && (kr[1] > kr[3])))
-            sdy = 1;
-          else
-            sdy = -1;
-        } else {
-          if (sw_tip == SZ) {
-            if (kr[1] < kr[7]) {
-              t1 += 3;
-              sdy = 1;
-            } else {
-              sdy = -1;
-            }
-            if (kr[0] < kr[6]) {
-              sd = 1;
-            } else {
-              sd = 0;
-            }
-          }
-        }
-        if (Tip_Opis_PKS == 1) {
-          bar(kr[t1 * 2] - shi * (1 - sd), pr1[1] - 1, kr[t1 * 2] + shi * sd, pr1[3] + 1);
-          setcolor(bord_act);
-          line(kr[t1 * 2] - shi * (1 - sd) + 1 * sd, kr[t1 * 2 + 1] + sdy * 2,
-               kr[t1 * 2] + shi * sd - 1 * (1 - sd), kr[t1 * 2 + 1] + sdy * 2);
-          line(kr[t1 * 2] - shi * (1 - sd), pr1[1], kr[t1 * 2] - shi * (1 - sd), pr1[3]);
-          line(kr[t1 * 2] + shi * sd, pr1[1], kr[t1 * 2] + shi * sd, pr1[3]);
-        }
-      }
-
-      break;
-    case 0:
-      //    default:
-
-      setcolor(COLOR_B);
-      setfillstyle(1, cvet);
-      _bar3d_(pr1[0], pr1[1], pr1[2], pr1[3], 0, 0);
-      _fillpoly_(sw_tip, kr, pr1[1], bShowIsNormalMnus, COLOR_B, cvet);
-
-      break;
+    break;
   }
   /// -------------------------  ОТОБРАЖАЕМ минус СТРЕЛКИ---------------------
   setcolor(C_D);
@@ -617,7 +637,8 @@ void Strel0::Strelka(int is, int sw_tip, int styll1, int styll2, int clr, int nm
   /// -------------------------  ОТОБРАЖАЕМ ПЛЮС СТРЕЛКИ-  end-----------------
 }
 
-void KY(int y1, int y, int x) {
+void KY(int y1, int y, int x)
+{
   y1 = y1 - sh_y / 2;
   y = y - sh_y / 2;
   kr[0] = x;
@@ -656,7 +677,8 @@ void krt(int x, int y, int len, int) /*-------*/
   }
 }
 
-void krb(int x, int y, int len, int) {
+void krb(int x, int y, int len, int)
+{
   int y1, x1;
   y1 = y + sh_y;
   y = y + sh2 - sh_y;
@@ -693,7 +715,8 @@ void klt(int x, int y, int len, int) /*----------*/
     kr[2] += (mas__ + len);
   }
 }
-void klb(int x, int y, int len, int) {
+void klb(int x, int y, int len, int)
+{
   int y1;
   y1 = y + sh_y;
   y = y + sh2 - sh_y;
@@ -717,10 +740,11 @@ void klb(int x, int y, int len, int) {
 
 int napr[22];
 
-void Str(int X, int Y, int c, int uc, int a1, int a2, int clr, int LUDOCHKA) {
-  int DD;  // ПОЛУДЛИННА
-  int S;   // ПОЛУТОЛЩИНА
-  int Z;   // ВЫСОТА ЗУБЦА
+void Str(int X, int Y, int c, int uc, int a1, int a2, int clr, int LUDOCHKA)
+{
+  int DD; // ПОЛУДЛИННА
+  int S;  // ПОЛУТОЛЩИНА
+  int Z;  // ВЫСОТА ЗУБЦА
   /*
   S= sh_y/2+1+1;
   Z= sh_y/2+1+1;
@@ -737,22 +761,22 @@ void Str(int X, int Y, int c, int uc, int a1, int a2, int clr, int LUDOCHKA) {
     Z = sh_y / 2 + 1;
   }
   DD = S * 3;
-  int napr1[22] = {X - DD,      Y - S,     X + DD, Y - S,     X + DD,      Y - S - Z,
-                   X + DD + DD, Y,         X + DD, Y + S + Z, X + DD,      Y + S,
-                   X - DD,      Y + S,     X - DD, Y + S + Z, X - DD - DD, Y,
-                   X - DD,      Y - S - Z, X - DD, Y - S};
-  int napr2[16] = {X - DD, Y - S,     X + DD, Y - S, X + DD, Y - S - Z, X + DD + DD, Y,
-                   X + DD, Y + S + Z, X + DD, Y + S, X - DD, Y + S,     X - DD,      Y - S};
-  int napr3[16] = {X + DD, Y - S,     X - DD, Y - S, X - DD, Y - S - Z, X - DD - DD, Y,
-                   X - DD, Y + S + Z, X - DD, Y + S, X + DD, Y + S,     X + DD,      Y - S};
+  int napr1[22] = {X - DD, Y - S, X + DD, Y - S, X + DD, Y - S - Z,
+                   X + DD + DD, Y, X + DD, Y + S + Z, X + DD, Y + S,
+                   X - DD, Y + S, X - DD, Y + S + Z, X - DD - DD, Y,
+                   X - DD, Y - S - Z, X - DD, Y - S};
+  int napr2[16] = {X - DD, Y - S, X + DD, Y - S, X + DD, Y - S - Z, X + DD + DD, Y,
+                   X + DD, Y + S + Z, X + DD, Y + S, X - DD, Y + S, X - DD, Y - S};
+  int napr3[16] = {X + DD, Y - S, X - DD, Y - S, X - DD, Y - S - Z, X - DD - DD, Y,
+                   X - DD, Y + S + Z, X - DD, Y + S, X + DD, Y + S, X + DD, Y - S};
   /*int A1[10]={          X-1 ,             Y-S+1,
                         X-DD+1,           Y-S+1,
                         X-DD+1,           Y+S-1,
                         X-1 ,             Y+S-1,
                         X-1,              Y+S-1
   };*/
-  int A1[10] = {X + DD - 1, Y - S + 1,  X - DD + 1, Y - S + 1,  X - DD + 1,
-                Y + S - 1,  X + DD - 1, Y + S - 1,  X + DD - 1, Y + S - 1};
+  int A1[10] = {X + DD - 1, Y - S + 1, X - DD + 1, Y - S + 1, X - DD + 1,
+                Y + S - 1, X + DD - 1, Y + S - 1, X + DD - 1, Y + S - 1};
   /*int A2[10]={          X   ,             Y-S+1  ,
                         X+DD-1  ,           Y-S+1  ,
                         X+DD-1  ,           Y+S-1  ,
@@ -773,15 +797,15 @@ void Str(int X, int Y, int c, int uc, int a1, int a2, int clr, int LUDOCHKA) {
 
   // собственнно стрелка
   switch (c) {
-    case 1:
-      fillpoly(11, napr1);
-      break;
-    case 2:
-      fillpoly(8, napr2);
-      break;
-    case 3:
-      fillpoly(8, napr3);
-      break;
+  case 1:
+    fillpoly(11, napr1);
+    break;
+  case 2:
+    fillpoly(8, napr2);
+    break;
+  case 3:
+    fillpoly(8, napr3);
+    break;
   }
 
   if ((a2 == 1) && (a1 == 0)) {
@@ -802,15 +826,15 @@ void Str(int X, int Y, int c, int uc, int a1, int a2, int clr, int LUDOCHKA) {
   if (uc != 0) {
     setcolor(GELT);
     switch (uc) {
-      case 3:
-        drawpoly(11, napr1);
-        break;
-      case 2:
-        drawpoly(7, napr2);
-        break;
-      case 1:
-        drawpoly(7, napr3);
-        break;
+    case 3:
+      drawpoly(11, napr1);
+      break;
+    case 2:
+      drawpoly(7, napr2);
+      break;
+    case 1:
+      drawpoly(7, napr3);
+      break;
     }
     setcolor(C_D);
   }

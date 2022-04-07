@@ -1,11 +1,12 @@
 #pragma once
 
-#include <QSettings>
-
 #include "antlibstringlist.h"
 #include "astring.h"
-class AIniFile : public QSettings {
- public:
+
+#include <QSettings>
+class AIniFile : public QSettings
+{
+public:
   String FileName;
 
   AIniFile(const String& FileName);

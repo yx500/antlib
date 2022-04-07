@@ -16,10 +16,10 @@ extern int NomerHeight;
 // extern uint8 *ras;
 // extern uint8 * ras_6[];
 
-int S(int len);   //смещение
-int S2(int len);  //----
-int S3(int len);  // обр тн я корректировккк
-int S4(int len);  // отр женн я ширин
+int S(int len);  //смещение
+int S2(int len); //----
+int S3(int len); // обр тн я корректировккк
+int S4(int len); // отр женн я ширин
 int S5(int len);
 
 void L(int x, int y, int len);

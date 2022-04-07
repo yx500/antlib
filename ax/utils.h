@@ -31,6 +31,6 @@ inline std::string trim(const std::string& s) { return left_trim(right_trim(s));
 std::string& strings_merge(const stringvector& words, const std::string& separator, std::string& text);
 int to_int(const std::string& s);
 
-}  // namespace alib
+} // namespace alib
 
 #endif

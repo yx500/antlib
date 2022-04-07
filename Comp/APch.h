@@ -1,21 +1,16 @@
 #ifndef APchH
 #define APchH
-//---------------------------------------------------------------------------
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "SIZE.h"
+#include "bgi.h"
+#include "col.h"
+#include "common.h"
 
-#include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string>
 
-
-#include "common.h"
-#include "bgi.h"
-#include "SIZE.h"
-#include "col.h"
-
-
-//---------------------------------------------------------------------------
 #endif

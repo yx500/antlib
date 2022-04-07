@@ -1,17 +1,17 @@
-//---------------------------------------------------------------------------
 
-#include "aheaders_cpp.h"
 
-#include "common.h"
 #include "Comp.h"
-#include "Vatempl.h"
-#include "Stan.h"
-#include "Polig.h"
-#include "bgi.h"
+
 #include "Impuls.h"
+#include "Polig.h"
+#include "Stan.h"
+#include "Vatempl.h"
+#include "aheaders_cpp.h"
+#include "bgi.h"
+#include "col.h"
+#include "common.h"
 #include "out_num.h"
 #include "uParString.h"
-#include "col.h"
 
 T_f_Func _f_ = NULL;
 T_f2_Func _f2_ = NULL;
@@ -22,24 +22,24 @@ bool ALIB_ShowMarkers = false;
 
 void Set_f_Func(T_f_Func A_f_)
 {
-    _f_ = A_f_;
+  _f_ = A_f_;
 }
 void Set_f2_Func(T_f2_Func A_f2_)
 {
-    _f2_ = A_f2_;
+  _f2_ = A_f2_;
 }
 void Set_T_GetSigName_Func(T_GetSigName_Func AGetSigName_Func)
 {
-    _GetSigName_Func = AGetSigName_Func;
+  _GetSigName_Func = AGetSigName_Func;
 };
 void Set_GetDatagramData_Func(T_GetDatagramData_Func AGetDatagramData_Func)
 {
-    GetDatagramData_Func = AGetDatagramData_Func;
+  GetDatagramData_Func = AGetDatagramData_Func;
 };
 
 void Set_GetDatagramPacket2_Func(T_GetDatagramPacket2_Func AGetDatagramPacket2_Func)
 {
-    GetDatagramPacket2_Func = AGetDatagramPacket2_Func;
+  GetDatagramPacket2_Func = AGetDatagramPacket2_Func;
 };
 /*
 void AComp::Hide(void)
@@ -58,289 +58,261 @@ void AComp::Move(int DeltaX, int DeltaY)
 */
 void AComp::Clear()
 {
-    StateChanged = true;
+  StateChanged = true;
 }
 
 AComp::AComp()
 {
-    AO = NULL;
-    ID = 0;
-    X = 0;
-    Y = 0;
-    mas = 0;
-    masy = 0;
-    masx2 = 0;
-    pr = 0;
-    impuls_busi = 0;
-    fimpuls_busi = 0;
-    Data = NULL;
-    Tag = 0;
-    memset(&ExtPriz, 0, sizeof(ExtPriz));
+  AO = NULL;
+  ID = 0;
+  X = 0;
+  Y = 0;
+  mas = 0;
+  masy = 0;
+  masx2 = 0;
+  pr = 0;
+  impuls_busi = 0;
+  fimpuls_busi = 0;
+  Data = NULL;
+  Tag = 0;
+  memset(&ExtPriz, 0, sizeof(ExtPriz));
 
-    iMacro = 0;
+  iMacro = 0;
 
-    ExtFocus = 0;
-    memset(pNext, 0, sizeof(pNext));
-    pmRepl = NULL;
-    memset(name, 0, sizeof(name));
-    memset(Pad, 0, sizeof(Pad));
+  ExtFocus = 0;
+  memset(pNext, 0, sizeof(pNext));
+  pmRepl = NULL;
+  memset(name, 0, sizeof(name));
+  memset(Pad, 0, sizeof(Pad));
 
-    clr = 0;
-    _clr = 0;
-    pVisibleArray = NULL;
-    Tagstr.clear();
-    StateChanged = false;
-    ExtFocus = 0;
+  clr = 0;
+  _clr = 0;
+  pVisibleArray = NULL;
+  Tagstr.clear();
+  StateChanged = false;
+  ExtFocus = 0;
 }
 
 unsigned int AComp::GetID()
 {
-    return ID;
+  return ID;
 }
 void AComp::SetID(unsigned int AID)
 {
-    ID = AID;
+  ID = AID;
 }
 
 AComp::~AComp()
 {
-    if (pmRepl != NULL)
-        delete pmRepl;
+  if (pmRepl != NULL)
+    delete pmRepl;
 }
 
-const char *AComp::GetIDObj()
+const char* AComp::GetIDObj()
 {
-    Station *s = AComp::Stan();
-    if (this->GetID() != 0 && s != 0 && s->FileName())
-    {
-        static char tmp[256];
-        String S(s->FileName());
-        S = S.Trim().UpperCase();
-        sprintf(tmp, "%s:%d", S.c_str(), this->GetID());
-        return tmp;
-    }
-    return 0;
+  Station* s = AComp::Stan();
+  if (this->GetID() != 0 && s != 0 && s->FileName()) {
+    static char tmp[256];
+    String S(s->FileName());
+    S = S.Trim().UpperCase();
+    sprintf(tmp, "%s:%d", S.c_str(), this->GetID());
+    return tmp;
+  }
+  return 0;
 }
 
-Station *AComp::Stan()
+Station* AComp::Stan()
 {
-    if (pVisibleArray == NULL)
-        return NULL;
-    return pVisibleArray->pStation;
+  if (pVisibleArray == NULL)
+    return NULL;
+  return pVisibleArray->pStation;
 }
 
-Poligon *AComp::Polig()
+Poligon* AComp::Polig()
 {
-    if (Stan() == NULL)
-        return NULL;
-    return Stan()->pPoligon;
+  if (Stan() == NULL)
+    return NULL;
+  return Stan()->pPoligon;
 }
 
 int AComp::f(int impls)
 {
-    if (impls == 0)
-        return 0;
-    if (impls == -1)
-        return 1;
-    if (impls == -2)
-        return 0;
-    if ((_f_ == NULL) && (_f2_ == NULL))
-    {
-        // return 33;
-        throw "_f_ not defined!";
-    }
+  if (impls == 0)
+    return 0;
+  if (impls == -1)
+    return 1;
+  if (impls == -2)
+    return 0;
+  if ((_f_ == NULL) && (_f2_ == NULL)) {
+    // return 33;
+    throw "_f_ not defined!";
+  }
 
-    unsigned imp;
-    int r = 33;
-    if ((impls <= -1000))
-    {
-        imp = abs(impls);
-    }
-    else
-    {
-        imp = impls;
-    }
-    if (imp < 1000)
-        return 0;
-    if (imp / 1000 >= 255)
-        return 33;
+  unsigned imp;
+  int r = 33;
+  if ((impls <= -1000)) {
+    imp = abs(impls);
+  } else {
+    imp = impls;
+  }
+  if (imp < 1000)
+    return 0;
+  if (imp / 1000 >= 255)
+    return 33;
 
-    if (_f2_)
-    { // функция по названию канала и номеру импульса
-        Station *STAN = Stan();
-        r = _f2_(imp, STAN->ChanelNames[imp / 1000]);
+  if (_f2_) { // функция по названию канала и номеру импульса
+    Station* STAN = Stan();
+    r = _f2_(imp, STAN->ChanelNames[imp / 1000]);
+  } else { // старый вариант
+    Station* STAN = Stan();
+    if ((STAN != NULL)) {
+      if (STAN->ChanelOffset[imp / 1000] > 0)
+        r = _f_(STAN->ChanelOffset[imp / 1000] + imp % 1000, this);
+      else
+        r = 33;
     }
-    else
-    { // старый вариант
-        Station *STAN = Stan();
-        if ((STAN != NULL))
-        {
-            if (STAN->ChanelOffset[imp / 1000] > 0)
-                r = _f_(STAN->ChanelOffset[imp / 1000] + imp % 1000, this);
-            else
-                r = 33;
-        }
-    }
+  }
 
-    if ((impls <= -1000))
-    {
-        if (r == 0)
-            r = 1;
-        else if (r == 1)
-            r = 0;
-    }
-    return r;
+  if ((impls <= -1000)) {
+    if (r == 0)
+      r = 1;
+    else if (r == 1)
+      r = 0;
+  }
+  return r;
 }
 
 int AComp::GetRealImp(int impls)
 {
-    signed int imp;
-    if ((impls < 0))
-    {
-        imp = abs(impls);
+  signed int imp;
+  if ((impls < 0)) {
+    imp = abs(impls);
+  } else {
+    imp = impls;
+  }
+  if (imp < 1000)
+    return impls;
+  if (imp / 1000 >= 255)
+    return impls;
+  int ii = imp;
+  Station* STAN = Stan();
+  if ((STAN != NULL)) {
+    if (STAN->ChanelOffset[imp / 1000] > 0) {
+      ii = STAN->ChanelOffset[imp / 1000] + imp % 1000;
     }
-    else
-    {
-        imp = impls;
-    }
-    if (imp < 1000)
-        return impls;
-    if (imp / 1000 >= 255)
-        return impls;
-    int ii = imp;
-    Station *STAN = Stan();
-    if ((STAN != NULL))
-    {
-        if (STAN->ChanelOffset[imp / 1000] > 0)
-        {
-            ii = STAN->ChanelOffset[imp / 1000] + imp % 1000;
-        }
-    }
-    if ((impls < 0))
-    {
-        ii = -ii;
-    }
-    return ii;
+  }
+  if ((impls < 0)) {
+    ii = -ii;
+  }
+  return ii;
 }
 
-bool AComp::SetNativeImp(int RealImpls, short int &NativeImp)
+bool AComp::SetNativeImp(int RealImpls, short int& NativeImp)
 {
-    if (abs(RealImpls) < 1000)
-    {
-        NativeImp = RealImpls;
-        return true;
-    }
-    unsigned int imp;
-    signed int NatImp = -1;
-    if ((RealImpls < 0))
-    {
-        imp = abs(RealImpls);
-    }
-    else
-    {
-        imp = RealImpls;
-    }
-
-    Station *STAN = Stan();
-    {
-        int chnoff = imp / 1000 * 1000;
-        for (int i = 1; i < 255; i++)
-        {
-            if (chnoff == STAN->ChanelOffset[i])
-            {
-                NatImp = i * 1000 + imp % 1000 /*-STAN->ALL_CHANELS_OFFSET*/;
-                break;
-            }
-        }
-    }
-    if (NatImp < 0)
-        return false;
-
-    if ((RealImpls < 0))
-        NatImp = -NatImp;
-
-    NativeImp = NatImp;
+  if (abs(RealImpls) < 1000) {
+    NativeImp = RealImpls;
     return true;
+  }
+  unsigned int imp;
+  signed int NatImp = -1;
+  if ((RealImpls < 0)) {
+    imp = abs(RealImpls);
+  } else {
+    imp = RealImpls;
+  }
+
+  Station* STAN = Stan();
+  {
+    int chnoff = imp / 1000 * 1000;
+    for (int i = 1; i < 255; i++) {
+      if (chnoff == STAN->ChanelOffset[i]) {
+        NatImp = i * 1000 + imp % 1000 /*-STAN->ALL_CHANELS_OFFSET*/;
+        break;
+      }
+    }
+  }
+  if (NatImp < 0)
+    return false;
+
+  if ((RealImpls < 0))
+    NatImp = -NatImp;
+
+  NativeImp = NatImp;
+  return true;
 }
 int AComp::GetNativeImp(int RealImpls)
 {
 
-    if (abs(RealImpls) < 1000)
-    {
-        return RealImpls;
-    }
-
-    unsigned int imp;
-
-    if ((RealImpls < 0))
-    {
-        imp = abs(RealImpls);
-    }
-    else
-    {
-        imp = RealImpls;
-    }
-    signed int NatImp = imp;
-
-    Station *STAN = Stan();
-    int chnoff = imp / 1000 * 1000;
-    for (int i = 1; i < 255; i++)
-    {
-        if (chnoff == STAN->ChanelOffset[i])
-        {
-            NatImp = i * 1000 + RealImpls % 1000;
-            break;
-        }
-    }
-    if ((RealImpls < 0))
-        NatImp = -NatImp;
-
+  if (abs(RealImpls) < 1000) {
     return RealImpls;
+  }
+
+  unsigned int imp;
+
+  if ((RealImpls < 0)) {
+    imp = abs(RealImpls);
+  } else {
+    imp = RealImpls;
+  }
+  signed int NatImp = imp;
+
+  Station* STAN = Stan();
+  int chnoff = imp / 1000 * 1000;
+  for (int i = 1; i < 255; i++) {
+    if (chnoff == STAN->ChanelOffset[i]) {
+      NatImp = i * 1000 + RealImpls % 1000;
+      break;
+    }
+  }
+  if ((RealImpls < 0))
+    NatImp = -NatImp;
+
+  return RealImpls;
 }
 
 int AComp::TstXY(int, int)
 {
-    return 0;
+  return 0;
 }
 
 void AComp::Go()
 {
-    UpdateState();
-    Show();
+  UpdateState();
+  Show();
 }
 
 void AComp::UpdateRCT()
 {
-    ClearBgiCoverRect();
-    Show();
-    RCT = GetBgiCoverRect();
+  ClearBgiCoverRect();
+  Show();
+  RCT = GetBgiCoverRect();
 }
 
 void AComp::Set()
 {
-    X = MEM.X_;
-    Y = MEM.Y_;
-    mas = MEM.mas;
-    masy = MEM.masy;
-    masx2 = MEM.masx2;
-    impuls_busi = MEM.impuls_busi;
-    // if (GetType()!=LAMP)
-    ExtPriz = MEM.ExtPriz;
-    iMacro = MEM.iMacro;
+  X = MEM.X_;
+  Y = MEM.Y_;
+  mas = MEM.mas;
+  masy = MEM.masy;
+  masx2 = MEM.masx2;
+  impuls_busi = MEM.impuls_busi;
+  // if (GetType()!=LAMP)
+  ExtPriz = MEM.ExtPriz;
+  iMacro = MEM.iMacro;
 }
 void AComp::Get()
 {
-    MEM.type = GetType();
-    MEM.X_ = X;
-    MEM.Y_ = Y;
-    MEM.mas = mas;
-    MEM.impuls_busi = impuls_busi;
+  MEM.type = GetType();
+  MEM.X_ = X;
+  MEM.Y_ = Y;
+  MEM.mas = mas;
+  MEM.impuls_busi = impuls_busi;
 
-    MEM.masy = masy;
-    MEM.masx2 = masx2;
-    // if (GetType()!=LAMP)
-    MEM.ExtPriz = ExtPriz;
-    MEM.iMacro = iMacro;
+  MEM.masy = masy;
+  MEM.masx2 = masx2;
+  // if (GetType()!=LAMP)
+  MEM.ExtPriz = ExtPriz;
+  MEM.iMacro = iMacro;
 }
 
 static char _ACompPropName[25][20] = {
@@ -371,109 +343,101 @@ static char _ACompPropName[25][20] = {
     "смPad3param"      // 24
 
 };
-void AComp::GetPropMap(TPropMap &m)
+void AComp::GetPropMap(TPropMap& m)
 {
 
-    m.put(_ACompPropName[0], GetID());
-    m.put(_ACompPropName[1], GetType());
-    m.put(_ACompPropName[2], X);
-    m.put(_ACompPropName[3], Y);
-    m.put(_ACompPropName[4], mas, 0);
-    m.put(_ACompPropName[5], masy, 0);
-    m.put(_ACompPropName[6], masx2, 0);
-    m.putEx(_ACompPropName[7], OldImpToNewStr(impuls_busi, this), GetRealImp(impuls_busi), OldImpToNewStr(0, this));
-    m.put(_ACompPropName[8], ExtPriz.NoShowYch, 0);
-    m.put(_ACompPropName[9], ExtPriz.NoShowStan, 0);
-    m.put(_ACompPropName[10], ExtPriz.MEM2, 0);
-    m.put(_ACompPropName[11], ExtPriz.UseInRevizor, 0);
-    m.put(_ACompPropName[12], ExtPriz.UseInCommLmp, 0);
-    m.put(_ACompPropName[13], iMacro, 0);
-    m.put(_ACompPropName[14], ExtPriz.NoShowYchAct, 0);
-    m.put(_ACompPropName[15], ExtPriz.NoShowExtInfo, 0);
-    for (int i = 0; i < 3; i++)
-    {
-        int xy = 0;
-        for (int j = 0; j < 8; j++)
-            xy += abs(Pad[i].xy[j]);
-        String stxy = "";
-        if (xy > 0)
-        {
-            stxy = IntToStr(Pad[i].xy[0]);
-            for (int j = 1; j < 8; j++)
-                stxy = stxy + ";" + IntToStr(Pad[i].xy[j]);
-        }
-        m.put("смPad" + IntToStr(i + 1) + "xy", stxy, "");
-        m.put("смPad" + IntToStr(i + 1) + "cmd", Pad[i].cmd, "");
-        m.put("смPad" + IntToStr(i + 1) + "param", Pad[i].param, "");
+  m.put(_ACompPropName[0], GetID());
+  m.put(_ACompPropName[1], GetType());
+  m.put(_ACompPropName[2], X);
+  m.put(_ACompPropName[3], Y);
+  m.put(_ACompPropName[4], mas, 0);
+  m.put(_ACompPropName[5], masy, 0);
+  m.put(_ACompPropName[6], masx2, 0);
+  m.putEx(_ACompPropName[7], OldImpToNewStr(impuls_busi, this), GetRealImp(impuls_busi), OldImpToNewStr(0, this));
+  m.put(_ACompPropName[8], ExtPriz.NoShowYch, 0);
+  m.put(_ACompPropName[9], ExtPriz.NoShowStan, 0);
+  m.put(_ACompPropName[10], ExtPriz.MEM2, 0);
+  m.put(_ACompPropName[11], ExtPriz.UseInRevizor, 0);
+  m.put(_ACompPropName[12], ExtPriz.UseInCommLmp, 0);
+  m.put(_ACompPropName[13], iMacro, 0);
+  m.put(_ACompPropName[14], ExtPriz.NoShowYchAct, 0);
+  m.put(_ACompPropName[15], ExtPriz.NoShowExtInfo, 0);
+  for (int i = 0; i < 3; i++) {
+    int xy = 0;
+    for (int j = 0; j < 8; j++)
+      xy += abs(Pad[i].xy[j]);
+    String stxy = "";
+    if (xy > 0) {
+      stxy = IntToStr(Pad[i].xy[0]);
+      for (int j = 1; j < 8; j++)
+        stxy = stxy + ";" + IntToStr(Pad[i].xy[j]);
     }
+    m.put("смPad" + IntToStr(i + 1) + "xy", stxy, "");
+    m.put("смPad" + IntToStr(i + 1) + "cmd", Pad[i].cmd, "");
+    m.put("смPad" + IntToStr(i + 1) + "param", Pad[i].param, "");
+  }
 
-    if (pmRepl != NULL)
-    {
-        for (int i = 0; i < pmRepl->GetItemsCount(); i++)
-        {
-            m.put(pmRepl->GetKeys(i), pmRepl->GetVal(i));
-        }
+  if (pmRepl != NULL) {
+    for (int i = 0; i < pmRepl->GetItemsCount(); i++) {
+      m.put(pmRepl->GetKeys(i), pmRepl->GetVal(i));
     }
+  }
 }
-void AComp::SetPropMap(TPropMap &m)
+void AComp::SetPropMap(TPropMap& m)
 {
 
-    SetID(m.geti(_ACompPropName[0]));
+  SetID(m.geti(_ACompPropName[0]));
 
-    X = m.geti(_ACompPropName[2]);
-    Y = m.geti(_ACompPropName[3]);
-    mas = m.geti(_ACompPropName[4]);
-    masy = m.geti(_ACompPropName[5]);
-    masx2 = m.geti(_ACompPropName[6]);
+  X = m.geti(_ACompPropName[2]);
+  Y = m.geti(_ACompPropName[3]);
+  mas = m.geti(_ACompPropName[4]);
+  masy = m.geti(_ACompPropName[5]);
+  masx2 = m.geti(_ACompPropName[6]);
 
-    impuls_busi = NewStrToOldImp(m.get(_ACompPropName[7]).c_str());
-    ExtPriz.NoShowYch = m.geti(_ACompPropName[8]);
-    ExtPriz.NoShowStan = m.geti(_ACompPropName[9]);
-    ExtPriz.MEM2 = m.geti(_ACompPropName[10]);
-    ExtPriz.UseInRevizor = m.geti(_ACompPropName[11]);
-    ExtPriz.UseInCommLmp = m.geti(_ACompPropName[12]);
-    iMacro = m.geti(_ACompPropName[13]);
-    ExtPriz.NoShowYchAct = m.geti(_ACompPropName[14]);
-    ExtPriz.NoShowExtInfo = m.geti(_ACompPropName[15]);
+  impuls_busi = NewStrToOldImp(m.get(_ACompPropName[7]).c_str());
+  ExtPriz.NoShowYch = m.geti(_ACompPropName[8]);
+  ExtPriz.NoShowStan = m.geti(_ACompPropName[9]);
+  ExtPriz.MEM2 = m.geti(_ACompPropName[10]);
+  ExtPriz.UseInRevizor = m.geti(_ACompPropName[11]);
+  ExtPriz.UseInCommLmp = m.geti(_ACompPropName[12]);
+  iMacro = m.geti(_ACompPropName[13]);
+  ExtPriz.NoShowYchAct = m.geti(_ACompPropName[14]);
+  ExtPriz.NoShowExtInfo = m.geti(_ACompPropName[15]);
 
-    for (int i = 0; i < 3; i++)
-    {
-        String stxy = m.get("смPad" + IntToStr(i + 1) + "xy");
-        if (stxy != "")
-        {
-            TParString ps("", ";");
-            ps.SetVal(stxy);
-            for (int j = 0; j < 8; j++)
-                Pad[i].xy[j] = ps.GetInt(j, 0);
-        }
-        strncpy(Pad[i].cmd, m.get("смPad" + IntToStr(i + 1) + "cmd").c_str(), sizeof(Pad[i].cmd));
-        strncpy(Pad[i].param, m.get("смPad" + IntToStr(i + 1) + "param").c_str(), sizeof(Pad[i].param));
+  for (int i = 0; i < 3; i++) {
+    String stxy = m.get("смPad" + IntToStr(i + 1) + "xy");
+    if (stxy != "") {
+      TParString ps("", ";");
+      ps.SetVal(stxy);
+      for (int j = 0; j < 8; j++)
+        Pad[i].xy[j] = ps.GetInt(j, 0);
     }
+    strncpy(Pad[i].cmd, m.get("смPad" + IntToStr(i + 1) + "cmd").c_str(), sizeof(Pad[i].cmd));
+    strncpy(Pad[i].param, m.get("смPad" + IntToStr(i + 1) + "param").c_str(), sizeof(Pad[i].param));
+  }
 
-    for (int i = 0; i < m.GetItemsCount(); i++)
-    {
-        String stKeys = m.GetKeys(i);
-        if ((stKeys.Length() >= 1) && (m.GetKeys(i)[1] == '$'))
-        {
-            if (pmRepl == NULL)
-                pmRepl = new TPropMap();
-            pmRepl->put(m.GetKeys(i), m.GetVal(i));
-        }
+  for (int i = 0; i < m.GetItemsCount(); i++) {
+    String stKeys = m.GetKeys(i);
+    if ((stKeys.Length() >= 1) && (m.GetKeys(i)[1] == '$')) {
+      if (pmRepl == NULL)
+        pmRepl = new TPropMap();
+      pmRepl->put(m.GetKeys(i), m.GetVal(i));
     }
+  }
 }
 
-const char *AComp::GetImpulsName(char *PropName)
+const char* AComp::GetImpulsName(char* PropName)
 {
-    static String _S;
-    if (_GetSigName_Func == NULL)
-        return "";
-    int imp;
-    _S = GetPropEx(PropName, imp);
-    if (_S == "")
-        return "";
+  static String _S;
+  if (_GetSigName_Func == NULL)
+    return "";
+  int imp;
+  _S = GetPropEx(PropName, imp);
+  if (_S == "")
+    return "";
 
-    _S = _GetSigName_Func(imp);
-    return _S.c_str();
+  _S = _GetSigName_Func(imp);
+  return _S.c_str();
 }
 
 /*
@@ -560,15 +524,15 @@ void AComp::HideTrainNumber(){};
 
 int AComp::IsAlarmState()
 {
-    if (fimpuls_busi == 1)
-        return impuls_busi;
-    return false;
+  if (fimpuls_busi == 1)
+    return impuls_busi;
+  return false;
 }
 
-void AComp::GetNumberPosition(int &X, int &Y, int Width, int Height, int direct)
+void AComp::GetNumberPosition(int& X, int& Y, int Width, int Height, int direct)
 {
-    X = this->X * MUL_X + _X_;
-    Y = this->Y * MUL_Y + _Y_;
+  X = this->X * MUL_X + _X_;
+  Y = this->Y * MUL_Y + _Y_;
 }
 
 /*
@@ -600,50 +564,46 @@ char * AComp::GetCompInfo()
     return _SS_GetCompInfo.c_str();
 }
 */
-char *AComp::GetText(char *txt)
+char* AComp::GetText(char* txt)
 {
-    strcpy(txt, Com_Nam[GetType()]);
-    strncat(txt, GetName(), CN);
-    return txt;
+  strcpy(txt, Com_Nam[GetType()]);
+  strncat(txt, GetName(), CN);
+  return txt;
 }
 
-const char * AComp::GetName()
+const char* AComp::GetName()
 {
-    return name;
+  return name;
 }
 
 int AComp::GetMarkerAtXY(int X, int Y)
 {
-    if (!ALIB_ShowMarkers)
-        return 0;
-    int aX, aY;
-    for (int i = 0; i < GetMarkerCount(); i++)
-    {
-        GetMarkerPoint(i + 1, aX, aY);
-        if ((X >= aX - 4) && (Y <= aY + 4) && (X <= aX + 4) && (Y >= aY - 4))
-            return i + 1;
-    }
+  if (!ALIB_ShowMarkers)
     return 0;
+  int aX, aY;
+  for (int i = 0; i < GetMarkerCount(); i++) {
+    GetMarkerPoint(i + 1, aX, aY);
+    if ((X >= aX - 4) && (Y <= aY + 4) && (X <= aX + 4) && (Y >= aY - 4))
+      return i + 1;
+  }
+  return 0;
 }
 
 void AComp::ShowPads()
 {
-    for (int p = 0; p < 3; p++)
-    {
-        int s = 0;
-        int xy[8];
-        for (int pj = 0; pj < 8; pj++)
-            s += abs(Pad[p].xy[pj]);
-        if (s > 0)
-        {
-            for (int pj = 0; pj < 4; pj++)
-            {
-                xy[pj * 2] = (X + Pad[p].xy[pj * 2]) * MUL_X + _X_;
-                xy[pj * 2 + 1] = (Y + Pad[p].xy[pj * 2 + 1]) * MUL_Y + _Y_;
-            }
-            setcolor(GELT);
-            setfillstyle(EMPTY_FILL, GELT);
-            fillpoly(4, xy);
-        }
+  for (int p = 0; p < 3; p++) {
+    int s = 0;
+    int xy[8];
+    for (int pj = 0; pj < 8; pj++)
+      s += abs(Pad[p].xy[pj]);
+    if (s > 0) {
+      for (int pj = 0; pj < 4; pj++) {
+        xy[pj * 2] = (X + Pad[p].xy[pj * 2]) * MUL_X + _X_;
+        xy[pj * 2 + 1] = (Y + Pad[p].xy[pj * 2 + 1]) * MUL_Y + _Y_;
+      }
+      setcolor(GELT);
+      setfillstyle(EMPTY_FILL, GELT);
+      fillpoly(4, xy);
     }
+  }
 }

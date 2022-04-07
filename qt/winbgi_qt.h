@@ -1,30 +1,21 @@
 #pragma once
 #include "aheaders_h.h"
-
 #include "bgi.h"
+
 #include <QPainter>
 
+QPainter* getAntLibPainter();
+QPainter* setAntLibPainter(QPainter* p);
 
-
-
-
-
-
-QPainter *getAntLibPainter();
-QPainter *setAntLibPainter(QPainter *p);
-
-
-class  QPainterDC
+class QPainterDC
 {
-    QPainter * pOldQPainter;
+  QPainter* pOldQPainter;
+
 public:
-    QPainterDC(QPainter* pdc){pOldQPainter=setAntLibPainter(pdc);}
-    ~QPainterDC(void){setAntLibPainter(pOldQPainter);}
-    static void SwapDACColor();
+  QPainterDC(QPainter* pdc) { pOldQPainter = setAntLibPainter(pdc); }
+  ~QPainterDC(void) { setAntLibPainter(pOldQPainter); }
+  static void SwapDACColor();
 };
 
-QColor      BgiColor(unsigned int c);
-QPainter*   BgiCanvas(void);
-
-
-
+QColor BgiColor(unsigned int c);
+QPainter* BgiCanvas(void);

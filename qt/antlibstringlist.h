@@ -1,12 +1,13 @@
 #pragma once
 
+#include "antlibstring.h"
+
 #include <string>
 #include <vector>
 
-#include "antlibstring.h"
-
-class AStringList : public std::vector<std::string> {
- public:
+class AStringList : public std::vector<std::string>
+{
+public:
   AStringList() {}
 
   int LoadFromFile(const std::string& FileName);

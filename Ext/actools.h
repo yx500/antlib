@@ -1,11 +1,9 @@
-//---------------------------------------------------------------------------
+
 #ifndef AC_TOOLS_H
 #define AC_TOOLS_H
-//---------------------------------------------------------------------------
-#include "aheaders_h.h"
+
 #include "ACom_T.h"
-
-
+#include "aheaders_h.h"
 
 /*
 
@@ -19,11 +17,6 @@ void  SetRootDir(const char* dir);
 
 extern char Root_Dir[256];
 */
-inline const char* CommitFile(const char* file){return file;}
+inline const char* CommitFile(const char* file) { return file; }
 
-
-
-//---------------------------------------------------------------------------
 #endif
-
-
