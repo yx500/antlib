@@ -80,11 +80,11 @@ TCanvas * Get_SaveDC()
     return _SaveDC;
 };
 
-RECT& ClearBgiCoverRect(void)
+TRect ClearBgiCoverRect(void)
 {
     ::SetRect(&TraceRect, MaxInt, MaxInt, -MaxInt, -MaxInt); return TraceRect;
 }
-RECT& GetBgiCoverRect(void)
+TRect GetBgiCoverRect(void)
 {
     return TraceRect;
 }
@@ -798,76 +798,9 @@ static void set_defaults()
     aspect_ratio_x = aspect_ratio_y = 10000;
 }
 
-void initgraph(int* device, int* mode, const char* p)
-{
-    for (int i = 0; i < FontCount; i++)  Fonts[ i ]  = NULL;
-    set_defaults();
-    /*
-    static short SolidBrushBitmap[8] =
-      {~0xFF, ~0xFF, ~0xFF, ~0xFF, ~0xFF, ~0xFF, ~0xFF, ~0xFF};
-    static short LineBrushBitmap[8] =
-      {~0x00, ~0x00, ~0x00, ~0x00, ~0x00, ~0x00, ~0x00, ~0xFF};
-    static short LtslashBrushBitmap[8] =
-      {~0x01, ~0x02, ~0x04, ~0x08, ~0x10, ~0x20, ~0x40, ~0x80};
-    static short SlashBrushBitmap[8] =
-      {~0x81, ~0x03, ~0x06, ~0x0C, ~0x18, ~0x30, ~0x60, ~0xC0};
-    static short BkslashBrushBitmap[8] =
-      {~0xC0, ~0x60, ~0x30, ~0x18, ~0x0C, ~0x06, ~0x03, ~0x81};
-    static short LtbkslashBrushBitmap[8] =
-      {~0x80, ~0x40, ~0x20, ~0x10, ~0x08, ~0x04, ~0x02, ~0x01};
-    static short HatchBrushBitmap[8] =
-      {~0x01, ~0x01, ~0x01, ~0x01, ~0x01, ~0x01, ~0x01, ~0xFF};
-    static short XhatchBrushBitmap[8] =
-      {~0x81, ~0x42, ~0x24, ~0x18, ~0x18, ~0x24, ~0x42, ~0x81};
-    static short InterleaveBrushBitmap[8] =
-      {~0x55, ~0xAA, ~0x55, ~0xAA, ~0x55, ~0xAA, ~0x55, ~0xAA};
-    static short WidedotBrushBitmap[8] =
-      {~0x00, ~0x00, ~0x00, ~0x00, ~0x00, ~0x00, ~0x00, ~0x01};
-    static short ClosedotBrushBitmap[8] =
-      {~0x44, ~0x00, ~0x11, ~0x00, ~0x44, ~0x00, ~0x11, ~0x00};
-
-     hBackgroundBrush = CreateSolidBrush(0);
-     hBrush[EMPTY_FILL] = (HBRUSH)GetStockObject(NULL_BRUSH);
-     hBrush[SOLID_FILL] =
-            CreatePatternBrush(CreateBitmap(8, 8, 1, 1, SolidBrushBitmap));
-     hBrush[LINE_FILL] =
-            CreatePatternBrush(CreateBitmap(8, 8, 1, 1, LineBrushBitmap));
-     hBrush[LTSLASH_FILL] =
-        CreatePatternBrush(CreateBitmap(8, 8, 1, 1, LtslashBrushBitmap));
-     hBrush[SLASH_FILL] =
-        CreatePatternBrush(CreateBitmap(8, 8, 1, 1, SlashBrushBitmap));
-     hBrush[BKSLASH_FILL] =
-        CreatePatternBrush(CreateBitmap(8, 8, 1, 1, BkslashBrushBitmap));
-     hBrush[LTBKSLASH_FILL] =
-            CreatePatternBrush(CreateBitmap(8, 8, 1, 1, LtbkslashBrushBitmap));
-     hBrush[HATCH_FILL] =
-            CreatePatternBrush(CreateBitmap(8, 8, 1, 1, HatchBrushBitmap));
-     hBrush[XHATCH_FILL] =
-        CreatePatternBrush(CreateBitmap(8, 8, 1, 1, XhatchBrushBitmap));
-     hBrush[INTERLEAVE_FILL] =
-        CreatePatternBrush(CreateBitmap(8, 8, 1, 1, InterleaveBrushBitmap));
-     hBrush[WIDE_DOT_FILL] =
-        CreatePatternBrush(CreateBitmap(8, 8, 1, 1, WidedotBrushBitmap));
-     hBrush[CLOSE_DOT_FILL] =
-        CreatePatternBrush(CreateBitmap(8, 8, 1, 1, ClosedotBrushBitmap));
-     hBrush[USER_FILL] =
-            CreatePatternBrush(CreateBitmap(8, 8, 1, 1, SolidBrushBitmap));
-    */
-}
-
-
-
-/*
-#ifdef __cplusplus
-}
-#endif
-*/
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-int F_DEFAULT  = 0;
-int F_LITT     = 1;
-int F_LITT_S   = 2;
-int F_LITT_B   = 3;
+
 
 void InitBgiFont(void);
 void SetFont(TFont* , int n);
@@ -887,7 +820,8 @@ void InitWinBGI(void)
     //Classes::RegisterClass(__classid(TFont));
 
 
-    initgraph(NULL, NULL, "");
+    for (int i = 0; i < FontCount; i++)  Fonts[ i ]  = NULL;
+    set_defaults();
     InitBgiFont();
     for (int i = 0; i < FontCount; i++) {
         if (!Fonts[ i ]) {

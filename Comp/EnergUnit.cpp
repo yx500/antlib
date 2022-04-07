@@ -129,7 +129,7 @@ void SaveLampsLS(Station *Stan)
     //заполняем буфер
     int cnt = 0;
     TE_OBJ *eo;
-    memset(Stan->EnergStanLamps, 0, sizeof(Stan->EnergStanLamps));
+    memset(Stan->EnergStanLamps, 0, sizeof(TEnergStanLamps));
     for (int j = 0; j < Stan->POLE[WAYS]->GetArraySize(); j++)
     {
         eo = dynamic_cast<TE_OBJ *>(Stan->POLE[WAYS]->GetObjPtr(j));

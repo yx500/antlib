@@ -141,7 +141,6 @@ int   textheight(const char  *__textstring);
 int   textwidth(const char  *__textstring);
 void  OutTextXY(int x, int y, const char* str);
 void  DrawText(int x, int y, int tw, int th, const char* str);
-void  initgraph(int* device, int* mode, const char* p);
 
 
 
@@ -150,10 +149,10 @@ void  initgraph(int* device, int* mode, const char* p);
 #define HORIZ_DIR   0   /* left to right */
 #define VERT_DIR    1   /* bottom to top */
 
-extern int F_DEFAULT; //0
-extern int F_LITT   ; //1
-extern int F_LITT_S ; //2
-extern int F_LITT_B ; //3
+#define F_DEFAULT 0
+#define F_LITT    1
+#define F_LITT_S  2
+#define F_LITT_B  3
 
 #define NULLFONT 0+4
 #define COURE12 1+4
@@ -195,8 +194,8 @@ extern int   UseBGIPalette;
 void   PolyColor(int iBrushColor, const TPoint *Points, const int * iColors, const int Points_Count, int PenW = 1);
 int    Draw_Ramka(int left, int top, int right, int bottom, int edge = BDR_RAISEDINNER, int grfFlags = BF_RECT);
 
-RECT&  ClearBgiCoverRect(void);
-RECT&  GetBgiCoverRect(void);
+TRect  ClearBgiCoverRect(void);
+TRect  GetBgiCoverRect(void);
 
 void    SwapDACColor();
 int     Get_DAC(void);
