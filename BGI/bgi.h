@@ -139,7 +139,7 @@ void fillpoly(int __numpoints, const int* __polypoints);
 int getmaxx(void);
 int getmaxy(void);
 void line(int __x1, int __y1, int __x2, int __y2);
-void rectangle(int __left, int __top, int __right, int __bottom);
+void rectangle(int left, int top, int right, int bottom);
 void roundrect(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int nWidth, int nHeight);
 void setcolor(int __color);
 void setfillpattern(const char* __upattern, int __color);
