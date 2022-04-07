@@ -751,7 +751,7 @@ bool TMarshList::SaveToCSV(String stFN)
   }
 
   SL->Add(PS.ResultStr());
-  int ind;
+  size_t ind;
   for (int i = 0; i < GetMARSHRUTSCOUNT(); i++) {
     m.clear();
     GetMARSHRUTS(i)->GetPropMap(m);

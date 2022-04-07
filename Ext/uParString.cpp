@@ -30,7 +30,7 @@ void TParString::SetVal(const String& ASTR)
   }
 }
 
-String TParString::GetStr(int ind, const String& def)
+String TParString::GetStr(size_t ind, const String& def)
 {
   if ((ind >= words.size()) || (ind < 0))
     return def;
@@ -40,7 +40,7 @@ String TParString::GetStr(int ind, const String& def)
   return s;
 }
 
-int TParString::GetInt(int ind, int def)
+int TParString::GetInt(size_t ind, int def)
 {
   if ((ind >= words.size()) || (ind < 0))
     return def;
@@ -48,7 +48,7 @@ int TParString::GetInt(int ind, int def)
   return s.ToIntDef(def);
 }
 
-void TParString::SetStr(int ind, const String& StrVal)
+void TParString::SetStr(size_t ind, const String& StrVal)
 {
   if (ind >= words.size()) {
     words.resize(ind + 1, "");
@@ -59,7 +59,7 @@ void TParString::SetStr(int ind, const String& StrVal)
 String TParString::ResultStr()
 {
   String STR = "";
-  for (int i = 0; i < words.size(); i++) {
+  for (size_t i = 0; i < words.size(); i++) {
     STR = STR + words[i].c_str();
     if (i < words.size() - 1)
       STR = STR + separators[0];
@@ -67,12 +67,12 @@ String TParString::ResultStr()
   return STR;
 }
 
-void TParString::SetInt(int ind, signed int IntVal)
+void TParString::SetInt(size_t ind, signed int IntVal)
 {
   SetStr(ind, IntToStr(IntVal));
 }
 
-void TParString::SetHex(int ind, signed int IntVal)
+void TParString::SetHex(size_t ind, signed int IntVal)
 {
   SetStr(ind, "0x" + IntToHex(IntVal, 2));
 }

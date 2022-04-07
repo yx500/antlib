@@ -185,7 +185,7 @@ void __fastcall TEXD::TN_PrepareDoublTNFilter()
 }
 
 
-TKroshTrainInfo * __fastcall TEXD::TN_GetTrainsInfo(int ind)
+TKroshTrainInfo * __fastcall TEXD::TN_GetTrainsInfo(size_t ind)
 {
      try {
          if ((Enabled)&&(dll_TN_GetTrainsInfo)) return (TKroshTrainInfo *)dll_TN_GetTrainsInfo(ind);

@@ -790,6 +790,7 @@ const char* Strel::GetName()
   case LOG_LAMP:
   case SUPERLAMP2:
   case LED:
+  default:
     return name;
   case NAPR:
     if (name[0] == '-')
@@ -1276,7 +1277,7 @@ void Info::ShowX(int xx, int y)
 {
   int TC[6];
   int x;
-  char* nms[6] = {
+  const char *nms[6] = {
       "“—",
       "—¡",
       "“”",

@@ -1,10 +1,6 @@
 
-HEADERS += $$files($$PWD/*.h) \
-    $$PWD/utils.h \
-    $$PWD/win/w32defs.h
+HEADERS += $$files($$PWD/*.h)
 
 
-
-SOURCES += $$files($$PWD/*.cpp) \
-    $$PWD/utils.cpp
+SOURCES += $$files($$PWD/*.cpp)
 

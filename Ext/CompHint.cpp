@@ -121,7 +121,7 @@ void TACOMPHINT::ShowHints(Station* stan)
   }
 }
 
-char* PN[3] = {"IMCH", "IMLH", "IMRH"};
+const char *PN[3] = {"IMCH", "IMLH", "IMRH"};
 void TACOMPHINT::_ShowHint(AComp* ac, HintItem& hi, bool bFON)
 {
   // начальная установка
