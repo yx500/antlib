@@ -119,7 +119,7 @@ struct arccoordstype {
 
 void  bar(int __left, int __top, int __right, int __bottom);
 void  circle(int __x, int __y, int __radius);
-void  arc(int x, int y, int start_angle, int end_angle, int radius);
+//void  arc(int x, int y, int start_angle, int end_angle, int radius);
 void  pie(int X1, int Y1, int X2, int Y2, int X3, int Y3, int X4, int Y4);
 void  drawpoly(int __numpoints, const int *__polypoints);
 void  fillellipse(int __x, int __y, int __xradius, int __yradius);

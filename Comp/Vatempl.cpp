@@ -418,12 +418,12 @@ PAComp VisibleArray::SetObjPtr(int p, PAComp ac)
     data.at(p) = ac;
     return ac2;
 }
-
+/*
 void VisibleArray::Move(PAComp ac, int DeltaX, int DeltaY)
 {
     ac->Move(DeltaX, DeltaY);
 }
-
+ */
 void VisibleArray::ShowAll()
 {
     PAComp ac;
@@ -494,7 +494,7 @@ void VisibleArray::ConnectAll()
         G->Connect();
     }
 }
-
+/*
 void VisibleArray::HideAll()
 {
     for (data_type::iterator i = data.begin(); i != data.end(); ++i)
@@ -505,6 +505,7 @@ void VisibleArray::MoveAll(int DeltaX, int DeltaY)
     for (data_type::iterator i = data.begin(); i != data.end(); ++i)
         Move((*i), DeltaX, DeltaY);
 }
+*/
 int VisibleArray::GetArraySize()
 {
     return data.size();

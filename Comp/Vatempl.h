@@ -29,13 +29,13 @@ public:
     void Show(PAComp ac);
     PAComp GetObjPtr(int p);
     PAComp SetObjPtr(int p, PAComp ac);
-    void Move(PAComp ac, int DeltaX, int DeltaY);
+    //void Move(PAComp ac, int DeltaX, int DeltaY);
     void ShowAll();
     void ShowLayer(int Layer);
     void GoAll();
-    void HideAll();
+    //void HideAll();
     void ConnectAll();
-    void MoveAll(int DeltaX, int DeltaY);
+    //void MoveAll(int DeltaX, int DeltaY);
     int GetArraySize();
     int LoadAll(int NALL, FILE *file, int ut);
     int SaveAll(FILE *file, int ut);

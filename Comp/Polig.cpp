@@ -196,7 +196,7 @@ void Poligon::Show()
             Current_Name = 1;
         else
             Current_Name = 0;
-        if (ST[CurrentStation != NULL])
+        if (ST[CurrentStation] != NULL)
         {
             if (CurrentPicture == BG)
                 ST[CurrentStation]->Show();
@@ -215,7 +215,7 @@ int Poligon::TstXY(int x, int y)
     {
         for (CurrentStation = 0; CurrentStation < Col_ST; CurrentStation++)
         {
-            if (ST[CurrentStation != NULL])
+            if (ST[CurrentStation] != NULL)
             {
                 // d = ST[CurrentStation]->TstXY(x,y);
             }
@@ -224,7 +224,7 @@ int Poligon::TstXY(int x, int y)
     }
     else
     {
-        if (ST[CurrentStation != NULL])
+        if (ST[CurrentStation] != NULL)
         {
             // d = ST[CurrentStation]->TstXY(x,y);
         }
@@ -241,7 +241,7 @@ void Poligon::Del(int Nomer)
     Col_ST--;
     for (CurrentStation = Nomer; CurrentStation < Col_ST; CurrentStation++)
     {
-        if (ST[CurrentStation != NULL])
+        if (ST[CurrentStation] != NULL)
             ST[CurrentStation] = ST[CurrentStation + 1];
     }
     CurrentStation = i;

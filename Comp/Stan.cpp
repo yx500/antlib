@@ -193,6 +193,7 @@ void Station::Show()
     ShowElemsSost();
 }
 //---------------------------------------------------------------------------
+/*
 void Station::Hide()
 {
     Adapter();
@@ -201,6 +202,7 @@ void Station::Hide()
         POLE[i]->HideAll();
     }
 }
+*/
 //---------------------------------------------------------------------------
 int Station::TstXY(int _x, int _y)
 {

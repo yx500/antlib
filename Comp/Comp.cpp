@@ -41,7 +41,7 @@ void Set_GetDatagramPacket2_Func(T_GetDatagramPacket2_Func AGetDatagramPacket2_F
 {
     GetDatagramPacket2_Func = AGetDatagramPacket2_Func;
 };
-
+/*
 void AComp::Hide(void)
 {
     Color_Off();
@@ -55,7 +55,7 @@ void AComp::Move(int DeltaX, int DeltaY)
     Y += DeltaY;
     Show();
 }
-
+*/
 void AComp::Clear()
 {
     StateChanged = true;

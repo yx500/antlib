@@ -78,8 +78,8 @@ public:
     };
     virtual UNIT GetUnit() = 0;
     char *GetText(char *txt);
-    void Hide(void);
-    void Move(int DeltaX, int DeltaY);
+    //void Hide(void);
+    //void Move(int DeltaX, int DeltaY);
     int f(int impls);
     int GetRealImp(int impls);
     bool SetNativeImp(int RealImpls, short int &NativeImp);

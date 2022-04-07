@@ -2478,10 +2478,13 @@ void  Bash::Show()
             barx(x + x_sdv, y - y_off - y_sdv, x + x_sdv + wx, y - y_off - wy - y_sdv);
             barx(x + x_sdv, y + y_off + y_sdv + 1, x + x_sdv + wx, y + y_off + wy + y_sdv);
         } else {
-            pie(x + x_sdv, y - y_off - y_sdv + wy, x + x_sdv + wx, y - y_off - wy - y_sdv,
-                x + x_sdv + wx , y - y_off - y_sdv, x + x_sdv, y - y_off - y_sdv);
-            pie(x + x_sdv, y + y_off + y_sdv - wy, x + x_sdv + wx, y + y_off + wy + y_sdv,
-                x + x_sdv, y + y_off + y_sdv, x + x_sdv + wx , y + y_off + y_sdv);
+            pie(x + x_sdv,      y - y_off - y_sdv + wy,
+                x + x_sdv + wx, y - y_off - y_sdv - wy ,
+                x + x_sdv + wx ,y - y_off - y_sdv,
+                x + x_sdv,      y - y_off - y_sdv);
+
+            pie(x + x_sdv,      y + y_off + y_sdv - wy, x + x_sdv + wx, y + y_off + wy + y_sdv,
+                x + x_sdv,      y + y_off + y_sdv, x + x_sdv + wx , y + y_off + y_sdv);
         }
 
         return;
