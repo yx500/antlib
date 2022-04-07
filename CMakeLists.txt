@@ -1,9 +1,15 @@
 get_filename_component(TARGET_NAME ${CMAKE_CURRENT_SOURCE_DIR} NAME)
 
-#file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
-#file(GLOB_RECURSE HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/*.h")
-#add_library ( ${TARGET_NAME} ${SOURCES} ${HEADERS} )
 
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+find_package(QT NAMES Qt6 6.2 Qt5 5.15 COMPONENTS Core REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
 
 
 file(GLOB SOURCES
@@ -22,8 +28,6 @@ file(GLOB SOURCES
 )
 add_library ( ${TARGET_NAME} ${SOURCES} )
 
-target_compile_definitions(${TARGET_NAME} PUBLIC QT_ANTLIB)
-
 target_include_directories ( ${TARGET_NAME} PUBLIC 
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/BGI
@@ -33,6 +37,15 @@ target_include_directories ( ${TARGET_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/qt
     ${CMAKE_CURRENT_SOURCE_DIR}/ax
 )
+
+target_compile_definitions( ${TARGET_NAME} PUBLIC QT_ANTLIB )
+#target_compile_definitions(desktop PRIVATE
+#    $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
+#    )
+target_link_libraries(${TARGET_NAME} PRIVATE
+    Qt${QT_VERSION_MAJOR}::Core
+    Qt${QT_VERSION_MAJOR}::Quick
+    )
 
 
 
