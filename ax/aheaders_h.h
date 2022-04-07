@@ -18,6 +18,7 @@
   #include "antlibgraphics.h"
   #include "vcllib.h"
   #include <unistd.h>
+  #include <cstring>
 
 #endif
 
