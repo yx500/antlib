@@ -65,7 +65,7 @@ public:
   virtual void Set();
   virtual void Get();
   virtual void Show() = 0;
-  virtual void ShowLayer(int Layer){};
+  virtual void ShowLayer(int ){};
   virtual const char* GetName();
   virtual void Go();
   virtual unsigned int GetID();
@@ -86,23 +86,14 @@ public:
   bool SetNativeImp(int RealImpls, short int& NativeImp);
   int GetNativeImp(int RealImpls);
   const char* GetImpulsName(char* PropName);
-  // virtual char * GetCompInfo();
 
   virtual void UpdateState();
-
   virtual int IsAlarmState();
-
   virtual void UpdateRCT();
 
   virtual void GetPropMap(TPropMap& m);
   virtual void SetPropMap(TPropMap& m);
 
-  // virtual int GetUsedImpulsCount();
-  // virtual char *  GetUsedImpulsInfo(int NumImpProp, int &RealOffset); // � 0
-
-  // int  GetImpulsInfo(int aimp, const char* &CnlName, int &RealOffset);  // � 0
-  // char * GetImpulsInfo2(char * PropName, int &RealOffset);
-  // char * GetImpulsInfo3(char * PropName, const char* &CnlName, int &RealOffset);
   virtual void ShowTrainNumber();
   virtual void HideTrainNumber();
 
@@ -110,9 +101,9 @@ public:
   Poligon* Polig();
 
   virtual int GetMarkerAtXY(int X, int Y);
-  virtual void ChangeMarkerXY(int iMarker, int aX, int aY){};
+  virtual void ChangeMarkerXY(int /*iMarker*/, int /*aX*/, int /*aY*/){};
   virtual int GetMarkerCount() { return 0; };
-  virtual void GetMarkerPoint(int iMarker, int& aX, int& aY){};
+  virtual void GetMarkerPoint(int /*iMarker*/, int& /*aX*/, int& /*aY*/){};
 
   void ShowPads();
 };

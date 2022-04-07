@@ -27,12 +27,12 @@ public:
   String ResultStr();
   int GetParamsCount();
 
-  String GetStr(int ind, const String& DefaultStr = "");
-  void SetStr(int ind, const String& StrVal);
+  String GetStr(size_t ind, const String& DefaultStr = "");
+  void SetStr(size_t ind, const String& StrVal);
 
-  int GetInt(int ind, int DefaultVal = 0);
-  void SetInt(int ind, signed int IntVal);
-  void SetHex(int ind, signed int IntVal);
+  int GetInt(size_t ind, int DefaultVal = 0);
+  void SetInt(size_t ind, signed int IntVal);
+  void SetHex(size_t ind, signed int IntVal);
 
   int GetInd(const String& stPar);
 

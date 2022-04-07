@@ -96,7 +96,7 @@ void Box_(int x, int y, int dr, int n, int Js)
   // 11.10 struct  fillsettingstype i;
   // 11.10 getfillsettings(&i);
   //  if(i.color==TXT){ f =1;/*setfillstyle(1,FON);*/}
-  char* nom = "      ";
+  char nom[32] = "      ";
   int nm = n;
   int clr = LIN;
   itoa(nm % 1000, nom + 1, 10);

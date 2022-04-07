@@ -322,7 +322,7 @@ void Station::Close()
   }
 }
 //--------------------------------------------------------------------------
-String GetStrParam(String st, int ind, String DefaultStr);
+String GetStrParam(String st, size_t ind, String DefaultStr);
 
 void Station::ConnectGorls()
 {

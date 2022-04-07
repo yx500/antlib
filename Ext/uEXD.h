@@ -25,7 +25,7 @@ public:
   void __fastcall TN_PrepareDoublTNFilter();
 
   // int __fastcall TN_GetTrainsCount(void);
-  // TKroshTrainInfo * __fastcall TN_GetTrainsInfo(int ind);
+  // TKroshTrainInfo * __fastcall TN_GetTrainsInfo(size_t ind);
 
   int __fastcall MK_SetInputBuf(void* buf, int maxchanels);
   bool __fastcall MK_SetInputBufChanel(void* buf, int ChanelNumber);
