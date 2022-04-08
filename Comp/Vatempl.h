@@ -53,6 +53,5 @@ extern TEachAComp EachACompStanPreFun;
 extern TEachAComp EachACompStanPostFun;
 extern TEachAComp MakeNewComp;
 
-// extern FILE *CurStanFile;
 
 #endif
