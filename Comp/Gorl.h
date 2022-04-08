@@ -22,7 +22,7 @@ struct ID_ZO
 struct Signal
 {
   char name[6]; /*хлъ ябернтнпю*/
-  PAComp nomer; /*юдпея(б тюике ме нопедекем)*/
+  AComp* nomer; /*юдпея(б тюике ме нопедекем)*/
 };
 
 struct Grl

@@ -1541,7 +1541,7 @@ void SubStation::Show()
       memcpy(substan->Dat, Stan()->Dat, sizeof(St_Dat));
       _X_ = _X_ + X * MUL_X;
       _Y_ = _Y_ + Y * MUL_Y;
-      PAComp ac;
+      AComp* ac;
 
       substan->GoEachACompStanPreFun();
       /* Выводим всё ! */

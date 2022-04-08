@@ -71,7 +71,7 @@ void Gorl::Go()
 void Gorl::UpdateState()
 {
   Get();
-  // PAComp G;
+  // AComp* G;
   // Size_G = MEM.mas;
   if (Size_G > _Size_G)
     return;

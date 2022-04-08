@@ -1,5 +1,3 @@
-
-
 #include "Comp.h"
 
 #include "Impuls.h"
@@ -41,21 +39,7 @@ void Set_GetDatagramPacket2_Func(T_GetDatagramPacket2_Func AGetDatagramPacket2_F
 {
   GetDatagramPacket2_Func = AGetDatagramPacket2_Func;
 };
-/*
-void AComp::Hide(void)
-{
-    Color_Off();
-    Show();
-    Color_On();
-}
-void AComp::Move(int DeltaX, int DeltaY)
-{
-    Hide();
-    X += DeltaX;
-    Y += DeltaY;
-    Show();
-}
-*/
+
 void AComp::Clear()
 {
   StateChanged = true;
@@ -535,35 +519,6 @@ void AComp::GetNumberPosition(int& X, int& Y, int Width, int Height, int direct)
   Y = this->Y * MUL_Y + _Y_;
 }
 
-/*
-static String _SS_GetCompInfo;
-char * AComp::GetCompInfo()
-{
-    _SS_GetCompInfo = "";
-    //name;ObjID;packet_name;busy;plus;minus;kzm
-    String packet_name = "";
-    String ss;
-    int imp;
-    String impname;
-    imp = impuls_busi;
-
-    char* CnlName;
-    int RealOffset;
-    impname = "";
-    GetImpulsInfo(imp, CnlName, RealOffset);
-    ss = String(CnlName);
-    if ((ss != "NONE")) packet_name = ss;
-    if (_GetSigName_Func != NULL) {
-        impname = _GetSigName_Func(RealOffset);
-    }
-    _SS_GetCompInfo = String(GetName()) + ";" +
-                      IntToStr(GetID()) + ";" +
-                      packet_name + ";" +
-                      IntToStr(imp) + ";" + impname + ";0;0;0";
-
-    return _SS_GetCompInfo.c_str();
-}
-*/
 char* AComp::GetText(char* txt)
 {
   strcpy(txt, Com_Nam[GetType()]);

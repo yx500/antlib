@@ -21,8 +21,6 @@ struct TACompPad
 
 class AComp : public pmComp
 {
-
-private:
 public:
   short int X;
   short int Y;
@@ -65,7 +63,7 @@ public:
   virtual void Set();
   virtual void Get();
   virtual void Show() = 0;
-  virtual void ShowLayer(int ){};
+  virtual void ShowLayer(int ) {};
   virtual const char* GetName();
   virtual void Go();
   virtual unsigned int GetID();
@@ -73,14 +71,9 @@ public:
 
   virtual void SetID(unsigned int);
   virtual TYP GetType() = 0;
-  virtual int GetSubType()
-  {
-    return 0;
-  };
+  virtual int GetSubType() { return 0; }
   virtual UNIT GetUnit() = 0;
   char* GetText(char* txt);
-  // void Hide(void);
-  // void Move(int DeltaX, int DeltaY);
   int f(int impls);
   int GetRealImp(int impls);
   bool SetNativeImp(int RealImpls, short int& NativeImp);
@@ -108,8 +101,7 @@ public:
   void ShowPads();
 };
 
-typedef AComp* PAComp;
-PAComp Trans(char*, int);
+AComp* Trans(char*, int);
 
 typedef int (*T_f_Func)(int, void*);
 void Set_f_Func(T_f_Func A_f_);

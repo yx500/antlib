@@ -1,5 +1,3 @@
-
-
 #include "pmComp.h"
 
 #include "aheaders_cpp.h"
@@ -50,6 +48,7 @@ void pmComp::SetPropInt(const char* PropName, int value)
 {
   SetProp(PropName, IntToStr(value).c_str());
 }
+
 int pmComp::GetPropInt(const char* PropName)
 {
   return StrToIntDef(GetProp(PropName), 0);
