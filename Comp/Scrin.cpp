@@ -119,7 +119,7 @@ void Super_Box(int x1, int y1, int x2, int y2, int h, int c1, int c2, int c3, in
 
 // #include"..\BMP\bmplib.h"
 // tBMP Aaa;
-
+/*
 void S_B(int rg)
 {
   int sdv = 70;
@@ -134,10 +134,7 @@ void S_B(int rg)
     //  setfillstyle(2,FON);
   } else
     setfillstyle(1, FON);
-  /*
-  char pattern[8] = {0x01, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
-  setfillpattern(pattern, getmaxcolor());
-    */
+
   //
   //
   //
@@ -165,7 +162,7 @@ void S_B(int rg)
     Super_Box(5, MaxY - sdv + 3, MaxX - 6, MaxY - 6, 0, LIN, LIN, C_D, C_D);
   }
 }
-
+ */
 void Super_Box(int x1, int y1, int x2, int y2, int h, int c1, int c2, int c3, int c4)
 {
   int t[10], b[10], l[10], r[10];

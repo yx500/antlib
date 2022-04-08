@@ -13,8 +13,29 @@ QPainter *setAntLibPainter(QPainter *p){
     return oldPainter;
     QFont f;
 }
+textsettingstype text_settings;
+linesettingstype line_settings;
+fillsettingstype fill_settings;
+static void set_defaults()
+{
+    line_settings.thickness = 1;
+    line_settings.linestyle = SOLID_LINE;
+    line_settings.upattern = ~0;
+
+    fill_settings.pattern = SOLID_FILL;
+    fill_settings.color = WHITE;
+
+    text_settings.direction = HORIZ_DIR;
+    text_settings.font = DEFAULT_FONT;
+    text_settings.charsize = 1;
+}
+
 const int FontCount = 32;
 QFont Fonts[FontCount];
+QFont font;
+QBrush brush;
+QPen pen;
+
 void initFonts(){
     for (int i=0;i<FontCount;i++) Fonts[i]=QFont("Arial",14,QFont::Normal);
     Fonts[F_DEFAULT ]=  QFont("Arial",14,QFont::Normal);
@@ -92,6 +113,118 @@ void tracking_add_rect(QRect r){
     traceRect=traceRect.united(r);
 }
 
+// =============   SETTING  ==========
+
+void setcolor(int __color){
+    pen.setColor(BgiColor(__color));
+    if (Painter) Painter->setPen(pen);
+}
+void setfillstyle(int __pattern, int __color){
+    fill_settings.color = __color;
+    fill_settings.pattern=__pattern;
+    brush.setColor(BgiColor(__color));
+    switch (__pattern) {
+    case EMPTY_FILL:
+        brush.setStyle(Qt::NoBrush);
+        break;
+    case SOLID_FILL:
+        brush.setStyle(Qt::SolidPattern);
+        break;
+    case LINE_FILL:
+        brush.setStyle(Qt::HorPattern);
+        break;
+    case LTSLASH_FILL:
+        brush.setStyle(Qt::HorPattern);
+        break;
+    case SLASH_FILL:
+        brush.setStyle(Qt::BDiagPattern);
+        break;
+    case BKSLASH_FILL:
+        brush.setStyle(Qt::FDiagPattern);
+        break;
+    case LTBKSLASH_FILL:
+    case HATCH_FILL:
+    case XHATCH_FILL:
+    case INTERLEAVE_FILL:
+        brush.setStyle(Qt::DiagCrossPattern);
+        break;
+    case WIDE_DOT_FILL:
+    case CLOSE_DOT_FILL:
+    case USER_FILL:
+        brush.setStyle(Qt::DiagCrossPattern);
+        break;
+    default:
+        brush.setStyle(Qt::NoBrush);
+    }
+    if (Painter) Painter->setBrush(brush);
+}
+void setlinestyle(int __linestyle, unsigned __upattern, int __thickness){
+    line_settings.linestyle = __linestyle;
+    line_settings.upattern = __upattern;
+    line_settings.thickness = __thickness;
+    switch (line_settings.linestyle) {
+    default:
+        pen.setStyle(Qt::SolidLine);
+        pen.setWidth(line_settings.thickness);
+        break;
+    case 1:
+        pen.setStyle(Qt::DashLine);
+        pen.setWidth(1);
+        break;
+    case 2:
+        pen.setStyle(Qt::DotLine);
+        pen.setWidth(1);
+        break;
+    case 3:
+        pen.setStyle(Qt::DashDotLine);
+        pen.setWidth(1);
+        break;
+    case 4:
+        pen.setStyle(Qt::DashDotDotLine);
+        pen.setWidth(1);
+        break;
+    }
+    if (Painter) Painter->setPen(pen);
+}
+void settextjustify(int __horiz, int __vert){
+    text_settings.horiz = __horiz;
+    text_settings.vert = __vert;
+}
+static void select_font()
+{
+    if (text_settings.font < 0 || text_settings.font >= FontCount) {
+        text_settings.font = 0;
+        std::cerr << "Default font." << std::endl;
+    }
+    font=Fonts[text_settings.font];
+    font.setPointSize(text_settings.charsize);
+    if (Painter) Painter->setFont(font);
+}
+void settextstyle(int __font, int __direction, int __charsize){
+    text_settings.font = (__font < FontCount) ? __font : 0;
+    text_settings.direction = __direction;
+    text_settings.charsize = __charsize;
+    select_font();
+}
+void _SetText(unsigned int __font, int d1, int d2){
+    text_settings.font = (__font < FontCount) ? __font : 0;
+    select_font();
+    settextjustify(d1, d2);
+}
+void _SetTextSize(int charsize){
+    text_settings.charsize = charsize;
+    select_font();
+}
+
+int textheight(const char* __textstring){
+    QFontMetrics fm(font);
+    return fm.horizontalAdvance(__textstring);
+}
+int textwidth(const char* __textstring){
+    QFontMetrics fm(font);
+    return fm.height();
+}
+
 // =============   DRAW  ==========
 
 void  bar(int __left, int __top, int __right, int __bottom){
@@ -117,8 +250,8 @@ void  pie(int X1, int Y1, int X2, int Y2, int X3, int Y3, int X4, int Y4){
         // Хер знат как пересчитать борланд отсечку в градусы
         // рисую полукружия , надо проверять
         if (Y3>Y4)
-        Painter->drawPie(r,0*16,180*16); else
-        Painter->drawPie(r,180*16,360*16);
+            Painter->drawPie(r,0*16,180*16); else
+            Painter->drawPie(r,180*16,360*16);
     }
 }
 void  drawpoly(int __numpoints, const int *__polypoints)
@@ -170,15 +303,15 @@ void rectangle(int left, int top, int right, int bottom)
 {
     if (top > bottom)
         std::swap(top, bottom);
-      if (left > right)
+    if (left > right)
         std::swap(left, right);
 
-      QPolygon p;
-      p.push_back(QPoint(left, top));
-      p.push_back(QPoint(right, top));
-      p.push_back(QPoint(right, bottom));
-      p.push_back(QPoint(left, bottom));
-      p.push_back(QPoint(left, top));
+    QPolygon p;
+    p.push_back(QPoint(left, top));
+    p.push_back(QPoint(right, top));
+    p.push_back(QPoint(right, bottom));
+    p.push_back(QPoint(left, bottom));
+    p.push_back(QPoint(left, top));
 
 
     if (bgi_tracking) {
@@ -194,6 +327,80 @@ void roundrect(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int
     }
     if (Painter) Painter->drawRoundedRect(r,nWidth,nHeight);
 }
+
+void OutTextXY(int x, int y, const char* str)
+{
+    if (strlen(str) == 0)         return;
+    int tw = textwidth(str);
+    int th = textheight(str);
+    int dy = 0; // ptm->tmInternalLeading;
+    int dx = 0;
+    switch (text_settings.horiz) {
+    case LEFT_TEXT:
+        dx = 0;
+        break;
+    case CENTER_TEXT: {
+        dx = (0.5 + 1. * tw / 2);
+    } break;
+    case RIGHT_TEXT:
+        dx = tw;
+        break;
+    }
+    switch (text_settings.vert) {
+    case TOP_TEXT:
+        dy = 0;
+        break;
+    case BOTTOM_TEXT:
+        dy = th;
+        break;
+    case CENTER_TEXT: {
+        dy = (0.5 + 1. * th / 2) /*-1*/;
+    } break;
+    }
+
+    if (bgi_tracking) {
+
+        QRect r(x - dx,y - dy,x - dx + tw,x - dx + th);
+        tracking_add_rect(r); return;
+    }
+    if (Painter) Painter->drawText(x - dx, y - dy, str);
+
+}
+void DrawText(int x, int y, int tw, int th, const char* str)
+{
+    if (strlen(str) == 0)         return;
+    QRect r(x,y,x + tw,x+ th);
+    if (bgi_tracking) {
+        tracking_add_rect(r); return;
+    }
+    int uF=0;
+    switch (text_settings.horiz) {
+    case LEFT_TEXT:
+        uF = uF | Qt::AlignLeft;
+        break;
+    case CENTER_TEXT:
+        uF = uF | Qt::AlignHCenter;
+        break;
+    case RIGHT_TEXT:
+        uF = uF | Qt::AlignRight;
+        break;
+    }
+    switch (text_settings.vert) {
+    case TOP_TEXT:
+        uF = uF | Qt::AlignTop;
+        break;
+    case BOTTOM_TEXT:
+        uF = uF | Qt::AlignBottom;
+        break;
+    case CENTER_TEXT:
+        uF = uF | Qt::AlignVCenter;
+        break;
+    }
+
+    if (Painter)Painter->drawText(r,uF,str);
+
+}
+
 
 
 
