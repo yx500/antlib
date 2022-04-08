@@ -55,7 +55,18 @@ struct TRect : public RECT
 typedef tagSIZE TSize;
 
 void ShowMessage(const String& txt);
+
 bool FileExists(const String& fn);
 String ChangeFileExt(const String& fn, const char* ext);
 String ExtractFileName(const String& fn);
 String ExtractFileDir(const String& fn);
+
+
+// winuser.h
+void OemToAnsi(const char* in, char* out);
+void OemToChar(const char* src, char* dst);
+void CharToOem(const char* src, char* dst);
+
+void OemToCharBuff(const char* in, char* out, size_t s);
+void CharToOemBuff(const char* in, char* out, size_t s);
+

@@ -94,9 +94,9 @@ public:
   Poligon* Polig();
 
   virtual int GetMarkerAtXY(int X, int Y);
-  virtual void ChangeMarkerXY(int /*iMarker*/, int /*aX*/, int /*aY*/){};
-  virtual int GetMarkerCount() { return 0; };
-  virtual void GetMarkerPoint(int /*iMarker*/, int& /*aX*/, int& /*aY*/){};
+  virtual void ChangeMarkerXY(int /*iMarker*/, int /*aX*/, int /*aY*/){}
+  virtual int GetMarkerCount() { return 0; }
+  virtual void GetMarkerPoint(int /*iMarker*/, int& /*aX*/, int& /*aY*/){}
 
   void ShowPads();
 };

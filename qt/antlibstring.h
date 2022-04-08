@@ -1,5 +1,7 @@
 #pragma once
 
+#include "utils.h"
+
 #include <iomanip>
 #include <iostream>
 #include <stdexcept>
@@ -35,8 +37,8 @@ public:
     return defaultValue;
   }
 
-  AString UpperCase() const;
-  AString Trim() const;
+  AString UpperCase() const { return alib::to_upper(*this); }
+  AString Trim() const { return alib::trim(*this); }
   AString SubString(int b, int n) const;
   AString Delete(int b, int n) const;
 
@@ -68,6 +70,3 @@ extern AString IntToHex(int Value, int Digits);
 
 inline int StrToInt(const AString& s) { return s.ToInt(); }
 inline int StrToIntDef(const AString& s, int Default) { return s.ToIntDef(Default); }
-
-extern void OemToChar(const char* src, char* dst);
-extern void CharToOem(const char* src, char* dst);
