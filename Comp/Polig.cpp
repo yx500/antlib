@@ -343,7 +343,7 @@ int Poligon::GetNumStanFor(int x, int y)
   static int ddd[256];
   for (int i = 0; i < 256; i++)
     ddd[i] = 2147483647;
-  PAComp P = NULL;
+  AComp* P = NULL;
   int sx, sy, mx, my;
   // char *name;
   for (int i = 0; i < Col_ST; i++) {

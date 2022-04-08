@@ -37,10 +37,10 @@ TEachAComp MakeNewComp = 0;
 // FILE *CurStanFile = 0;
 // long int FTellPos = 0;
 
-PAComp VisibleArray::New(TYP type)
+AComp* VisibleArray::New(TYP type)
 {
   try {
-    PAComp RT = NULL;
+    AComp* RT = NULL;
     switch (type) {
     case GORL:
       RT = new Gorl();
@@ -333,13 +333,13 @@ VisibleArray::~VisibleArray()
   RemoveAll();
 }
 
-int VisibleArray::Add(PAComp ptr)
+int VisibleArray::Add(AComp* ptr)
 {
   data.push_back(ptr);
   ptr->pVisibleArray = this;
   return data.size();
 }
-int VisibleArray::Insert(PAComp ptr, int p)
+int VisibleArray::Insert(AComp* ptr, int p)
 {
   data.insert(data.begin() + p, ptr);
   ptr->pVisibleArray = this;
@@ -350,7 +350,7 @@ int VisibleArray::Remove(int p)
 {
   if (data.size() <= p)
     return 0;
-  PAComp ac = data.at(p);
+  AComp* ac = data.at(p);
   if (ac != NULL) {
     delete ac;
   }
@@ -366,7 +366,7 @@ void VisibleArray::RemoveAll()
 }
 
 void __fastcall tracecoord(int x, int y);
-void VisibleArray::Show(PAComp ac)
+void VisibleArray::Show(AComp* ac)
 {
   if (((ac->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) ||
       ((ac->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT))) {
@@ -386,36 +386,36 @@ void VisibleArray::Get(int Number)
 {
 if(Number<1 || Number>data->Count)
   return;
-((PAComp)data->Items[Number-1])->Get();
+((AComp*)data->Items[Number-1])->Get();
 }
 void VisibleArray::Set(int Number)
 {
 if(Number<1 || Number>data->Count)
   return;
-((PAComp)data->Items[Number-1])->Set();
+((AComp*)data->Items[Number-1])->Set();
 }
 */
-PAComp VisibleArray::GetObjPtr(int p)
+AComp* VisibleArray::GetObjPtr(int p)
 {
   if (p < 0 || p >= data.size())
     return NULL;
   return data.at(p);
 }
-PAComp VisibleArray::SetObjPtr(int p, PAComp ac)
+AComp* VisibleArray::SetObjPtr(int p, AComp* ac)
 {
-  PAComp ac2 = data.at(p);
+  AComp* ac2 = data.at(p);
   data.at(p) = ac;
   return ac2;
 }
 /*
-void VisibleArray::Move(PAComp ac, int DeltaX, int DeltaY)
+void VisibleArray::Move(AComp* ac, int DeltaX, int DeltaY)
 {
     ac->Move(DeltaX, DeltaY);
 }
  */
 void VisibleArray::ShowAll()
 {
-  PAComp ac;
+  AComp* ac;
   for (data_type::iterator i = data.begin(); i != data.end(); ++i) {
     ac = (*i);
     if (((ac->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)))
@@ -426,7 +426,7 @@ void VisibleArray::ShowAll()
 
 void VisibleArray::ShowLayer(int Layer)
 {
-  PAComp ac;
+  AComp* ac;
   for (data_type::iterator i = data.begin(); i != data.end(); ++i) {
     ac = (*i);
     if (((ac->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) || ((ac->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT)))
@@ -440,7 +440,7 @@ void VisibleArray::GoAll()
     return;
   data_type::iterator b = data.begin();
   data_type::iterator e = data.end();
-  PAComp ac;
+  AComp* ac;
 
   if ((*b)->GetType() == GORL)
     b = e - RTGorlCnt;
@@ -499,7 +499,7 @@ int VisibleArray::GetArraySize()
 int VisibleArray::LoadAll(int NALL, FILE* file, int ut)
 {
   PGorl Member;
-  PAComp G;
+  AComp* G;
   TYP type;
   // CurStanFile = file;
   for (int count = 0; count < NALL; count++) {
@@ -542,7 +542,7 @@ int VisibleArray::SaveAll(FILE* file, int ut)
 {
   PGorl Member;
   // Lamp *Lmp;
-  PAComp G;
+  AComp* G;
   int cnt = data.size();
   data_type::iterator b = data.begin();
   data_type::iterator e = data.end();
@@ -575,7 +575,7 @@ int VisibleArray::SaveAll(FILE* file, int ut)
 
 void VisibleArray::ClearAll(void)
 {
-  PAComp ac;
+  AComp* ac;
 
   for (data_type::iterator i = data.begin(); i != data.end(); ++i) {
     ac = (*i);
@@ -584,7 +584,7 @@ void VisibleArray::ClearAll(void)
   }
 }
 
-int VisibleArray::IndexOf(PAComp ac)
+int VisibleArray::IndexOf(AComp* ac)
 {
   data_type::iterator i = std::find(data.begin(), data.end(), ac);
   if (i == data.end())
