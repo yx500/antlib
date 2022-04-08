@@ -34,9 +34,6 @@ TEachAComp EachACompStanPostFun = 0;
 
 TEachAComp MakeNewComp = 0;
 
-// FILE *CurStanFile = 0;
-// long int FTellPos = 0;
-
 AComp* VisibleArray::New(TYP type)
 {
   try {
