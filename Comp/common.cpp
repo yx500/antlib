@@ -10,22 +10,16 @@
 #include <iomanip>
 #include <iostream>
 
-void Qui(const char* bf, int, int)
+void CriticalError(const char* bf, bool do_throw)
 {
-  // throw(const char*)bf;
-  WriteToErr(bf);
+  PrintError(bf);
+  if( do_throw ) 
+    throw std::runtime_error(bf);
 }
 
-void WriteToLog(const std::string& Str)
+void PrintError(const char* txt)
 {
-  std::clog << "Log: " << Str.c_str() << std::endl;
-}
-
-void WriteToErr(const std::string& Str)
-{
-  std::cerr << std::endl
-            << "Err: " << Str.c_str() << std::endl
-            << std::endl;
+  std::cerr << "Err: " << txt << std::endl;
 }
 
 const int _ctnon = 0;

@@ -858,7 +858,7 @@ void Gorl::Load(FILE* file)
     /*-------------------------------------------------*/
   } else {
     if (gorl[0] == NULL)
-      Qui("нет памяти для горловин", 1, 0);
+      CriticalError("нет памяти для горловин");
 
     fread(gorl[0], sizeof(Grl), 1, file);
     if (gorl[0]->nom_fiz > Col_Gorl)

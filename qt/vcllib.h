@@ -54,8 +54,9 @@ struct TRect : public RECT
 
 typedef tagSIZE TSize;
 
-void ShowMessage(const String& txt);
 
+
+//**********************************************************************************************
 bool FileExists(const String& fn);
 String ChangeFileExt(const String& fn, const char* ext);
 String ExtractFileName(const String& fn);

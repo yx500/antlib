@@ -4,8 +4,7 @@
 #ifdef __BORLANDC__
 
 #include <system.hpp>
-// class RTL_DELPHIRETURN AString : public AnsiString{
-// };
+// class RTL_DELPHIRETURN AString : public AnsiString{};
 // typedef AnsiString  String;
 
 #else

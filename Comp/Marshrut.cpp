@@ -13,6 +13,7 @@
 
 extern bool ShowUstMarshOnly_1;
 const String chNO_CHECK_IS = "#";
+
 TStrInMarsh::TStrInMarsh()
 {
   memset(STRELNAME, 0, sizeof(STRELNAME));
@@ -23,9 +24,6 @@ TStrInMarsh::TStrInMarsh()
   realIS = 0;
   realBUSY = 0;
   realKZM = 0;
-  // PacketName = "";
-  // memset(imp, 0, sizeof(imp));
-  // ObjID = 0;
 }
 
 void TStrInMarsh::UpdateState() // Устанавливает текущие значения
@@ -69,32 +67,6 @@ void TStrInMarsh::UpdateState() // Устанавливает текущие значения
     //}
   }
 }
-/*extern T_f_Func _f_;
-void        TStrInMarsh::UpdateState2()
-{
-    realIS = 3;
-    realBUSY = 0;
-    realKZM = 0;
-
-    int fimpuls_busi = _f_(imp[0], NULL);
-    int fimpuls_plus = _f_(imp[1], NULL);
-    int fimpuls_mnus = _f_(imp[2], NULL);
-    int fimpuls_kzm = _f_(imp[3], NULL);
-
-    if ((imp[1] == 0) && (imp[2] == 0)) {
-        realIS = 0;
-    } else {
-        if ((fimpuls_plus == 1) && (fimpuls_mnus == 0)) realIS = P;
-        if ((fimpuls_plus == 0) && (fimpuls_mnus == 1)) realIS = M;
-    }
-
-    //realIS=S->fimpuls_plus*2+S->fimpuls_minus;
-    realBUSY = fimpuls_busi;
-    if (imp[0] == 0) realBUSY = 3;
-    realKZM = fimpuls_kzm;
-    if (imp[3] == 0)realKZM = 3;
-}
-*/
 
 void TStrInMarsh::FromString(String stSrc)
 {
@@ -139,11 +111,6 @@ String TStrInMarsh::ToString()
 // =====================================================================
 
 TMarshrut::TMarshrut()
-/*apilotState(mk_state_Busy),
-oldapilotState(mk_state_Busy),
-apilotStateEx(mk_state_ex_Nothing),
-apilotEsr(0),
-apilotId_mar(0)*/
 {
   pSV = NULL;
   pSV2 = NULL;
@@ -154,21 +121,10 @@ apilotId_mar(0)*/
   realbusyS_PAST = 0;
   realkzmS_PRED = 0;
   realkzmS_PAST = 0;
-  // PacketName = "";
-  // memset(imp, 0, sizeof(imp));
-  // memset(ObjID, 0, sizeof(ObjID));
   MarshList = NULL;
 
   memset(&TUCmd, 0, sizeof(TUCmd));
   TUPacketName = "";
-
-  // for (int d = 0; d < 2; d++) {
-  //     imp_per_napr[d] = 0; imp_per_busy[d] = 0;
-  // }
-  // YZ_PRED = NULL;  // указатели на зоны в графе
-  // YZ_PAST = NULL;
-  // YZ_TNZ = NULL;
-  // YZ_TNO = NULL;
   bErrorData = false;
 }
 
@@ -178,6 +134,7 @@ void TMarshrut::Clear()
     delete vStrels[i];
   vStrels.clear();
 }
+
 TMarshrut::~TMarshrut()
 {
   Clear();
@@ -365,33 +322,6 @@ void TMarshrut::UpdateState()
   }
 }
 
-/*void TMarshrut::UpdateState2()
-{
-    // обновляем текущее состояние
-    for (int i = 0; i < GetSTRELSCOUNT(); i++)
-        GetSTRELS(i)->UpdateState2();
-
-    realbusySV = _f_(imp[ii_busySV], NULL);
-    realbusyS_PRED = _f_(imp[ii_busyS_PRED], NULL);
-    realbusyS_PAST = _f_(imp[ii_busyS_PAST], NULL);
-    realkzmS_PRED = _f_(imp[ii_kzmS_PRED], NULL);
-    realkzmS_PAST = _f_(imp[ii_kzmS_PAST], NULL);
-    if (imp[ii_busySV]    == 0) realbusySV = 3;
-    if (imp[ii_busyS_PRED] == 0) realbusyS_PRED = 3;
-    if (imp[ii_busyS_PAST] == 0) realbusyS_PAST = 3;
-    if (imp[ii_kzmS_PRED] == 0) realkzmS_PRED = 3;
-    if (imp[ii_kzmS_PAST] == 0) realkzmS_PAST = 3;
-
-    for (int d = 0; d < 2; d++) {
-        rimp_per_napr[d] = _f_(imp_per_napr[d], NULL);
-        rimp_per_busy[d] = _f_(imp_per_busy[d], NULL);
-        if (imp_per_napr[d] == 0) rimp_per_napr[d] = 3;
-        if (imp_per_busy[d] == 0) rimp_per_busy[d] = 3;
-    }
-
-
-}
-*/
 
 bool TMarshrut::UpdateStrelOrder() // Устанавливает параметр ORDER для стрелок
 {
@@ -422,9 +352,6 @@ void TMarshrut::AddStrInMarsh(TStrInMarsh* sim)
 
 void TMarshrut::DelStrInMarsh(TStrInMarsh* sim)
 {
-  //    std::vector<TStrInMarsh*>::iterator f = std::find(vStrels.begin(),vStrels.end(),sim);
-  //    if( f != vStrels.end() )
-  //        vStrels.erase(f);
   vStrels.erase(std::find(vStrels.begin(), vStrels.end(), sim));
 }
 
@@ -432,7 +359,7 @@ TStrInMarsh* TMarshrut::SetStrInMarsh(String StrelName, int IS, TStrInMarshChek 
 {
   TStrInMarsh* simS = MarshList->GetStrelByName(StrelName);
   if (simS == NULL) {
-    WriteToLog((StrelName + " нет в списке стрелок станции.").c_str());
+    PrintError((StrelName + " нет в списке стрелок станции.").c_str());
     return NULL;
   }
   TStrInMarsh* simM = GetStrelByName(StrelName);
@@ -471,36 +398,6 @@ TMarshOdd_Even TMarshrut::GetOddEven()
     return mOdd; // нечётное
   return mUnknown;
 }
-
-/*int TMarshrut::CheckGoodDir()
-{
-    if (GetDirType() != mdirDep) return 1;  // тока отправление шерстим
-    int naprOdd = imp_per_napr[0];  //сигнал направления на перегоне Н Ч
-    int naprEven = imp_per_napr[1];
-    int zanOdd = imp_per_busy[0];  //сигнал занятия перегона Н Ч
-    int zanEven = imp_per_busy[1];
-    // изменяются в UpdateState()
-    int rnaprOdd = rimp_per_napr[0];
-    int rnaprEven = rimp_per_napr[1];
-    int rzanOdd = rimp_per_busy[0];
-    int rzanEven = rimp_per_busy[1];
-
-    TMarshOdd_Even OdEv_ = GetOddEven();
-
-    if (OdEv_ == mUnknown) return 1;
-    if (rnaprEven == 33 || rzanEven == 33 || rnaprOdd == 33 || rzanOdd == 33) return 1;
-    if ((rzanEven == 1) || (rzanOdd == 1)) { // занят перегон
-        if (OdEv_ == mOdd) {
-            if ((rnaprEven == 1) || (rnaprEven == rnaprOdd)) return -1; // перегон занят!
-        }
-        if (OdEv_ == mEven) {
-            if ((rnaprOdd == 1) || (rnaprEven == rnaprOdd)) return -1; // перегон занят!
-        }
-    }
-    return 1; // криминала нет!
-}
-*/
-// ====================================================================================
 
 TMarshList::TMarshList()
 {
@@ -559,7 +456,7 @@ bool TMarshList::LoadFromCSV(String stFN)
       }
     }
     if (stSH == "") {
-      WriteToLog(("Не найдена шапка в " + stFN).c_str());
+      PrintError(("Не найдена шапка в " + stFN).c_str());
       return false;
     }
     TParString PS(stSH, ";,"); // двойной разделитель из-за различных версий Excel
@@ -574,12 +471,6 @@ bool TMarshList::LoadFromCSV(String stFN)
       if (!IsPropNameStrel(PS[i]))
         PropStrBegin = i + 1;
     }
-    // if (m.GetItemsCount!=pcnt){
-    //    ShowMessage("Проблемы в шапке "+stFN+"\r совпадают "+IntToStr(pcnt-m.ItemsCount)+" поля(е) !");
-    //    return false;
-    // }
-
-    // if (PS.GetInd(MarshrutPropName[indGORL]))<=0) PropStrBegin
 
     // заполняем массив имён стрелок
     for (int i = 0 /*PropStrBegin*/; i < pcnt; i++) {
@@ -613,7 +504,7 @@ bool TMarshList::LoadFromCSV(String stFN)
                int ii = ps.GetInt(1);
                SIM = STRELS[ii];
                if ((SIM == NULL) || (String(SIM->STRELNAME) != ps[2])) {
-                   WriteToLog(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str());
+                   PrintError(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str());
                    break;
                }
                SIM->ObjID = ps.GetInt(3, 0);
@@ -628,7 +519,7 @@ bool TMarshList::LoadFromCSV(String stFN)
            if (ps[0] == "M_T") {
                int ii = ps.GetInt(1); M = MARSHRUTS[ii];
                if ((M == NULL)) {
-                   WriteToLog(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str()); break;
+                   PrintError(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str()); break;
                }
                M->MarshSectType = (TMarshSectType)ps.GetInt(2, 0);
            }
@@ -639,7 +530,7 @@ bool TMarshList::LoadFromCSV(String stFN)
            if (ps[0] == "M_SV") {
                int ii = ps.GetInt(1); M = MARSHRUTS[ii];
                if ((M == NULL) || (M->SV != ps[2])) {
-                   WriteToLog(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str()); break;
+                   PrintError(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str()); break;
                }
                M->ObjID[ii_busySV] = ps.GetInt(3, 0);
                M->PacketName = ps[4];
@@ -649,7 +540,7 @@ bool TMarshList::LoadFromCSV(String stFN)
            if (ps[0] == "M_S_PRED") {
                int ii = ps.GetInt(1); M = MARSHRUTS[ii];
                if ((M == NULL) || (M->S_PRED != ps[2])) {
-                   WriteToLog(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str()); break;
+                   PrintError(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str()); break;
                }
                M->ObjID[ii_busyS_PRED] = ps.GetInt(3, 0);
                if (M->PacketName == "")M->PacketName = ps[4];
@@ -661,7 +552,7 @@ bool TMarshList::LoadFromCSV(String stFN)
            if (ps[0] == "M_S_PAST") {
                int ii = ps.GetInt(1); M = MARSHRUTS[ii];
                if ((M == NULL) || (M->S_PAST != ps[2])) {
-                   WriteToLog(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str()); break;
+                   PrintError(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str()); break;
                }
                M->ObjID[2] = ps.GetInt(3, 0);
                if (M->PacketName == "")M->PacketName = ps[4];
@@ -677,7 +568,7 @@ bool TMarshList::LoadFromCSV(String stFN)
     // UpdateLoadedImps();
 
   } catch (...) {
-    WriteToErr((" Проблемы с " + stFN).c_str());
+    PrintError((" Проблемы с " + stFN).c_str());
     return false;
   }
   return true;
@@ -797,7 +688,7 @@ bool TMarshList::SaveToCSV(String stFN)
   try {
     SL->SaveToFile(stFN);
   } catch (...) {
-    ShowMessage(" Не могу записать " + stFN);
+    PrintError(" Не могу записать " + stFN);
     return false;
   }
   delete SL;
@@ -958,14 +849,6 @@ void TMarshList::UpdateState()
   }
 }
 
-/*void TMarshList::UpdateState2()
-{
-    for (int i = 0; i < getMARSHRUTSCOUNT(); i++) {
-        GetMARSHRUTS(i)->UpdateState2();
-    }
-}
-*/
-
 TStrInMarsh* TMarshList::GetStrelByName(String StrelName)
 {
   for (int i = 0; i < vStrels.size(); i++)
@@ -1030,9 +913,6 @@ void TMarshList::ShowUstMarsh(bool Only_1)
       S->bShowInSpyMarsh = false;
     }
   }
-  // for(int i=0;i<getMARSHRUTSCOUNT();i++){
-  //         GetMARSHRUTS(i)->SetForShowUst(true);
-  // }
 
   for (int i = 0; i < GetMARSHRUTSCOUNT(); i++) {
     if (((!Only_1) || (GetMARSHRUTS(i)->GROUP == 1)) && (GetMARSHRUTS(i)->IsUstanovlen()))

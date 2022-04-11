@@ -5,31 +5,17 @@
 
 #include <string>
 
-class AComp;
-
-//-------------------------------------------------------------------
-//                 œ–Œ“Œ“»œ€ ‘”Õ ÷»…
-//-------------------------------------------------------------------
-
 extern void Color_Off(void);
 extern void Color_On(void);
 
-extern void Qui(const char*, int, int);
-void WriteToLog(const std::string& Str);
-void WriteToErr(const std::string& Str);
+extern void CriticalError(const char*, bool do_throw=true);
+void PrintError(const char* txt);
+inline void PrintError(const std::string& txt) { PrintError(txt.c_str()); }
 
-/*
-struct TImpPropNamesInfo {
-    char   CompType[64];
-    char   CompName[64];
 
-    int    ImpCount;
-    char   ImpName[6][64];
-    int RealOffset[6];
-};
-void  _GetImpPropNamesInfo(AComp * ac , TImpPropNamesInfo &I);
-*/
+class AComp;
 const char* GetTypeName(AComp* AC);
 const char* GetTypeAndName(AComp* AC);
+
 
 #endif

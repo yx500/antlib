@@ -6,6 +6,8 @@
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#include <memory>
+#include <cstdio>
 
 class AString : public std::string
 {
@@ -42,27 +44,37 @@ public:
   AString SubString(int b, int n) const;
   AString Delete(int b, int n) const;
 
-  void printf(const char* f, float v)
+//  void printf(const  f, float v)
+//  {
+//    static char _buf[64];
+//    sprintf(_buf, f, v);
+//    this->clear();
+//    this->append(_buf);
+//  }
+//  void printf(const char* f, int v)
+//  {
+//    static char _buf[64];
+//    sprintf(_buf, f, v);
+//    this->clear();
+//    this->append(_buf);
+//  }
+//  void printf(const char* f, double v)
+//  {
+//    static char _buf[64];
+//    sprintf(_buf, f, v);
+//    this->clear();
+//    this->append(_buf);
+//  }
+
+  template<typename ... Args>
+  void printf( const char* format, Args ... args )
   {
-    static char _buf[64];
-    sprintf(_buf, f, v);
-    this->clear();
-    this->append(_buf);
+    size_t size = std::snprintf( nullptr, 0, format, args ... ) + 1; // Extra space for '\0'
+    std::unique_ptr<char[]> buf( new char[ size ] );
+    std::snprintf( buf.get(), size, format, args ... );
+    this->assign( std::string( buf.get(), buf.get() + size - 1 ) ); // We don't want the '\0' inside
   }
-  void printf(const char* f, int v)
-  {
-    static char _buf[64];
-    sprintf(_buf, f, v);
-    this->clear();
-    this->append(_buf);
-  }
-  void printf(const char* f, double v)
-  {
-    static char _buf[64];
-    sprintf(_buf, f, v);
-    this->clear();
-    this->append(_buf);
-  }
+
 };
 
 inline AString IntToStr(int Value) { return std::to_string(Value); }

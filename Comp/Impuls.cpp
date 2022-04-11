@@ -237,7 +237,7 @@ void __fastcall TAImpuls::SetAbsNumber(int value)
       }
     }
     // MessageDlg(IntToStr(value)+" Не Входит в список каналов станции", mtError  , TMsgDlgButtons() << mbOK , 0);
-    Qui(" Не Входит в список каналов станции", 1, 1);
+    CriticalError(" Не Входит в список каналов станции");
   } else {
     FAbsNumber = value;
     Number = value;

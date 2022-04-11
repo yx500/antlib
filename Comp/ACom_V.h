@@ -1,5 +1,3 @@
-
-
 #ifndef ACom_VH
 #define ACom_VH
 

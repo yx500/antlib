@@ -62,7 +62,7 @@ int Poligon::LoadYCH(const char* filename)
 
   if (file == NULL) {
     String t = String("Can't open file: ") + filename;
-    Qui(t.c_str(), 1, 0);
+    CriticalError(t.c_str());
     return -1;
   }
   fread(&Col_ST, sizeof(short int), 1, file);
@@ -292,7 +292,7 @@ void Poligon::SaveYCH()
   // file=fopen(CommitFile(FULL_PATH),"wb");
   file = fopen(CommitFile(FullFileName), "wb");
   if (file == NULL)
-    Qui("Не могу открыть файл участка", 1, 0);
+    CriticalError("Не могу открыть файл участка");
 
   fwrite(&Col_ST, sizeof(short int), 1, file);
   for (int i = 0; i < Col_ST; i++) {
@@ -394,7 +394,7 @@ void* Poligon::SetCommBuf(int8 A)
     if (ENG_Pack == NULL)
       return NULL;
     if (CABufCount++ > 490) {
-      Qui("SetCommBuf", 0, 0);
+      CriticalError("SetCommBuf");
       return NULL;
     }
 
@@ -402,7 +402,7 @@ void* Poligon::SetCommBuf(int8 A)
     return &ENG_Pack[CABufCount];
   } catch (...) {
   }
-  Qui("SetCommBuf_catch", 0, 0);
+  CriticalError("SetCommBuf_catch");
   return NULL;
 }
 

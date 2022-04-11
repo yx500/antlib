@@ -129,7 +129,7 @@ void SaveLampsLS(Station* Stan)
     // memset(&Stan->EnergStanLamps->Lamps[cnt].Reserv,0,sizeof(Stan->EnergStanLamps->Lamps[cnt].Reserv));
     cnt++;
     if (cnt == _MaxLampsInPacket) {
-      ShowMessage("Переполнение буфера энергетиков по станции " + String(Stan->Dat->filename));
+      PrintError("Переполнение буфера энергетиков по станции " + String(Stan->Dat->filename));
       cnt = _MaxLampsInPacket - 1;
     }
   }
