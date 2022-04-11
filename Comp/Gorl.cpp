@@ -790,7 +790,6 @@ void Gorl::Show()
 
 void Gorl::Save(FILE* file)
 {
-
   Grl gorl_0;
   memcpy(&gorl_0, gorl[0], sizeof(Grl));
 
@@ -811,15 +810,10 @@ void Gorl::Save(FILE* file)
   }
 
   // fwrite(gorl[0]->Sign,sizeof(Signal),gorl[0]->Col_Mar,file);
-
   fwrite(gorl[0]->impuls_m, sizeof(short int), gorl[0]->Col_Mar, file);
   fwrite(gorl[0]->impuls_km, sizeof(short int), gorl[0]->Col_Mar, file);
-
   fwrite(gorl[0]->zona_M, sizeof(ID_ZO), gorl[0]->Col_Mar, file);
 
-  /*         */
-
-  /*         */
   Get();
   fwrite(&MEM, sizeof(AMemory), 1, file);
 };
