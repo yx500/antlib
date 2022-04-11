@@ -16,14 +16,3 @@ String ExtractFileDir(const String &fn)
 }
 
 
-void OemToAnsi(const char *in, char *out)
-{
-}
-
-void OemToChar(const char *src, char *dst)
-{
-}
-
-void CharToOem(const char *src, char *dst)
-{
-}

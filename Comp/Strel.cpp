@@ -97,12 +97,12 @@ void Strel::Set()
        (GetType() == BASH) ||
        (GetType() == P_SVE) ||
        (GetType() == NAPR))) {
-    OemToCharBuff(MEM.name, name, 9); /*strncpy(name,MEM.name,9)*/
+    cp866_to_cp1251_buff(MEM.name, name, 9); /*strncpy(name,MEM.name,9)*/
     ;
     return;
   }
   if (MEM.name[0] == '$')
-    OemToCharBuff(MEM.name, name, 9);
+    cp866_to_cp1251_buff(MEM.name, name, 9);
   else
     memset(name, 0, 9);
 }
@@ -245,14 +245,14 @@ void Strel::Get()
   MEM2.Y_ = Y;
   MEM2.masy = 0;
   memset(MEM2.name, 0, sizeof(MEM2.name));
-  CharToOemBuff(name, MEM2.name, 9);
+  cp1251_to_cp866_buff(name, MEM2.name, 9);
   // memcpy(MEM2.name,name,9);
   MEM2.name[0] = '~';
   MEM2.ExtPriz.MEM2 = 0;
 
   MEM.Nomer = nomer;
   memset(MEM.name, 0, 10);
-  CharToOemBuff(name, MEM.name, 9);
+  cp1251_to_cp866_buff(name, MEM.name, 9);
   // memcpy(MEM.name,name,9);
 
   // memcpy( MEM.name+7   ,RezBuf   , 4);

@@ -116,7 +116,7 @@ public:
     if (strlen(name) > 0)
       return name;
     static char n_name[256];
-    ::OemToAnsi(Dat->descriptor, n_name);
+    cp866_to_cp1251_buff( Dat->descriptor, n_name, strlen(Dat->descriptor) );
     return n_name;
   }
   const char* FileName()

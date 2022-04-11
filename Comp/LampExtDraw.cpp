@@ -186,8 +186,6 @@ void TLED::Show()
     _SetText(font, LEFT_TEXT, TOP_TEXT);
     _SetTextSize(font_size);
 
-    // OemToAnsi( TextStr.c_str(),n_str );
-
     sz.cx = textwidth(TextStr.c_str());
     sz.cy = textheight(TextStr.c_str());
 

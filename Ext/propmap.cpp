@@ -44,14 +44,14 @@ String TPropMap::getOEM(const String& stKey)
 {
   String stVal = get(stKey);
   static char tmp[255];
-  CharToOem(stVal.c_str(), tmp);
+  cp1251_to_cp866_buff( stVal.c_str(), tmp, strlen(stVal.c_str()) );
   return tmp;
 }
 
 void TPropMap::putOEM(const String& stKey, String stVal)
 {
   static char tmp[255];
-  OemToChar(stVal.c_str(), tmp);
+  cp866_to_cp1251_buff(stVal.c_str(), tmp, strlen(stVal.c_str()) );
   put(stKey, String(tmp));
 }
 

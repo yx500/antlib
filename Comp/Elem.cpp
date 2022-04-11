@@ -17,7 +17,7 @@ void Element::Set()
   impuls_kmu = MEM.impuls_kmu;
   impuls_mu = MEM.impuls_mu;
   memset(name, 0, sizeof(name));
-  OemToCharBuff(MEM.name, name, 7);
+  cp866_to_cp1251_buff(MEM.name, name, 7);
 
   // memcpy(name,MEM.name,7);
   name[7] = 0;
@@ -40,7 +40,7 @@ void Element::Get()
   MEM.impuls_mu = impuls_mu;
   MEM.Nomer = 0;
   memset(MEM.name, 0, sizeof(MEM.name));
-  CharToOemBuff(name, MEM.name, 7);
+  cp1251_to_cp866_buff(name, MEM.name, 7);
   // strncpy(MEM.name,oemname,7);
   MEM.name[7] = 0;
 

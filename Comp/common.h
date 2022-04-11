@@ -5,10 +5,10 @@
 
 #include <string>
 
-extern void Color_Off(void);
-extern void Color_On(void);
+void Color_Off(void);
+void Color_On(void);
 
-extern void CriticalErr(const char*, bool do_throw=true);
+void CriticalErr(const char*, bool do_throw=true);
 void PrintErr(const char* txt);
 inline void PrintErr(const std::string& txt) { PrintErr(txt.c_str()); }
 

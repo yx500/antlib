@@ -14,7 +14,7 @@ void Lini::Set()
   AComp::Set();
   mas_y = MEM.Nomer;
   // strncpy(name,MEM.name,7);
-  OemToCharBuff(MEM.name, name, 7);
+  cp866_to_cp1251_buff(MEM.name, name, 7);
 }
 
 static String _LiniPropName[2] = {
@@ -43,7 +43,7 @@ void Lini::Get()
   MEM.impuls_kzm = 0;
   MEM.Nomer = mas_y;
   memset(MEM.name, 0, 16);
-  CharToOemBuff(name, MEM.name, 7);
+  cp1251_to_cp866_buff(name, MEM.name, 7);
   // strncpy(MEM.name,name,16);
 }
 

@@ -18,7 +18,7 @@ void AText::Set()
 {
   AComp::Set();
   memset(name, 0, sizeof(name));
-  OemToCharBuff(MEM.name, name, 15);
+  cp866_to_cp1251_buff(MEM.name, name, 15);
   // strncpy(name,MEM.name,15);
 }
 void AText::SetPropMap(TPropMap& m)
@@ -37,7 +37,7 @@ void AText::Get()
   MEM.impuls_kzm = 0;
   MEM.Nomer = 0;
   memset(MEM.name, 0, sizeof(MEM.name));
-  CharToOemBuff(name, MEM.name, 15);
+  cp1251_to_cp866_buff(name, MEM.name, 15);
   // strncpy(MEM.name,name,15);
 }
 

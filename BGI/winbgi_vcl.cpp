@@ -1286,8 +1286,7 @@ void DrawText(int x, int y, int tw, int th, const char* str)
 {
   if (strlen(str) == 0)
     return;
-  // OemToAnsi( str,n_str );
-
+  
   tracecoord(x, y);
   tracecoord(x + tw, y);
   tracecoord(x, y + th);
