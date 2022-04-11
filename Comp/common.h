@@ -8,9 +8,9 @@
 extern void Color_Off(void);
 extern void Color_On(void);
 
-extern void CriticalError(const char*, bool do_throw=true);
-void PrintError(const char* txt);
-inline void PrintError(const std::string& txt) { PrintError(txt.c_str()); }
+extern void CriticalErr(const char*, bool do_throw=true);
+void PrintErr(const char* txt);
+inline void PrintErr(const std::string& txt) { PrintErr(txt.c_str()); }
 
 
 class AComp;

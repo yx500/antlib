@@ -10,14 +10,14 @@
 #include <iomanip>
 #include <iostream>
 
-void CriticalError(const char* bf, bool do_throw)
+void CriticalErr(const char* bf, bool do_throw)
 {
-  PrintError(bf);
+  PrintErr(bf);
   if( do_throw ) 
     throw std::runtime_error(bf);
 }
 
-void PrintError(const char* txt)
+void PrintErr(const char* txt)
 {
   std::cerr << "Err: " << txt << std::endl;
 }

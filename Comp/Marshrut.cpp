@@ -359,7 +359,7 @@ TStrInMarsh* TMarshrut::SetStrInMarsh(String StrelName, int IS, TStrInMarshChek 
 {
   TStrInMarsh* simS = MarshList->GetStrelByName(StrelName);
   if (simS == NULL) {
-    PrintError((StrelName + " нет в списке стрелок станции.").c_str());
+    PrintErr((StrelName + " нет в списке стрелок станции.").c_str());
     return NULL;
   }
   TStrInMarsh* simM = GetStrelByName(StrelName);
@@ -456,7 +456,7 @@ bool TMarshList::LoadFromCSV(String stFN)
       }
     }
     if (stSH == "") {
-      PrintError(("Не найдена шапка в " + stFN).c_str());
+      PrintErr(("Не найдена шапка в " + stFN).c_str());
       return false;
     }
     TParString PS(stSH, ";,"); // двойной разделитель из-за различных версий Excel
@@ -504,7 +504,7 @@ bool TMarshList::LoadFromCSV(String stFN)
                int ii = ps.GetInt(1);
                SIM = STRELS[ii];
                if ((SIM == NULL) || (String(SIM->STRELNAME) != ps[2])) {
-                   PrintError(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str());
+                   PrintErr(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str());
                    break;
                }
                SIM->ObjID = ps.GetInt(3, 0);
@@ -519,7 +519,7 @@ bool TMarshList::LoadFromCSV(String stFN)
            if (ps[0] == "M_T") {
                int ii = ps.GetInt(1); M = MARSHRUTS[ii];
                if ((M == NULL)) {
-                   PrintError(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str()); break;
+                   PrintErr(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str()); break;
                }
                M->MarshSectType = (TMarshSectType)ps.GetInt(2, 0);
            }
@@ -530,7 +530,7 @@ bool TMarshList::LoadFromCSV(String stFN)
            if (ps[0] == "M_SV") {
                int ii = ps.GetInt(1); M = MARSHRUTS[ii];
                if ((M == NULL) || (M->SV != ps[2])) {
-                   PrintError(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str()); break;
+                   PrintErr(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str()); break;
                }
                M->ObjID[ii_busySV] = ps.GetInt(3, 0);
                M->PacketName = ps[4];
@@ -540,7 +540,7 @@ bool TMarshList::LoadFromCSV(String stFN)
            if (ps[0] == "M_S_PRED") {
                int ii = ps.GetInt(1); M = MARSHRUTS[ii];
                if ((M == NULL) || (M->S_PRED != ps[2])) {
-                   PrintError(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str()); break;
+                   PrintErr(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str()); break;
                }
                M->ObjID[ii_busyS_PRED] = ps.GetInt(3, 0);
                if (M->PacketName == "")M->PacketName = ps[4];
@@ -552,7 +552,7 @@ bool TMarshList::LoadFromCSV(String stFN)
            if (ps[0] == "M_S_PAST") {
                int ii = ps.GetInt(1); M = MARSHRUTS[ii];
                if ((M == NULL) || (M->S_PAST != ps[2])) {
-                   PrintError(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str()); break;
+                   PrintErr(("Проблемы загрузки данных из " + stFN + "\r" + SL->At(i)).c_str()); break;
                }
                M->ObjID[2] = ps.GetInt(3, 0);
                if (M->PacketName == "")M->PacketName = ps[4];
@@ -568,7 +568,7 @@ bool TMarshList::LoadFromCSV(String stFN)
     // UpdateLoadedImps();
 
   } catch (...) {
-    PrintError((" Проблемы с " + stFN).c_str());
+    PrintErr((" Проблемы с " + stFN).c_str());
     return false;
   }
   return true;
@@ -688,7 +688,7 @@ bool TMarshList::SaveToCSV(String stFN)
   try {
     SL->SaveToFile(stFN);
   } catch (...) {
-    PrintError(" Не могу записать " + stFN);
+    PrintErr(("Не могу записать " + stFN).c_str());
     return false;
   }
   delete SL;

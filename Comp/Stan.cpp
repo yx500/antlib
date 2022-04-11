@@ -376,7 +376,7 @@ int Station::LoadSTA()
   St_Dat A;
 
   if ((file = this->_fopen("rb")) == NULL) {
-    CriticalError((String("No file: ") + FullFN()).c_str());
+    CriticalErr((String("No file: ") + FullFN()).c_str());
     return -1;
   }
   fread(&A, sizeof(St_Dat), 1, file);
@@ -402,7 +402,7 @@ int Station::LoadSTA()
       POLE[i] = new VisibleArray(NALL + 2, this);
     }
     if (POLE[i]->LoadAll(NALL, file, i) < 0) {
-      PrintError((String("Bad file: ") + FullFN()).c_str());
+      PrintErr((String("Bad file: ") + FullFN()).c_str());
       return -1;
     }
   }
@@ -1167,7 +1167,7 @@ uint16 Station::SetUnicalID(uint16 ID)
     }
   }
   if (maxID >= 0xFFFF) {
-    PrintError("Максимальное кол-во!");
+    PrintErr("Максимальное кол-во!");
     return 0;
   }
   return maxID + 1;

@@ -299,13 +299,13 @@ AComp* VisibleArray::New(TYP type)
       break;
 
     default:
-      CriticalError("Неизвестный тип элемента в *.sta ");
+      CriticalErr("Неизвестный тип элемента в *.sta ");
       break;
     }
     if (MakeNewComp && RT)
       MakeNewComp(RT);
     if (!RT) {
-      CriticalError("Битый файл или Того не могет быть %)");
+      CriticalErr("Битый файл или Того не могет быть %)");
       return NULL;
     } else {
       RT->pr = 0;
@@ -314,7 +314,7 @@ AComp* VisibleArray::New(TYP type)
       return RT;
     }
   } catch (...) {
-    CriticalError("Ошибка конструктора ");
+    CriticalErr("Ошибка конструктора ");
   }
   return NULL;
 }
