@@ -72,10 +72,10 @@ void TParString::SetInt(size_t ind, signed int IntVal)
   SetStr(ind, IntToStr(IntVal));
 }
 
-void TParString::SetHex(size_t ind, signed int IntVal)
-{
-  SetStr(ind, "0x" + IntToHex(IntVal, 2));
-}
+// void TParString::SetHex(size_t ind, signed int IntVal)
+// {
+//   SetStr(ind, "0x" + IntToHex(IntVal, 2));
+// }
 
 int TParString::GetInd(const String& stPar)
 {

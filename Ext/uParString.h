@@ -32,7 +32,7 @@ public:
 
   int GetInt(size_t ind, int DefaultVal = 0);
   void SetInt(size_t ind, signed int IntVal);
-  void SetHex(size_t ind, signed int IntVal);
+  // void SetHex(size_t ind, signed int IntVal);
 
   int GetInd(const String& stPar);
 
