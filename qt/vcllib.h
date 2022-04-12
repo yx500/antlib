@@ -58,9 +58,10 @@ typedef tagSIZE TSize;
 
 //**********************************************************************************************
 bool FileExists(const String& fn);
-String ChangeFileExt(const String& fn, const char* ext);
-String ExtractFileName(const String& fn);
-String ExtractFileDir(const String& fn);
+String ChangeFileExt(const String& filename, const char* ext);
+String ExtractFileName(const String& filename);
+String ExtractFileDir(const String& filename);
+bool FileExists(const String& filename);
 
 
 

@@ -1,18 +1,28 @@
 #include "vcllib.h"
+#include <QDir>
+#include <QFile>
+#include <QFileInfo>
+#include <filesystem>
 
-String ChangeFileExt(const String &fn, const char *ext)
+
+String ChangeFileExt(const String &filename, const char *ext)
 {
-  return __FUNCTION__;
+  QString file  = QString::fromLocal8Bit(filename.c_str(), filename.size());
+  file.replace( QFileInfo(file).suffix(), ext );
+  return file.toStdString();
 }
 
-String ExtractFileName(const String &fn)
+String ExtractFileName(const String &filename)
 {
-  return __FUNCTION__;
+  return QFileInfo(QString::fromLocal8Bit(filename.c_str(), filename.size())).fileName().toStdString();
 }
 
-String ExtractFileDir(const String &fn)
+String ExtractFileDir(const String &filename)
 {
-  return __FUNCTION__;
+  return QFileInfo( QString::fromLocal8Bit(filename.c_str(), filename.size()) ).filePath().toStdString();
 }
 
-
+bool FileExists(const String &filename)
+{
+  return QFileInfo::exists( QString::fromLocal8Bit(filename.c_str(), filename.size()) );
+}
