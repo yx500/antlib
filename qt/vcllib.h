@@ -1,6 +1,5 @@
 #pragma once
 
-#include "astring.h"
 #include "win/w32defs.h"
 
 struct TPoint : public POINT
@@ -57,11 +56,12 @@ typedef tagSIZE TSize;
 
 
 //**********************************************************************************************
-bool FileExists(const String& fn);
-String ChangeFileExt(const String& filename, const char* ext);
-String ExtractFileName(const String& filename);
-String ExtractFileDir(const String& filename);
-bool FileExists(const String& filename);
+#include "astring.h"
+extern bool FileExists(const String& fn);
+extern String ChangeFileExt(const String& filename, const char* ext);
+extern String ExtractFileName(const String& filename);
+extern String ExtractFileDir(const String& filename);
+extern bool FileExists(const String& filename);
 
 
 

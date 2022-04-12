@@ -23,7 +23,7 @@ public:
   void ReadSections(AStringList* Strings);
   void ReadSectionValues(const String& Section, AStringList* Strings);
   void EraseSection(const String& Section);
-  void UpdateFile(void);
+  void UpdateFile(void) {;}
   //  bool ValueExists(const String &Section, const String &Ident);
 
 };
