@@ -10,7 +10,7 @@ public:
   String FileName;
 
   AIniFile(const String& FileName);
-  ~AIniFile();
+//  ~AIniFile();
 
   bool SectionExists(const String& Section);
   String ReadString(const String& Section, const String& Ident, const String& Default);
