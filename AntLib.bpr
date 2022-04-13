@@ -95,11 +95,7 @@
       <FILE FILENAME="Ext\astringlist.cpp" FORMNAME="" UNITNAME="astringlist" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="ax\utils.cpp" FORMNAME="" UNITNAME="utils" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="Ext\ainifile.cpp" FORMNAME="" UNITNAME="ainifile" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-<<<<<<< Updated upstream
       <FILE FILENAME="Ext\astring.cpp" FORMNAME="" UNITNAME="astring" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-=======
-      <FILE FILENAME="Ext\astring.cpp" FORMNAME="" UNITNAME="astring.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
->>>>>>> Stashed changes
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>
