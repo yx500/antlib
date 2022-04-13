@@ -1,10 +1,7 @@
 
-HEADERS += $$files($$PWD/*.h) \
-    $$PWD/antlibgraphics.h \
-    $$PWD/vcllib.h
+HEADERS += $$files($$PWD/*.h)
 
 
 
-SOURCES += $$files($$PWD/*.cpp) \
-    $$PWD/vcllib.cpp
+SOURCES += $$files($$PWD/*.cpp)
 

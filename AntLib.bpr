@@ -15,7 +15,7 @@
       obj.tmp\propmap.obj obj.tmp\uParString.obj obj.tmp\Gor_Elem.obj 
       obj.tmp\Gor_Logic.obj obj.tmp\uFormula.obj obj.tmp\EnergUnit.obj 
       obj.tmp\CompHint.obj obj.tmp\astringlist.obj obj.tmp\utils.obj 
-      obj.tmp\ainifile.obj"/>
+      obj.tmp\ainifile.obj obj.tmp\astring.obj"/>
     <RESFILES value=""/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -95,6 +95,7 @@
       <FILE FILENAME="Ext\astringlist.cpp" FORMNAME="" UNITNAME="astringlist" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="ax\utils.cpp" FORMNAME="" UNITNAME="utils" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="Ext\ainifile.cpp" FORMNAME="" UNITNAME="ainifile" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Ext\astring.cpp" FORMNAME="" UNITNAME="astring" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

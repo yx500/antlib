@@ -790,13 +790,14 @@ const char* Strel::GetName()
   case LOG_LAMP:
   case SUPERLAMP2:
   case LED:
-  default:
+
     return name;
   case NAPR:
     if (name[0] == '-')
       return name + 1;
     else
       return name;
+    default: ;
   }
 
   if (name[0] == '$') {

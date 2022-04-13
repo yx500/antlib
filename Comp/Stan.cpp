@@ -1292,8 +1292,10 @@ void Replaceacprop(AComp* ac, TPropMap& mrpl)
   TPropMap m;
   String pmstr = ac->Tagstr.c_str();
   std::string s = pmstr.c_str();
+
+
   for (int i = 0; i < mrpl.GetItemsCount(); i++) {
-    alib::string_replace(s, mrpl.GetKeys(i).c_str(), mrpl.GetVal(i).c_str());
+    alib::string_replace_all(s, mrpl.GetKeys(i).c_str(), mrpl.GetVal(i).c_str());
     pmstr = s.c_str();
     // pmstr = AnsiReplaceStr(pmstr, mrpl.Keys[i], mrpl.GetVal(i));
     // ac->Tagstr.replace() ()
@@ -1306,7 +1308,7 @@ void Replaceacprop(AComp* ac, TPropMap& mrpl)
     String pmReplstr = ac->pmRepl->text();
     for (int i = 0; i < mrpl.GetItemsCount(); i++) {
       std::string s = pmReplstr.c_str();
-      alib::string_replace(s, mrpl.GetKeys(i).c_str(), mrpl.GetVal(i).c_str());
+      alib::string_replace_all(s, mrpl.GetKeys(i).c_str(), mrpl.GetVal(i).c_str());
       pmReplstr = s.c_str();
       // pmReplstr = AnsiReplaceStr(pmReplstr, mrpl.GetKeys(i), mrpl.GetVal(i));
     }
