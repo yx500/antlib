@@ -33,15 +33,15 @@
     <USERDEFINES value="_DEBUG"/>
     <SYSDEFINES value="NO_STRICT"/>
     <MAINSOURCE value="AntLib.bpf"/>
-    <INCLUDEPATH value="ax;Gora;Bgi;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl"/>
+    <INCLUDEPATH value="ax\;ax;Gora;Bgi;Ext;Comp;$(BCB)\include;$(BCB)\include\vcl"/>
     <LIBPATH value="ax\;..\nb_trb;..\CommonSrc\ImgContainer;Gora;..\VladSrc;Bgi;Ext;Comp;$(BCB)\lib\obj;$(BCB)\lib"/>
     <WARNINGS value="-wuse -wstv -w-par"/>
     <LISTFILE value=""/>
     <OTHERFILES value=""/>
   </MACROS>
   <OPTIONS>
-    <IDLCFLAGS value="-Iax -IGora -IBgi -IExt -IComp -I$(BCB)\include -I$(BCB)\include\vcl 
-      -src_suffix cpp -D_DEBUG -boa"/>
+    <IDLCFLAGS value="-Iax\. -Iax -IGora -IBgi -IExt -IComp -I$(BCB)\include 
+      -I$(BCB)\include\vcl -src_suffix cpp -D_DEBUG -boa"/>
     <CFLAG1 value="-Od -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 -5 -b- -k -y -v -vi- 
       -c -tW -tWM"/>
     <PFLAGS value="-N2.\obj.tmp -N0.\obj.tmp -$YD -$W -$O- -$A8 -v -JPHNE -M"/>
@@ -95,7 +95,11 @@
       <FILE FILENAME="Ext\astringlist.cpp" FORMNAME="" UNITNAME="astringlist" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="ax\utils.cpp" FORMNAME="" UNITNAME="utils" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="Ext\ainifile.cpp" FORMNAME="" UNITNAME="ainifile" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+<<<<<<< Updated upstream
       <FILE FILENAME="Ext\astring.cpp" FORMNAME="" UNITNAME="astring" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+=======
+      <FILE FILENAME="Ext\astring.cpp" FORMNAME="" UNITNAME="astring.cpp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+>>>>>>> Stashed changes
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>
