@@ -3,8 +3,10 @@
 
 
 std::string ToStdStr(const QString& qstr){
-  QTextCodec* codec1251 = QTextCodec::codecForName("Windows-1251");
-  auto ba = codec1251->fromUnicode(qstr);
+//  QTextCodec* codec1251 = QTextCodec::codecForName("Windows-1251");
+//  auto ba = codec1251->fromUnicode(qstr);
+  QByteArray ba;
+  ba = qstr.toLatin1();
   return ba.toStdString();
 }
 
@@ -84,8 +86,8 @@ void AIniFile::ReadSectionValues(const String& Section, AStringList* Strings)
   auto l = this->childKeys();
   for (auto& k: l) {
     auto v = this->value(k).toString();
-    auto sv = QString("%1=%2").arg(k).arg(v);
-    Strings->Add( ToStdStr(sv) );
+    auto sv = ToStdStr(k) + "=" + ToStdStr(v);
+    Strings->Add( sv );
   }
   this->endGroup();
 }
