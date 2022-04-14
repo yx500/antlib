@@ -128,8 +128,8 @@ int AComp::f(int impls)
   if (impls == -2)
     return 0;
   if ((_f_ == NULL) && (_f2_ == NULL)) {
-    // return 33;
-    throw "_f_ not defined!";
+    return 33;
+    //throw "_f_ not defined!";
   }
 
   unsigned imp;

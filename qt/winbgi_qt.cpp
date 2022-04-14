@@ -318,7 +318,7 @@ void drawpoly(int __numpoints, const int* __polypoints)
 
 void fillellipse(int __x, int __y, int __xradius, int __yradius)
 {
-    QRect r(__x - __xradius, __y - __yradius, __x + __xradius, __y + __yradius);
+    QRect r( __x - __xradius, __y - __yradius, __xradius*2, __yradius*2);
     if (bgi_tracking) {
         tracking_add_rect(r);
         return;

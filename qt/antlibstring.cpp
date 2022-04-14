@@ -14,10 +14,10 @@ int AString::Pos(char ch) const
 
 AString AString::SubString(int b, int n) const
 {
-  return this->substr(b+1, n);
+  return this->substr(b-1, n);
 }
 
 AString AString::Delete(int b, int n)
 {
-  return this->erase(b+1, n);
+  return this->erase(b-1, n);
 }
