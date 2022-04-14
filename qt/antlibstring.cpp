@@ -2,7 +2,7 @@
 
 int AString::Pos(const std::string &subStr) const
 {
-  auto f = this->find(subStr)+1;
+  auto f = this->find(subStr);
   return f==npos ? 0 : f+1;
 }
 
