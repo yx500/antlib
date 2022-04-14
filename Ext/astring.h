@@ -10,7 +10,9 @@
 #else
 
 #include "antlibstring.h"
-typedef AString String;
+#include "antlibqstring.h"
+//typedef AString String;
+typedef AQString String;
 
 #endif //__BORLANDC__
 
