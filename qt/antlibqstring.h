@@ -1,53 +1,39 @@
 #pragma once
 
-#include "utils.h"
-
 #include <QString>
-#include <iomanip>
-#include <iostream>
-#include <stdexcept>
-#include <string>
-#include <memory>
-#include <cstdio>
 
-class AString : public QString
+class AQString : public QString
 {
 public:
-  AString() : QString() {}
-  AString(const char* s) : std::string(s) {}
-  AString(const std::string& s) : std::string(s) {}
+  AQString() : QString() {}
+  AQString(const QString &s) : QString(s) {}
+  AQString(const char* s) : QString(s) {}
+  AQString(const std::string& s) : QString(s.c_str()) {}
 
-  int Pos(const std::string& subStr) const;
-  int Pos(char ch) const;
-  bool IsEmpty() const { return this->empty(); }
+  int Pos(const QString& subStr) const {return this->indexOf(subStr);}
+  //int Pos(char ch) const;
+  bool IsEmpty() const { return this->isEmpty(); }
   int Length() const { return size(); }
-  int ToInt() const  {
-    try { return std::stoi(*this); } catch (const std::invalid_argument& e) {
-      std::cerr << __FUNCTION__ << e.what() << std::endl;
-    }
-    return 0;
-  }
+  int ToInt() const  {return this->toInt();}
 
   int ToIntDef(int defaultValue) const {
-    try { return std::stoi(*this); } catch (...) {}
-    return defaultValue;
+    bool ok;
+    int n=this->toInt(&ok);
+    if (!ok) return defaultValue;
+    return n;
   }
 
-  AString UpperCase() const { return alib::to_upper(*this); }
-  AString Trim() const { return alib::trim(*this); }
-  AString SubString(int b, int n) const;
-  AString Delete(int b, int n);
+  AQString UpperCase() const { return this->toUpper(); }
+  AQString Trim() const { return this->trimmed(); }
+  AQString SubString(int b, int n)  const {return this->mid(b,n);}
+  AQString Delete(int b, int n){return this->remove(b,n);}
 
-  template<typename ... Args>
-  void printf( const char* format, Args ... args ) {
-    size_t size = std::snprintf( nullptr, 0, format, args ... ) + 1; // Extra space for '\0'
-    std::unique_ptr<char[]> buf( new char[ size ] );
-    std::snprintf( buf.get(), size, format, args ... );
-    this->assign( std::string( buf.get(), buf.get() + size - 1 ) ); // We don't want the '\0' inside
+  void printf( const char* format, int v) {
+     *this=QString::asprintf(format,v);
   }
 
 };
 
-inline AString IntToStr(int Value) { return std::to_string(Value); }
-inline int StrToInt(const AString& s) { return s.ToInt(); }
-inline int StrToIntDef(const AString& s, int Default) { return s.ToIntDef(Default); }
+inline AQString IntToStr(int Value) { return QString::number(Value); }
+inline int StrToInt(const AQString& s) { return s.toInt(); }
+inline int StrToIntDef(const AQString& s, int Default) { return s.ToIntDef(Default); }
