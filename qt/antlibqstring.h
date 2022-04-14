@@ -31,6 +31,7 @@ public:
   void printf( const char* format, int v) {
      *this=QString::asprintf(format,v);
   }
+  const char *c_str() const ;
 
 };
 

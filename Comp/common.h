@@ -10,7 +10,8 @@ void Color_On(void);
 
 void CriticalErr(const char*, bool do_throw=true);
 void PrintErr(const char* txt);
-inline void PrintErr(const std::string& txt) { PrintErr(txt.c_str()); }
+//inline void PrintErr(const std::string& txt) { PrintErr(txt.c_str()); }
+inline void PrintErr(const String& txt) { PrintErr(txt.c_str()); }
 
 
 class AComp;

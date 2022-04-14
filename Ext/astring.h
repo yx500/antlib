@@ -9,7 +9,7 @@
 
 #else
 
-#include "antlibstring.h"
+//#include "antlibstring.h"
 #include "antlibqstring.h"
 //typedef AString String;
 typedef AQString String;

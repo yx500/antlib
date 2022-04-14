@@ -1,7 +1,5 @@
 #include "antlibstringlist.h"
 
-#include "utils.h"
-
 #include <algorithm>
 #include <cctype>
 #include <fstream>
@@ -9,13 +7,13 @@
 #include <iostream>
 #include <locale>
 
-int AStringList::LoadFromFile(const std::string& filename)
+int AStringList::LoadFromFile(const AQString &filename)
 {
   this->clear();
 
   std::ifstream ifs(filename.c_str());
   if (!ifs.is_open()) {
-    std::cerr << "AStringList::LoadFromFile bad!!!" << filename << std::endl;
+    std::cerr << "AStringList::LoadFromFile bad!!!" << filename.c_str() << std::endl;
     return 0;
   }
 
@@ -23,33 +21,39 @@ int AStringList::LoadFromFile(const std::string& filename)
   while (getline(ifs, line)) {
     if (line.size())
       continue;
-    this->push_back(alib::right_trim(line));
+    AQString s(line);
+    this->push_back(  s.trimmed());
   }
 
   return this->size();
 }
 
-void AStringList::SaveToFile(const std::string& filename)
+void AStringList::SaveToFile(const AQString &filename)
 {
   std::ofstream ofs(filename.c_str());
-  std::vector<std::string>::const_iterator i = begin();
-  while (i != this->end()) {
-    ofs << *i++ << std::endl;
+
+  for (int i=0;i<size();i++)
+  {
+      QString s=this->at(i);
+      ofs << s.toStdString().c_str() << std::endl;
   }
+
 }
 
 void AStringList::Sort() { std::sort(this->begin(), this->end()); }
 
-std::string AStringList::Name(size_t idx)
+AQString AStringList::Name(size_t idx)
 {
-  alib::stringvector w;
-  alib::string_split(this->at(idx), "=", w);
-  return w.size() > 1 ? alib::trim(w[0]) : "";
+  QString s=this->at(idx);
+  auto l=s.split("=");
+  if (l.size()>0) return l[0];
+  return "";
 }
 
-std::string AStringList::Value(size_t idx)
+AQString AStringList::Value(size_t idx)
 {
-  alib::stringvector w;
-  alib::string_split(this->at(idx), "=", w);
-  return w.size() > 1 ? alib::trim(w[1]) : "";
+    QString s=this->at(idx);
+    auto l=s.split("=");
+    if (l.size()>1) return l[1];
+    return "";
 }

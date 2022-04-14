@@ -359,7 +359,7 @@ TStrInMarsh* TMarshrut::SetStrInMarsh(String StrelName, int IS, TStrInMarshChek 
 {
   TStrInMarsh* simS = MarshList->GetStrelByName(StrelName);
   if (simS == NULL) {
-    PrintErr((StrelName + " нет в списке стрелок станции.").c_str());
+    PrintErr((StrelName + " нет в списке стрелок станции."));
     return NULL;
   }
   TStrInMarsh* simM = GetStrelByName(StrelName);
@@ -456,7 +456,7 @@ bool TMarshList::LoadFromCSV(String stFN)
       }
     }
     if (stSH == "") {
-      PrintErr(("Не найдена шапка в " + stFN).c_str());
+      PrintErr(String("Не найдена шапка в ") + stFN);
       return false;
     }
     TParString PS(stSH, ";,"); // двойной разделитель из-за различных версий Excel
@@ -568,7 +568,7 @@ bool TMarshList::LoadFromCSV(String stFN)
     // UpdateLoadedImps();
 
   } catch (...) {
-    PrintErr((" Проблемы с " + stFN).c_str());
+    PrintErr(String(" Проблемы с ") + stFN);
     return false;
   }
   return true;
@@ -688,7 +688,7 @@ bool TMarshList::SaveToCSV(String stFN)
   try {
     SL->SaveToFile(stFN);
   } catch (...) {
-    PrintErr(("Не могу записать " + stFN).c_str());
+    PrintErr(String("Не могу записать ") + stFN);
     return false;
   }
   delete SL;
