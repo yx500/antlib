@@ -1,16 +1,23 @@
 #include "antlibstring.h"
 
-AString IntToHex(int Value, int Digits)
+int AString::Pos(const std::string &subStr) const
 {
-  return __FUNCTION__;
+  auto f = this->find(subStr)+1;
+  return f==npos ? 0 : f+1;
+}
+
+int AString::Pos(char ch) const
+{
+  auto f = this->find_first_of(ch);
+  return f==npos ? 0 : f+1;
 }
 
 AString AString::SubString(int b, int n) const
 {
-  return __FUNCTION__;
+  return this->substr(b+1, n);
 }
 
-AString AString::Delete(int b, int n) const
+AString AString::Delete(int b, int n)
 {
-  return __FUNCTION__;
+  return this->erase(b+1, n);
 }
