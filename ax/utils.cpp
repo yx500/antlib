@@ -128,11 +128,10 @@ string left_trim(const string& s)
 #ifdef __BORLANDC__
   result.erase(result.begin(), find_if(result.begin(), result.end(), not1(ptr_fun(std::isspace))));
 #else
-  result.erase(result.begin(),
-               find_if(result.begin(), result.end(),
-                       not1(
-                           std::bind2nd(std::ptr_fun(&std::isspace<char>),
-                                        std::locale("")))));
+//  result.erase(result.begin(), std::find_if(result.begin(), result.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
+  result.erase(result.begin(), std::find_if(result.begin(), result.end(), [](unsigned char ch) {
+                                              return !std::isspace(ch);
+          }));
 #endif
   return result;
 }
@@ -143,12 +142,9 @@ string right_trim(const string& s)
 #ifdef __BORLANDC__
   result.erase(find_if(result.rbegin(), result.rend(), not1(ptr_fun(std::isspace))).base(), result.end());
 #else
-  result.erase(
-      find_if(result.rbegin(), result.rend(),
-              not1(
-                  std::bind2nd(std::ptr_fun(&std::isspace<char>), std::locale(""))))
-          .base(),
-      result.end());
+  result.erase(std::find_if(result.rbegin(), result.rend(), [](unsigned char ch) {
+            return !std::isspace(ch);
+          }).base(), result.end());
 #endif
   return result;
 }
@@ -159,9 +155,7 @@ string to_lower(const string& s)
 #ifdef __BORLANDC__
   transform(s.begin(), s.end(), result.begin(), std::tolower);
 #else
-  transform(s.begin(), s.end(), result.begin(),
-            std::bind2nd(std::ptr_fun(&std::tolower<char>),
-                         std::locale("")));
+  transform(s.begin(), s.end(), result.begin(), [](unsigned char ch) { return std::tolower(ch); } );
 #endif
   return result;
 }
@@ -172,8 +166,7 @@ string to_upper(const string& s)
 #ifdef __BORLANDC__
   transform(s.begin(), s.end(), result.begin(), ptr_fun(std::toupper));
 #else
-  transform(s.begin(), s.end(), result.begin(),
-            std::bind2nd(std::ptr_fun(&std::toupper<char>), std::locale("")));
+  transform(s.begin(), s.end(), result.begin(), [](unsigned char ch) { return std::toupper(ch); } );
 #endif
   return result;
 }
