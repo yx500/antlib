@@ -14,7 +14,9 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Gui REQUIRED)
 
 file(GLOB SOURCES
     # "${CMAKE_CURRENT_SOURCE_DIR}/BGI/*.cpp"
-    # "${CMAKE_CURRENT_SOURCE_DIR}/BGI/*.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/BGI/bgi.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/BGI/winpalet.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/BGI/winpalet.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/Comp/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/Comp/*.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/Ext/*.cpp"

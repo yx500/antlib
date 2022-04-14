@@ -28,5 +28,6 @@ void cp1251_to_cp866_buff(const char *in, char *out, size_t sz)
   //todo implement
   std::cerr<< __FUNCTION__ << " is NOT IMPLEMENTED."<<std::endl;
   strncpy(out, in, sz);
+
 #endif
 }

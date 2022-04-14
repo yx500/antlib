@@ -1,4 +1,14 @@
 #include "antlibinifile.h"
+#include <QTextCodec>
+
+
+std::string ToStdStr(const QString& qstr){
+  QTextCodec* codec1251 = QTextCodec::codecForName("Windows-1251");
+  auto ba = codec1251->fromUnicode(qstr);
+  return ba.toStdString();
+}
+
+
 
 AIniFile::AIniFile(const String& FileName) : QSettings(FileName.c_str(), QSettings::IniFormat)
 {
@@ -16,7 +26,7 @@ String AIniFile::ReadString(const String& Section, const String& Ident, const St
 {
   QString s = QString("%1=%2").arg(Section.c_str()).arg(Ident.c_str());
   QString d = Default.c_str();
-  return this->value(s, d).toString().toStdString().c_str();
+  return ToStdStr(this->value(s, d).toString());
 }
 
 void AIniFile::WriteString(const String& Section, const String& Ident, const String& Value)
@@ -54,8 +64,8 @@ void AIniFile::ReadSection(const String& Section, AStringList* Strings)
 {
   this->beginGroup(Section.c_str());
   auto l = this->childKeys();
-  foreach (auto k, l) {
-    Strings->Add(k.toStdString().c_str());
+  for (auto& k: l) {
+    Strings->Add( ToStdStr(k) );
   }
   this->endGroup();
 }
@@ -63,8 +73,8 @@ void AIniFile::ReadSection(const String& Section, AStringList* Strings)
 void AIniFile::ReadSections(AStringList* Strings)
 {
   auto l = this->childGroups();
-  foreach (auto k, l) {
-    Strings->Add(k.toStdString().c_str());
+  for (auto& k: l) {
+    Strings->Add( ToStdStr(k) );
   }
 }
 
@@ -72,10 +82,10 @@ void AIniFile::ReadSectionValues(const String& Section, AStringList* Strings)
 {
   this->beginGroup(Section.c_str());
   auto l = this->childKeys();
-  foreach (auto k, l) {
+  for (auto& k: l) {
     auto v = this->value(k).toString();
     auto sv = QString("%1=%2").arg(k).arg(v);
-    Strings->Add(sv.toStdString().c_str());
+    Strings->Add( ToStdStr(sv) );
   }
   this->endGroup();
 }
