@@ -2187,8 +2187,8 @@ void tG_TPLABEL::GetPropMap(TPropMap& m)
   int i = 0;
 
   m.put(_G_TPLABEL_PropName[i++], VesBukv, 0);
-  m.putEx(_G_TPLABEL_PropName[i++], OldImpToNewStr(imp_krasn, this), GetRealImp(imp_krasn), 0);
-  m.putEx(_G_TPLABEL_PropName[i++], OldImpToNewStr(imp_krasn_mig, this), GetRealImp(imp_krasn_mig), 0);
+  m.putEx(_G_TPLABEL_PropName[i++], OldImpToNewStr(imp_krasn, this), GetRealImp(imp_krasn),  OldImpToNewStr(0, this));
+  m.putEx(_G_TPLABEL_PropName[i++], OldImpToNewStr(imp_krasn_mig, this), GetRealImp(imp_krasn_mig), OldImpToNewStr(0, this));
   m.put(_G_TPLABEL_PropName[i++], ZKR_N, 0);
   m.put(_G_TPLABEL_PropName[i++], NoShowVout, 0);
   m.put(_G_TPLABEL_PropName[i++], ADAM, "");

@@ -218,7 +218,7 @@ static void select_font()
 {
     if (text_settings.font < 0 || text_settings.font >= FontCount) {
         text_settings.font = 0;
-        std::cerr << "Default font." << std::endl;
+//        std::cerr << "Default font." << std::endl;
     }
     font = Fonts[text_settings.font];
     font.setPointSize(text_settings.charsize);

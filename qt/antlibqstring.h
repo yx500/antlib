@@ -9,6 +9,7 @@ public:
   AQString(const QString &s) : QString(s) {}
   AQString(const char* s) : QString(s) {}
   AQString(const std::string& s) : QString(s.c_str()) {}
+  AQString(const char &s) : QString(s) {}
 
   int Pos(const QString& subStr) const {return this->indexOf(subStr);}
   //int Pos(char ch) const;
@@ -32,6 +33,7 @@ public:
      *this=QString::asprintf(format,v);
   }
   const char *c_str() const ;
+  const char operator[](int i) const {return this->at(i).toLatin1();}
 
 };
 
