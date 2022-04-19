@@ -59,46 +59,39 @@ void convert_string1251(wchar_t* dst, const char* src, int size)
 }
 
 /*****************************************************************************/
-char* K866to1251(char* p)
+void convert_866to1251(const char* in, char* out, size_t sz)
 {
-  uint8_t c;
-  char *q = p;
-  while ((c = *p) != 0) {
+  for(size_t i =0; i<sz; ++i){
+    uint8_t c = in[i];
     if (c >= 128 && c < 176)
       c += 64;
     else if (c >= 224 && c < 240)
       c += 16;
-    *p = c;
-    p++;
+    out[i] = c;
   }
-  return q;
 }
 
-char* K1251to866(char* p)
+void convert_1251to866(const char* in, char* out, size_t sz)
 {
-  uint8_t c;
-  char *q = p;
-  while ((c = *p) != 0) {
+  for(size_t i =0; i<sz; ++i){
+    uint8_t c = in[i];
     if (c >= 192 && c < 240)
       c -= 64;
     else if (c >= 240)
       c -= 16;
     else if (c == 184)
-      c = 'e';
-    *p = c;
-    p++;
+      c = 133;
+    out[i] = c;
   }
-  return q;
 }
+/*****************************************************************************/
 
 void cp866_to_cp1251_buff(const char* in, char* out, size_t sz)
 {
 #ifdef _WIN32
   ::OemToCharBuffA(in, out, sz);
 #else
-  // todo implement
-  std::cerr << __FUNCTION__ << " is NOT IMPLEMENTED." << std::endl;
-  strncpy(out, in, sz);
+  convert_866to1251(in, out, sz);
 #endif
 }
 
@@ -107,9 +100,6 @@ void cp1251_to_cp866_buff(const char* in, char* out, size_t sz)
 #ifdef _WIN32
   ::CharToOemBuffA(in, out, sz);
 #else
-  // todo implement
-  std::cerr << __FUNCTION__ << " is NOT IMPLEMENTED." << std::endl;
-  strncpy(out, in, sz);
-
+  convert_1251to866(in, out, sz);
 #endif
 }

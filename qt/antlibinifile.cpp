@@ -1,5 +1,5 @@
 #include "antlibinifile.h"
-#include <QTextCodec>
+//#include <QTextCodec>
 
 
 std::string ToStdStr(const QString& qstr){

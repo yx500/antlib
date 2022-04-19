@@ -26,8 +26,8 @@ TAImpuls::TAImpuls()
 
 TAImpuls::~TAImpuls()
 {
-  // TODO: Add your source code here
 }
+
 extern T_f_Func _f_;
 bool TAImpuls::UpdateState()
 {
