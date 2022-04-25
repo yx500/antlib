@@ -57,7 +57,7 @@ void convert_string1251(wchar_t* dst, const char* src, int size)
   for (int i = 0; i < size; ++i)
     dst[i] = cp1251[(unsigned char)src[i]];
 }
-
+#ifndef _WIN32
 /*****************************************************************************/
 void convert_866to1251(const char* in, char* out, size_t sz)
 {
@@ -85,11 +85,13 @@ void convert_1251to866(const char* in, char* out, size_t sz)
   }
 }
 /*****************************************************************************/
-
+#endif
 void cp866_to_cp1251_buff(const char* in, char* out, size_t sz)
 {
+  memset(out,0,sz);
 #ifdef _WIN32
-  ::OemToCharBuffA(in, out, sz);
+
+  ::OemToCharBuffA( in, out, sz);
 #else
   convert_866to1251(in, out, sz);
 #endif
@@ -97,6 +99,7 @@ void cp866_to_cp1251_buff(const char* in, char* out, size_t sz)
 
 void cp1251_to_cp866_buff(const char* in, char* out, size_t sz)
 {
+  memset(out,0,sz);
 #ifdef _WIN32
   ::CharToOemBuffA(in, out, sz);
 #else

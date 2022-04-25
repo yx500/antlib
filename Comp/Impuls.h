@@ -19,7 +19,7 @@ public:
 
   int Value;
   int LastValue;
-  char ImpName[24];
+  char ImpName[48];
 
   AComp* Parent;
 

@@ -88,10 +88,10 @@ void TACOMPHINT::ShowHints(Station* stan)
   }
 
   // проставим параметры не из ETT, а сравнивая EttReciveName
-  std::string stDestYch = stan->AO->EttReciveName;
+  String stDestYch = stan->AO->EttReciveName;
   for (items_type::iterator hi = items.begin(); hi != items.end(); ++hi) {
     if (hi->stDest != "*") {
-      if ((stDestYch.length() != 0) && (hi->stDest.find(stDestYch) == std::string::npos)) {
+      if ((stDestYch.Length() != 0) && (hi->stDest.Pos(stDestYch) >0)) {
         items.erase(hi);
         hi--;
       }
@@ -193,7 +193,7 @@ void TACOMPHINT::_ShowHint(AComp* ac, HintItem& hi, bool bFON)
     setcolor(clr);
     _SetText(TIMES20b, CENTER_TEXT, CENTER_TEXT);
     _SetTextSize(FontSize);
-    DrawText(RCT.left, RCT.top, hi.WW, hi.HH - hi.HH / 4, hi.stHint.c_str());
+    DrawText(RCT.left, RCT.top, hi.WW, hi.HH - hi.HH / 4, hi.stHint);
   }
   _SetText(F_DEFAULT, LEFT_TEXT, TOP_TEXT);
   _SetTextSize(1);

@@ -66,10 +66,10 @@ public:
   uint8 TextAllign;
   bool bUseGrid;
 
-  std::string ExtPropStr;
-  std::string TextStr;
-  std::string TagStr;
-  std::string Picture;
+  String ExtPropStr;
+  String TextStr;
+  String TagStr;
+  String Picture;
   int PictureState; // State -  ставит внешнее ПО
 
   int PersistInt;

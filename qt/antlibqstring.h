@@ -7,12 +7,12 @@ class AQString : public QString
 public:
   AQString() : QString() {}
   AQString(const QString &s) : QString(s) {}
-  AQString(const char* s) : QString(s) {}
-  AQString(const std::string& s) : QString(s.c_str()) {}
-  AQString(const char &s) : QString(s) {}
+  AQString(const char* s) ;
+  AQString(const std::string& s) : AQString(s.c_str()) {}
+  AQString(const char &s) ;
 
-  int Pos(const QString& subStr) const {return this->indexOf(subStr);}
-  int Pos(char ch) const {return this->indexOf(ch);}
+  int Pos(const QString& subStr) const {return this->indexOf(subStr)+1;}
+  int Pos(char ch) const {return this->indexOf(AQString(ch))+1;}
   bool IsEmpty() const { return this->isEmpty(); }
   int Length() const { return size(); }
   int ToInt() const  {return this->toInt();}
@@ -26,8 +26,8 @@ public:
 
   AQString UpperCase() const { return this->toUpper(); }
   AQString Trim() const { return this->trimmed(); }
-  AQString SubString(int b, int n)  const {return this->mid(b,n);}
-  AQString Delete(int b, int n){return this->remove(b,n);}
+  AQString SubString(int b, int n)  const {return this->mid(b-1,n);}
+  AQString Delete(int b, int n){return this->remove(b-1,n);}
 
   void printf( const char* format, int v) {
      *this=QString::asprintf(format,v);

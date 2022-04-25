@@ -417,9 +417,9 @@ static int UprKlPictNumber1[4] = {
     2  //   1       1    вкл.прав   |
 };
 
-const char* GetEImageName(std::string Picture, int onoff, int onoff_ok, int ii)
+const char* GetEImageName(String Picture, int onoff, int onoff_ok, int ii)
 {
-  static std::string res = "";
+  static String res = "";
   res = "";
   if (Picture == "")
     return res.c_str();
@@ -690,7 +690,7 @@ void TE_OBJ::Show()
     }
   }
   if (type_obj == eng_lmp) {
-    if (Picture.length() > 0) {
+    if (Picture.Length() > 0) {
       // копия LED
       PictureState = 0; // sost0;
       if (fAimp0 == 1)
@@ -739,7 +739,7 @@ void TE_OBJ::Show()
         barx(xx + 1, yy, xx + ww - 1, yy + hh + 2);
       }
       _SetText(font, CENTER_TEXT, CENTER_TEXT);
-      DrawText(xx + 2, yy + 1, ww - 2, hh, (char*)TextStr.c_str());
+      DrawText(xx + 2, yy + 1, ww - 2, hh, TextStr);
     }
   }
 
@@ -808,7 +808,7 @@ void TE_OBJ::ShowText()
       setcolor(txtclr);
       setfillstyle(1, FON);
       _SetText(font, LEFT_TEXT, TOP_TEXT);
-      OutTextXY(tx, ty, (char*)TextStr.c_str());
+      OutTextXY(tx, ty, TextStr);
       _SetTextSize(1);
       _SetText(F_DEFAULT, LEFT_TEXT, BOTTOM_TEXT);
     }

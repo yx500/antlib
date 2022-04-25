@@ -90,9 +90,9 @@ void SetTextAlignXY(int tp, int& tx, int& ty, int x, int y, int WP, int HP, TSiz
 extern void __fastcall tracecoord(int x, int y);
 // static char n_str[ 256 ];
 
-const char* GetImageName(std::string Picture, int PictureState)
+const char* GetImageName(String Picture, int PictureState)
 {
-  static std::string res = "";
+  static String res = "";
   res = "";
   if (Picture == "")
     return res.c_str();
@@ -197,7 +197,7 @@ void TLED::Show()
     tracecoord(tx + sz.cx, ty + sz.cy);
     setcolor(C_D);
     setfillstyle(1, FON);
-    OutTextXY(tx, ty, (char*)TextStr.c_str());
+    OutTextXY(tx, ty, TextStr);
     _SetTextSize(1);
     _SetText(F_DEFAULT, LEFT_TEXT, BOTTOM_TEXT);
   }

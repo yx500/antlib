@@ -12,8 +12,8 @@ class TACOMPHINT
   struct HintItem
   {
     char filename[13];
-    std::string stHint;
-    std::string stDest;
+    String stHint;
+    String stDest;
     int ID;
     int Type; // 1 À, 2 Ï , 3Í
     int TOsec;

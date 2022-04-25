@@ -97,6 +97,7 @@ void Strel::Set()
        (GetType() == BASH) ||
        (GetType() == P_SVE) ||
        (GetType() == NAPR))) {
+       memset(name,0,10);
     cp866_to_cp1251_buff(MEM.name, name, 9); /*strncpy(name,MEM.name,9)*/
     ;
     return;

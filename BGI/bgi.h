@@ -149,10 +149,10 @@ void settextjustify(int __horiz, int __vert);
 void settextstyle(int __font, int __direction, int __charsize);
 void _SetText(unsigned int font, int d1, int d2);
 void _SetTextSize(int charsize);
-int textheight(const char* __textstring);
-int textwidth(const char* __textstring);
-void OutTextXY(int x, int y, const char* str);
-void DrawText(int x, int y, int tw, int th, const char* str);
+int textheight(const String &__textstring);
+int textwidth(const String &__textstring);
+void OutTextXY(int x, int y, const String &str);
+void DrawText(int x, int y, int tw, int th, const String &str);
 
 /*-----------------------------------------*/
 // FONTS

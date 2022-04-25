@@ -1985,7 +1985,7 @@ void tG_OTCLABEL::Show()
   }
   settextjustify(CENTER_TEXT, CENTER_TEXT);
   settextstyle(1, HORIZ_DIR, HH1 - 4);
-  DrawText(TT[0].x, TT[0].y, Width - 2, Height, SS.c_str());
+  DrawText(TT[0].x, TT[0].y, Width - 2, Height, SS);
   settextjustify(LEFT_TEXT, TOP_TEXT);
   settextstyle(DEFAULT_FONT, HORIZ_DIR, 1);
 }
@@ -2394,7 +2394,7 @@ void tG_TPLABEL::Show()
       settextjustify(CENTER_TEXT, CENTER_TEXT);
       settextstyle(1, HORIZ_DIR, HH1 - 4);
       setcolor(colV);
-      DrawText(TF[0].x, TF[0].y, Width - HH1 - HH2 - 2 - 2 - 2, Height, SS.c_str());
+      DrawText(TF[0].x, TF[0].y, Width - HH1 - HH2 - 2 - 2 - 2, Height, SS);
       if ((!bShowVnadv) && (p_rzp > 0) && (NTP <= 2)) {
         int cZ[4] = {C_D, C_D, C_D, C_D};
         PolyColor(0x00246BFF, TZ, cZ, 4);
@@ -2930,7 +2930,7 @@ void tG_KZP::Show()
   }
   settextjustify(CENTER_TEXT, CENTER_TEXT);
   settextstyle(1, HORIZ_DIR, HH1 - 0);
-  DrawText(TT[0].x, TT[0].y, WidthT - 2, HeightT, SS.c_str());
+  DrawText(TT[0].x, TT[0].y, WidthT - 2, HeightT, SS);
   settextjustify(LEFT_TEXT, TOP_TEXT);
   settextstyle(DEFAULT_FONT, HORIZ_DIR, 1);
 }
@@ -3144,7 +3144,7 @@ void tG_OSY::Show()
           if (outParam == 4)
             stV.printf("%2.1f", 1. * OsyCell_21.Vel / 10.);
           if (OsyCell_21.V != 0) {
-            OutTextXY(x, yt, stV.c_str());
+            OutTextXY(x, yt, stV);
           }
         } else {
           if (osi != 0) {
@@ -3676,7 +3676,7 @@ void tG_KZP2::Show()
     settextjustify(CENTER_TEXT, CENTER_TEXT);
     settextstyle(1, HORIZ_DIR, szNP.cy - 2);
 
-    DrawText(TNP[0].x, TNP[0].y, szNP.cy * 2, szNP.cy, stP.c_str());
+    DrawText(TNP[0].x, TNP[0].y, szNP.cy * 2, szNP.cy, stP);
   } else {
 
     strncpy(Lmp.name, stP.c_str(), sizeof(Lmp.name) - 1);
@@ -3715,7 +3715,7 @@ void tG_KZP2::Show()
         setcolor(C_D);
         settextjustify(CENTER_TEXT, CENTER_TEXT);
         settextstyle(1, HORIZ_DIR, szNZ.cy);
-        DrawText(TNZ[0].x, TNZ[0].y, szNZ.cx, szNZ.cy, stZ.c_str());
+        DrawText(TNZ[0].x, TNZ[0].y, szNZ.cx, szNZ.cy, stZ);
       }
     }
   }
@@ -3744,7 +3744,7 @@ void tG_KZP2::Show()
     } */
     settextstyle(1, HORIZ_DIR, szNSV.cy);
     setcolor(C_D);
-    DrawText(T[0].x + _dd * fmx, T[0].y, xx * fmx, szNSV.cy, stS.c_str());
+    DrawText(T[0].x + _dd * fmx, T[0].y, xx * fmx, szNSV.cy, stS);
   }
 
   // скорость
@@ -3764,7 +3764,7 @@ void tG_KZP2::Show()
       setcolor(C_D);
       settextjustify(CENTER_TEXT, CENTER_TEXT);
       settextstyle(1, HORIZ_DIR, szV.cy);
-      DrawText(TV[0].x, TV[0].y, szV.cx, szV.cy, stV.c_str());
+      DrawText(TV[0].x, TV[0].y, szV.cx, szV.cy, stV);
     }
   }
   settextjustify(LEFT_TEXT, TOP_TEXT);

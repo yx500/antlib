@@ -181,7 +181,10 @@ void TAImpuls::FromString(const char* szSrc)
   */
 
   // sscanf(stSrc.c_str(), "%03d:%04d:%1d:%02d",&Chanel,&Number,&Invers,&Value);
-  sscanf(stSrc.c_str(), IMPFORMAT, &Chanel, &Number, &Invers, &Value, ImpName);
+  static char _ImpName[256];
+  memset(_ImpName,0,sizeof(_ImpName));
+  sscanf(stSrc.c_str(), IMPFORMAT, &Chanel, &Number, &Invers, &Value, _ImpName);
+  strncpy(ImpName,_ImpName,sizeof(ImpName)-1);
 
   UpdateAbsNumber();
 }

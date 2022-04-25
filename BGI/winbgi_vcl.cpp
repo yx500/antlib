@@ -755,7 +755,7 @@ void setviewport(int left, int top, int right, int bottom,
   view_port.clip = clip;
 }
 static TEXTMETRIC ptm;
-int textheight(const char* str)
+int textheight(const String &str)
 {
   if ((dc == NULL) && (_SaveDC != NULL)) {
     GetTextMetrics(
@@ -790,22 +790,22 @@ int textwidthA(const char *str)
   return dc->TextWidth(str);
 }
 */
-int textwidth(const char* str)
+int textwidth(const String &str)
 {
   if (str == NULL)
     return 0;
   SIZE sz;
-  int l = StrLen(str);
+  int l = str.Length();
 
   if ((dc == NULL) && (_SaveDC != NULL)) {
-    GetTextExtentPoint32(_SaveDC->Handle, str, l, &sz);
+    GetTextExtentPoint32(_SaveDC->Handle, str.c_str(), l, &sz);
     return sz.cx;
   }
   if ((dc == NULL) || (!UseNativeFontSize)) {
-    int ln = strlen(str);
+    int ln = str.Length();
     return font_width[text_settings.font] * ln;
   }
-  GetTextExtentPoint32(dc->Handle, str, l, &sz);
+  GetTextExtentPoint32(dc->Handle, str.c_str(), l, &sz);
   return sz.cx;
 }
 
@@ -924,9 +924,9 @@ void _SetText(unsigned int font, int d1, int d2)
   settextjustify(d1, d2);
 }
 
-void OutTextXY(int x, int y, const char* str)
+void OutTextXY(int x, int y, const String &str)
 {
-  if (strlen(str) == 0)
+  if (str.Length() == 0)
     return;
   int dy = 0; // ptm->tmInternalLeading;
   // int dy2 = ptm->tmExternalLeading;
@@ -1282,9 +1282,10 @@ TColor Color(int8 palColor)
   return BGICOLOR(palColor);
 }
 
-void DrawText(int x, int y, int tw, int th, const char* str)
+void DrawText(int x, int y, int tw, int th, const String &str)
 {
-  if (strlen(str) == 0)
+  //if (strlen(str) == 0)
+  if (str.Length()==0)
     return;
   
   tracecoord(x, y);
@@ -1330,8 +1331,8 @@ void DrawText(int x, int y, int tw, int th, const char* str)
       break;
     }
     ::DrawText(dc->Handle,  // handle to device context
-               str,         // pointer to string to draw
-               strlen(str), // string length, in characters
+               str.c_str(),         // pointer to string to draw
+               str.Length(),//strlen(str), // string length, in characters
                &R,          // pointer to structure with formatting dimensions
                uF           // text-drawing flags
     );

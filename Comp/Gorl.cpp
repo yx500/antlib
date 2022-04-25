@@ -749,6 +749,7 @@ void Gorl::Get()
 {
   AComp::Get();
   // strcpy(MEM.name,gorl[0]->name);
+  memset(MEM.name,0,sizeof(MEM.name));
   cp1251_to_cp866_buff(gorl[0]->name, MEM.name, 6);
 
   // memset(MEM.name,0,9);
@@ -794,7 +795,9 @@ void Gorl::Save(FILE* file)
   memcpy(&gorl_0, gorl[0], sizeof(Grl));
 
   Signal oemSign;
+  memset(gorl_0.name, 0, sizeof(gorl_0.name));
   cp1251_to_cp866_buff(gorl[0]->name, gorl_0.name, 5);
+  memset(gorl_0.Sign_i.name, 0, sizeof(gorl_0.Sign_i.name));
   cp1251_to_cp866_buff(gorl[0]->Sign_i.name, gorl_0.Sign_i.name, 5);
 
   fwrite(&gorl_0, sizeof(Grl), 1, file);
@@ -873,11 +876,13 @@ void Gorl::Load(FILE* file)
     Set();
   }
   char ansiname[6];
+  memset(ansiname,0,sizeof(ansiname));
   cp866_to_cp1251_buff(gorl[0]->name, ansiname, 5);
   strncpy(gorl[0]->name, ansiname, 5);
   cp866_to_cp1251_buff(gorl[0]->Sign_i.name, ansiname, 5);
   strncpy(gorl[0]->Sign_i.name, ansiname, 5);
   for (int i = 0; i < gorl[0]->Col_Mar; i++) {
+    memset(ansiname,0,sizeof(ansiname));
     cp866_to_cp1251_buff(gorl[0]->Sign[i].name, ansiname, 5);
     strncpy(gorl[0]->Sign[i].name, ansiname, 5);
   }

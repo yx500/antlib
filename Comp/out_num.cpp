@@ -400,7 +400,7 @@ void EXD_ShowTrainNumber(AComp* AC, int rimpb)
     }
     clr = GetTNPenClr(&wAC->TrainInfo);
     setcolor(clr);
-    DrawText(X + xx, Y - 1, Width + 100, Height, ST.c_str());
+    DrawText(X + xx, Y - 1, Width + 100, Height, ST);
   }
 }
 TTrainInfo* __fastcall MakeTrainInfo(void* TNdata, int Ver);
@@ -455,7 +455,7 @@ void EXD_ShowTrainNumbers(AComp* AC, int rimpb)
     }
     clr = GetTNPenClr(&wAC->TrainInfo);
     setcolor(clr);
-    DrawText(X + xx, Y - 1, Width + 100, Height, ST.c_str());
+    DrawText(X + xx, Y - 1, Width + 100, Height, ST);
   }
 }
 

@@ -43,40 +43,40 @@ static void set_defaults()
 
 void initFonts()
 {
-    for (int i = 0; i < FontCount; i++)
-        Fonts[i] = QFont("Arial", 14, QFont::Normal);
-    Fonts[F_DEFAULT] = QFont("Arial", 14, QFont::Normal);
-    Fonts[F_LITT] = QFont("Arial", 12, QFont::Normal);
-    Fonts[F_LITT_S] = QFont("Arial", 14, QFont::Normal);
-    Fonts[F_LITT_B] = QFont("Arial", 16, QFont::Normal);
-    Fonts[NULLFONT] = QFont("Arial", 90, QFont::Normal);
-    Fonts[COURE12] = QFont("Courier New", 12, QFont::Normal);
-    Fonts[COURE18] = QFont("Courier New", 18, QFont::Normal);
-    Fonts[COURE22] = QFont("Courier New", 22, QFont::Normal);
-    Fonts[COURE28] = QFont("Courier New", 28, QFont::Normal);
-    Fonts[TIMES12] = QFont("Times New Roman", 12, QFont::Normal);
-    Fonts[TIMES14] = QFont("Times New Roman", 14, QFont::Normal);
-    Fonts[TIMES18] = QFont("Times New Roman", 18, QFont::Normal);
-    Fonts[TIMES20] = QFont("Times New Roman", 20, QFont::Normal);
-    Fonts[TIMES20b] = QFont("Times New Roman", 20, QFont::Bold);
-    Fonts[TIMES22] = QFont("Times New Roman", 22, QFont::Normal);
-    Fonts[TIMES28] = QFont("Times New Roman", 28, QFont::Normal);
-    Fonts[ARIAL12] = QFont("Arial", 12, QFont::Normal);
-    Fonts[ARIAL18] = QFont("Arial", 18, QFont::Normal);
-    Fonts[ARIAL22] = QFont("Arial", 22, QFont::Normal);
-    Fonts[ARIAL28] = QFont("Arial", 28, QFont::Normal);
-    Fonts[TIMES30b] = QFont("Times New Roman", 30, QFont::Bold);
-    Fonts[TIMES28b] = QFont("Times New Roman", 28, QFont::Bold);
-    Fonts[COURE28b] = QFont("Courier New", 28, QFont::Bold);
-    Fonts[ARIAL12b] = QFont("Arial", 12, QFont::Bold);
-    Fonts[COURE12b] = QFont("Courier New", 12, QFont::Bold);
-    Fonts[COURE16] = QFont("Courier New", 16, QFont::Normal);
-    Fonts[ARIAL10b] = QFont("Arial", 10, QFont::Bold);
-    Fonts[WINDI10b] = QFont("Wingdings", 10, QFont::Bold);
-    Fonts[WIND210b] = QFont("Wingdings 2", 10, QFont::Bold);
-    Fonts[WIND310b] = QFont("Wingdings 3", 10, QFont::Bold);
-    Fonts[WEBDI10b] = QFont("Webdings", 10, QFont::Bold);
-    Fonts[TERMI10b] = QFont("Terminal", 10, QFont::Bold);
+    for (int i = 0; i < FontCount; i++){
+        Fonts[i] = QFont("Arial", 14, QFont::Normal);               Fonts[i].setPixelSize(14);}
+    Fonts[F_LITT] = QFont("Arial", 12, QFont::Normal);              Fonts[F_LITT].setPixelSize(12);
+    Fonts[F_DEFAULT] = QFont("Arial", 14, QFont::Normal);           Fonts[F_DEFAULT].setPixelSize(14);
+    Fonts[F_LITT_S] = QFont("Arial", 14, QFont::Normal);            Fonts[F_LITT_S].setPixelSize(14);
+    Fonts[F_LITT_B] = QFont("Arial", 16, QFont::Normal);            Fonts[F_LITT_B].setPixelSize(16);
+    Fonts[NULLFONT] = QFont("Arial", 90, QFont::Normal);            Fonts[NULLFONT].setPixelSize(90);
+    Fonts[COURE12] = QFont("Courier New", 12, QFont::Normal);       Fonts[COURE12].setPixelSize(12);
+    Fonts[COURE18] = QFont("Courier New", 18, QFont::Normal);       Fonts[COURE18].setPixelSize(18);
+    Fonts[COURE22] = QFont("Courier New", 22, QFont::Normal);       Fonts[COURE22].setPixelSize(22);
+    Fonts[COURE28] = QFont("Courier New", 28, QFont::Normal);       Fonts[COURE28].setPixelSize(28);
+    Fonts[TIMES12] = QFont("Times New Roman", 12, QFont::Normal);   Fonts[TIMES12].setPixelSize(12);
+    Fonts[TIMES14] = QFont("Times New Roman", 14, QFont::Normal);   Fonts[TIMES14].setPixelSize(14);
+    Fonts[TIMES18] = QFont("Times New Roman", 18, QFont::Normal);   Fonts[TIMES18].setPixelSize(18);
+    Fonts[TIMES20] = QFont("Times New Roman", 20, QFont::Normal);   Fonts[TIMES20].setPixelSize(20);
+    Fonts[TIMES20b] = QFont("Times New Roman", 20, QFont::Bold);    Fonts[TIMES20b].setPixelSize(20);
+    Fonts[TIMES22] = QFont("Times New Roman", 22, QFont::Normal);   Fonts[TIMES22].setPixelSize(22);
+    Fonts[TIMES28] = QFont("Times New Roman", 28, QFont::Normal);   Fonts[TIMES28].setPixelSize(28);
+    Fonts[ARIAL12] = QFont("Arial", 12, QFont::Normal);             Fonts[ARIAL12].setPixelSize(12);
+    Fonts[ARIAL18] = QFont("Arial", 18, QFont::Normal);             Fonts[ARIAL18].setPixelSize(18);
+    Fonts[ARIAL22] = QFont("Arial", 22, QFont::Normal);             Fonts[ARIAL22].setPixelSize(22);
+    Fonts[ARIAL28] = QFont("Arial", 28, QFont::Normal);             Fonts[ARIAL28].setPixelSize(28);
+    Fonts[TIMES30b] = QFont("Times New Roman", 30, QFont::Bold);    Fonts[TIMES30b].setPixelSize(30);
+    Fonts[TIMES28b] = QFont("Times New Roman", 28, QFont::Bold);    Fonts[TIMES28b].setPixelSize(28);
+    Fonts[COURE28b] = QFont("Courier New", 28, QFont::Bold);        Fonts[COURE28b].setPixelSize(28);
+    Fonts[ARIAL12b] = QFont("Arial", 12, QFont::Bold);              Fonts[ARIAL12b].setPixelSize(12);
+    Fonts[COURE12b] = QFont("Courier New", 12, QFont::Bold);        Fonts[COURE12b].setPixelSize(12);
+    Fonts[COURE16] = QFont("Courier New", 16, QFont::Normal);       Fonts[COURE16].setPixelSize(16);
+    Fonts[ARIAL10b] = QFont("Arial", 10, QFont::Bold);              Fonts[ARIAL10b].setPixelSize(10);
+    Fonts[WINDI10b] = QFont("Wingdings", 10, QFont::Bold);          Fonts[WINDI10b].setPixelSize(10);
+    Fonts[WIND210b] = QFont("Wingdings 2", 10, QFont::Bold);        Fonts[WIND210b].setPixelSize(10);
+    Fonts[WIND310b] = QFont("Wingdings 3", 10, QFont::Bold);        Fonts[WIND310b].setPixelSize(10);
+    Fonts[WEBDI10b] = QFont("Webdings", 10, QFont::Bold);           Fonts[WEBDI10b].setPixelSize(10);
+    Fonts[TERMI10b] = QFont("Terminal", 10, QFont::Bold);           Fonts[TERMI10b].setPixelSize(10);
 }
 
 TRect ClearBgiCoverRect(void)
@@ -119,7 +119,7 @@ void tracking_add_rect(QRect r)
     traceRect = traceRect.united(r);
 }
 void tracecoord(int x, int y){
-    QRect r1(x,y,x+1,y+1);
+    QRect r1(x,y,1,1);
     traceRect = traceRect.united(r1);
 }
 
@@ -218,12 +218,18 @@ static void select_font()
 {
     if (text_settings.font < 0 || text_settings.font >= FontCount) {
         text_settings.font = 0;
-//        std::cerr << "Default font." << std::endl;
+        //        std::cerr << "Default font." << std::endl;
     }
-    font = Fonts[text_settings.font];
-    font.setPointSize(text_settings.charsize);
-    if (Painter)
+
+    if (Painter){
+        font = Fonts[text_settings.font];
+        if (text_settings.charsize != 1){
+            if (text_settings.charsize<0)
+                font.setPixelSize(-text_settings.charsize);else
+                font.setPixelSize(text_settings.charsize);
+        }
         Painter->setFont(font);
+    }
 }
 
 void settextstyle(int __font, int __direction, int __charsize)
@@ -247,34 +253,41 @@ void _SetTextSize(int charsize)
     select_font();
 }
 
-int textheight(const char* __textstring)
+int textheight(const String & __textstring)
 {
     QFontMetrics fm(font);
-    return fm.horizontalAdvance(__textstring);
+    //    return fm.horizontalAdvance(__textstring);
+    return fm.height();
 }
 
-int textwidth(const char* __textstring)
+int textwidth(const String &__textstring)
 {
     QFontMetrics fm(font);
-    return fm.height();
+    return fm.width(__textstring);
 }
 
 // =============   DRAW  ==========
 
 void bar(int __left, int __top, int __right, int __bottom)
 {
-    QRect r(__left, __top, __right - __left, __bottom - __top);
+    QRect r(QPoint(__left, __top),QPoint(__right-1 , __bottom-1));
     if (bgi_tracking) {
         tracking_add_rect(r);
         return;
     }
-    if (Painter)
+    if (Painter){
+        auto old_pen_color=pen.color();
+        pen.setColor(brush.color());
+        Painter->setPen(pen);
         Painter->drawRect(r);
+        pen.setColor(old_pen_color);
+        Painter->setPen(pen);
+    }
 }
 
 void circle(int __x, int __y, int __radius)
 {
-    QRect r(__x - __radius, __y - __radius, __x + __radius, __y + __radius);
+    QRect r(__x - __radius, __y - __radius,  __radius*2,  __radius*2);
     if (bgi_tracking) {
         tracking_add_rect(r);
         return;
@@ -285,7 +298,7 @@ void circle(int __x, int __y, int __radius)
 
 void pie(int X1, int Y1, int X2, int Y2, int X3, int Y3, int X4, int Y4)
 {
-    QRect r(X1, Y1, X2, Y2);
+    QRect r(QPoint(X1, Y1), QPoint(X2, Y2));
     if (bgi_tracking) {
         tracking_add_rect(r);
         return;
@@ -348,7 +361,7 @@ void line(int __x1, int __y1, int __x2, int __y2)
 {
 
     if (bgi_tracking) {
-        QRect r(__x1, __y1, __x2, __y2);
+        QRect r(QPoint(__x1, __y1),QPoint(__x2, __y2));
         tracking_add_rect(r);
         return;
     }
@@ -380,7 +393,7 @@ void rectangle(int left, int top, int right, int bottom)
 
 void roundrect(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int nWidth, int nHeight)
 {
-    QRect r(nLeftRect, nTopRect, nRightRect, nBottomRect);
+    QRect r(QPoint(nLeftRect, nTopRect), QPoint(nRightRect, nBottomRect));
     if (bgi_tracking) {
         tracking_add_rect(r);
         return;
@@ -389,12 +402,13 @@ void roundrect(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int
         Painter->drawRoundedRect(r, nWidth, nHeight);
 }
 
-void OutTextXY(int x, int y, const char* str)
+void OutTextXY(int x, int y, const String &str)
 {
-    if (strlen(str) == 0)
+    if (str.Length()==0)
         return;
     int tw = textwidth(str);
     int th = textheight(str);
+    QRect r(x , y, tw,   th);
     int dy = 0; // ptm->tmInternalLeading;
     int dx = 0;
     switch (text_settings.horiz) {
@@ -402,39 +416,44 @@ void OutTextXY(int x, int y, const char* str)
         dx = 0;
         break;
     case CENTER_TEXT: {
-        dx = (0.5 + 1. * tw / 2);
+        dx = -tw/2;//(0.5 + 1. * tw / 2);
     } break;
     case RIGHT_TEXT:
-        dx = tw;
+        dx = -tw;
         break;
     }
     switch (text_settings.vert) {
     case TOP_TEXT:
-        dy = 0;
+        dy =0;// -th;
         break;
     case BOTTOM_TEXT:
-        dy = th;
+        dy = -th;
         break;
     case CENTER_TEXT: {
-        dy = (0.5 + 1. * th / 2) /*-1*/;
+        dy = -th/2;//(0.5 + 1. * th / 2) /*-1*/;
     } break;
     }
-
+    r.translate(dx,dy);
     if (bgi_tracking) {
 
-        QRect r(x - dx, y - dy, x - dx + tw, x - dx + th);
+        QRect r(x - dx, y - dy, tw,   th);
         tracking_add_rect(r);
         return;
     }
-    if (Painter)
-        Painter->drawText(x - dx, y - dy, str);
+    if (Painter){
+        int uF = Qt::AlignLeft;
+        Painter->drawText(r,uF, str);
+        //        QRect r(x - dx, y - dy, tw,   th);
+        //        Painter->drawRect(r);
+    }
 }
 
-void DrawText(int x, int y, int tw, int th, const char* str)
+void DrawText(int x, int y, int tw, int th, const String &str)
 {
-    if (strlen(str) == 0)
+    //    if (strlen(str) == 0)
+    if (str.Length()==0)
         return;
-    QRect r(x, y, x + tw, x + th);
+    QRect r( x, y, tw, th);
     if (bgi_tracking) {
         tracking_add_rect(r);
         return;
@@ -544,6 +563,7 @@ int Draw_Ramka(int left, int top, int right, int bottom, int edge , int grfFlags
 bool drawemf(const RECT* lpRect, const char* szimagename, int animstep )
 {
     rectangle(lpRect->left,  lpRect->top,  lpRect->right,  lpRect->bottom);
+    return true;
 }
 
 
@@ -551,6 +571,9 @@ bool drawemf(const RECT* lpRect, const char* szimagename, int animstep )
 class initbgi
 {
 public:
-    initbgi() { initFonts(); }
+    initbgi() {
+        initFonts();
+        Get_DAC();
+    }
 };
 static initbgi _initbgi;

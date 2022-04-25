@@ -1080,7 +1080,7 @@ void Station::GoEachACompStanPostFun()
   }
 }
 
-const char* GetImageName(std::string Picture, int PictureState);
+const char* GetImageName(String Picture, int PictureState);
 void Station::ShowElemsSost()
 {
   if (!AO->bShowInfStatAll)
@@ -1135,7 +1135,7 @@ void Station::ShowElemsTagStr()
         String SS = String(ac->Tagstr.c_str());
         setcolor(TXT);
         TRect RCT = ac->RCT;
-        OutTextXY(RCT.left, RCT.top, SS.c_str());
+        OutTextXY(RCT.left, RCT.top, SS);
       }
     }
   }

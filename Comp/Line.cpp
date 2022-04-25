@@ -14,6 +14,7 @@ void Lini::Set()
   AComp::Set();
   mas_y = MEM.Nomer;
   // strncpy(name,MEM.name,7);
+  memset(name,0,8);
   cp866_to_cp1251_buff(MEM.name, name, 7);
 }
 
