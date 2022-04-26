@@ -42,8 +42,10 @@ static void set_defaults()
 
 void initFonts()
 {
-    for (int i = 0; i < FontCount; i++){
-        Fonts[i] = QFont("Arial", 14, QFont::Normal);               Fonts[i].setPixelSize(14);}
+    for (int i = 0; i < FontCount; i++){ 
+        Fonts[i] = QFont("Arial", 14, QFont::Normal);               
+        Fonts[i].setPixelSize(14);
+    }
     Fonts[F_LITT] = QFont("Arial", 12, QFont::Normal);              Fonts[F_LITT].setPixelSize(12);
     Fonts[F_DEFAULT] = QFont("Arial", 14, QFont::Normal);           Fonts[F_DEFAULT].setPixelSize(14);
     Fonts[F_LITT_S] = QFont("Arial", 14, QFont::Normal);            Fonts[F_LITT_S].setPixelSize(14);

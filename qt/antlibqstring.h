@@ -4,12 +4,14 @@
 
 class AQString : public QString
 {
+  mutable std::string cstr;
+
 public:
   AQString() : QString() {}
-  AQString(const QString &s) : QString(s) {}
+  AQString(const QString &s);
   AQString(const char* s) ;
-  AQString(const std::string& s) : AQString(s.c_str()) {}
   AQString(const char &s) ;
+  AQString(const std::string& s) : AQString( s.c_str() ) {}
 
   int Pos(const QString& subStr) const {return this->indexOf(subStr)+1;}
   int Pos(char ch) const {return this->indexOf(AQString(ch))+1;}
