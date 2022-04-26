@@ -1,12 +1,12 @@
 #pragma once
 
-// #include "aheaders_h.h"
 #include "bgi.h"
 
 #include <QPainter>
 
 QPainter* getAntLibPainter();
 QPainter* setAntLibPainter(QPainter* p);
+
 QPainter* BgiCanvas(void);
 QColor BgiColor(unsigned int c);
 void start_bgi_tracking();

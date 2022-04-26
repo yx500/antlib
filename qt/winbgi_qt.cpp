@@ -17,14 +17,13 @@ static int bgi_tracking = 0;
 
 QPainter* BgiCanvas(void) { return Painter; }
 
-QPainter* getAntLibPainter() { return Painter; }
+QPainter* getAntLibPainter() { return BgiCanvas(); }
 
 QPainter* setAntLibPainter(QPainter* p)
 {
     auto oldPainter = Painter;
     Painter = p;
     return oldPainter;
-    QFont f;
 }
 
 static void set_defaults()
@@ -304,8 +303,6 @@ void pie(int X1, int Y1, int X2, int Y2, int X3, int Y3, int X4, int Y4)
         return;
     }
     if (Painter) {
-        // Хер знат как пересчитать борланд отсечку в градусы
-        // рисую полукружия , надо проверять
         if (Y3 > Y4)
             Painter->drawPie(r, 0 * 16, 180 * 16);
         else
