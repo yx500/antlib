@@ -9,6 +9,8 @@ QPainter* getAntLibPainter();
 QPainter* setAntLibPainter(QPainter* p);
 QPainter* BgiCanvas(void);
 QColor BgiColor(unsigned int c);
+void start_bgi_tracking();
+QRect stop_bgi_tracking();
 
 class QPainterDC
 {

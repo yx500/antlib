@@ -81,9 +81,9 @@ void initFonts()
 
 TRect ClearBgiCoverRect(void)
 {
-    RECT traceRECT = GetBgiCoverRect();
+    RECT _traceRECT = GetBgiCoverRect();
     traceRect = QRect();
-    return traceRECT;
+    return _traceRECT;
 }
 
 TRect GetBgiCoverRect(void)
@@ -132,7 +132,7 @@ QColor BgiColor(unsigned int c){
 void setcolor(int __color)
 {
     pen.setColor(BgiColor(__color));
-    if (Painter)
+    if ((Painter) &&(!bgi_tracking))
         Painter->setPen(pen);
 }
 void setfillstyle(int __pattern, int __color)
@@ -173,7 +173,7 @@ void setfillstyle(int __pattern, int __color)
     default:
         brush.setStyle(Qt::NoBrush);
     }
-    if (Painter)
+    if ((Painter)&&(!bgi_tracking))
         Painter->setBrush(brush);
 }
 
@@ -435,8 +435,6 @@ void OutTextXY(int x, int y, const String &str)
     }
     r.translate(dx,dy);
     if (bgi_tracking) {
-
-        QRect r(x - dx, y - dy, tw,   th);
         tracking_add_rect(r);
         return;
     }
@@ -524,6 +522,8 @@ void PolyColor(int iBrushColor, const TPoint* Points, const int* iColors, const 
     setfillstyle(fill_settings.pattern,iBrushColor);
     pen.setWidth(PenW);
     if (Painter){
+        Painter->setPen(pen);
+        Painter->setBrush(brush);
         if (bNormPol) {
             setlinestyle(SOLID_LINE,0,PenW);
             setcolor(iColors0);
@@ -532,20 +532,20 @@ void PolyColor(int iBrushColor, const TPoint* Points, const int* iColors, const 
         } else {
 
             Painter->drawPolygon(p);
-            pen.setColor(BrushColor);
+            pen.setColor(BrushColor);Painter->setPen(pen);
             Painter->drawPolyline(p);
-            pen.setStyle(Qt::SolidLine);
+            pen.setStyle(Qt::SolidLine);Painter->setPen(pen);
 
             for (int i = 1; i < Points_Count; i++) {
 
                 if ((iBrushColor == iColors[i - 1]) && (iBrushColor != FON))
                     continue;
-                pen.setColor(BgiColor(iColors[i - 1]));
+                pen.setColor(BgiColor(iColors[i - 1]));Painter->setPen(pen);
                 Painter->drawLine(Points[i - 1].x, Points[i - 1].y,Points[i].x, Points[i].y);
                 //                Cnv->Pixels[Points[i].x][Points[i].y] = Cnv->Pen->Color;
             }
             if ((iBrushColor != iColors[Points_Count - 1]) || ((iBrushColor == FON) && (iColors[Points_Count - 1] == FON))) {
-                pen.setColor(BgiColor(iColors[Points_Count - 1]));
+                pen.setColor(BgiColor(iColors[Points_Count - 1]));Painter->setPen(pen);
                 Painter->drawLine(Points[Points_Count - 1].x, Points[Points_Count - 1].y,Points[0].x, Points[0].y);
                 //                Cnv->Pixels[Points[0].x][Points[0].y] = Cnv->Pen->Color;
             }
