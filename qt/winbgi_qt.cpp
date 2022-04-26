@@ -258,14 +258,14 @@ void _SetTextSize(int charsize)
 int textheight(const String & __textstring)
 {
     QFontMetrics fm(font);
-    //    return fm.horizontalAdvance(__textstring);
     return fm.height();
 }
 
 int textwidth(const String &__textstring)
 {
     QFontMetrics fm(font);
-    return fm.width(__textstring);
+    return fm.horizontalAdvance(__textstring);
+//    return fm.width(__textstring);
 }
 
 // =============   DRAW  ==========
