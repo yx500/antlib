@@ -242,6 +242,7 @@ void settextstyle(int __font, int __direction, int __charsize)
 void _SetText(unsigned int __font, int d1, int d2)
 {
     text_settings.font = (__font < FontCount) ? __font : 0;
+    text_settings.charsize = Fonts[__font].pixelSize();
     select_font();
     settextjustify(d1, d2);
 }
