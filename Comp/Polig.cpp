@@ -132,7 +132,7 @@ int Poligon::LoadYCE(const char* filename)
     // SetCurrentDir(oldcd);
     strncpy(tmpStan->filename, SS.c_str(), sizeof(tmpStan->filename) - 1);
 
-    if (tmpStan->Open(tmpStan->FullFN()) == -1) {
+    if (tmpStan->Open(SS.c_str()/*tmpStan->FullFN()*/) == -1) {
       if (MOD == ED)
         return -1;
       else

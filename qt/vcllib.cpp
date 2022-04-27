@@ -19,7 +19,7 @@ String ExtractFileName(const String &filename)
 
 String ExtractFileDir(const String &filename)
 {
-  return QFileInfo( QString::fromLocal8Bit(filename.c_str(), filename.size()) ).filePath().toStdString();
+  return QFileInfo( QString::fromLocal8Bit(filename.c_str(), filename.size()) ).dir().path().toStdString();
 }
 
 bool FileExists(const String &filename)
