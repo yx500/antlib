@@ -353,7 +353,7 @@ void tG_Strel_Y::UpdateState()
   // Y_Strel_2.pVisibleArray=pVisibleArray;
   tGRC0::UpdateState();
   // StateChanged=Y_Strel_2.StateChanged;
-  int rimpuls_pr[7];
+  int rimpuls_pr[8];
   for (int i = 0; i < 8; i++)
     rimpuls_pr[i] = f(impuls_pr[i]);
   for (int i = 0; i < 8; i++)
