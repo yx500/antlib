@@ -7,7 +7,7 @@
 #include <string>
 #include <utility>
 
-namespace antlib::utils {
+namespace alib::tools {
 
 
 using clk        = std::chrono::high_resolution_clock;
@@ -16,6 +16,8 @@ using std::chrono::duration;
 using std::chrono::duration_cast;
 
 class ProfilerTimer {
+  time_point  start_;
+  std::string label;
 public:
 
 
@@ -30,7 +32,7 @@ public:
   ~ProfilerTimer() { print(); }
 
   void print() {
-    finish_         = clk::now();
+    time_point finish_         = clk::now();
     auto elapsed    = finish_ - start_;
     auto elapsed_s  = duration_cast<duration<double>>(elapsed).count();
     auto elapsed_ms = elapsed_s * 1000;
@@ -38,11 +40,6 @@ public:
     std::sprintf(buf, "%-20s %12.4f ms", label.data(), elapsed_ms); // NOLINT
     std::cerr << buf << '\n';                                       // NOLINT
   }
-
-private:
-  time_point  start_;
-  time_point  finish_;
-  std::string label;
 };
 
-} // namespace antlib::utils
+} // namespace
