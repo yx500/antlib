@@ -28,7 +28,7 @@ AQString::AQString(const char* s) : QString()
   cstr=std::string( s );
 }
 
-AQString::AQString(const char &s) : QString()
+AQString::AQString(const char s) : QString()
 {
   if (codec1251==nullptr) codec1251=QTextCodec::codecForName("Windows-1251");
   if (codec1251!=nullptr) {
