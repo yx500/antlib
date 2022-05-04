@@ -64,7 +64,3 @@ extern String ExtractFileDir(const String& filename);
 extern bool FileExists(const String& filename);
 
 
-#include "atools.h"
-
-
-
