@@ -337,10 +337,10 @@ void Stik::Show()
   int st_st = 2;
   int sd;
   int sd2 = 0;
-  if (((ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) ||
-      ((ExtPriz.NoShowStan == 1) && (CurrentPicture == LT)))
+  if (((ExtPriz.isNoShowYch()== 1) && (CurrentPicture == BG)) ||
+      ((ExtPriz.isNoShowStan()== 1) && (CurrentPicture == LT)))
     return;
-  // if ((ExtPriz.NoShowExtInfo==1)&&(!bShowExtInfo))   return;
+  // if ((ExtPriz.isNoShowExtInfo()==1)&&(!bShowExtInfo))   return;
   setcolor(BLUE_m);
   /* дополнительные припары !   */
   if (name[0] == '#') {

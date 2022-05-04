@@ -56,7 +56,7 @@ public:
   char ChanelNames[255][12]; /*�������� ��� ������� 1..255, 0 - �� �������*/
   TvUseChanelNames vUseChanelNames;
   int ID_RP;                       /*   */
-  char filename[255];              /*��� �����     */
+  String filename;              /*��� �����     */
   char name[255];                  /*���      */
   TEnergStanLamps* EnergStanLamps; // ����� �����������
   TMarshList MARSHLIST;

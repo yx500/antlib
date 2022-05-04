@@ -338,14 +338,14 @@ void AComp::GetPropMap(TPropMap& m)
   m.put(_ACompPropName[5], masy, 0);
   m.put(_ACompPropName[6], masx2, 0);
   m.putEx(_ACompPropName[7], OldImpToNewStr(impuls_busi, this), GetRealImp(impuls_busi), OldImpToNewStr(0, this));
-  m.put(_ACompPropName[8], ExtPriz.NoShowYch, 0);
-  m.put(_ACompPropName[9], ExtPriz.NoShowStan, 0);
-  m.put(_ACompPropName[10], ExtPriz.MEM2, 0);
-  m.put(_ACompPropName[11], ExtPriz.UseInRevizor, 0);
-  m.put(_ACompPropName[12], ExtPriz.UseInCommLmp, 0);
+  m.put(_ACompPropName[8], ExtPriz.isNoShowYch(), 0);
+  m.put(_ACompPropName[9], ExtPriz.isNoShowStan(), 0);
+  m.put(_ACompPropName[10], ExtPriz.isMEM2(), 0);
+  m.put(_ACompPropName[11], ExtPriz.isUseInRevizor(), 0);
+  m.put(_ACompPropName[12], ExtPriz.isUseInCommLmp(), 0);
   m.put(_ACompPropName[13], iMacro, 0);
-  m.put(_ACompPropName[14], ExtPriz.NoShowYchAct, 0);
-  m.put(_ACompPropName[15], ExtPriz.NoShowExtInfo, 0);
+  m.put(_ACompPropName[14], ExtPriz.isNoShowYchAct(), 0);
+  m.put(_ACompPropName[15], ExtPriz.isNoShowExtInfo(), 0);
   for (int i = 0; i < 3; i++) {
     int xy = 0;
     for (int j = 0; j < 8; j++)
@@ -379,14 +379,14 @@ void AComp::SetPropMap(TPropMap& m)
   masx2 = m.geti(_ACompPropName[6]);
 
   impuls_busi = NewStrToOldImp(m.get(_ACompPropName[7]).c_str());
-  ExtPriz.NoShowYch = m.geti(_ACompPropName[8]);
-  ExtPriz.NoShowStan = m.geti(_ACompPropName[9]);
-  ExtPriz.MEM2 = m.geti(_ACompPropName[10]);
-  ExtPriz.UseInRevizor = m.geti(_ACompPropName[11]);
-  ExtPriz.UseInCommLmp = m.geti(_ACompPropName[12]);
+  ExtPriz.setNoShowYch( m.geti(_ACompPropName[8]));
+  ExtPriz.setNoShowStan( m.geti(_ACompPropName[9]));
+  ExtPriz.setMEM2( m.geti(_ACompPropName[10]));
+  ExtPriz.setUseInRevizor( m.geti(_ACompPropName[11]));
+  ExtPriz.setUseInCommLmp( m.geti(_ACompPropName[12]));
   iMacro = m.geti(_ACompPropName[13]);
-  ExtPriz.NoShowYchAct = m.geti(_ACompPropName[14]);
-  ExtPriz.NoShowExtInfo = m.geti(_ACompPropName[15]);
+  ExtPriz.setNoShowYchAct( m.geti(_ACompPropName[14]));
+  ExtPriz.setNoShowExtInfo( m.geti(_ACompPropName[15]));
 
   for (int i = 0; i < 3; i++) {
     String stxy = m.get("ñìPad" + IntToStr(i + 1) + "xy");

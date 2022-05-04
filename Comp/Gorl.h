@@ -19,13 +19,19 @@ struct ID_ZO
   uint8 b[4];
 };
 
-struct Signal
+struct Signal_file
 {
   char name[6]; /*хлъ ябернтнпю*/
-  AComp* nomer; /*юдпея(б тюике ме нопедекем)*/
+  uint32 _nomer; /*юдпея(б тюике ме нопедекем)*/
 };
 
-struct Grl
+
+struct Signal :public Signal_file
+{
+    AComp* nomer; /*юдпея(б тюике ме нопедекем)*/
+};
+
+struct Grl_file
 {
 
   short int Col_Mar; // йнкхвеярбн  люпьпсрнб
@@ -37,35 +43,81 @@ struct Grl
   uint8 bit_kzm; // опхгмюй сопюбкемхъ гюлшйюмхел
   uint8 nom_fiz; // мнлеп тхг цнпкнбхмш
 
-  short int impuls_ksp;  // яхцмюк гюмърхъ
-  short int impuls_kzm;  // яхцмюк гюлшйюмхъ
-  short int impuls_ks;   // яхцмюк ябернтнпю нропюбкемхъ
-  short int impuls_ks_i; // яхцмюк ябернтнпю опхелю
-  char** Matr;           // юДПЕЯ люрпхжш  люпьпсрнб
-  char* Strel_N;         // юДПЕЯ мнлепю ярпекнй
-  Strel0** _Strel;       // сЙЮГЮРЕКЭ МЮ сйюгюрекх (б тюике менопедекемш)
-  Signal* Sign;          // сЙЮГЮРЕКЭ ябернтнпнб нропюбкемхъ
-  Signal Sign_i;         // ябернтн опхелю
-  short int* impuls_m;   // яхцмюкш мю сярюмнбйс люпьпсрю
-  short int* impuls_km;  // яхцмюкш мю гюмърхе люпьпсрю
+  int16 impuls_ksp;  // яхцмюк гюмърхъ
+  int16 impuls_kzm;  // яхцмюк гюлшйюмхъ
+  int16 impuls_ks;   // яхцмюк ябернтнпю нропюбкемхъ
+  int16 impuls_ks_i; // яхцмюк ябернтнпю опхелю
+  uint32 _Matr;           // юДПЕЯ люрпхжш  люпьпсрнб
+  uint32 _Strel_N;         // юДПЕЯ мнлепю ярпекнй
+  uint32 __Strel;       // сЙЮГЮРЕКЭ МЮ сйюгюрекх (б тюике менопедекемш)
+  uint32 _Sign;          // сЙЮГЮРЕКЭ ябернтнпнб нропюбкемхъ
+  Signal_file _Sign_i;         // ябернтн опхелю
+  uint32 _impuls_m;   // яхцмюкш мю сярюмнбйс люпьпсрю
+  uint32 _impuls_km;  // яхцмюкш мю гюмърхе люпьпсрю
                          //------------======  якефемхе  =======-----------
   uint8 IN_OUT;          // ОПХЕЛ \НРОПЮБКЕМХЕ  (1)              -╛
-  ID_ZO* zona_M;         // яохянй оепелеммшу хлем гнм  (4*6=24)  +
+  uint32 _zona_M;         // яохянй оепелеммшу хлем гнм  (4*6=24)  +
   ID_ZO zona_1;          // онярнъмюъ гнмю               (4)      ╕ 133
-  short int tu_marh;
-  long time_tu;
-  short int priz;
-  short int marh;
-  short int marh_tu;
-  short int marh_m;
-  short int marh_sv;
-  short int old_marsh;   // МНЛЕП ОПНЬКНЦН ЛЮПЬПСРЮ
-  unsigned long tim_o_m; // БПЕЛЪ ОПНЬКНЦН ЛЮПЬПСРЮ ОПХ ОНРЕПЕ
+  int16 tu_marh;
+  int32 time_tu;
+  int16 priz;
+  int16 marh;
+  int16 marh_tu;
+  int16 marh_m;
+  int16 marh_sv;
+  int16 old_marsh;   // МНЛЕП ОПНЬКНЦН ЛЮПЬПСРЮ
+  uint32 tim_o_m; // БПЕЛЪ ОПНЬКНЦН ЛЮПЬПСРЮ ОПХ ОНРЕПЕ
 
   uint16 ID;
   char zapas[2];
 
+  Grl_file();
+};
+
+struct Grl 
+{
+    short int    Col_Mar;                   // йнкхвеярбн  люпьпсрнб
+    short int    Col_Str;                   // йнкхвеярбн  ярпекнй
+
+    char   name[6];                   // хлъ цнпкнбхмш
+    uint8   bit_m;                     // опхгмюй сопюбкемхъ люпьпсрнл
+    uint8   bit_ksp;                   // опхгмюй сопюбкемхъ гюмърхел
+    uint8   bit_kzm;                   // опхгмюй сопюбкемхъ гюлшйюмхел
+    uint8   nom_fiz;                   // мнлеп тхг цнпкнбхмш
+
+    int16    impuls_ksp;                // яхцмюк гюмърхъ
+    int16    impuls_kzm;                // яхцмюк гюлшйюмхъ
+    int16    impuls_ks;                 // яхцмюк ябернтнпю нропюбкемхъ
+    int16    impuls_ks_i;               // яхцмюк ябернтнпю опхелю
+    char   **Matr;                // юДПЕЯ люрпхжш  люпьпсрнб
+    char   *Strel_N;                // юДПЕЯ мнлепю ярпекнй
+    Strel0    * *_Strel;               // сЙЮГЮРЕКЭ МЮ сйюгюрекх (б тюике менопедекемш)
+    Signal *Sign;                 // сЙЮГЮРЕКЭ ябернтнпнб нропюбкемхъ
+    Signal     Sign_i;                // ябернтн опхелю
+    int16    *impuls_m;             // яхцмюкш мю сярюмнбйс люпьпсрю
+    int16    *impuls_km;            // яхцмюкш мю гюмърхе люпьпсрю
+//------------======  якефемхе  =======-----------
+    int8   IN_OUT  ;                 // ОПХЕЛ \НРОПЮБКЕМХЕ  (1)              -╛
+    ID_ZO  *zona_M;              // яохянй оепелеммшу хлем гнм  (4*6=24)  +
+    ID_ZO  zona_1    ;               // онярнъмюъ гнмю               (4)      ╕ 133
+    int16    tu_marh;
+    int32   time_tu;
+    int16    priz;
+    int16    marh;
+    int16    marh_tu;
+    int16    marh_m;
+    int16    marh_sv;
+    int16    old_marsh;      // МНЛЕП ОПНЬКНЦН ЛЮПЬПСРЮ
+    uint32 tim_o_m; // БПЕЛЪ ОПНЬКНЦН ЛЮПЬПСРЮ ОПХ ОНРЕПЕ
+
+    uint16 ID;
+    char zapas[2];
+
+
+
   Grl();
+  void toGrl_file(Grl_file *gf);
+  void fromGrl_file(Grl_file *gf);
 };
 #pragma pack(pop)
 

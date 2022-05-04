@@ -293,7 +293,7 @@ bool ExShowLamp(int x, int y, Lamp* AL, int YS)
       //* Общие для ключей  *
       if (AL->LS != NULL) {
         //* подложки *
-        if (AL->LS->MyStat4 > 0) {
+        if (AL->LS->isMyStat4() > 0) {
           GE = AL->GrpahExData;
           GE.PictWidthYch = GE.PictWidthYch + GE.PictWidthYch / 2;
           if (GE.PictWidthYch % 2 != 0)
@@ -312,7 +312,7 @@ bool ExShowLamp(int x, int y, Lamp* AL, int YS)
           ShowPictText(xx, yy, &GE, "", YS);
         }
 
-        if (AL->LS->MyStat3 > 0) {
+        if (AL->LS->isMyStat3() > 0) {
           GE = AL->GrpahExData;
           GE.PictWidthYch = GE.PictWidthYch + GE.PictWidthYch / 5;
           if (GE.PictWidthYch % 2 != 0)
@@ -326,7 +326,7 @@ bool ExShowLamp(int x, int y, Lamp* AL, int YS)
           GE.PictHeightStan = GE.PictHeightStan + GE.PictHeightStan / 5;
           if (GE.PictHeightStan % 2 != 0)
             GE.PictHeightStan++;
-          GE.PictNumber = 30 + AL->LS->MyStat3;
+          GE.PictNumber = 30 + AL->LS->isMyStat3();
           GE.GridAllign = 0;
           ShowPictText(xx, yy, &GE, "", YS);
         }
@@ -369,7 +369,7 @@ bool ExShowLamp(int x, int y, Lamp* AL, int YS)
           // GE.GridAllign=0;
           ShowPictText(x, y, &GE, "", YS);
         }
-        int pol = AL->LS->MyStat2;
+        int pol = AL->LS->isMyStat2();
         //  Ручные ключи *
         if (LTYP == lt_r_kl) {
           NPict = 13 + pol;
@@ -383,9 +383,9 @@ bool ExShowLamp(int x, int y, Lamp* AL, int YS)
             NPict = pol + 9;
           } else {
             if (AL->AO->ENERG == 2)
-              NPict = UprKlPictNumber[pol * 4 + AL->LS->__MyStat5 * 2 + 1 - ii];
+              NPict = UprKlPictNumber[pol * 4 + AL->LS->is__MyStat5() * 2 + 1 - ii];
             else
-              NPict = UprKlPictNumber[pol * 4 + AL->LS->__MyStat5 * 2 + ii];
+              NPict = UprKlPictNumber[pol * 4 + AL->LS->is__MyStat5() * 2 + ii];
           }
         }
         GE = AL->GrpahExData;
@@ -396,7 +396,7 @@ bool ExShowLamp(int x, int y, Lamp* AL, int YS)
     }   // case
     }   // switch
     //* предупреждения для всех
-    if ((AL->LS != NULL) && ((AL->LS->MyStat4 == 1) || (AL->LS->MyStat4 == 3))) {
+    if ((AL->LS != NULL) && ((AL->LS->isMyStat4() == 1) || (AL->LS->isMyStat4() == 3))) {
       GE = AL->GrpahExData;
       // GE.PictWidthYch=GE.PictWidthYch/2;
       // GE.PictHeightYch=GE.PictHeightYch/2;
@@ -406,7 +406,7 @@ bool ExShowLamp(int x, int y, Lamp* AL, int YS)
       GE.GridAllign = 7;
       ShowPictText(xx + W / 2, yy, &GE, "", YS);
     }
-    if ((AL->LS != NULL) && ((AL->LS->MyStat4 == 2) || (AL->LS->MyStat4 == 3))) {
+    if ((AL->LS != NULL) && ((AL->LS->isMyStat4() == 2) || (AL->LS->isMyStat4() == 3))) {
       GE = AL->GrpahExData;
       // GE.PictWidthYch=GE.PictWidthYch/2;
       // GE.PictHeightYch=GE.PictHeightYch/2;
@@ -417,7 +417,7 @@ bool ExShowLamp(int x, int y, Lamp* AL, int YS)
       ShowPictText(xx + W / 2, yy, &GE, "", YS);
     }
     /* TU  *
-    if ((AL->LS!=NULL)&&(AL->LS->MyStat22==1)){
+    if ((AL->LS!=NULL)&&(AL->LS->isMyStat2()2==1)){
        GE=AL->GrpahExData;
        GE.PictWidthYch=40;
        GE.PictHeightYch=30;

@@ -121,7 +121,7 @@ void SaveLampsLS(Station* Stan)
     eo = dynamic_cast<TE_OBJ*>(Stan->POLE[WAYS]->GetObjPtr(j));
     if (eo == NULL)
       continue;
-    // lmp->LS->__MyStat5=lmp->MyStat5;
+    // lmp->LS->is__MyStat5()=lmp->MyStat5;
     if (memcmp(&eo->KeySost_current, &eo->KeySost_default, sizeof(TE_KeySost)) == 0)
       continue;
     Stan->EnergStanLamps->Lamps[cnt].ObjID = eo->GetID();
@@ -164,7 +164,7 @@ void LoadLampsLS(Station* Stan)
       memcpy(&eo->KeySost_current, &Stan->EnergStanLamps->Lamps[cnt].KeySost, sizeof(TE_KeySost));
       ex = true;
       break;
-      // lmp->MyStat2=lmp->LS->__MyStat2;
+      // lmp->isMyStat2()=lmp->LS->__MyStat2;
       // memset(&Stan->EnergStanLamps->Lamps[cnt].Reserv,0,sizeof(Stan->EnergStanLamps->Lamps[cnt].Reserv));
     }
     if (!ex)

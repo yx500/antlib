@@ -147,25 +147,40 @@ enum TYP
 
 //  Структура элемента в файле                       sizeof
 
-typedef struct
+struct  __tLStat
 {
-  unsigned MyStat2 : 1;
-  unsigned MyStat22 : 1;
-  unsigned MyStat3 : 3;
-  unsigned MyStat4 : 2;
-  unsigned __MyStat5 : 1;
-} __tLStat;
+  uint8 P;
+  int isMyStat2(){     return (P>>0) & 0x01;}
+  int isMyStat22() {   return (P>>1) & 0x01;}
+  int isMyStat3() {    return (P>>2) & 0x07;}//0b00000111 ;}   // : 3;
+  int isMyStat4() {    return (P>>5) & 0x03;}//0b00000011;}   //  : 2;
+  int is__MyStat5() {  return (P>>7) & 0x01;}
+  void setMyStat2(int v){     if (v) P|=  ( 1 << 0 ); else P&= ~( 1 << 0 );}
+  void setMyStat22(int v){    if (v) P|=  ( 1 << 1 ); else P&= ~( 1 << 1 );}
+  void setMyStat3(int v) {    P&= 0xE3/*0b11100011*/;    P|=  ( v << 2 ); }
+  void setMyStat4(int v) {    P&= 0x9F/*0b10011111*/;    P|=  ( v << 5 ); }
+  void set__MyStat5(int v) {  if (v) P|=  ( 1 << 7 ); else P&= ~( 1 << 7 );}
+};
 /* Дополнительные признаки  */
 struct TExtPriz
 {
-  unsigned NoShowYch : 1;
-  unsigned NoShowStan : 1;
-  unsigned MEM2 : 1;
-  unsigned UseInRevizor : 1;
-  unsigned UseInCommLmp : 1;
-  unsigned NoShowYchAct : 1;
-  unsigned NoShowExtInfo : 1;
-  unsigned Zapas : 1;
+  uint8 P;
+  bool isNoShowYch(){     return (P>>0) & 0x01;}
+  bool isNoShowStan(){    return (P>>1) & 0x01;}
+  bool isMEM2(){          return (P>>2) & 0x01;}
+  bool isUseInRevizor(){  return (P>>3) & 0x01;}
+  bool isUseInCommLmp(){  return (P>>4) & 0x01;}
+  bool isNoShowYchAct(){  return (P>>5) & 0x01;}
+  bool isNoShowExtInfo(){ return (P>>6) & 0x01;}
+  bool isZapas(){         return (P>>7) & 0x01;}
+  void setNoShowYch(bool v){     if (v) P|=  ( 1 << 0 ); else P&= ~( 1 << 0 );}
+  void setNoShowStan(bool v){    if (v) P|=  ( 1 << 1 ); else P&= ~( 1 << 1 );}
+  void setMEM2(bool v){          if (v) P|=  ( 1 << 2 ); else P&= ~( 1 << 2 );}
+  void setUseInRevizor(bool v){  if (v) P|=  ( 1 << 3 ); else P&= ~( 1 << 3 );}
+  void setUseInCommLmp(bool v){  if (v) P|=  ( 1 << 4 ); else P&= ~( 1 << 4 );}
+  void setNoShowYchAct(bool v){  if (v) P|=  ( 1 << 5 ); else P&= ~( 1 << 5 );}
+  void setNoShowExtInfo(bool v){ if (v) P|=  ( 1 << 6 ); else P&= ~( 1 << 6 );}
+  void setZapas(bool v){         if (v) P|=  ( 1 << 7 ); else P&= ~( 1 << 7 );}
 };
 
 struct AMemory

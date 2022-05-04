@@ -79,7 +79,10 @@ int Poligon::LoadYCH(const char* filename)
 
     fread(ST[CurrentStation]->Dat, sizeof(St_Dat), 1, file);
     //> !!!  править обязательно когда
-    if (ST[CurrentStation]->Open(ST[CurrentStation]->FullFN()) == -1) {
+    String fns = ExtractFileDir(filename)+"\\..\\"+Sta_Dir+ST[CurrentStation]->Dat->filename+".sta";
+    ST[CurrentStation]->filename=fns;
+//    if (ST[CurrentStation]->Open(ST[CurrentStation]->FullFN()) == -1) {
+    if (ST[CurrentStation]->Open(fns.c_str()) == -1) {
       return -1;
     }
     STB[CurrentStation] = new Station("");
@@ -130,7 +133,8 @@ int Poligon::LoadYCE(const char* filename)
     // SetCurrentDir(ExtractFileDir(filename));
     // SS = ExpandFileName(SS);
     // SetCurrentDir(oldcd);
-    strncpy(tmpStan->filename, SS.c_str(), sizeof(tmpStan->filename) - 1);
+//    strncpy(tmpStan->filename, SS.c_str(), sizeof(tmpStan->filename) - 1);
+    tmpStan->filename= SS;
 
     if (tmpStan->Open(SS.c_str()/*tmpStan->FullFN()*/) == -1) {
       if (MOD == ED)

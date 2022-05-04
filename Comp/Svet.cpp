@@ -737,7 +737,7 @@ bool Svet_0::Show1()
     // см UpdateState()
 
     // не рисуем не активные на уч
-    if ((ExtPriz.NoShowYchAct == 1) && (AO->bNoShowPSV)) {
+    if ((ExtPriz.isNoShowYchAct()== 1) && (AO->bNoShowPSV)) {
       if ((CurrentPicture == BG) && (clr == FON) && (fimpuls_busi == 0) && (fimpuls_plus == 0) && (fimpuls_mnus == 0) && (fimpuls_kzm == 0)) {
         clrP = FON1;
       } else {

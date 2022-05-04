@@ -104,8 +104,8 @@ void TACOMPHINT::ShowHints(Station* stan)
       for (int i = 0; i < Units_Size; i++) {
         for (int j = 0; j < stan->POLE[i]->GetArraySize(); j++) {
           ac = stan->POLE[i]->GetObjPtr(j);
-          if (((ac->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) ||
-              ((ac->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT)))
+          if (((ac->ExtPriz.isNoShowYch()== 1) && (CurrentPicture == BG)) ||
+              ((ac->ExtPriz.isNoShowStan()== 1) && (CurrentPicture == LT)))
             continue;
           for (unsigned int v = 0; v < items.size(); v++) {
             HintItem& hi = items[v];

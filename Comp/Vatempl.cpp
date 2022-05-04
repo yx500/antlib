@@ -365,8 +365,8 @@ void VisibleArray::RemoveAll()
 void __fastcall tracecoord(int x, int y);
 void VisibleArray::Show(AComp* ac)
 {
-  if (((ac->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) ||
-      ((ac->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT))) {
+  if (((ac->ExtPriz.isNoShowYch() == 1) && (CurrentPicture == BG)) ||
+      ((ac->ExtPriz.isNoShowStan() == 1) && (CurrentPicture == LT))) {
     //ставим точку
     tracecoord(ac->X * MUL_X + _X_, ac->Y * MUL_Y + _Y_);
     return;
@@ -415,7 +415,7 @@ void VisibleArray::ShowAll()
   AComp* ac;
   for (data_type::iterator i = data.begin(); i != data.end(); ++i) {
     ac = (*i);
-    if (((ac->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)))
+    if (((ac->ExtPriz.isNoShowYch() == 1) && (CurrentPicture == BG)))
       continue;
     Show((ac));
   }
@@ -426,7 +426,7 @@ void VisibleArray::ShowLayer(int Layer)
   AComp* ac;
   for (data_type::iterator i = data.begin(); i != data.end(); ++i) {
     ac = (*i);
-    if (((ac->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) || ((ac->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT)))
+    if (((ac->ExtPriz.isNoShowYch() == 1) && (CurrentPicture == BG)) || ((ac->ExtPriz.isNoShowStan() == 1) && (CurrentPicture == LT)))
       continue;
     ac->ShowLayer(Layer);
   }
@@ -443,10 +443,10 @@ void VisibleArray::GoAll()
     b = e - RTGorlCnt;
   for (data_type::iterator i = b; i != e; ++i) {
     ac = (*i);
-    if (((ac->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) ||
-        ((ac->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT)))
+    if (((ac->ExtPriz.isNoShowYch() == 1) && (CurrentPicture == BG)) ||
+        ((ac->ExtPriz.isNoShowStan() == 1) && (CurrentPicture == LT)))
       continue;
-    // if ((ac->ExtPriz.NoShowExtInfo==1)&&(!bShowExtInfo))  continue ;
+    // if ((ac->ExtPriz.isNoShowExtInfo()==1)&&(!bShowExtInfo))  continue ;
     if (EachACompPreFun)
       EachACompPreFun(ac);
     // злобно будет считать все время!
@@ -504,16 +504,16 @@ int VisibleArray::LoadAll(int NALL, FILE* file, int ut)
       // FTellPos = ftell(file);
       fread(&MEM, sizeof(AMemory), 1, file);
       //дополнительный МЕМ
-      if ((MEM.ExtPriz.MEM2)) {
+      if ((MEM.ExtPriz.isMEM2())) {
         if (count == NALL) {
-          MEM.ExtPriz.MEM2 = 0;
+          MEM.ExtPriz.setMEM2(0);
         } else {
           fread(&MEM2, sizeof(AMemory), 1, file);
           // проверяем на мусор
           if ((MEM2.type != 29) || (MEM2.name[0] != '~')) {
             fseek(file, -sizeof(AMemory), SEEK_CUR);
             memset(&MEM2, 0, sizeof(MEM2));
-            MEM.ExtPriz.MEM2 = 0;
+            MEM.ExtPriz.setMEM2(0);
           } else {
             count++;
           }
@@ -554,7 +554,7 @@ int VisibleArray::SaveAll(FILE* file, int ut)
 
       fwrite(&MEM, sizeof(AMemory), 1, file);
       //дополнительный МЕМ
-      if ((MEM.ExtPriz.MEM2) && (MEM2.type == 29) && (MEM2.name[0] == '~')) {
+      if ((MEM.ExtPriz.isMEM2()) && (MEM2.type == 29) && (MEM2.name[0] == '~')) {
         fwrite(&MEM2, sizeof(AMemory), 1, file);
       }
       //  if(MEM.type == LAMP){

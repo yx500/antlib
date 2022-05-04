@@ -274,8 +274,8 @@ void EXD_HideTrainNumber(AComp* AC)
   CheckUslDraw(wAC, bs, bdbl);
   if (!bs)
     return;
-  if (((AC->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) ||
-      ((AC->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT)))
+  if (((AC->ExtPriz.isNoShowYch()== 1) && (CurrentPicture == BG)) ||
+      ((AC->ExtPriz.isNoShowStan()== 1) && (CurrentPicture == LT)))
     return;
 
   TTrainInfo* TI = EXD.TN_GetTN(wAC->impuls_busi, wAC->Stan()->Dat->filename, wAC->Stan()->Name4Canal(abs(wAC->impuls_busi) / 1000), bdbl);
@@ -310,8 +310,8 @@ void EXD_UpdateTrainNumber(AComp* AC, int rimpb)
   CheckUslDraw(wAC, bs, bdbl);
   if (!bs)
     return;
-  if (((AC->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) ||
-      ((AC->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT)))
+  if (((AC->ExtPriz.isNoShowYch()== 1) && (CurrentPicture == BG)) ||
+      ((AC->ExtPriz.isNoShowStan()== 1) && (CurrentPicture == LT)))
     return;
 
   int X, Y, Width, Height, direct;
@@ -351,8 +351,8 @@ void EXD_ShowTrainNumber(AComp* AC, int rimpb)
   CheckUslDraw(wAC, bs, bdbl);
   if (!bs)
     return;
-  if (((AC->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) ||
-      ((AC->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT)))
+  if (((AC->ExtPriz.isNoShowYch()== 1) && (CurrentPicture == BG)) ||
+      ((AC->ExtPriz.isNoShowStan()== 1) && (CurrentPicture == LT)))
     return;
 
   int X, Y, Width, Height, direct;
@@ -417,8 +417,8 @@ void EXD_ShowTrainNumbers(AComp* AC, int rimpb)
   CheckUslDraw(wAC, bs, bdbl);
   if (!bs)
     return;
-  if (((AC->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) ||
-      ((AC->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT)))
+  if (((AC->ExtPriz.isNoShowYch()== 1) && (CurrentPicture == BG)) ||
+      ((AC->ExtPriz.isNoShowStan()== 1) && (CurrentPicture == LT)))
     return;
 
   int X, Y, Width, Height, direct;

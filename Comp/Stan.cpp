@@ -43,7 +43,7 @@ const char* Station::FullFN()
   strncat(FULL_PATH, Sta_Dir, strlen(Sta_Dir));
   strncat(FULL_PATH, Dat->filename, 8);
   strcat(FULL_PATH, ".sta");
-  return (filename[0] != 0) ? filename : FULL_PATH;
+  return (filename.Length() != 0) ? filename.c_str() : FULL_PATH;
 }
 
 FILE* Station::_fopen(char* mod)
@@ -290,7 +290,7 @@ void Station::Clear()
 int Station::Open(const char* fn)
 {
   //  Close();
-  strncpy(filename, fn, sizeof(filename) - 1);
+  filename=fn;
   strncpy(Dat->filename,
           ChangeFileExt(ExtractFileName(fn), "").c_str(),
           sizeof(Dat->filename) - 1);
@@ -305,7 +305,7 @@ int Station::Open(const char* fn)
 
 void Station::Close()
 {
-  memset(filename, 0, sizeof(filename));
+  filename="";
   memset(name, 0, sizeof(name));
   pPoligon = NULL;
   memset(ChanelOffset, 0, sizeof(ChanelOffset));
@@ -425,7 +425,7 @@ int Station::LoadSTA()
 
 int Station::SaveAs(const char* NewFileName)
 {
-  strncpy(filename, NewFileName, sizeof(filename) - 1);
+  filename=NewFileName;
   strncpy(Dat->filename,
           ChangeFileExt(ExtractFileName(NewFileName), "").c_str(),
           sizeof(Dat->filename) - 1);
@@ -460,7 +460,7 @@ int Station::SaveSTA()
       int cnt = POLE[i]->GetArraySize();
       for (int count = 0; count < cnt; count++) {
         POLE[i]->GetObjPtr(count)->Get();
-        if ((MEM.ExtPriz.MEM2))
+        if ((MEM.ExtPriz.isMEM2()))
           NALL++;
       }
     }
@@ -493,7 +493,7 @@ Station::Station(const char* ifilename)
   memset(ChanelOffset, 0, sizeof(ChanelOffset));
   memset(ChanelNames, 0, sizeof(ChanelNames));
   ID_RP = 0;
-  memset(filename, 0, sizeof(filename));
+  filename="";
   memset(name, 0, sizeof(name));
 
   Dat = new St_Dat;
@@ -1095,7 +1095,7 @@ void Station::ShowElemsSost()
       if (ac->GetType() == LED)
         continue;
       //---
-      if (((ac->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) || ((ac->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT)))
+      if (((ac->ExtPriz.isNoShowYch() == 1) && (CurrentPicture == BG)) || ((ac->ExtPriz.isNoShowStan() == 1) && (CurrentPicture == LT)))
         continue;
       //---
       TElemCheckState* EI = EXD.EI_GetEI(packetname, ac->GetID());
@@ -1128,7 +1128,7 @@ void Station::ShowElemsTagStr()
       if (ac->GetType() == LED)
         continue;
       //---
-      if (((ac->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) || ((ac->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT)))
+      if (((ac->ExtPriz.isNoShowYch() == 1) && (CurrentPicture == BG)) || ((ac->ExtPriz.isNoShowStan() == 1) && (CurrentPicture == LT)))
         continue;
       //---
       if (!ac->Tagstr.empty()) {
@@ -1551,10 +1551,10 @@ void SubStation::Show()
         for (int i = 0; i < Units_Size; i++) {
           for (int j = 0; j < substan->POLE[i]->GetArraySize(); j++) {
             ac = substan->POLE[i]->GetObjPtr(j);
-            if (((ac->ExtPriz.NoShowYch == 1) && (CurrentPicture == BG)) ||
-                ((ac->ExtPriz.NoShowStan == 1) && (CurrentPicture == LT)))
+            if (((ac->ExtPriz.isNoShowYch() == 1) && (CurrentPicture == BG)) ||
+                ((ac->ExtPriz.isNoShowStan() == 1) && (CurrentPicture == LT)))
               continue;
-            // if ((ExtPriz.NoShowExtInfo==1)&&(!bShowExtInfo))  continue ;
+            // if ((ExtPriz.isNoShowExtInfo()==1)&&(!bShowExtInfo))  continue ;
             if (EachACompPreFun)
               EachACompPreFun(ac);
             ac->Go();

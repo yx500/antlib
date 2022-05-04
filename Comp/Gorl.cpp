@@ -15,13 +15,19 @@
 
 #define tutim 200
 PGorl Curr_G;
+Grl_file::Grl_file()
+{
 
-Grl::Grl()
+}
+
+
+Grl::Grl() 
 {
   Col_Mar = 0;
   Col_Str = 0;
 
   memset(name, 0, sizeof(name));
+
   Matr = NULL;
   Strel_N = NULL;
   _Strel = NULL;
@@ -30,6 +36,83 @@ Grl::Grl()
   impuls_m = NULL;
   impuls_km = NULL;
   zona_M = NULL;
+}
+
+void Grl::toGrl_file(Grl_file *gf)
+{
+    gf->Col_Mar=Col_Mar; // ÊÎËÈ×ÅÑÒÂÎ  ÌÀÐØÐÓÒÎÂ
+    gf->Col_Str=Col_Str; // ÊÎËÈ×ÅÑÒÂÎ  ÑÒÐÅËÎÊ
+
+    memcpy(gf->name,name,sizeof(name));  // ÈÌß ÃÎÐËÎÂÈÍÛ
+    gf->bit_m=bit_m;   // ÏÐÈÇÍÀÊ ÓÏÐÀÂËÅÍÈß ÌÀÐØÐÓÒÎÌ
+    gf->bit_ksp=bit_ksp; // ÏÐÈÇÍÀÊ ÓÏÐÀÂËÅÍÈß ÇÀÍßÒÈÅÌ
+    gf->bit_kzm=bit_kzm; // ÏÐÈÇÍÀÊ ÓÏÐÀÂËÅÍÈß ÇÀÌÛÊÀÍÈÅÌ
+    gf->nom_fiz=nom_fiz; // ÍÎÌÅÐ ÔÈÇ ÃÎÐËÎÂÈÍÛ
+
+    gf->impuls_ksp=impuls_ksp;  // ÑÈÃÍÀË ÇÀÍßÒÈß
+    gf->impuls_kzm=impuls_kzm;  // ÑÈÃÍÀË ÇÀÌÛÊÀÍÈß
+    gf->impuls_ks=impuls_ks;   // ÑÈÃÍÀË ÑÂÅÒÎÔÎÐÀ ÎÒÏÐÀÂËÅÍÈß
+    gf->impuls_ks_i=impuls_ks_i; // ÑÈÃÍÀË ÑÂÅÒÎÔÎÐÀ ÏÐÈÅÌÀ
+    gf->_Matr=0;           // Àäðåñ ÌÀÒÐÈÖÛ  ÌÀÐØÐÓÒÎÂ
+    gf->_Strel_N=0;         // Àäðåñ ÍÎÌÅÐÀ ÑÒÐÅËÎÊ
+    gf->__Strel=0;       // Óêàçàòåëü íà ÓÊÀÇÀÒÅËÈ (Â ÔÀÉËÅ ÍÅÎÏÐÅÄÅËÅÍÛ)
+    gf->_Sign=0;          // Óêàçàòåëü ÑÂÅÒÎÔÎÐÎÂ ÎÒÏÐÀÂËÅÍÈß
+    gf->_Sign_i._nomer=0;         // ÑÂÅÒÎÔÎ ÏÐÈÅÌÀ
+    memcpy(gf->_Sign_i.name,Sign_i.name,sizeof(Sign_i.name));         // ÑÂÅÒÎÔÎ ÏÐÈÅÌÀ
+    gf->_impuls_m=0;;   // ÑÈÃÍÀËÛ ÍÀ ÓÑÒÀÍÎÂÊÓ ÌÀÐØÐÓÒÀ
+    gf->_impuls_km=0;  // ÑÈÃÍÀËÛ ÍÀ ÇÀÍßÒÈÅ ÌÀÐØÐÓÒÀ
+                           //------------======  ÑËÅÆÅÍÈÅ  =======-----------
+    gf->IN_OUT=IN_OUT;          // ïðèåì \îòïðàâëåíèå  (1)              -¬
+    gf->_zona_M=0;         // ÑÏÈÑÎÊ ÏÅÐÅÌÅÍÍÛÕ ÈÌÅÍ ÇÎÍ  (4*6=24)  +
+    gf->zona_1=zona_1;          // ÏÎÑÒÎßÍÀß ÇÎÍÀ               (4)      ¦ 133
+    gf->tu_marh=tu_marh;
+    gf->time_tu=time_tu;
+    gf->priz=priz;
+    gf->marh=marh;
+    gf->marh_tu=marh_tu;
+    gf->marh_m=marh_m;
+    gf->marh_sv=marh_sv;
+    gf->old_marsh=old_marsh;   // íîìåð ïðîøëîãî ìàðøðóòà
+    gf->tim_o_m=tim_o_m; // âðåìÿ ïðîøëîãî ìàðøðóòà ïðè ïîòåðå
+
+    gf->ID=ID;
+    memcpy(gf->zapas,zapas,sizeof(zapas));
+}
+
+void Grl::fromGrl_file(Grl_file *gf)
+{
+    Col_Mar=gf->Col_Mar; // ÊÎËÈ×ÅÑÒÂÎ  ÌÀÐØÐÓÒÎÂ
+    Col_Str=gf->Col_Str; // ÊÎËÈ×ÅÑÒÂÎ  ÑÒÐÅËÎÊ
+
+    memcpy(name,gf->name,sizeof(name));  // ÈÌß ÃÎÐËÎÂÈÍÛ
+    bit_m=gf->bit_m;   // ÏÐÈÇÍÀÊ ÓÏÐÀÂËÅÍÈß ÌÀÐØÐÓÒÎÌ
+    bit_ksp=gf->bit_ksp; // ÏÐÈÇÍÀÊ ÓÏÐÀÂËÅÍÈß ÇÀÍßÒÈÅÌ
+    bit_kzm=gf->bit_kzm; // ÏÐÈÇÍÀÊ ÓÏÐÀÂËÅÍÈß ÇÀÌÛÊÀÍÈÅÌ
+    nom_fiz=gf->nom_fiz; // ÍÎÌÅÐ ÔÈÇ ÃÎÐËÎÂÈÍÛ
+
+    impuls_ksp=gf->impuls_ksp;  // ÑÈÃÍÀË ÇÀÍßÒÈß
+    impuls_kzm=gf->impuls_kzm;  // ÑÈÃÍÀË ÇÀÌÛÊÀÍÈß
+    impuls_ks=gf->impuls_ks;   // ÑÈÃÍÀË ÑÂÅÒÎÔÎÐÀ ÎÒÏÐÀÂËÅÍÈß
+    impuls_ks_i=gf->impuls_ks_i; // ÑÈÃÍÀË ÑÂÅÒÎÔÎÐÀ ÏÐÈÅÌÀ
+    memcpy(Sign_i.name,gf->_Sign_i.name,sizeof(Sign_i.name));         // ÑÂÅÒÎÔÎ ÏÐÈÅÌÀ
+    //_impuls_m=gf->_impuls_m;   // ÑÈÃÍÀËÛ ÍÀ ÓÑÒÀÍÎÂÊÓ ÌÀÐØÐÓÒÀ
+    //_impuls_km=gf->_impuls_km;  // ÑÈÃÍÀËÛ ÍÀ ÇÀÍßÒÈÅ ÌÀÐØÐÓÒÀ
+                           //------------=gf->=gf->=gf->=gf->=gf->=gf->  ÑËÅÆÅÍÈÅ  =gf->=gf->=gf->=gf->=gf->=gf->=gf->-----------
+    IN_OUT=gf->IN_OUT;          // ïðèåì \îòïðàâëåíèå  (1)              -¬
+    //_zona_M=gf->_zona_M;         // ÑÏÈÑÎÊ ÏÅÐÅÌÅÍÍÛÕ ÈÌÅÍ ÇÎÍ  (4*6=gf->24)  +
+    zona_1=gf->zona_1;          // ÏÎÑÒÎßÍÀß ÇÎÍÀ               (4)      ¦ 133
+    tu_marh=gf->tu_marh;
+    time_tu=gf->time_tu;
+    priz=gf->priz;
+    marh=gf->marh;
+    marh_tu=gf->marh_tu;
+    marh_m=gf->marh_m;
+    marh_sv=gf->marh_sv;
+    old_marsh=gf->old_marsh;   // íîìåð ïðîøëîãî ìàðøðóòà
+    tim_o_m=gf->tim_o_m; // âðåìÿ ïðîøëîãî ìàðøðóòà ïðè ïîòåðå
+
+    ID=gf->ID;
+    memcpy(zapas,gf->zapas,sizeof(zapas));
 }
 
 const char* Gorl::GetName()
@@ -791,8 +874,10 @@ void Gorl::Show()
 
 void Gorl::Save(FILE* file)
 {
+  Grl_file gf;
   Grl gorl_0;
   memcpy(&gorl_0, gorl[0], sizeof(Grl));
+
 
   Signal oemSign;
   memset(gorl_0.name, 0, sizeof(gorl_0.name));
@@ -800,16 +885,19 @@ void Gorl::Save(FILE* file)
   memset(gorl_0.Sign_i.name, 0, sizeof(gorl_0.Sign_i.name));
   cp1251_to_cp866_buff(gorl[0]->Sign_i.name, gorl_0.Sign_i.name, 5);
 
-  fwrite(&gorl_0, sizeof(Grl), 1, file);
+  gorl_0.toGrl_file(&gf);
+  fwrite(&gf, sizeof(gf), 1, file);
+
+  //fwrite(&gorl_0, sizeof(Grl), 1, file);
   for (int i = 0; i < gorl[0]->Col_Mar; i++) {
     fwrite(gorl[0]->Matr[i], sizeof(char), gorl[0]->Col_Str, file);
   }
   fwrite(gorl[0]->Strel_N, sizeof(char), gorl[0]->Col_Str, file);
 
   for (int i = 0; i < gorl[0]->Col_Mar; i++) {
-    memcpy(&oemSign, &gorl[0]->Sign[i], sizeof(Signal));
+    memcpy(&oemSign, &gorl[0]->Sign[i], sizeof(Signal_file));
     cp1251_to_cp866_buff(gorl[0]->Sign[i].name, oemSign.name, 6);
-    fwrite(&oemSign, sizeof(Signal), 1, file);
+    fwrite(&oemSign, sizeof(Signal_file), 1, file);
   }
 
   // fwrite(gorl[0]->Sign,sizeof(Signal),gorl[0]->Col_Mar,file);
@@ -823,9 +911,14 @@ void Gorl::Save(FILE* file)
 
 void Gorl::Load(FILE* file)
 {
-  if (MOD == ED) {
 
-    fread(gorl[0], sizeof(Grl), 1, file);
+  Grl_file gf;
+  int sz1=sizeof(Grl);
+  int sz2=sizeof(Grl_file);
+  if (MOD == ED) {
+    fread(&gf, sizeof(gf), 1, file);
+    gorl[0]->fromGrl_file(&gf);
+    //fread(gorl[0], sizeof(Grl), 1, file);
     if (gorl[0]->nom_fiz > Col_Gorl)
       Col_Gorl = gorl[0]->nom_fiz;
     Creat();
@@ -843,7 +936,7 @@ void Gorl::Load(FILE* file)
 
     fread(gorl[0]->Strel_N, sizeof(char), gorl[0]->Col_Str, file);
 
-    fread(gorl[0]->Sign, sizeof(Signal), gorl[0]->Col_Mar, file);
+    fread(gorl[0]->Sign, sizeof(Signal_file), gorl[0]->Col_Mar, file);
     fread(gorl[0]->impuls_m, sizeof(short int), gorl[0]->Col_Mar, file);
     fread(gorl[0]->impuls_km, sizeof(short int), gorl[0]->Col_Mar, file);
     fread(gorl[0]->zona_M, sizeof(ID_ZO), gorl[0]->Col_Mar, file);
@@ -857,7 +950,10 @@ void Gorl::Load(FILE* file)
     if (gorl[0] == NULL)
       CriticalErr("íåò ïàìÿòè äëÿ ãîðëîâèí");
 
-    fread(gorl[0], sizeof(Grl), 1, file);
+    fread(&gf, sizeof(gf), 1, file);
+    gorl[0]->fromGrl_file(&gf);
+
+    //fread(gorl[0], sizeof(Grl), 1, file);
     if (gorl[0]->nom_fiz > Col_Gorl)
       Col_Gorl = gorl[0]->nom_fiz;
     Creat();
@@ -867,7 +963,12 @@ void Gorl::Load(FILE* file)
     }
     fread(gorl[0]->Strel_N, sizeof(char), gorl[0]->Col_Str, file);
 
-    fread(gorl[0]->Sign, sizeof(Signal), gorl[0]->Col_Mar, file);
+    //fread(gorl[0]->Sign, sizeof(Signal_file), gorl[0]->Col_Mar, file);
+    for (int i = 0; i < gorl[0]->Col_Mar; i++) {
+      fread(&gorl[0]->Sign[i], sizeof(Signal_file), 1, file);
+    }
+
+
     fread(gorl[0]->impuls_m, sizeof(short int), gorl[0]->Col_Mar, file);
     fread(gorl[0]->impuls_km, sizeof(short int), gorl[0]->Col_Mar, file);
     fread(gorl[0]->zona_M, sizeof(ID_ZO), gorl[0]->Col_Mar, file);

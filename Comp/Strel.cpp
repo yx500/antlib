@@ -80,7 +80,7 @@ void Strel::Set()
   memcpy(&ID, MEM.name + 11, 2);
   nomer = MEM.Nomer;
 
-  if (ExtPriz.MEM2) {
+  if (ExtPriz.isMEM2()) {
     impuls_IR = MEM2.impuls_busi;
     impuls_PKS = MEM2.impuls_plus;
     impuls_ZS = MEM2.impuls_mnus;
@@ -231,7 +231,7 @@ void Strel::Get()
   MEM.impuls_kmu = impuls_kmu;
   MEM.impuls_mu = impuls_mu;
 
-  if (ExtPriz.MEM2) {
+  if (ExtPriz.isMEM2()) {
     MEM2.impuls_busi = impuls_IR;
     MEM2.impuls_plus = impuls_PKS;
     MEM2.impuls_mnus = impuls_ZS;
@@ -249,7 +249,7 @@ void Strel::Get()
   cp1251_to_cp866_buff(name, MEM2.name, 9);
   // memcpy(MEM2.name,name,9);
   MEM2.name[0] = '~';
-  MEM2.ExtPriz.MEM2 = 0;
+  MEM2.ExtPriz.setMEM2( 0);
 
   MEM.Nomer = nomer;
   memset(MEM.name, 0, 10);
@@ -304,7 +304,7 @@ void Strel::UpdateState()
   fimpuls_otkl_plus = rimpuls_otkl_plus;
   fimpuls_otkl_minus = rimpuls_otkl_minus;
 
-  if (ExtPriz.MEM2) {
+  if (ExtPriz.isMEM2()) {
     rimpuls_IR = f(impuls_IR);
     rimpuls_PKS = f(impuls_PKS);
     rimpuls_ZS = f(impuls_ZS);
@@ -378,7 +378,7 @@ void Strel0::UpdateState()
     }
 
     // искуственная разделка
-    if ((ExtPriz.MEM2) && (impuls_IR != 0) && (fimpuls_IR == 1)) {
+    if ((ExtPriz.isMEM2()) && (impuls_IR != 0) && (fimpuls_IR == 1)) {
       if (clr == COLOR_B)
         clr = COLOR_IR_B;
       else if (clr == COLOR_SET)
@@ -454,7 +454,7 @@ void Strel0::UpdateState()
     cbord2 = SV_MIG;
   }
 
-  if ((ExtPriz.MEM2) &&
+  if ((ExtPriz.isMEM2()) &&
           ((impuls_ZS != 0) && (fimpuls_ZS == 1)) ||
       ((impuls_ZS2 != 0) && (fimpuls_ZS2 == 1)))
 
@@ -463,7 +463,7 @@ void Strel0::UpdateState()
     cbord2 = KRAYARK;
   }
 
-  if ((ExtPriz.MEM2) && (impuls_PKS != 0) && (fimpuls_PKS == 1)) {
+  if ((ExtPriz.isMEM2()) && (impuls_PKS != 0) && (fimpuls_PKS == 1)) {
     cbord1 = COLOR_PSV;
     cbord2 = COLOR_PSV;
   }

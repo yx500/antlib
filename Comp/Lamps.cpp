@@ -267,11 +267,11 @@ void Lamp::SetPropMap(TPropMap& m)
     NOb = m.geti(_LampPropName[17]);
 
     // if (LS!=NULL){
-    FirstLS.MyStat2 = m.geti(_LampPropName[18]);
+    FirstLS.setMyStat2(m.geti(_LampPropName[18]));
     //
-    FirstLS.MyStat3 = m.geti(_LampPropName[19]);
-    FirstLS.MyStat4 = m.geti(_LampPropName[20]);
-    FirstLS.__MyStat5 = m.geti(_LampPropName[21]);
+    FirstLS.setMyStat3(m.geti(_LampPropName[19]));
+    FirstLS.setMyStat4(m.geti(_LampPropName[20]));
+    FirstLS.set__MyStat5(m.geti(_LampPropName[21]));
     //}
     // FirstLS=*LS;
   }
@@ -301,10 +301,10 @@ void Lamp::GetPropMap(TPropMap& m)
     m.put(_LampPropName[17], NOb, 0);
 
     // if (LS!=NULL){
-    m.put(_LampPropName[18], FirstLS.MyStat2, 0);
-    m.put(_LampPropName[19], FirstLS.MyStat3, 0);
-    m.put(_LampPropName[20], FirstLS.MyStat4, 0);
-    m.put(_LampPropName[21], FirstLS.__MyStat5, 0);
+    m.put(_LampPropName[18], FirstLS.isMyStat2(), 0);
+    m.put(_LampPropName[19], FirstLS.isMyStat3(), 0);
+    m.put(_LampPropName[20], FirstLS.isMyStat4(), 0);
+    m.put(_LampPropName[21], FirstLS.is__MyStat5(), 0);
     // }
   }
 }
@@ -1282,7 +1282,7 @@ void CommLmp::CollectComps()
   for (int i = 1; i < Units_Size; i++) {
     for (int j = 0; j < S->POLE[i]->GetArraySize(); j++) {
       ac = S->POLE[i]->GetObjPtr(j);
-      if (ac->ExtPriz.UseInCommLmp)
+      if (ac->ExtPriz.isUseInCommLmp())
         vComps.push_back(ac);
     }
   }
