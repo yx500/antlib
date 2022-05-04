@@ -60,7 +60,7 @@ TAntOpt::TAntOpt()
   _E_def_FontsSz[1] = 14;
 
   memset(ENG_PackName, 0, sizeof(ENG_PackName));
-  memset(Name, 0, sizeof(Name));
+  Name="";
   memset(EttReciveName, 0, sizeof(EttReciveName));
 }
 

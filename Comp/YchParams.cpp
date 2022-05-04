@@ -61,7 +61,7 @@ bool AOReadFromIni(void* pFI, String Sect, TAntOpt* AO)
   AA.bDopPriznak = FI->ReadBool(Sect, "bDopPriznak", AA.bDopPriznak);
 
   strncpy(AA.ENG_PackName, FI->ReadString(Sect, "ENG_PackName", AA.ENG_PackName).c_str(), sizeof(AA.ENG_PackName) - 1);
-  strncpy(AA.Name, FI->ReadString(Sect, "Name", "").c_str(), sizeof(AA.Name) - 1);
+  AA.Name=FI->ReadString(Sect, "Name", "");
 
   AA.bPodgonSvet = FI->ReadBool(Sect, "bPodgonSvet", AA.bPodgonSvet);
 

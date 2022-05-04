@@ -8,7 +8,8 @@
 String ChangeFileExt(const String &filename, const char *ext)
 {
   QString file  = QString::fromLocal8Bit(filename.c_str(), filename.size());
-  file.replace( QFileInfo(file).suffix(), ext );
+  QString suffix=QString(".%1").arg(QFileInfo(file).suffix());
+  file.replace(suffix , ext );
   return file.toStdString();
 }
 

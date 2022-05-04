@@ -52,7 +52,7 @@ public:
   int TsOffColor;
   bool bNumStrelColor;
 
-  char Name[255];
+  String Name;
 
   bool bEmbeddedSubStation;
   int _E_def_WK[2];

@@ -19,7 +19,7 @@ extern int CurrentUCH;
 Poligon::Poligon()
 {
   memset(filename, 0, sizeof(filename));
-  memset(name, 0, sizeof(name));
+  name="";
   memset(FullFileName, 0, sizeof(FullFileName));
   Col_ST = 0;
   ENG_Pack = NULL;
@@ -31,7 +31,7 @@ Poligon::Poligon()
 int Poligon::Close()
 {
   memset(filename, 0, sizeof(filename));
-  memset(name, 0, sizeof(name));
+  name="";
   memset(FullFileName, 0, sizeof(FullFileName));
   Col_ST = 0;
   for (int i = 0; i < 30; i++) {
@@ -56,7 +56,7 @@ int Poligon::LoadYCH(const char* filename)
     AO = AntOpt0;
   // AOSetANTON(&AntOpt);  else
   // AOGetANTON(&AntOpt);
-  strncpy(name, AO.Name, sizeof(name) - 1);
+  name=AO.Name;
 
   file = fopen(CommitFile(filename), "rb");
 
@@ -112,7 +112,7 @@ int Poligon::LoadYCE(const char* filename)
 
   // AO.SetANTON(&AntOpt); else
   // AOGetANTON(&AntOpt);
-  strncpy(name, AO.Name, sizeof(name));
+  name=AO.Name;
 
   String SectName, SS, oldcd;
   CurrentStation = Col_ST = 0;

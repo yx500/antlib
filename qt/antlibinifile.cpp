@@ -30,7 +30,9 @@ String AIniFile::ReadString(const String& Section, const String& Ident, const St
   if (codec1251==nullptr) codec1251 = QTextCodec::codecForName("Windows-1251");
   QString s = QString("%1/%2").arg(Section).arg(Ident);
   QString ss = QString().fromLatin1(codec1251->fromUnicode(s));
-  QString v=ToStdStr(this->value(ss, Default).toString()).c_str();
+//  QString v=ToStdStr(this->value(ss, Default).toString()).c_str();
+  QString v=this->value(ss, Default).toString();
+  v=codec1251->toUnicode(v.toLatin1().data());
   return v;
 }
 

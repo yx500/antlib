@@ -11,7 +11,7 @@ class Poligon
 public:
   char filename[255];
   char FullFileName[255]; // ������ ��� �����
-  char name[255];
+  String name;
   int Col_ST;
   Station* ST[30];
   Station* STB[30];
@@ -33,7 +33,7 @@ public:
   int LoadYCE(const char* filename);
   int Close();
 
-  const char* Name()
+  String Name()
   {
     return name;
   }
