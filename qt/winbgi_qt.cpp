@@ -13,6 +13,7 @@ static QFont font;
 static QBrush brush;
 static QPen pen;
 static QRect traceRect;
+static QRect qt_traceRect;
 static int bgi_tracking = 0;
 
 QPainter* BgiCanvas(void) { return Painter; }
@@ -100,14 +101,14 @@ TRect GetBgiCoverRect(void)
 void start_bgi_tracking()
 {
     if (bgi_tracking == 0)
-        ClearBgiCoverRect();
+        qt_traceRect=QRect();
     bgi_tracking++;
 }
 
 QRect stop_bgi_tracking()
 {
     bgi_tracking--;
-    return traceRect;
+    return qt_traceRect;
 }
 
 void tracking_add_rect(QRect r)
@@ -118,10 +119,12 @@ void tracking_add_rect(QRect r)
     if (r.height() == 0)
         r.adjust(0, 1, 0, 1);
     traceRect = traceRect.united(r);
+    qt_traceRect = qt_traceRect.united(r);
 }
 void tracecoord(int x, int y){
     QRect r1(x,y,1,1);
     traceRect = traceRect.united(r1);
+    qt_traceRect = qt_traceRect.united(r1);
 }
 
 // =============   SETTING  ==========
@@ -138,6 +141,7 @@ void setcolor(int __color)
 }
 void setfillstyle(int __pattern, int __color)
 {
+    if (bgi_tracking) return;
     fill_settings.color = __color;
     fill_settings.pattern = __pattern;
     brush.setColor(BgiColor(__color));
@@ -186,6 +190,9 @@ void setlinestyle(int __linestyle, unsigned __upattern, int __thickness)
     switch (line_settings.linestyle) {
     default:
         pen.setStyle(Qt::SolidLine);
+        if (line_settings.thickness<0){
+            line_settings.thickness=0;
+        }
         pen.setWidth(line_settings.thickness);
         break;
     case 1:
@@ -205,6 +212,7 @@ void setlinestyle(int __linestyle, unsigned __upattern, int __thickness)
         pen.setWidth(1);
         break;
     }
+    if (bgi_tracking) return;
     if (Painter)
         Painter->setPen(pen);
 }
@@ -221,7 +229,7 @@ static void select_font()
         text_settings.font = 0;
         //        std::cerr << "Default font." << std::endl;
     }
-
+    if (bgi_tracking) return;
     if (Painter){
         font = Fonts[text_settings.font];
         if (text_settings.charsize != 1){
@@ -520,6 +528,9 @@ void PolyColor(int iBrushColor, const TPoint* Points, const int* iColors, const 
         }
 
     setfillstyle(fill_settings.pattern,iBrushColor);
+    if (PenW<0){
+        PenW=0;
+    }
     pen.setWidth(PenW);
     if (Painter){
         Painter->setPen(pen);

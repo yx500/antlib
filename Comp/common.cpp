@@ -30,9 +30,9 @@ const int _ctsvt = 4;
 const int _ctlmp = 5;
 const int _ctnpr = 6;
 const int _ctuksps = 7;
-static char _CommonTypeName[8][5] = {"", "путь", "уч", "стр", "свт", "лмп", "нпр", "укс"};
+String _CommonTypeName[8] = {"", "путь", "уч", "стр", "свт", "лмп", "нпр", "укс"};
 //                                  0     1     2     3     4     5     6     7    8  9   10      11     12     13     14    15
-static char _BASHTypeName[16][7] = {"кгн", "кгн", "кгн", "кгн", "кгн", "кгн", "кгн", "кгн", "", "", "укспс", "саут", "кгу", "диск", "кгу", "ячейка"};
+String _BASHTypeName[16] = {"кгн", "кгн", "кгн", "кгн", "кгн", "кгн", "кгн", "кгн", "", "", "укспс", "саут", "кгу", "диск", "кгу", "ячейка"};
 static int _CommonTypeInd[CompTypeCount] = {
     // NOTHING,WAY    ,PLOT   ,SIG_L  ,SIG_R
     _ctnon, _ctway, _ctblu, _ctsvt, _ctsvt,
@@ -61,7 +61,7 @@ static int _CommonTypeInd[CompTypeCount] = {
     _ctlmp                          //  LED,
 };
 
-const char* GetTypeName(AComp* AC)
+String GetTypeName(AComp* AC)
 {
 
   TYP AType = AC->GetType();
@@ -76,9 +76,7 @@ const char* GetTypeName(AComp* AC)
   return _CommonTypeName[ind];
 }
 
-const char* GetTypeAndName(AComp* AC)
+String GetTypeAndName(AComp* AC)
 {
-  static String _TypeAndName;
-  _TypeAndName = String(GetTypeName(AC)) + " " + AC->GetName();
-  return _TypeAndName.c_str();
+  return  GetTypeName(AC) + " " + String(AC->GetName());
 }

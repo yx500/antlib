@@ -519,11 +519,9 @@ void AComp::GetNumberPosition(int& X, int& Y, int Width, int Height, int direct)
   Y = this->Y * MUL_Y + _Y_;
 }
 
-char* AComp::GetText(char* txt)
+String AComp::GetText()
 {
-  strcpy(txt, Com_Nam[GetType()]);
-  strncat(txt, GetName(), CN);
-  return txt;
+  return Com_Nam[GetType()] +GetName();
 }
 
 const char* AComp::GetName()

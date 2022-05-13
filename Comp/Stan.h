@@ -57,7 +57,7 @@ public:
   TvUseChanelNames vUseChanelNames;
   int ID_RP;                       /*   */
   String filename;              /*��� �����     */
-  char name[255];                  /*���      */
+  String name;                  /*���      */
   TEnergStanLamps* EnergStanLamps; // ����� �����������
   TMarshList MARSHLIST;
   TAntOpt* AO;
@@ -111,9 +111,9 @@ public:
     else
       return "none";
   }
-  const char* Name()
+  String Name()
   {
-    if (strlen(name) > 0)
+    if (name.Length() > 0)
       return name;
     static char n_name[256];
     memset(n_name,0,sizeof(n_name));

@@ -19,7 +19,7 @@ int AStringList::LoadFromFile(const AQString &filename)
 
   std::string line;
   while (getline(ifs, line)) {
-    if (line.size())
+    if (line.size()==0)
       continue;
     AQString s(line);
     this->push_back(  s.trimmed());

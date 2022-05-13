@@ -73,7 +73,7 @@ public:
   virtual TYP GetType() = 0;
   virtual int GetSubType() { return 0; }
   virtual UNIT GetUnit() = 0;
-  char* GetText(char* txt);
+  String GetText();
   int f(int impls);
   int GetRealImp(int impls);
   bool SetNativeImp(int RealImpls, short int& NativeImp);

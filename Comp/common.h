@@ -17,8 +17,8 @@ inline void PrintErr(const String& txt) { PrintErr(txt.c_str()); }
 
 
 class AComp;
-const char* GetTypeName(AComp* AC);
-const char* GetTypeAndName(AComp* AC);
+String GetTypeName(AComp* AC);
+String GetTypeAndName(AComp* AC);
 
 
 #endif

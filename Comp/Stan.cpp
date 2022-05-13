@@ -306,7 +306,7 @@ int Station::Open(const char* fn)
 void Station::Close()
 {
   filename="";
-  memset(name, 0, sizeof(name));
+  name="";
   pPoligon = NULL;
   memset(ChanelOffset, 0, sizeof(ChanelOffset));
   memset(ChanelNames, 0, sizeof(ChanelNames));
@@ -494,7 +494,7 @@ Station::Station(const char* ifilename)
   memset(ChanelNames, 0, sizeof(ChanelNames));
   ID_RP = 0;
   filename="";
-  memset(name, 0, sizeof(name));
+  name="";
 
   Dat = new St_Dat;
   AO = &AntOpt0;
@@ -510,7 +510,7 @@ Station::Station(const char* ifilename)
   Close();
 
   pPoligon = NULL;
-  memset(name, 0, sizeof(name));
+  name="";
   ID_RP = 0;
   //  memset(Dat->descriptor,0,sizeof(Dat->descriptor));
   //  memset(Dat->filename,0,sizeof(Dat->filename));
@@ -806,7 +806,7 @@ void Station::SetPropMap(TPropMap& m)
   Dat->MUL_Y[1] = m.geti(_StanPropName[8]);
   Dat->X_begin[1] = m.geti(_StanPropName[9]);
   Dat->Y_begin[1] = m.geti(_StanPropName[10]);
-  strncpy(name, m.get(_StanPropName[12]).c_str(), 255);
+  name=m.get(_StanPropName[12]);
   strncpy(ElemsSostPacketName, m.get(_StanPropName[13]).c_str(), 12);
 }
 
