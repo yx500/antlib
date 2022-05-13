@@ -44,7 +44,8 @@ public:
      *this=QString::asprintf(format,v);
   }
   const char *c_str() const ;
-  const char operator[](int i) const {return this->at(i).toLatin1();}
+  char operator[](int i) const { return this->at(i).toLatin1(); }
+  operator std::string() const { return this->toStdString(); }
 
 };
 

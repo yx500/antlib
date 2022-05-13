@@ -42,14 +42,14 @@ void AStdStringList::Sort() { std::sort(this->begin(), this->end()); }
 
 std::string AStdStringList::Name(size_t idx)
 {
-  alib::stringvector w;
+  alib::string_vector w;
   alib::string_split(this->at(idx), "=", w);
   return w.size() > 1 ? alib::trim(w[0]) : "";
 }
 
 std::string AStdStringList::Value(size_t idx)
 {
-  alib::stringvector w;
+  alib::string_vector w;
   alib::string_split(this->at(idx), "=", w);
   return w.size() > 1 ? alib::trim(w[1]) : "";
 }

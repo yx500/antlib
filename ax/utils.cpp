@@ -58,7 +58,7 @@ char* itoa(int num, char* buffer, int base)
   return buffer;
 }
 
-int string_split(const string& text, const string& separators, stringvector& words)
+int string_split(const string& text, const string& separators, string_vector& words)
 {
   string::size_type n = text.size();
   string::size_type start, stop;
@@ -73,7 +73,7 @@ int string_split(const string& text, const string& separators, stringvector& wor
   return words.size();
 }
 
-int string_splitex(const string& text, const string& separators, stringvector& words)
+int string_splitex(const string& text, const string& separators, string_vector& words)
 {
   string::size_type n = text.size();
   string::size_type start = 0;
@@ -111,9 +111,9 @@ void string_replace_all(string& o, const char* ss, const char* d)
   }
 }
 
-string& strings_merge(const stringvector& words, const string& separator, string& text)
+string& strings_merge(const string_vector& words, const string& separator, string& text)
 {
-  stringvector::const_iterator i = words.begin();
+  string_vector::const_iterator i = words.begin();
   while (i != words.end()) {
     text = text + (*i++) + separator;
   }
