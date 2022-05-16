@@ -15,8 +15,8 @@ namespace alib {
 char* itoa(int num, char* buffer, int base);
 
 // strings
-using  string_list = std::list<std::string>;
-using  string_vector = std::vector<std::string>;
+typedef std::list<std::string> string_list;
+typedef std::vector<std::string> string_vector;
 
 int string_split(const std::string& text, const std::string& separators, string_vector& words);
 int string_splitex(const std::string& text, const std::string& separators, string_vector& words);

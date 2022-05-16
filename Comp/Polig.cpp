@@ -79,7 +79,7 @@ int Poligon::LoadYCH(const char* filename)
 
     fread(ST[CurrentStation]->Dat, sizeof(St_Dat), 1, file);
     //> !!!  править обязательно когда
-    String fns = ExtractFileDir(filename)+"\\..\\"+Sta_Dir+ST[CurrentStation]->Dat->filename+".sta";
+    String fns = ExtractFileDir(filename)+"\\..\\sta\\"+ST[CurrentStation]->Dat->filename+".sta";
     ST[CurrentStation]->filename=fns;
 //    if (ST[CurrentStation]->Open(ST[CurrentStation]->FullFN()) == -1) {
     if (ST[CurrentStation]->Open(fns.c_str()) == -1) {

@@ -63,8 +63,8 @@ public:
   TAntOpt* AO;
   char ElemsSostPacketName[12];
 
-  FILE* _fopen(char* mod);
-  FILE* _fopenTu(char* mod);
+  FILE* _fopen(const char* mod);
+  FILE* _fopenTu(const char* mod);
   bool OpenIniFile();
   void Adapter();
   int GetImpVal(int imp);

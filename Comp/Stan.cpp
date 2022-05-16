@@ -46,13 +46,13 @@ const char* Station::FullFN()
   return (filename.Length() != 0) ? filename.c_str() : FULL_PATH;
 }
 
-FILE* Station::_fopen(char* mod)
+FILE* Station::_fopen(const char* mod)
 {
   const char* FN = FullFN();
   return fopen(CommitFile(FN), mod);
 }
 
-FILE* Station::_fopenTu(char* mod)
+FILE* Station::_fopenTu(const char* mod)
 {
   String FN = FullFN();
   FN = ChangeFileExt(FN, ".tu");
