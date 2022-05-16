@@ -165,8 +165,8 @@ public:
   virtual void GetPropMap(TPropMap& m);
   virtual void SetPropMap(TPropMap& m);
   virtual void Go();
-  void Save(FILE* file);
-  void Load(FILE* file);
+  void Save(std::ostream& file);
+  void Load(std::istream& file);
   TYP GetType();
   UNIT GetUnit();
   Gorl();

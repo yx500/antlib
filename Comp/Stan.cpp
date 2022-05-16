@@ -24,6 +24,9 @@
 
 #include <typeinfo>
 
+
+// CommitFile( ChangeFileExt( FullFN(), ".tu") )
+
 extern bool DescrCached;
 
 TAntOpt AntOpt0;                // используется если нет участка( для станции 1ой)
@@ -36,34 +39,13 @@ TAntOpt* GetUsedAntOpt()
   return UsedAntOpt;
 }
 
-const char* Station::FullFN()
+String Station::FullFN()
 {
-  static char FULL_PATH[255];
-  memset(FULL_PATH, 0, sizeof(FULL_PATH));
-  strncat(FULL_PATH, Sta_Dir, strlen(Sta_Dir));
-  strncat(FULL_PATH, Dat->filename, 8);
-  strcat(FULL_PATH, ".sta");
-  return (filename.Length() != 0) ? filename.c_str() : FULL_PATH;
-}
-
-FILE* Station::_fopen(const char* mod)
-{
-  const char* FN = FullFN();
-  return fopen(CommitFile(FN), mod);
-}
-
-FILE* Station::_fopenTu(const char* mod)
-{
-  String FN = FullFN();
-  FN = ChangeFileExt(FN, ".tu");
-  FILE* fileTU = fopen(CommitFile(FN.c_str()), mod);
-  return fileTU;
+  return filename.IsEmpty() ? Sta_Dir + Dat->filename+".sta" : filename;
 }
 
 void Station::Adapter()
 {
-  /* set ych params */
-
   if (pPoligon != NULL)
     AO = &pPoligon->AO;
   else
@@ -370,27 +352,27 @@ void Station::ConnectGorls()
 int Station::LoadSTA()
 {
   int i;
-  FILE* file = NULL;
   int NALL = 0;
   Col_Gorl = 0;
   St_Dat A;
 
-  if ((file = this->_fopen("rb")) == NULL) {
-    CriticalErr(String("No file: ") + FullFN());
+  std::ifstream file( CommitFile( FullFN() ), std::ios::binary);
+  if ( !file.is_open() ) {
+    CriticalErr( String("No file: ") + FullFN() );
     return -1;
   }
-  fread(&A, sizeof(St_Dat), 1, file);
+  file.read( (char*)&A, sizeof(St_Dat));
   if (Dat->descriptor[0] == 0)
     memcpy(Dat, &A, sizeof(A));
 
   OpenIniFile();
 
   for (i = 0; i < Units_Size; i++) {
-    if (feof(file))
+    if (file.eof())
       NALL = 0;
     else
-      fread(&NALL, sizeof(short int), 1, file);
-    if (feof(file))
+      file.read( (char*)&NALL, sizeof(short int));
+    if (file.eof())
       NALL = 0;
 
     if (POLE[i])
@@ -408,9 +390,6 @@ int Station::LoadSTA()
   }
 
   ConnectGorls();
-
-  fclose(file);
-  file = NULL;
 
   // Пытаемся открыть маршруты
   String stFN = FullFN();
@@ -434,8 +413,7 @@ int Station::SaveAs(const char* NewFileName)
 
 int Station::Save()
 {
-  String FN = FullFN();
-  FN = FN.UpperCase();
+  String FN = FullFN().UpperCase();
   if (FN.Pos(".STE") == FN.Length() - 3) {
     return SaveSTE();
   } else {
@@ -446,10 +424,10 @@ int Station::Save()
 int Station::SaveSTA()
 {
   int NALL = 0;
-  FILE* file = this->_fopen("wb");
-  if (file == NULL)
+  std::ofstream file( CommitFile( FullFN() ), std::ios::binary);
+  if (!file.is_open())
     return -1;
-  fwrite(Dat, sizeof(St_Dat), 1, file);
+  file.write( (char*)Dat, sizeof(St_Dat));
   for (int i = 0; i < Units_Size; i++) {
     NALL = POLE[i]->GetArraySize();
     if ((NALL >= 2) && (i == GORE))
@@ -465,13 +443,9 @@ int Station::SaveSTA()
       }
     }
 
-    fwrite(&NALL, sizeof(short int), 1, file);
+    file.write( (char*)&NALL, sizeof(short int));
     POLE[i]->SaveAll(file, i);
   }
-  fclose(file);
-
-  file = NULL;
-
   return 1;
 };
 
@@ -722,32 +696,6 @@ void Station::ShowTrainNumbers(bool bHide)
 }
 
 extern T_GetSigName_Func _GetSigName_Func;
-/*
-static TImpPropNamesInfo _II;
-bool Station::GetObjByImpulsName(String &impname, String & respropname, int &resimpabsnumber)
-{
-    AComp * ac;
-    static String _S;
-    if (_GetSigName_Func == NULL) return false;
-    for (int i = 0; i < Units_Size; i++) {
-        for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
-            ac = POLE[i]->GetObjPtr(j);
-            _GetImpPropNamesInfo(ac, _II);
-            for (int ii = 0; ii < _II.ImpCount; ii++) {
-                if ((_II.RealOffset[ii] == 0) || (_II.RealOffset[ii] == -1) || (_II.RealOffset[ii] == -2)) continue;
-                _S = _GetSigName_Func(_II.RealOffset[ii]);
-                if (_S == impname) {
-                    respropname = _II.ImpName[ii];
-                    resimpabsnumber = _II.RealOffset[ii];
-                    return true;
-                }
-            }
-        }
-    }
-    return false;
-
-}
-*/
 
 static String _StanPropName[14] = {
     "цфNom",                 // 0
@@ -768,7 +716,6 @@ static String _StanPropName[14] = {
 
 void Station::GetPropMap(TPropMap& m)
 {
-  // считаем обьекты
   int NALL = 0;
   int cnt = 0;
   for (int i = 0; i < Units_Size; i++) {
@@ -820,8 +767,6 @@ void WritePmToIni(TPropMap& pm, AIniFile* FI, String SectionName)
   for (int i = 0; i < SL->Size(); i++)
     FI->WriteString(SectionName, SL->Name(i), SL->Value(i));
   delete SL;
-  //     for ( int i=0; i<pm.GetItemsCount(); i++ )
-  //         FI->WriteString(SectionName,pm.GetKeys(i),pm.GetVal(i));
 }
 
 int Station::SaveSTE()
@@ -829,10 +774,6 @@ int Station::SaveSTE()
   TPropMap pm;
   pm.bNotPutDefault = true;
   AComp* ac;
-
-  // AStringList *SL=new AStringList();
-  // int oldmod=MOD;
-  // MOD=RD; // надо чтоб лишнее не писалось
 
   String FN = FullFN();
   if (FileExists(FN))

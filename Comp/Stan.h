@@ -50,10 +50,10 @@ protected:
 
 public:
   PSt_Dat Dat;
-  VisibleArray* POLE[Units_Size + 1]; // +1 -` ������ �������
+  VisibleArray* POLE[Units_Size + 1]; 
   Poligon* pPoligon;
-  int ChanelOffset[255];     /*�������� ��� ������� 1..255, 0 - �� �������*/
-  char ChanelNames[255][12]; /*�������� ��� ������� 1..255, 0 - �� �������*/
+  int ChanelOffset[255];    
+  char ChanelNames[255][12]; 
   TvUseChanelNames vUseChanelNames;
   int ID_RP;                       /*   */
   String filename;              /*��� �����     */
@@ -63,8 +63,6 @@ public:
   TAntOpt* AO;
   char ElemsSostPacketName[12];
 
-  FILE* _fopen(const char* mod);
-  FILE* _fopenTu(const char* mod);
   bool OpenIniFile();
   void Adapter();
   int GetImpVal(int imp);
@@ -73,7 +71,7 @@ public:
   ~Station();
 
   void Close();
-  const char* FullFN();
+  String FullFN();
   void Show();
   void ShowActives();
   void Hide();

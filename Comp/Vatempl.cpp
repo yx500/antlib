@@ -493,7 +493,7 @@ int VisibleArray::GetArraySize()
   return data.size();
 }
 
-int VisibleArray::LoadAll(int NALL, FILE* file, int ut)
+int VisibleArray::LoadAll(int NALL, std::istream& file, int ut)
 {
   PGorl Member;
   AComp* G;
@@ -502,16 +502,16 @@ int VisibleArray::LoadAll(int NALL, FILE* file, int ut)
   for (int count = 0; count < NALL; count++) {
     if (ut != GORE) {
       // FTellPos = ftell(file);
-      fread(&MEM, sizeof(AMemory), 1, file);
+      file.read( (char*)&MEM, sizeof(AMemory));
       //дополнительный МЕМ
       if ((MEM.ExtPriz.isMEM2())) {
         if (count == NALL) {
           MEM.ExtPriz.setMEM2(0);
         } else {
-          fread(&MEM2, sizeof(AMemory), 1, file);
+          file.read( (char*)&MEM2, sizeof(AMemory));
           // проверяем на мусор
           if ((MEM2.type != 29) || (MEM2.name[0] != '~')) {
-            fseek(file, -sizeof(AMemory), SEEK_CUR);
+            file.seekg(-sizeof(AMemory), std::ios_base::cur);
             memset(&MEM2, 0, sizeof(MEM2));
             MEM.ExtPriz.setMEM2(0);
           } else {
@@ -535,7 +535,7 @@ int VisibleArray::LoadAll(int NALL, FILE* file, int ut)
   return 1;
 }
 
-int VisibleArray::SaveAll(FILE* file, int ut)
+int VisibleArray::SaveAll(std::ostream& file, int ut)
 {
   PGorl Member;
   // Lamp *Lmp;
@@ -552,10 +552,10 @@ int VisibleArray::SaveAll(FILE* file, int ut)
       memset(&MEM2, 0, sizeof(MEM2));
       G->Get();
 
-      fwrite(&MEM, sizeof(AMemory), 1, file);
+      file.write( (char*)&MEM, sizeof(AMemory));
       //дополнительный МЕМ
       if ((MEM.ExtPriz.isMEM2()) && (MEM2.type == 29) && (MEM2.name[0] == '~')) {
-        fwrite(&MEM2, sizeof(AMemory), 1, file);
+        file.write( (char*)&MEM2, sizeof(AMemory));
       }
       //  if(MEM.type == LAMP){
       //            Lmp = (Lamp*)G;

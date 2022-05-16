@@ -872,7 +872,7 @@ void Gorl::Show()
   _SetText(F_DEFAULT, LEFT_TEXT, TOP_TEXT);
 };
 
-void Gorl::Save(FILE* file)
+void Gorl::Save(std::ostream& file)
 {
   Grl_file gf;
   Grl gorl_0;
@@ -886,44 +886,43 @@ void Gorl::Save(FILE* file)
   cp1251_to_cp866_buff(gorl[0]->Sign_i.name, gorl_0.Sign_i.name, 5);
 
   gorl_0.toGrl_file(&gf);
-  fwrite(&gf, sizeof(gf), 1, file);
+  file.write( (char*)&gf, sizeof(gf));
 
   //fwrite(&gorl_0, sizeof(Grl), 1, file);
   for (int i = 0; i < gorl[0]->Col_Mar; i++) {
-    fwrite(gorl[0]->Matr[i], sizeof(char), gorl[0]->Col_Str, file);
+    file.write( (char*)gorl[0]->Matr[i], sizeof(char)*gorl[0]->Col_Str);
   }
-  fwrite(gorl[0]->Strel_N, sizeof(char), gorl[0]->Col_Str, file);
+  file.write( (char*)gorl[0]->Strel_N, sizeof(char)*gorl[0]->Col_Str);
 
   for (int i = 0; i < gorl[0]->Col_Mar; i++) {
     memcpy(&oemSign, &gorl[0]->Sign[i], sizeof(Signal_file));
     cp1251_to_cp866_buff(gorl[0]->Sign[i].name, oemSign.name, 6);
-    fwrite(&oemSign, sizeof(Signal_file), 1, file);
+    file.write( (char*)&oemSign, sizeof(Signal_file));
   }
 
-  // fwrite(gorl[0]->Sign,sizeof(Signal),gorl[0]->Col_Mar,file);
-  fwrite(gorl[0]->impuls_m, sizeof(short int), gorl[0]->Col_Mar, file);
-  fwrite(gorl[0]->impuls_km, sizeof(short int), gorl[0]->Col_Mar, file);
-  fwrite(gorl[0]->zona_M, sizeof(ID_ZO), gorl[0]->Col_Mar, file);
+  // file.write( (char*)gorl[0]->Sign,sizeof(Signal),gorl[0]->Col_Mar,file);
+  file.write( (char*)gorl[0]->impuls_m, sizeof(short int)*gorl[0]->Col_Mar);
+  file.write( (char*)gorl[0]->impuls_km, sizeof(short int)*gorl[0]->Col_Mar);
+  file.write( (char*)gorl[0]->zona_M, sizeof(ID_ZO)*gorl[0]->Col_Mar);
 
   Get();
-  fwrite(&MEM, sizeof(AMemory), 1, file);
+  file.write( (char*)&MEM, sizeof(AMemory));
 };
 
-void Gorl::Load(FILE* file)
+void Gorl::Load(std::istream& file)
 {
 
   Grl_file gf;
   int sz1=sizeof(Grl);
   int sz2=sizeof(Grl_file);
   if (MOD == ED) {
-    fread(&gf, sizeof(gf), 1, file);
+    file.read( (char*)&gf, sizeof(gf));
     gorl[0]->fromGrl_file(&gf);
-    //fread(gorl[0], sizeof(Grl), 1, file);
     if (gorl[0]->nom_fiz > Col_Gorl)
       Col_Gorl = gorl[0]->nom_fiz;
     Creat();
     for (int i = 0; i < gorl[0]->Col_Mar; i++) {
-      fread(gorl[0]->Matr[i], sizeof(char), gorl[0]->Col_Str, file);
+      file.read( (char*)gorl[0]->Matr[i], sizeof(char)* gorl[0]->Col_Str);
     }
     for (int i = 0; i < gorl[0]->Col_Mar; i++) {
       for (int j = 0; j < gorl[0]->Col_Str; j++) {
@@ -934,13 +933,13 @@ void Gorl::Load(FILE* file)
       }
     }
 
-    fread(gorl[0]->Strel_N, sizeof(char), gorl[0]->Col_Str, file);
+    file.read( (char*)gorl[0]->Strel_N, sizeof(char)*gorl[0]->Col_Str);
 
-    fread(gorl[0]->Sign, sizeof(Signal_file), gorl[0]->Col_Mar, file);
-    fread(gorl[0]->impuls_m, sizeof(short int), gorl[0]->Col_Mar, file);
-    fread(gorl[0]->impuls_km, sizeof(short int), gorl[0]->Col_Mar, file);
-    fread(gorl[0]->zona_M, sizeof(ID_ZO), gorl[0]->Col_Mar, file);
-    fread(&MEM, sizeof(AMemory), 1, file);
+    file.read( (char*)gorl[0]->Sign, sizeof(Signal_file) * gorl[0]->Col_Mar);
+    file.read( (char*)gorl[0]->impuls_m, sizeof(short int) * gorl[0]->Col_Mar);
+    file.read( (char*)gorl[0]->impuls_km, sizeof(short int) * gorl[0]->Col_Mar);
+    file.read( (char*)gorl[0]->zona_M, sizeof(ID_ZO) * gorl[0]->Col_Mar);
+    file.read( (char*)&MEM, sizeof(AMemory));
     MEM.type = GORL;
     Set();
     /*-------------------------------------------------*/
@@ -950,7 +949,7 @@ void Gorl::Load(FILE* file)
     if (gorl[0] == NULL)
       CriticalErr("нет памяти для горловин");
 
-    fread(&gf, sizeof(gf), 1, file);
+    file.read( (char*)&gf, sizeof(gf));
     gorl[0]->fromGrl_file(&gf);
 
     //fread(gorl[0], sizeof(Grl), 1, file);
@@ -959,21 +958,21 @@ void Gorl::Load(FILE* file)
     Creat();
 
     for (int i = 0; i < gorl[0]->Col_Mar; i++) {
-      fread(gorl[0]->Matr[i], sizeof(char), gorl[0]->Col_Str, file);
+      file.read( (char*)gorl[0]->Matr[i], sizeof(char)*gorl[0]->Col_Str);
     }
-    fread(gorl[0]->Strel_N, sizeof(char), gorl[0]->Col_Str, file);
+    file.read( (char*)gorl[0]->Strel_N, sizeof(char)*gorl[0]->Col_Str);
 
     //fread(gorl[0]->Sign, sizeof(Signal_file), gorl[0]->Col_Mar, file);
     for (int i = 0; i < gorl[0]->Col_Mar; i++) {
-      fread(&gorl[0]->Sign[i], sizeof(Signal_file), 1, file);
+      file.read( (char*)&gorl[0]->Sign[i], sizeof(Signal_file));
     }
 
 
-    fread(gorl[0]->impuls_m, sizeof(short int), gorl[0]->Col_Mar, file);
-    fread(gorl[0]->impuls_km, sizeof(short int), gorl[0]->Col_Mar, file);
-    fread(gorl[0]->zona_M, sizeof(ID_ZO), gorl[0]->Col_Mar, file);
+    file.read( (char*)gorl[0]->impuls_m, sizeof(short int) * gorl[0]->Col_Mar);
+    file.read( (char*)gorl[0]->impuls_km, sizeof(short int)*gorl[0]->Col_Mar);
+    file.read( (char*)gorl[0]->zona_M, sizeof(ID_ZO)*gorl[0]->Col_Mar);
 
-    fread(&MEM, sizeof(AMemory), 1, file);
+    file.read( (char*)&MEM, sizeof(AMemory));
     Set();
   }
   char ansiname[6];

@@ -504,7 +504,7 @@ String Com_Nam[CompTypeCount + 1] = {
 AMemory MEM;
 AMemory MEM2;
 
-char Ych_Dir[256] = "CFG\\";
-char Sta_Dir[256] = "STA\\";
-char Dat_Dir[256] = "DAT\\";
-char NBDRV_Path[256] = ".\\..\\NB_DRV.CFG";
+String Ych_Dir = "CFG\\";
+String Sta_Dir = "STA\\";
+String Dat_Dir = "DAT\\";
+String NBDRV_Path = ".\\..\\NB_DRV.CFG";

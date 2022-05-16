@@ -34,8 +34,8 @@ public:
   void GoAll();
   void ConnectAll();
   int GetArraySize();
-  int LoadAll(int NALL, FILE* file, int ut);
-  int SaveAll(FILE* file, int ut);
+  int LoadAll(int NALL, std::istream& file, int ut);
+  int SaveAll(std::ostream& file, int ut);
   int TstXY(int x, int y); //!!!
   void ClearAll(void);
   int IndexOf(AComp* ac);

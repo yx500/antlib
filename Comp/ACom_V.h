@@ -66,10 +66,10 @@ public:
 extern bool bNoEmbeddSubStations;
 extern bool bShowExtInfo;
 extern bool bShowNumberPosition;
-extern char Ych_Dir[256];
-extern char Sta_Dir[256];
-extern char Dat_Dir[256];
-extern char NBDRV_Path[256];
+extern String Ych_Dir;
+extern String Sta_Dir;
+extern String Dat_Dir;
+extern String NBDRV_Path;
 
 extern int CommonAnimationStep; // шаг для прорисовки анимации
 

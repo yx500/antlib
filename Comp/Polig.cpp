@@ -49,8 +49,8 @@ int Poligon::Close()
 
 int Poligon::LoadYCH(const char* filename)
 {
-  FILE* file = NULL;
-  FILE* file_c = NULL;
+  std::ifstream file;
+  std::ifstream file_c;
   /* --- */
   if (!LoadYchParams(ChangeFileExt(String(filename), ".ini"), &AO))
     AO = AntOpt0;
@@ -58,14 +58,14 @@ int Poligon::LoadYCH(const char* filename)
   // AOGetANTON(&AntOpt);
   name=AO.Name;
 
-  file = fopen(CommitFile(filename), "rb");
+  file.open(CommitFile(filename), std::ios::binary);
 
-  if (file == NULL) {
+  if (!file.is_open()) {
     String t = String("Can't open file: ") + filename;
     CriticalErr(t.c_str());
     return -1;
   }
-  fread(&Col_ST, sizeof(short int), 1, file);
+  file.read( (char*)&Col_ST, sizeof(short int));
   for (CurrentStation = 0; CurrentStation < Col_ST; CurrentStation++) {
     if (ST[CurrentStation] == NULL) {
       ST[CurrentStation] = new Station("");
@@ -77,7 +77,7 @@ int Poligon::LoadYCH(const char* filename)
       }
     }
 
-    fread(ST[CurrentStation]->Dat, sizeof(St_Dat), 1, file);
+    file.read( (char*)ST[CurrentStation]->Dat, sizeof(St_Dat));
     //> !!!  править обязательно когда
     String fns = ExtractFileDir(filename)+"\\..\\sta\\"+ST[CurrentStation]->Dat->filename+".sta";
     ST[CurrentStation]->filename=fns;
@@ -96,7 +96,7 @@ int Poligon::LoadYCH(const char* filename)
     } else
       STB[CurrentStation]->Open(fnm.c_str());
   }
-  fclose(file);
+  
 
   CurrentStation = 0;
 
@@ -292,19 +292,17 @@ void Poligon::SaveYCH()
   // strcpy(FULL_PATH,Ych_Dir);
   // strcat(FULL_PATH,filename);
 
-  FILE* file = 0;
-  // file=fopen(CommitFile(FULL_PATH),"wb");
-  file = fopen(CommitFile(FullFileName), "wb");
-  if (file == NULL)
+  std::ofstream file(CommitFile(FullFileName), std::ios::binary);
+  if (!file.is_open())
     CriticalErr("Не могу открыть файл участка");
 
-  fwrite(&Col_ST, sizeof(short int), 1, file);
+  file.write( (char*)&Col_ST, sizeof(short int));
   for (int i = 0; i < Col_ST; i++) {
     ST[i]->Dat->Nom = i;
-    fwrite(ST[i]->Dat, sizeof(St_Dat), 1, file);
+    file.write( (char*)ST[i]->Dat, sizeof(St_Dat));
     // if(mode==ALL)ST[i]->Save(mode);
   }
-  fclose(file);
+  
 }
 
 void Poligon::SaveYCE()
