@@ -376,7 +376,7 @@ int Station::LoadSTA()
   St_Dat A;
 
   if ((file = this->_fopen("rb")) == NULL) {
-    CriticalErr(String((String("No file: ") + FullFN())).c_str());
+    CriticalErr(String("No file: ") + FullFN());
     return -1;
   }
   fread(&A, sizeof(St_Dat), 1, file);
