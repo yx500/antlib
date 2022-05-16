@@ -241,7 +241,6 @@ void Station::Go()
   GoEachACompStanPostFun();
   ShowElemsSost();
   // ShowElemsTagStr();
-  //  рисуем сверху Хинты!
   ACOMPHINT.ShowHints(this);
 }
 
