@@ -2,17 +2,13 @@
 #define ASTRING_H
 
 #ifdef __BORLANDC__
-
-#include <system.hpp>
-// class RTL_DELPHIRETURN AString : public AnsiString{};
-// typedef AnsiString  String;
-
+    #include <system.hpp>
 #else
 
-//#include "antlibstring.h"
-#include "antlibqstring.h"
-//typedef AString String;
-typedef AQString String;
+    //#include "antlibstring.h"
+    //typedef AString String;
+    #include "antlibqstring.h"
+    typedef AQString String;
 
 #endif //__BORLANDC__
 

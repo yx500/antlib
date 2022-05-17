@@ -1,7 +1,6 @@
 #ifndef POLIGON_H
 #define POLIGON_H
 
-class Station;
 #include "ACom_V.h"
 #include "Stan.h"
 #include "YchParams.h"
@@ -9,8 +8,7 @@ class Station;
 class Poligon
 {
 public:
-  char filename[255];
-  char FullFileName[255]; // ������ ��� �����
+  String FullFileName;
   String name;
   int Col_ST;
   Station* ST[30];
@@ -23,33 +21,18 @@ public:
   int CABufCount;
 
   Poligon();
-  ~Poligon()
-  {
-    Close();
-  }
+  ~Poligon() { Close(); }
 
   int Open(const char* fn);
   int LoadYCH(const char* filename);
   int LoadYCE(const char* filename);
   int Close();
 
-  String Name()
-  {
-    return name;
-  }
-  const char* FileName()
-  {
-    return filename;
-  }
+  String Name() { return name; }
+  const char* FileName() { return FullFileName.c_str(); }
 
-  int Count()
-  {
-    return Col_ST;
-  }
-  Station* Item(int i)
-  {
-    return STB[i];
-  }
+  int Count() { return Col_ST; }
+  Station* Item(int i) { return STB[i]; }
 
   void Save();
   void SaveYCH();
@@ -57,7 +40,6 @@ public:
   void Go();
   void ShowActives();
   void Clear();
-  // void Job();
   void Show();
   void Del(int Nomer);
   int TstXY(int, int);

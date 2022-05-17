@@ -18,9 +18,8 @@ extern int CurrentUCH;
 
 Poligon::Poligon()
 {
-  memset(filename, 0, sizeof(filename));
   name="";
-  memset(FullFileName, 0, sizeof(FullFileName));
+  FullFileName="";
   Col_ST = 0;
   ENG_Pack = NULL;
   CABufCount = 0;
@@ -30,9 +29,8 @@ Poligon::Poligon()
 
 int Poligon::Close()
 {
-  memset(filename, 0, sizeof(filename));
   name="";
-  memset(FullFileName, 0, sizeof(FullFileName));
+  FullFileName="";
   Col_ST = 0;
   for (int i = 0; i < 30; i++) {
     if (ST[i] == STB[i])
@@ -49,6 +47,8 @@ int Poligon::Close()
 
 int Poligon::LoadYCH(const char* filename)
 {
+  FullFileName = filename;
+
   std::ifstream file;
   std::ifstream file_c;
   /* --- */
@@ -105,6 +105,8 @@ int Poligon::LoadYCH(const char* filename)
 
 int Poligon::LoadYCE(const char* filename)
 {
+  FullFileName = filename;
+  
   AIniFile* FI = new AIniFile(filename);
   /* --- */
   if (!AOReadFromIni(FI, "", &AO))
@@ -167,11 +169,9 @@ int Poligon::LoadYCE(const char* filename)
 
 int Poligon::Open(const char* filename)
 {
-  // int i=CurrentStation;
-
-  strncpy(FullFileName, filename, sizeof(FullFileName) - 1);
+  FullFileName = filename;
+  
   String FN = filename;
-
   if (FN.UpperCase().Pos(".YCE") == FN.Length() - 3) {
     return LoadYCE(FN.c_str());
   } else {
@@ -287,11 +287,6 @@ void Poligon::Save()
 
 void Poligon::SaveYCH()
 {
-  // char FULL_PATH[256];
-  // memset(FULL_PATH,0,sizeof(FULL_PATH));
-  // strcpy(FULL_PATH,Ych_Dir);
-  // strcat(FULL_PATH,filename);
-
   std::ofstream file(CommitFile(FullFileName), std::ios::binary);
   if (!file.is_open())
     CriticalErr("Не могу открыть файл участка");
@@ -307,12 +302,6 @@ void Poligon::SaveYCH()
 
 void Poligon::SaveYCE()
 {
-  // char FULL_PATH[256];
-  // memset(FULL_PATH,0,sizeof(FULL_PATH));
-  // strcpy(FULL_PATH,Ych_Dir);
-  // strcat(FULL_PATH,filename);
-
-  // SaveYchParams(FullFileName,&AO);
   AIniFile* FI = new AIniFile(FullFileName);
   St_Dat* Dat;
 
