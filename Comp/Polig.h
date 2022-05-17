@@ -51,6 +51,5 @@ public:
   void reassignChanelOffset();
 };
 
-typedef Poligon* PPoligon;
 
 #endif

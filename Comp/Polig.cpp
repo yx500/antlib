@@ -49,15 +49,12 @@ int Poligon::LoadYCH(const char* filename)
 {
   FullFileName = filename;
 
-  std::ifstream file;
-  std::ifstream file_c;
-  /* --- */
+
   if (!LoadYchParams(ChangeFileExt(String(filename), ".ini"), &AO))
     AO = AntOpt0;
-  // AOSetANTON(&AntOpt);  else
-  // AOGetANTON(&AntOpt);
   name=AO.Name;
 
+  std::ifstream file;
   file.open(CommitFile(filename), std::ios::binary);
 
   if (!file.is_open()) {
@@ -81,7 +78,6 @@ int Poligon::LoadYCH(const char* filename)
     //> !!!  править обязательно когда
     String fns = ExtractFileDir(filename)+"\\..\\sta\\"+ST[CurrentStation]->Dat->filename+".sta";
     ST[CurrentStation]->filename=fns;
-//    if (ST[CurrentStation]->Open(ST[CurrentStation]->FullFN()) == -1) {
     if (ST[CurrentStation]->Open(fns.c_str()) == -1) {
       return -1;
     }
@@ -97,9 +93,7 @@ int Poligon::LoadYCH(const char* filename)
       STB[CurrentStation]->Open(fnm.c_str());
   }
   
-
   CurrentStation = 0;
-
   return 1;
 }
 
@@ -108,12 +102,10 @@ int Poligon::LoadYCE(const char* filename)
   FullFileName = filename;
   
   AIniFile* FI = new AIniFile(filename);
-  /* --- */
+
   if (!AOReadFromIni(FI, "", &AO))
     AO = AntOpt0;
 
-  // AO.SetANTON(&AntOpt); else
-  // AOGetANTON(&AntOpt);
   name=AO.Name;
 
   String SectName, SS, oldcd;

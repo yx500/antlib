@@ -32,7 +32,7 @@ struct St_Dat
 };
 
 #pragma pack(pop)
-typedef St_Dat* PSt_Dat;
+
 struct TUseChanelName
 {
   int type;
@@ -49,7 +49,7 @@ protected:
   bool bETTListNotFound;
 
 public:
-  PSt_Dat Dat;
+  St_Dat* Dat;
   VisibleArray* POLE[Units_Size + 1]; 
   Poligon* pPoligon;
   int ChanelOffset[255];    
@@ -109,6 +109,7 @@ public:
     else
       return "none";
   }
+
   String Name()
   {
     if (name.Length() > 0)
@@ -118,6 +119,7 @@ public:
     cp866_to_cp1251_buff( Dat->descriptor, n_name, strlen(Dat->descriptor) );
     return n_name;
   }
+
   const char* FileName()
   {
     return Dat->filename;
@@ -139,7 +141,6 @@ public:
 
   // bool GetParamsEttItem(unsigned int EventType_ID,int ID_OBJ,int &Visible,int &Act,int &TOShow);
 };
-typedef Station* PStation;
 
 class SubStation : public Element
 {
