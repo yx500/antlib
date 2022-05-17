@@ -48,7 +48,6 @@ int Poligon::LoadYCH(const char* filename)
 {
   alib::CaseInsensitiveFilePath  filepath(filename);
   FullFileName = filepath.path();
-  
 
   if (!LoadYchParams(ChangeFileExt(String(filename), ".ini"), &AO))
     AO = AntOpt0;
@@ -67,10 +66,6 @@ int Poligon::LoadYCH(const char* filename)
       ST[CurrentStation] = new Station("");
       ST[CurrentStation]->pPoligon = this;
       ST[CurrentStation]->AO = &AO;
-      if (!ST[CurrentStation]) {
-        throw "Ýòîãî íå ìîæåò áûòü.";
-        return -1;
-      }
     }
 
     file.read( (char*)ST[CurrentStation]->Dat, sizeof(St_Dat));
@@ -123,14 +118,9 @@ int Poligon::LoadYCE(const char* filename)
     String staFN = ExtractFileDir(filename) + "\\..\\" + Sta_Dir + "\\" + SS;
     SS = FI->ReadString(SectName, "ñìFullFileName", staFN);
     SS = staFN;
-    // oldcd = GetCurrentDir();
-    // SetCurrentDir(ExtractFileDir(filename));
-    // SS = ExpandFileName(SS);
-    // SetCurrentDir(oldcd);
-//    strncpy(tmpStan->filename, SS.c_str(), sizeof(tmpStan->filename) - 1);
     tmpStan->filename= SS;
 
-    if (tmpStan->Open(SS.c_str()/*tmpStan->FullFN()*/) == -1) {
+    if (tmpStan->Open(SS.c_str()) == -1) {
       if (MOD == ED)
         return -1;
       else
