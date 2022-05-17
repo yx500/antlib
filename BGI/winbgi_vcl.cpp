@@ -851,7 +851,6 @@ static void set_defaults()
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-void InitBgiFont(void);
 void SetFont(TFont*, int n);
 void InitWinBGI(void)
 {
@@ -871,7 +870,6 @@ void InitWinBGI(void)
   for (int i = 0; i < FontCount; i++)
     Fonts[i] = NULL;
   set_defaults();
-  InitBgiFont();
   for (int i = 0; i < FontCount; i++) {
     if (!Fonts[i]) {
       Fonts[i] = new TFont();
@@ -1187,16 +1185,6 @@ static char FontFileNames[FontCount][20] = {
 
 };
 
-char BgiCfgFileName[256] = "bgifnt.cfg";
-void InitBgiFont(void)
-{
-  std::ifstream is(BgiCfgFileName);
-  if (is.is_open())
-    for (int i = 0; i < FontCount && is.good(); i++) {
-      ws(is).get(FontFileNames[i], sizeof(FontFileNames[i]));
-      is.ignore(80, '\n');
-    }
-}
 void SetFont(TFont* Font, int nn)
 {
   if (!strlen(FontFileNames[nn]))
