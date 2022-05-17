@@ -14,7 +14,6 @@
 #include "Strel.h"
 #include "Vatempl.h"
 #include "YchParams.h"
-#include "actools.h"
 #include "aheaders_cpp.h"
 #include "ainifile.h"
 #include "uEXD.h"
@@ -24,8 +23,6 @@
 
 #include <typeinfo>
 
-
-// CommitFile( ChangeFileExt( FullFN(), ".tu") )
 
 extern bool DescrCached;
 
@@ -355,7 +352,8 @@ int Station::LoadSTA()
   Col_Gorl = 0;
   St_Dat A;
 
-  std::ifstream file( CommitFile( FullFN() ), std::ios::binary);
+  alib::CaseInsensitiveFilePath filepath( FullFN().c_str() );
+  std::ifstream file( filepath.path(), std::ios::binary);
   if ( !file.is_open() ) {
     CriticalErr( String("No file: ") + FullFN() );
     return -1;
@@ -423,7 +421,7 @@ int Station::Save()
 int Station::SaveSTA()
 {
   int NALL = 0;
-  std::ofstream file( CommitFile( FullFN() ), std::ios::binary);
+  std::ofstream file( FullFN().c_str(), std::ios::binary);
   if (!file.is_open())
     return -1;
   file.write( (char*)Dat, sizeof(St_Dat));
@@ -556,12 +554,11 @@ int GetPacketOffset(int PacketType, String PacketName, String PathNBDRV)
   int num, typ, CountWatch, Len;
   String S;
   try {
-    PacketName = PacketName.UpperCase();
-    if (!FileExists(PathNBDRV))
-      return 0;
     std::ifstream fil(PathNBDRV.c_str());
     if (!fil.is_open())
       return 0;
+
+    PacketName = PacketName.UpperCase();
     fil >> num;
     for (int i = 0; i < num && fil.good(); i++) {
       fil >> typ;
@@ -590,9 +587,9 @@ bool Station::OpenIniFile()
 {
   memset(ChanelNames, 0, sizeof(ChanelNames));
   try {
-    String FN = FullFN();
-    FN = ChangeFileExt(FN, ".ini");
-    FN = CommitFile(FN.c_str());
+    String FN = ChangeFileExt(FullFN(), ".ini");
+    alib::CaseInsensitiveFilePath  filepath(FN.c_str());
+    FN = filepath.path();
     if (!FileExists(FN))
       return false;
     AIniFile* FI = new AIniFile(FN);
@@ -883,11 +880,13 @@ int Station::LoadSTE()
 
   AStringList* SL = new AStringList();
   AStringList* SLsect = new AStringList();
-  String FN = FullFN();
   pm.clear();
   int type;
   UNIT unit;
   // ищем сверху свое
+  String FN = FullFN();
+  alib::CaseInsensitiveFilePath  filepath(FN.c_str());
+  FN = filepath.path();
   AIniFile* FI = new AIniFile(FN);
   ReadPmFromIni(pm, FI, "STATION");
 

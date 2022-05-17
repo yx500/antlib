@@ -3,7 +3,6 @@
 
 #include "APch.h"
 #include "Stan.h"
-#include "actools.h"
 #include "aheaders_cpp.h"
 #include "ainifile.h"
 
@@ -47,15 +46,15 @@ int Poligon::Close()
 
 int Poligon::LoadYCH(const char* filename)
 {
-  FullFileName = filename;
-
+  alib::CaseInsensitiveFilePath  filepath(filename);
+  FullFileName = filepath.path();
+  
 
   if (!LoadYchParams(ChangeFileExt(String(filename), ".ini"), &AO))
     AO = AntOpt0;
   name=AO.Name;
 
-  std::ifstream file;
-  file.open(CommitFile(filename), std::ios::binary);
+  std::ifstream file( FullFileName.c_str(), std::ios::binary);
 
   if (!file.is_open()) {
     String t = String("Can't open file: ") + filename;
@@ -99,9 +98,10 @@ int Poligon::LoadYCH(const char* filename)
 
 int Poligon::LoadYCE(const char* filename)
 {
-  FullFileName = filename;
-  
-  AIniFile* FI = new AIniFile(filename);
+  alib::CaseInsensitiveFilePath  filepath(filename);
+  FullFileName = filepath.path();
+
+  AIniFile* FI = new AIniFile( FullFileName.c_str() );
 
   if (!AOReadFromIni(FI, "", &AO))
     AO = AntOpt0;
@@ -279,7 +279,7 @@ void Poligon::Save()
 
 void Poligon::SaveYCH()
 {
-  std::ofstream file(CommitFile(FullFileName), std::ios::binary);
+  std::ofstream file( FullFileName.c_str(), std::ios::binary);
   if (!file.is_open())
     CriticalErr("Не могу открыть файл участка");
 

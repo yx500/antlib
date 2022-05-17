@@ -2,7 +2,6 @@
 
 #include "APch.h"
 #include "CompHint.h"
-#include "actools.h"
 #include "aheaders_cpp.h"
 #include "ainifile.h"
 
@@ -168,25 +167,20 @@ bool AOWriteToIni(void* pFI, String Sect, TAntOpt* AO)
 
 bool LoadYchParams(String FileName, TAntOpt* AO)
 {
-  bool b = false;
   if (!bLoadYchParams)
     return false;
-  try {
-    FileName = CommitFile(FileName.c_str());
-    if (!FileExists(FileName)) {
-      FileName = ExtractFileDir(FileName) + "\\default.ych.ini";
-      if (!FileExists(FileName))
+
+  alib::CaseInsensitiveFilePath  filepath(FileName.c_str());
+  FileName = filepath.path();
+  if (!FileExists(FileName)) 
         return false;
-    }
-    AIniFile* FI = new AIniFile(FileName);
-    b = AOReadFromIni(FI, "", AO);
-    if (FI)
-      delete FI;
-  } catch (...) {
-    b = false;
-  }
+  AIniFile* FI = new AIniFile(FileName);
+  bool b = AOReadFromIni(FI, "", AO);
+  delete FI;
   return b;
 }
+
+
 bool SaveYchParams(String FileName, TAntOpt* AO)
 {
   bool b = false;

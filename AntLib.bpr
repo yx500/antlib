@@ -4,13 +4,13 @@
   <MACROS>
     <VERSION value="BCB.06.00"/>
     <PROJECT value="AntLib.lib"/>
-    <OBJFILES value="obj.tmp\ACom_V.obj obj.tmp\actools.obj obj.tmp\pmComp.obj obj.tmp\Comp.obj 
-      obj.tmp\col.obj obj.tmp\common.obj obj.tmp\Elem.obj obj.tmp\F.obj 
-      obj.tmp\Gorl.obj obj.tmp\Line.obj obj.tmp\Polig.obj obj.tmp\Scrin.obj 
-      obj.tmp\SIZE.obj obj.tmp\Stan.obj obj.tmp\Static.obj obj.tmp\Str_fun.obj 
-      obj.tmp\Strel.obj obj.tmp\Svet.obj obj.tmp\Vatempl.obj 
-      obj.tmp\uExtElem.obj obj.tmp\YchParams.obj obj.tmp\uEXD.obj 
-      obj.tmp\Y_STREL.obj obj.tmp\out_num.obj obj.tmp\Ways.obj obj.tmp\Lamps.obj 
+    <OBJFILES value="obj.tmp\ACom_V.obj obj.tmp\pmComp.obj obj.tmp\Comp.obj obj.tmp\col.obj 
+      obj.tmp\common.obj obj.tmp\Elem.obj obj.tmp\F.obj obj.tmp\Gorl.obj 
+      obj.tmp\Line.obj obj.tmp\Polig.obj obj.tmp\Scrin.obj obj.tmp\SIZE.obj 
+      obj.tmp\Stan.obj obj.tmp\Static.obj obj.tmp\Str_fun.obj obj.tmp\Strel.obj 
+      obj.tmp\Svet.obj obj.tmp\Vatempl.obj obj.tmp\uExtElem.obj 
+      obj.tmp\YchParams.obj obj.tmp\uEXD.obj obj.tmp\Y_STREL.obj 
+      obj.tmp\out_num.obj obj.tmp\Ways.obj obj.tmp\Lamps.obj 
       obj.tmp\LampExtDraw.obj obj.tmp\Impuls.obj obj.tmp\Marshrut.obj 
       obj.tmp\propmap.obj obj.tmp\uParString.obj obj.tmp\Gor_Elem.obj 
       obj.tmp\Gor_Logic.obj obj.tmp\uFormula.obj obj.tmp\EnergUnit.obj 
@@ -57,7 +57,6 @@
   <FILELIST>
       <FILE FILENAME="AntLib.bpf" FORMNAME="" UNITNAME="AntLib" CONTAINERID="BPF" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="Comp\ACom_V.cpp" FORMNAME="" UNITNAME="ACom_V" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="Ext\actools.cpp" FORMNAME="" UNITNAME="actools" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="Comp\pmComp.cpp" FORMNAME="" UNITNAME="pmComp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="Comp\Comp.cpp" FORMNAME="" UNITNAME="Comp" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="Comp\col.cpp" FORMNAME="" UNITNAME="Col" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>

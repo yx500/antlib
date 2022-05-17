@@ -171,4 +171,13 @@ string to_upper(const string& s)
   return result;
 }
 
+
+
+std::string WindowsCaseTrasformFunc(const char* path){
+  return path;
+}
+
+CaseInsensitiveFilePath::CaseTrasformFunc CaseInsensitiveFilePath::_path_transform_function_ = WindowsCaseTrasformFunc;
+
+
 } // namespace alib

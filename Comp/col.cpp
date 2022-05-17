@@ -3,6 +3,7 @@
 #include "aheaders_cpp.h"
 #include "ainifile.h"
 #include "winpalet.h"
+#include "utils.h"
 
 int COLOR_S = LIN;        //   11 :-)))WHT       ;     /* цвет сбоя      */
 int COLOR_SET = GELT;     // 2 GREEN     ;     /* цвет установленного маршрута */
@@ -358,8 +359,9 @@ bool wc_LoadIniFile()
   try {
     if (wc_loaded)
       return true;
-    String FN = String(DACCfgFileName);
-    FN = ChangeFileExt(FN, ".ini");
+    String FN = ChangeFileExt(String(DACCfgFileName), ".ini");;
+    alib::CaseInsensitiveFilePath  filepath(FN.c_str());
+    FN = filepath.path();
     if (!FileExists(FN))
       return false;
     AIniFile* FI = new AIniFile(FN);

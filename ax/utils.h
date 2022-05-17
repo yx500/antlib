@@ -30,6 +30,25 @@ inline std::string trim(const std::string& s) { return left_trim(right_trim(s));
 std::string& strings_merge(const string_vector& words, const std::string& separator, std::string& text);
 int to_int(const std::string& s);
 
+
+
+
+class CaseInsensitiveFilePath : std::string
+{
+public:
+    typedef std::string (*CaseTrasformFunc)(const char* );
+    static CaseTrasformFunc _path_transform_function_;
+
+    explicit CaseInsensitiveFilePath(const char* filepath )
+        : std::string( _path_transform_function_(filepath) ) {
+    }
+
+    const char* path() { return this->c_str(); }
+};
+
+
+
+
 } // namespace alib
 
 #endif
