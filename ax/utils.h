@@ -37,10 +37,10 @@ class CaseInsensitiveFilePath : std::string
 {
 public:
     typedef std::string (*CaseTrasformFunc)(const char* );
-    static CaseTrasformFunc _path_transform_function_;
+    static CaseTrasformFunc path_transform_function;
 
     explicit CaseInsensitiveFilePath(const char* filepath )
-        : std::string( _path_transform_function_(filepath) ) {
+        : std::string( path_transform_function(filepath) ) {
     }
 
     const char* path() { return this->c_str(); }

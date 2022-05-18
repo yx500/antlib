@@ -177,7 +177,7 @@ std::string WindowsCaseTrasformFunc(const char* path){
   return path;
 }
 
-CaseInsensitiveFilePath::CaseTrasformFunc CaseInsensitiveFilePath::_path_transform_function_ = WindowsCaseTrasformFunc;
+CaseInsensitiveFilePath::CaseTrasformFunc CaseInsensitiveFilePath::path_transform_function = WindowsCaseTrasformFunc;
 
 
 } // namespace alib

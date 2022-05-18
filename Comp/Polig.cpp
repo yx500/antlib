@@ -22,8 +22,8 @@ Poligon::Poligon()
   Col_ST = 0;
   ENG_Pack = NULL;
   CABufCount = 0;
-  for (int i = 0; i < 30; i++)
-    ST[i] = STB[i] = NULL;
+  ST.resize(30, NULL);
+  STB.resize(30, NULL);
 }
 
 int Poligon::Close()
@@ -199,17 +199,6 @@ int Poligon::TstXY(int x, int y)
 
   CurrentStation = i;
   return 0;
-}
-
-void Poligon::Del(int Nomer)
-{
-  int i = CurrentStation;
-  Col_ST--;
-  for (CurrentStation = Nomer; CurrentStation < Col_ST; CurrentStation++) {
-    if (ST[CurrentStation] != NULL)
-      ST[CurrentStation] = ST[CurrentStation + 1];
-  }
-  CurrentStation = i;
 }
 
 void Poligon::Go()

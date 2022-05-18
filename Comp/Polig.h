@@ -1,9 +1,12 @@
 #ifndef POLIGON_H
 #define POLIGON_H
 
+#include <vector>
+
 #include "ACom_V.h"
 #include "Stan.h"
 #include "YchParams.h"
+
 
 class Poligon
 {
@@ -11,8 +14,8 @@ public:
   String FullFileName;
   String name;
   int Col_ST;
-  Station* ST[30];
-  Station* STB[30];
+  std::vector<Station*> ST;
+  std::vector<Station*> STB;
 
   TAntOpt AO;
   void SetSelfAntOpt();
@@ -41,7 +44,6 @@ public:
   void ShowActives();
   void Clear();
   void Show();
-  void Del(int Nomer);
   int TstXY(int, int);
   int GetNumStanFor(int x, int y);
 
