@@ -137,8 +137,6 @@ AComp* VisibleArray::New(TYP type)
       break;
     case OVER:
       RT = new Over();
-
-      //      RT = (Comp *)malloc( sizeof(Over));
       break;
     case NOMER:
       RT = new Nomer();
@@ -378,38 +376,20 @@ void VisibleArray::Show(AComp* ac)
     EachACompPostFun(ac);
 }
 
-/*
-void VisibleArray::Get(int Number)
-{
-if(Number<1 || Number>data->Count)
-  return;
-((AComp*)data->Items[Number-1])->Get();
-}
-void VisibleArray::Set(int Number)
-{
-if(Number<1 || Number>data->Count)
-  return;
-((AComp*)data->Items[Number-1])->Set();
-}
-*/
 AComp* VisibleArray::GetObjPtr(int p)
 {
   if (p < 0 || p >= data.size())
     return NULL;
   return data.at(p);
 }
+
 AComp* VisibleArray::SetObjPtr(int p, AComp* ac)
 {
   AComp* ac2 = data.at(p);
   data.at(p) = ac;
   return ac2;
 }
-/*
-void VisibleArray::Move(AComp* ac, int DeltaX, int DeltaY)
-{
-    ac->Move(DeltaX, DeltaY);
-}
- */
+
 void VisibleArray::ShowAll()
 {
   AComp* ac;
@@ -476,18 +456,7 @@ void VisibleArray::ConnectAll()
     G->Connect();
   }
 }
-/*
-void VisibleArray::HideAll()
-{
-    for (data_type::iterator i = data.begin(); i != data.end(); ++i)
-        (*i)->Hide();
-}
-void VisibleArray::MoveAll(int DeltaX, int DeltaY)
-{
-    for (data_type::iterator i = data.begin(); i != data.end(); ++i)
-        Move((*i), DeltaX, DeltaY);
-}
-*/
+
 int VisibleArray::GetArraySize()
 {
   return data.size();
@@ -502,13 +471,13 @@ int VisibleArray::LoadAll(int NALL, std::istream& file, int ut)
   for (int count = 0; count < NALL; count++) {
     if (ut != GORE) {
       // FTellPos = ftell(file);
-      file.read( (char*)&MEM, sizeof(AMemory));
+      file.read((char*)&MEM, sizeof(AMemory));
       //дополнительный МЕМ
       if ((MEM.ExtPriz.isMEM2())) {
         if (count == NALL) {
           MEM.ExtPriz.setMEM2(0);
         } else {
-          file.read( (char*)&MEM2, sizeof(AMemory));
+          file.read((char*)&MEM2, sizeof(AMemory));
           // проверяем на мусор
           if ((MEM2.type != 29) || (MEM2.name[0] != '~')) {
             file.seekg(-sizeof(AMemory), std::ios_base::cur);
@@ -552,16 +521,11 @@ int VisibleArray::SaveAll(std::ostream& file, int ut)
       memset(&MEM2, 0, sizeof(MEM2));
       G->Get();
 
-      file.write( (char*)&MEM, sizeof(AMemory));
+      file.write((char*)&MEM, sizeof(AMemory));
       //дополнительный МЕМ
       if ((MEM.ExtPriz.isMEM2()) && (MEM2.type == 29) && (MEM2.name[0] == '~')) {
-        file.write( (char*)&MEM2, sizeof(AMemory));
+        file.write((char*)&MEM2, sizeof(AMemory));
       }
-      //  if(MEM.type == LAMP){
-      //            Lmp = (Lamp*)G;
-      //            if(fileTU!=0)
-      //            fprintf(fileTU,"%d %d %d %d \n",&Lmp->TypKp,&Lmp->NKp,&Lmp->NGr,&Lmp->NOb);
-      //  }
     } else {
       Member = dynamic_cast<PGorl>((*i));
       Member->Save(file);

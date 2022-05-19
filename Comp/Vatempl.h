@@ -41,8 +41,6 @@ public:
   int IndexOf(AComp* ac);
 };
 
-typedef VisibleArray* PVisibleArray;
-
 typedef void* (*TSetCommBufFunc)(int8);
 void SetSetCommBufFunc(TSetCommBufFunc ASetCommBuf);
 
@@ -52,6 +50,5 @@ extern TEachAComp EachACompPostFun;
 extern TEachAComp EachACompStanPreFun;
 extern TEachAComp EachACompStanPostFun;
 extern TEachAComp MakeNewComp;
-
 
 #endif
