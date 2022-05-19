@@ -1,4 +1,3 @@
-//
 #include "Gorl.h"
 
 #include "APch.h"
@@ -14,20 +13,16 @@
 #include "uParString.h"
 
 #define tutim 200
-PGorl Curr_G;
+
 Grl_file::Grl_file()
 {
-
 }
 
-
-Grl::Grl() 
+Grl::Grl()
 {
   Col_Mar = 0;
   Col_Str = 0;
-
   memset(name, 0, sizeof(name));
-
   Matr = NULL;
   Strel_N = NULL;
   _Strel = NULL;
@@ -38,81 +33,82 @@ Grl::Grl()
   zona_M = NULL;
 }
 
-void Grl::toGrl_file(Grl_file *gf)
+void Grl::toGrl_file(Grl_file* gf)
 {
-    gf->Col_Mar=Col_Mar; // КОЛИЧЕСТВО  МАРШРУТОВ
-    gf->Col_Str=Col_Str; // КОЛИЧЕСТВО  СТРЕЛОК
+  gf->Col_Mar = Col_Mar; // КОЛИЧЕСТВО  МАРШРУТОВ
+  gf->Col_Str = Col_Str; // КОЛИЧЕСТВО  СТРЕЛОК
 
-    memcpy(gf->name,name,sizeof(name));  // ИМЯ ГОРЛОВИНЫ
-    gf->bit_m=bit_m;   // ПРИЗНАК УПРАВЛЕНИЯ МАРШРУТОМ
-    gf->bit_ksp=bit_ksp; // ПРИЗНАК УПРАВЛЕНИЯ ЗАНЯТИЕМ
-    gf->bit_kzm=bit_kzm; // ПРИЗНАК УПРАВЛЕНИЯ ЗАМЫКАНИЕМ
-    gf->nom_fiz=nom_fiz; // НОМЕР ФИЗ ГОРЛОВИНЫ
+  memcpy(gf->name, name, sizeof(name)); // ИМЯ ГОРЛОВИНЫ
+  gf->bit_m = bit_m;                    // ПРИЗНАК УПРАВЛЕНИЯ МАРШРУТОМ
+  gf->bit_ksp = bit_ksp;                // ПРИЗНАК УПРАВЛЕНИЯ ЗАНЯТИЕМ
+  gf->bit_kzm = bit_kzm;                // ПРИЗНАК УПРАВЛЕНИЯ ЗАМЫКАНИЕМ
+  gf->nom_fiz = nom_fiz;                // НОМЕР ФИЗ ГОРЛОВИНЫ
 
-    gf->impuls_ksp=impuls_ksp;  // СИГНАЛ ЗАНЯТИЯ
-    gf->impuls_kzm=impuls_kzm;  // СИГНАЛ ЗАМЫКАНИЯ
-    gf->impuls_ks=impuls_ks;   // СИГНАЛ СВЕТОФОРА ОТПРАВЛЕНИЯ
-    gf->impuls_ks_i=impuls_ks_i; // СИГНАЛ СВЕТОФОРА ПРИЕМА
-    gf->_Matr=0;           // Адрес МАТРИЦЫ  МАРШРУТОВ
-    gf->_Strel_N=0;         // Адрес НОМЕРА СТРЕЛОК
-    gf->__Strel=0;       // Указатель на УКАЗАТЕЛИ (В ФАЙЛЕ НЕОПРЕДЕЛЕНЫ)
-    gf->_Sign=0;          // Указатель СВЕТОФОРОВ ОТПРАВЛЕНИЯ
-    gf->_Sign_i._nomer=0;         // СВЕТОФО ПРИЕМА
-    memcpy(gf->_Sign_i.name,Sign_i.name,sizeof(Sign_i.name));         // СВЕТОФО ПРИЕМА
-    gf->_impuls_m=0;;   // СИГНАЛЫ НА УСТАНОВКУ МАРШРУТА
-    gf->_impuls_km=0;  // СИГНАЛЫ НА ЗАНЯТИЕ МАРШРУТА
-                           //------------======  СЛЕЖЕНИЕ  =======-----------
-    gf->IN_OUT=IN_OUT;          // прием \отправление  (1)              -¬
-    gf->_zona_M=0;         // СПИСОК ПЕРЕМЕННЫХ ИМЕН ЗОН  (4*6=24)  +
-    gf->zona_1=zona_1;          // ПОСТОЯНАЯ ЗОНА               (4)      ¦ 133
-    gf->tu_marh=tu_marh;
-    gf->time_tu=time_tu;
-    gf->priz=priz;
-    gf->marh=marh;
-    gf->marh_tu=marh_tu;
-    gf->marh_m=marh_m;
-    gf->marh_sv=marh_sv;
-    gf->old_marsh=old_marsh;   // номер прошлого маршрута
-    gf->tim_o_m=tim_o_m; // время прошлого маршрута при потере
+  gf->impuls_ksp = impuls_ksp;                                // СИГНАЛ ЗАНЯТИЯ
+  gf->impuls_kzm = impuls_kzm;                                // СИГНАЛ ЗАМЫКАНИЯ
+  gf->impuls_ks = impuls_ks;                                  // СИГНАЛ СВЕТОФОРА ОТПРАВЛЕНИЯ
+  gf->impuls_ks_i = impuls_ks_i;                              // СИГНАЛ СВЕТОФОРА ПРИЕМА
+  gf->_Matr = 0;                                              // Адрес МАТРИЦЫ  МАРШРУТОВ
+  gf->_Strel_N = 0;                                           // Адрес НОМЕРА СТРЕЛОК
+  gf->__Strel = 0;                                            // Указатель на УКАЗАТЕЛИ (В ФАЙЛЕ НЕОПРЕДЕЛЕНЫ)
+  gf->_Sign = 0;                                              // Указатель СВЕТОФОРОВ ОТПРАВЛЕНИЯ
+  gf->_Sign_i._nomer = 0;                                     // СВЕТОФО ПРИЕМА
+  memcpy(gf->_Sign_i.name, Sign_i.name, sizeof(Sign_i.name)); // СВЕТОФО ПРИЕМА
+  gf->_impuls_m = 0;
+  ;                    // СИГНАЛЫ НА УСТАНОВКУ МАРШРУТА
+  gf->_impuls_km = 0;  // СИГНАЛЫ НА ЗАНЯТИЕ МАРШРУТА
+                       //------------======  СЛЕЖЕНИЕ  =======-----------
+  gf->IN_OUT = IN_OUT; // прием \отправление  (1)              -¬
+  gf->_zona_M = 0;     // СПИСОК ПЕРЕМЕННЫХ ИМЕН ЗОН  (4*6=24)  +
+  gf->zona_1 = zona_1; // ПОСТОЯНАЯ ЗОНА               (4)      ¦ 133
+  gf->tu_marh = tu_marh;
+  gf->time_tu = time_tu;
+  gf->priz = priz;
+  gf->marh = marh;
+  gf->marh_tu = marh_tu;
+  gf->marh_m = marh_m;
+  gf->marh_sv = marh_sv;
+  gf->old_marsh = old_marsh; // номер прошлого маршрута
+  gf->tim_o_m = tim_o_m;     // время прошлого маршрута при потере
 
-    gf->ID=ID;
-    memcpy(gf->zapas,zapas,sizeof(zapas));
+  gf->ID = ID;
+  memcpy(gf->zapas, zapas, sizeof(zapas));
 }
 
-void Grl::fromGrl_file(Grl_file *gf)
+void Grl::fromGrl_file(Grl_file* gf)
 {
-    Col_Mar=gf->Col_Mar; // КОЛИЧЕСТВО  МАРШРУТОВ
-    Col_Str=gf->Col_Str; // КОЛИЧЕСТВО  СТРЕЛОК
+  Col_Mar = gf->Col_Mar; // КОЛИЧЕСТВО  МАРШРУТОВ
+  Col_Str = gf->Col_Str; // КОЛИЧЕСТВО  СТРЕЛОК
 
-    memcpy(name,gf->name,sizeof(name));  // ИМЯ ГОРЛОВИНЫ
-    bit_m=gf->bit_m;   // ПРИЗНАК УПРАВЛЕНИЯ МАРШРУТОМ
-    bit_ksp=gf->bit_ksp; // ПРИЗНАК УПРАВЛЕНИЯ ЗАНЯТИЕМ
-    bit_kzm=gf->bit_kzm; // ПРИЗНАК УПРАВЛЕНИЯ ЗАМЫКАНИЕМ
-    nom_fiz=gf->nom_fiz; // НОМЕР ФИЗ ГОРЛОВИНЫ
+  memcpy(name, gf->name, sizeof(name)); // ИМЯ ГОРЛОВИНЫ
+  bit_m = gf->bit_m;                    // ПРИЗНАК УПРАВЛЕНИЯ МАРШРУТОМ
+  bit_ksp = gf->bit_ksp;                // ПРИЗНАК УПРАВЛЕНИЯ ЗАНЯТИЕМ
+  bit_kzm = gf->bit_kzm;                // ПРИЗНАК УПРАВЛЕНИЯ ЗАМЫКАНИЕМ
+  nom_fiz = gf->nom_fiz;                // НОМЕР ФИЗ ГОРЛОВИНЫ
 
-    impuls_ksp=gf->impuls_ksp;  // СИГНАЛ ЗАНЯТИЯ
-    impuls_kzm=gf->impuls_kzm;  // СИГНАЛ ЗАМЫКАНИЯ
-    impuls_ks=gf->impuls_ks;   // СИГНАЛ СВЕТОФОРА ОТПРАВЛЕНИЯ
-    impuls_ks_i=gf->impuls_ks_i; // СИГНАЛ СВЕТОФОРА ПРИЕМА
-    memcpy(Sign_i.name,gf->_Sign_i.name,sizeof(Sign_i.name));         // СВЕТОФО ПРИЕМА
-    //_impuls_m=gf->_impuls_m;   // СИГНАЛЫ НА УСТАНОВКУ МАРШРУТА
-    //_impuls_km=gf->_impuls_km;  // СИГНАЛЫ НА ЗАНЯТИЕ МАРШРУТА
-                           //------------=gf->=gf->=gf->=gf->=gf->=gf->  СЛЕЖЕНИЕ  =gf->=gf->=gf->=gf->=gf->=gf->=gf->-----------
-    IN_OUT=gf->IN_OUT;          // прием \отправление  (1)              -¬
-    //_zona_M=gf->_zona_M;         // СПИСОК ПЕРЕМЕННЫХ ИМЕН ЗОН  (4*6=gf->24)  +
-    zona_1=gf->zona_1;          // ПОСТОЯНАЯ ЗОНА               (4)      ¦ 133
-    tu_marh=gf->tu_marh;
-    time_tu=gf->time_tu;
-    priz=gf->priz;
-    marh=gf->marh;
-    marh_tu=gf->marh_tu;
-    marh_m=gf->marh_m;
-    marh_sv=gf->marh_sv;
-    old_marsh=gf->old_marsh;   // номер прошлого маршрута
-    tim_o_m=gf->tim_o_m; // время прошлого маршрута при потере
+  impuls_ksp = gf->impuls_ksp;                                // СИГНАЛ ЗАНЯТИЯ
+  impuls_kzm = gf->impuls_kzm;                                // СИГНАЛ ЗАМЫКАНИЯ
+  impuls_ks = gf->impuls_ks;                                  // СИГНАЛ СВЕТОФОРА ОТПРАВЛЕНИЯ
+  impuls_ks_i = gf->impuls_ks_i;                              // СИГНАЛ СВЕТОФОРА ПРИЕМА
+  memcpy(Sign_i.name, gf->_Sign_i.name, sizeof(Sign_i.name)); // СВЕТОФО ПРИЕМА
+  //_impuls_m=gf->_impuls_m;   // СИГНАЛЫ НА УСТАНОВКУ МАРШРУТА
+  //_impuls_km=gf->_impuls_km;  // СИГНАЛЫ НА ЗАНЯТИЕ МАРШРУТА
+  //------------=gf->=gf->=gf->=gf->=gf->=gf->  СЛЕЖЕНИЕ  =gf->=gf->=gf->=gf->=gf->=gf->=gf->-----------
+  IN_OUT = gf->IN_OUT; // прием \отправление  (1)              -¬
+  //_zona_M=gf->_zona_M;         // СПИСОК ПЕРЕМЕННЫХ ИМЕН ЗОН  (4*6=gf->24)  +
+  zona_1 = gf->zona_1; // ПОСТОЯНАЯ ЗОНА               (4)      ¦ 133
+  tu_marh = gf->tu_marh;
+  time_tu = gf->time_tu;
+  priz = gf->priz;
+  marh = gf->marh;
+  marh_tu = gf->marh_tu;
+  marh_m = gf->marh_m;
+  marh_sv = gf->marh_sv;
+  old_marsh = gf->old_marsh; // номер прошлого маршрута
+  tim_o_m = gf->tim_o_m;     // время прошлого маршрута при потере
 
-    ID=gf->ID;
-    memcpy(zapas,gf->zapas,sizeof(zapas));
+  ID = gf->ID;
+  memcpy(zapas, gf->zapas, sizeof(zapas));
 }
 
 const char* Gorl::GetName()
@@ -121,11 +117,6 @@ const char* Gorl::GetName()
 }
 
 #define TU 1
-
-int Col_Gorl = 0;
-// int  Size_G = 1;  /* 14.02.2003 перенёс в класс  */
-
-// extern int nm,ng;
 
 int Test_KSP(int j, int* Flag_KSP, int* mem_KSP, int C_s)
 {
@@ -151,6 +142,7 @@ void Gorl::Go()
 {
   UpdateState();
 }
+
 void Gorl::UpdateState()
 {
   Get();
@@ -694,7 +686,6 @@ void Gorl::usOutStrel()
 
 void Gorl::usOutSvet()
 {
-
   /*----Вывод светофоров-----------------------------------------*/
   int clr1 = LIN;
   PElement sgn;
@@ -772,10 +763,10 @@ Gorl::Gorl()
 
   bVirtual = false;
   Size_G = 1;
-  //todo remove хуйня блядь , выделяем память на одну горловину, а деструктор смоти ниже
-  // for (int i = 0; i < Size_G; i++) {
-  //   gorl[i] = new Grl;
-  // }
+  // todo remove хуйня блядь , выделяем память на одну горловину, а деструктор смоти ниже
+  //  for (int i = 0; i < Size_G; i++) {
+  //    gorl[i] = new Grl;
+  //  }
   memset(&TheData, 0, sizeof(TheData));
   gorl[0] = &TheData;
 }
@@ -789,13 +780,13 @@ Gorl::Gorl(int c_s, int c_m)
 
   bVirtual = false;
   Size_G = 1;
-  //todo remove хуйня блядь , выделяем память на одну горловину, а деструктор смоти ниже
-  // for (int i = 0; i < Size_G; i++) {
-  //   gorl[i] = new Grl;
-  // }
+  // todo remove хуйня блядь , выделяем память на одну горловину, а деструктор смоти ниже
+  //  for (int i = 0; i < Size_G; i++) {
+  //    gorl[i] = new Grl;
+  //  }
   memset(&TheData, 0, sizeof(TheData));
   gorl[0] = &TheData;
-  
+
   gorl[0]->Col_Str = c_s;
   gorl[0]->Col_Mar = c_m;
   Creat();
@@ -803,10 +794,10 @@ Gorl::Gorl(int c_s, int c_m)
 
 Gorl::~Gorl()
 {
-  //todo remove бляд рукажопа програмеры.... попу поттирарть бумажкой научить нада
-  // for (int i = 0; i < Max_Size_Gorl_; i++)
-  //   if (gorl[i] != NULL)
-  //     delete gorl[i];
+  // todo remove бляд рукажопа програмеры.... попу поттирарть бумажкой научить нада
+  //  for (int i = 0; i < Max_Size_Gorl_; i++)
+  //    if (gorl[i] != NULL)
+  //      delete gorl[i];
 }
 
 void Gorl::Connect()
@@ -832,7 +823,7 @@ void Gorl::Get()
 {
   AComp::Get();
   // strcpy(MEM.name,gorl[0]->name);
-  memset(MEM.name,0,sizeof(MEM.name));
+  memset(MEM.name, 0, sizeof(MEM.name));
   cp1251_to_cp866_buff(gorl[0]->name, MEM.name, 6);
 
   // memset(MEM.name,0,9);
@@ -878,7 +869,6 @@ void Gorl::Save(std::ostream& file)
   Grl gorl_0;
   memcpy(&gorl_0, gorl[0], sizeof(Grl));
 
-
   Signal oemSign;
   memset(gorl_0.name, 0, sizeof(gorl_0.name));
   cp1251_to_cp866_buff(gorl[0]->name, gorl_0.name, 5);
@@ -886,43 +876,41 @@ void Gorl::Save(std::ostream& file)
   cp1251_to_cp866_buff(gorl[0]->Sign_i.name, gorl_0.Sign_i.name, 5);
 
   gorl_0.toGrl_file(&gf);
-  file.write( (char*)&gf, sizeof(gf));
+  file.write((char*)&gf, sizeof(gf));
 
-  //fwrite(&gorl_0, sizeof(Grl), 1, file);
+  // fwrite(&gorl_0, sizeof(Grl), 1, file);
   for (int i = 0; i < gorl[0]->Col_Mar; i++) {
-    file.write( (char*)gorl[0]->Matr[i], sizeof(char)*gorl[0]->Col_Str);
+    file.write((char*)gorl[0]->Matr[i], sizeof(char) * gorl[0]->Col_Str);
   }
-  file.write( (char*)gorl[0]->Strel_N, sizeof(char)*gorl[0]->Col_Str);
+  file.write((char*)gorl[0]->Strel_N, sizeof(char) * gorl[0]->Col_Str);
 
   for (int i = 0; i < gorl[0]->Col_Mar; i++) {
     memcpy(&oemSign, &gorl[0]->Sign[i], sizeof(Signal_file));
     cp1251_to_cp866_buff(gorl[0]->Sign[i].name, oemSign.name, 6);
-    file.write( (char*)&oemSign, sizeof(Signal_file));
+    file.write((char*)&oemSign, sizeof(Signal_file));
   }
 
   // file.write( (char*)gorl[0]->Sign,sizeof(Signal),gorl[0]->Col_Mar,file);
-  file.write( (char*)gorl[0]->impuls_m, sizeof(short int)*gorl[0]->Col_Mar);
-  file.write( (char*)gorl[0]->impuls_km, sizeof(short int)*gorl[0]->Col_Mar);
-  file.write( (char*)gorl[0]->zona_M, sizeof(ID_ZO)*gorl[0]->Col_Mar);
+  file.write((char*)gorl[0]->impuls_m, sizeof(short int) * gorl[0]->Col_Mar);
+  file.write((char*)gorl[0]->impuls_km, sizeof(short int) * gorl[0]->Col_Mar);
+  file.write((char*)gorl[0]->zona_M, sizeof(ID_ZO) * gorl[0]->Col_Mar);
 
   Get();
-  file.write( (char*)&MEM, sizeof(AMemory));
+  file.write((char*)&MEM, sizeof(AMemory));
 };
 
 void Gorl::Load(std::istream& file)
 {
 
   Grl_file gf;
-  int sz1=sizeof(Grl);
-  int sz2=sizeof(Grl_file);
+  int sz1 = sizeof(Grl);
+  int sz2 = sizeof(Grl_file);
   if (MOD == ED) {
-    file.read( (char*)&gf, sizeof(gf));
+    file.read((char*)&gf, sizeof(gf));
     gorl[0]->fromGrl_file(&gf);
-    if (gorl[0]->nom_fiz > Col_Gorl)
-      Col_Gorl = gorl[0]->nom_fiz;
     Creat();
     for (int i = 0; i < gorl[0]->Col_Mar; i++) {
-      file.read( (char*)gorl[0]->Matr[i], sizeof(char)* gorl[0]->Col_Str);
+      file.read((char*)gorl[0]->Matr[i], sizeof(char) * gorl[0]->Col_Str);
     }
     for (int i = 0; i < gorl[0]->Col_Mar; i++) {
       for (int j = 0; j < gorl[0]->Col_Str; j++) {
@@ -933,13 +921,13 @@ void Gorl::Load(std::istream& file)
       }
     }
 
-    file.read( (char*)gorl[0]->Strel_N, sizeof(char)*gorl[0]->Col_Str);
+    file.read((char*)gorl[0]->Strel_N, sizeof(char) * gorl[0]->Col_Str);
 
-    file.read( (char*)gorl[0]->Sign, sizeof(Signal_file) * gorl[0]->Col_Mar);
-    file.read( (char*)gorl[0]->impuls_m, sizeof(short int) * gorl[0]->Col_Mar);
-    file.read( (char*)gorl[0]->impuls_km, sizeof(short int) * gorl[0]->Col_Mar);
-    file.read( (char*)gorl[0]->zona_M, sizeof(ID_ZO) * gorl[0]->Col_Mar);
-    file.read( (char*)&MEM, sizeof(AMemory));
+    file.read((char*)gorl[0]->Sign, sizeof(Signal_file) * gorl[0]->Col_Mar);
+    file.read((char*)gorl[0]->impuls_m, sizeof(short int) * gorl[0]->Col_Mar);
+    file.read((char*)gorl[0]->impuls_km, sizeof(short int) * gorl[0]->Col_Mar);
+    file.read((char*)gorl[0]->zona_M, sizeof(ID_ZO) * gorl[0]->Col_Mar);
+    file.read((char*)&MEM, sizeof(AMemory));
     MEM.type = GORL;
     Set();
     /*-------------------------------------------------*/
@@ -949,40 +937,37 @@ void Gorl::Load(std::istream& file)
     if (gorl[0] == NULL)
       CriticalErr("нет памяти для горловин");
 
-    file.read( (char*)&gf, sizeof(gf));
+    file.read((char*)&gf, sizeof(gf));
     gorl[0]->fromGrl_file(&gf);
 
-    //fread(gorl[0], sizeof(Grl), 1, file);
-    if (gorl[0]->nom_fiz > Col_Gorl)
-      Col_Gorl = gorl[0]->nom_fiz;
+    // fread(gorl[0], sizeof(Grl), 1, file);
     Creat();
 
     for (int i = 0; i < gorl[0]->Col_Mar; i++) {
-      file.read( (char*)gorl[0]->Matr[i], sizeof(char)*gorl[0]->Col_Str);
+      file.read((char*)gorl[0]->Matr[i], sizeof(char) * gorl[0]->Col_Str);
     }
-    file.read( (char*)gorl[0]->Strel_N, sizeof(char)*gorl[0]->Col_Str);
+    file.read((char*)gorl[0]->Strel_N, sizeof(char) * gorl[0]->Col_Str);
 
-    //fread(gorl[0]->Sign, sizeof(Signal_file), gorl[0]->Col_Mar, file);
+    // fread(gorl[0]->Sign, sizeof(Signal_file), gorl[0]->Col_Mar, file);
     for (int i = 0; i < gorl[0]->Col_Mar; i++) {
-      file.read( (char*)&gorl[0]->Sign[i], sizeof(Signal_file));
+      file.read((char*)&gorl[0]->Sign[i], sizeof(Signal_file));
     }
 
+    file.read((char*)gorl[0]->impuls_m, sizeof(short int) * gorl[0]->Col_Mar);
+    file.read((char*)gorl[0]->impuls_km, sizeof(short int) * gorl[0]->Col_Mar);
+    file.read((char*)gorl[0]->zona_M, sizeof(ID_ZO) * gorl[0]->Col_Mar);
 
-    file.read( (char*)gorl[0]->impuls_m, sizeof(short int) * gorl[0]->Col_Mar);
-    file.read( (char*)gorl[0]->impuls_km, sizeof(short int)*gorl[0]->Col_Mar);
-    file.read( (char*)gorl[0]->zona_M, sizeof(ID_ZO)*gorl[0]->Col_Mar);
-
-    file.read( (char*)&MEM, sizeof(AMemory));
+    file.read((char*)&MEM, sizeof(AMemory));
     Set();
   }
   char ansiname[6];
-  memset(ansiname,0,sizeof(ansiname));
+  memset(ansiname, 0, sizeof(ansiname));
   cp866_to_cp1251_buff(gorl[0]->name, ansiname, 5);
   strncpy(gorl[0]->name, ansiname, 5);
   cp866_to_cp1251_buff(gorl[0]->Sign_i.name, ansiname, 5);
   strncpy(gorl[0]->Sign_i.name, ansiname, 5);
   for (int i = 0; i < gorl[0]->Col_Mar; i++) {
-    memset(ansiname,0,sizeof(ansiname));
+    memset(ansiname, 0, sizeof(ansiname));
     cp866_to_cp1251_buff(gorl[0]->Sign[i].name, ansiname, 5);
     strncpy(gorl[0]->Sign[i].name, ansiname, 5);
   }

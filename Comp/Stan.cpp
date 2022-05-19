@@ -23,7 +23,6 @@
 
 #include <typeinfo>
 
-
 extern bool DescrCached;
 
 TAntOpt AntOpt0;                // используется если нет участка( для станции 1ой)
@@ -38,7 +37,7 @@ TAntOpt* GetUsedAntOpt()
 
 String Station::FullFN()
 {
-  return filename.IsEmpty() ? Sta_Dir + Dat->filename+".sta" : filename;
+  return filename.IsEmpty() ? Sta_Dir + Dat->filename + ".sta" : filename;
 }
 
 void Station::Adapter()
@@ -268,7 +267,7 @@ void Station::Clear()
 int Station::Open(const char* fn)
 {
   //  Close();
-  filename=fn;
+  filename = fn;
   strncpy(Dat->filename,
           ChangeFileExt(ExtractFileName(fn), "").c_str(),
           sizeof(Dat->filename) - 1);
@@ -283,8 +282,8 @@ int Station::Open(const char* fn)
 
 void Station::Close()
 {
-  filename="";
-  name="";
+  filename = "";
+  name = "";
   pPoligon = NULL;
   memset(ChanelOffset, 0, sizeof(ChanelOffset));
   memset(ChanelNames, 0, sizeof(ChanelNames));
@@ -349,16 +348,15 @@ int Station::LoadSTA()
 {
   int i;
   int NALL = 0;
-  Col_Gorl = 0;
   St_Dat A;
 
-  alib::CaseInsensitiveFilePath filepath( FullFN().c_str() );
-  std::ifstream file( filepath.path(), std::ios::binary);
-  if ( !file.is_open() ) {
-    CriticalErr( String("No file: ") + FullFN() );
+  alib::CaseInsensitiveFilePath filepath(FullFN().c_str());
+  std::ifstream file(filepath.path(), std::ios::binary);
+  if (!file.is_open()) {
+    CriticalErr(String("No file: ") + FullFN());
     return -1;
   }
-  file.read( (char*)&A, sizeof(St_Dat));
+  file.read((char*)&A, sizeof(St_Dat));
   if (Dat->descriptor[0] == 0)
     memcpy(Dat, &A, sizeof(A));
 
@@ -368,7 +366,7 @@ int Station::LoadSTA()
     if (file.eof())
       NALL = 0;
     else
-      file.read( (char*)&NALL, sizeof(short int));
+      file.read((char*)&NALL, sizeof(short int));
     if (file.eof())
       NALL = 0;
 
@@ -401,7 +399,7 @@ int Station::LoadSTA()
 
 int Station::SaveAs(const char* NewFileName)
 {
-  filename=NewFileName;
+  filename = NewFileName;
   strncpy(Dat->filename,
           ChangeFileExt(ExtractFileName(NewFileName), "").c_str(),
           sizeof(Dat->filename) - 1);
@@ -421,10 +419,10 @@ int Station::Save()
 int Station::SaveSTA()
 {
   int NALL = 0;
-  std::ofstream file( FullFN().c_str(), std::ios::binary);
+  std::ofstream file(FullFN().c_str(), std::ios::binary);
   if (!file.is_open())
     return -1;
-  file.write( (char*)Dat, sizeof(St_Dat));
+  file.write((char*)Dat, sizeof(St_Dat));
   for (int i = 0; i < Units_Size; i++) {
     NALL = POLE[i]->GetArraySize();
     if ((NALL >= 2) && (i == GORE))
@@ -440,7 +438,7 @@ int Station::SaveSTA()
       }
     }
 
-    file.write( (char*)&NALL, sizeof(short int));
+    file.write((char*)&NALL, sizeof(short int));
     POLE[i]->SaveAll(file, i);
   }
   return 1;
@@ -464,8 +462,8 @@ Station::Station(const char* ifilename)
   memset(ChanelOffset, 0, sizeof(ChanelOffset));
   memset(ChanelNames, 0, sizeof(ChanelNames));
   ID_RP = 0;
-  filename="";
-  name="";
+  filename = "";
+  name = "";
 
   Dat = new St_Dat;
   AO = &AntOpt0;
@@ -481,7 +479,7 @@ Station::Station(const char* ifilename)
   Close();
 
   pPoligon = NULL;
-  name="";
+  name = "";
   ID_RP = 0;
   //  memset(Dat->descriptor,0,sizeof(Dat->descriptor));
   //  memset(Dat->filename,0,sizeof(Dat->filename));
@@ -588,7 +586,7 @@ bool Station::OpenIniFile()
   memset(ChanelNames, 0, sizeof(ChanelNames));
   try {
     String FN = ChangeFileExt(FullFN(), ".ini");
-    alib::CaseInsensitiveFilePath  filepath(FN.c_str());
+    alib::CaseInsensitiveFilePath filepath(FN.c_str());
     FN = filepath.path();
     if (!FileExists(FN))
       return false;
@@ -749,7 +747,7 @@ void Station::SetPropMap(TPropMap& m)
   Dat->MUL_Y[1] = m.geti(_StanPropName[8]);
   Dat->X_begin[1] = m.geti(_StanPropName[9]);
   Dat->Y_begin[1] = m.geti(_StanPropName[10]);
-  name=m.get(_StanPropName[12]);
+  name = m.get(_StanPropName[12]);
   strncpy(ElemsSostPacketName, m.get(_StanPropName[13]).c_str(), 12);
 }
 
@@ -885,7 +883,7 @@ int Station::LoadSTE()
   UNIT unit;
   // ищем сверху свое
   String FN = FullFN();
-  alib::CaseInsensitiveFilePath  filepath(FN.c_str());
+  alib::CaseInsensitiveFilePath filepath(FN.c_str());
   FN = filepath.path();
   AIniFile* FI = new AIniFile(FN);
   ReadPmFromIni(pm, FI, "STATION");
@@ -1231,7 +1229,6 @@ void Replaceacprop(AComp* ac, TPropMap& mrpl)
   TPropMap m;
   String pmstr = ac->Tagstr.c_str();
   std::string s = pmstr.c_str();
-
 
   for (int i = 0; i < mrpl.GetItemsCount(); i++) {
     alib::string_replace_all(s, mrpl.GetKeys(i).c_str(), mrpl.GetVal(i).c_str());
