@@ -154,19 +154,11 @@ void Gorl::Go()
 void Gorl::UpdateState()
 {
   Get();
-  // AComp* G;
   // Size_G = MEM.mas;
-  if (Size_G > _Size_G)
+  if (Size_G > Max_Size_Gorl_)
     return;
-  //Подстановка количества стррелок в горловине
-  /*    if(Size_G>10) Size_G = 7;   !!!  */
-  //-------------------------------------------
 
-  // PElement  sgn;
-  // PStrel0 nom_s;
   PStrel0 stre;
-
-  // int i,j;
 
   memset(nom, 0, sizeof(nom));
   memset(marsh, -1, sizeof(marsh));
@@ -773,30 +765,37 @@ void Gorl::usOutSvet()
 
 Gorl::Gorl()
 {
-  bVirtual = false;
-  Size_G = 1;
-  int i;
-  for (i = 0; i < Size_G; i++) {
+  for (int i = 0; i < Max_Size_Gorl_; i++) {
     gorl[i] = NULL;
     comp[i] = NULL;
   }
-  for (i = 0; i < Size_G; i++) {
-    gorl[i] = new Grl;
-  }
+
+  bVirtual = false;
+  Size_G = 1;
+  //todo remove хуйня блядь , выделяем память на одну горловину, а деструктор смоти ниже
+  // for (int i = 0; i < Size_G; i++) {
+  //   gorl[i] = new Grl;
+  // }
+  memset(&TheData, 0, sizeof(TheData));
+  gorl[0] = &TheData;
 }
 
 Gorl::Gorl(int c_s, int c_m)
 {
-  bVirtual = false;
-  Size_G = 1;
-  int i;
-  for (i = 0; i < Size_G; i++) {
+  for (int i = 0; i < Max_Size_Gorl_; i++) {
     gorl[i] = NULL;
     comp[i] = NULL;
   }
-  for (i = 0; i < Size_G; i++) {
-    gorl[i] = new Grl;
-  }
+
+  bVirtual = false;
+  Size_G = 1;
+  //todo remove хуйня блядь , выделяем память на одну горловину, а деструктор смоти ниже
+  // for (int i = 0; i < Size_G; i++) {
+  //   gorl[i] = new Grl;
+  // }
+  memset(&TheData, 0, sizeof(TheData));
+  gorl[0] = &TheData;
+  
   gorl[0]->Col_Str = c_s;
   gorl[0]->Col_Mar = c_m;
   Creat();
@@ -804,9 +803,10 @@ Gorl::Gorl(int c_s, int c_m)
 
 Gorl::~Gorl()
 {
-  for (int i = 0; i < Size_G; i++)
-    if (gorl[i] != NULL)
-      delete gorl[i];
+  //todo remove бляд рукажопа програмеры.... попу поттирарть бумажкой научить нада
+  // for (int i = 0; i < Max_Size_Gorl_; i++)
+  //   if (gorl[i] != NULL)
+  //     delete gorl[i];
 }
 
 void Gorl::Connect()
@@ -1047,7 +1047,6 @@ void Gorl::GetMarsh(int& Marsh, bool& BUSY, bool& KZM, bool& SvOpen0, bool& SvOp
     SvOpen1 = false;
     BUSY = false;
     char State[Max_Size_Strel_];
-    // PStrel0 nom[_Size_G]= {0,0,0,0,0,0,0,0,0,0};
     PStrel0 str;
     int Count_empty;
     /*------Поиск установленного и устанавливаемого маршрута -----  */

@@ -4,9 +4,9 @@
 #include "Comp.h"
 
 #include <stdio.h>
+#include <stdio.h>
 
-#define Max_Gorl 40 //  люйяхлюкэмне йнкхвеярбн кнц. цнпкнбхм б ндмни
-#define _Size_G 40
+#define Max_Size_Gorl_ 40  //  люйяхлюкэмне йнкхвеярбн кнц. цнпкнбхм б ндмни
 #define Max_Size_Strel_ 80 //  люйяхлюкэмне йнкхвеярбн ярпекнй б цнпк.
 #define Max_Size_Marsh_ 20 //  люйяхлюкэмне йнкхвеярбн люпьпсрнб б цнпк.
 
@@ -126,19 +126,22 @@ class Strel0;
 
 class Gorl : public AComp
 {
+
+  Grl TheData;
+  
 private:
-  Strel0* nom[_Size_G];
-  int marsh[_Size_G],
-      busi[_Size_G],
-      // sign   [_Size_G],
-      // sign_i [_Size_G],
-      marsh_y[_Size_G],
-      marsh_u[_Size_G],
-      itis[_Size_G],
-      clr0[_Size_G],
-      isu[_Size_G],
-      svu[_Size_G],
-      ism[_Size_G];
+  Strel0* nom[Max_Size_Gorl_];
+  int marsh[Max_Size_Gorl_],
+      busi[Max_Size_Gorl_],
+      // sign   [Max_Size_Gorl_],
+      // sign_i [Max_Size_Gorl_],
+      marsh_y[Max_Size_Gorl_],
+      marsh_u[Max_Size_Gorl_],
+      itis[Max_Size_Gorl_],
+      clr0[Max_Size_Gorl_],
+      isu[Max_Size_Gorl_],
+      svu[Max_Size_Gorl_],
+      ism[Max_Size_Gorl_];
   char State[Max_Size_Strel_];
   int Flag_KSP_[Max_Size_Strel_];
   int mem_KSP[Max_Size_Strel_];
@@ -154,9 +157,9 @@ private:
 
 public:
   int Size_G;
-  PGrl gorl[_Size_G];
-  int TU[_Size_G];
-  Gorl* comp[_Size_G];
+  PGrl gorl[Max_Size_Gorl_];
+  int TU[Max_Size_Gorl_];
+  Gorl* comp[Max_Size_Gorl_];
   bool bVirtual;
   virtual const char* GetName();
   virtual void Show();
@@ -194,5 +197,11 @@ extern int Size_G;
 
 typedef Gorl* PGorl;
 extern PGorl Curr_G;
+
+
+
+
+
+
 
 #endif
