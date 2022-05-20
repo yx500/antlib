@@ -274,8 +274,8 @@ void EXD_HideTrainNumber(AComp* AC)
   CheckUslDraw(wAC, bs, bdbl);
   if (!bs)
     return;
-  if (((AC->ExtPriz.isNoShowYch()== 1) && (CurrentPicture == BG)) ||
-      ((AC->ExtPriz.isNoShowStan()== 1) && (CurrentPicture == LT)))
+  if (((AC->ExtPriz.isNoShowYch() == 1) && (CurrentPicture == BG)) ||
+      ((AC->ExtPriz.isNoShowStan() == 1) && (CurrentPicture == LT)))
     return;
 
   TTrainInfo* TI = EXD.TN_GetTN(wAC->impuls_busi, wAC->Stan()->Dat->filename, wAC->Stan()->Name4Canal(abs(wAC->impuls_busi) / 1000), bdbl);
@@ -310,8 +310,8 @@ void EXD_UpdateTrainNumber(AComp* AC, int rimpb)
   CheckUslDraw(wAC, bs, bdbl);
   if (!bs)
     return;
-  if (((AC->ExtPriz.isNoShowYch()== 1) && (CurrentPicture == BG)) ||
-      ((AC->ExtPriz.isNoShowStan()== 1) && (CurrentPicture == LT)))
+  if (((AC->ExtPriz.isNoShowYch() == 1) && (CurrentPicture == BG)) ||
+      ((AC->ExtPriz.isNoShowStan() == 1) && (CurrentPicture == LT)))
     return;
 
   int X, Y, Width, Height, direct;
@@ -351,8 +351,8 @@ void EXD_ShowTrainNumber(AComp* AC, int rimpb)
   CheckUslDraw(wAC, bs, bdbl);
   if (!bs)
     return;
-  if (((AC->ExtPriz.isNoShowYch()== 1) && (CurrentPicture == BG)) ||
-      ((AC->ExtPriz.isNoShowStan()== 1) && (CurrentPicture == LT)))
+  if (((AC->ExtPriz.isNoShowYch() == 1) && (CurrentPicture == BG)) ||
+      ((AC->ExtPriz.isNoShowStan() == 1) && (CurrentPicture == LT)))
     return;
 
   int X, Y, Width, Height, direct;
@@ -417,8 +417,8 @@ void EXD_ShowTrainNumbers(AComp* AC, int rimpb)
   CheckUslDraw(wAC, bs, bdbl);
   if (!bs)
     return;
-  if (((AC->ExtPriz.isNoShowYch()== 1) && (CurrentPicture == BG)) ||
-      ((AC->ExtPriz.isNoShowStan()== 1) && (CurrentPicture == LT)))
+  if (((AC->ExtPriz.isNoShowYch() == 1) && (CurrentPicture == BG)) ||
+      ((AC->ExtPriz.isNoShowStan() == 1) && (CurrentPicture == LT)))
     return;
 
   int X, Y, Width, Height, direct;
@@ -533,74 +533,3 @@ int GetTNPenClr(TTrainInfo* TI)
   }
   return cl;
 }
-
-/*
-static int _imp0=0;
-TrNum:: TrNum(){
-     imp_busy=&_imp0;
-     impuls_kmu=&_imp0;
-     impuls_mu=&_imp0;
-     pWay=NULL;
-     bMustClear=false;
-     bTI=false;
-}
-
-void TrNum::UpdateState()
-{
-     AComp::UpdateState();
-
-     TTrainInfo * TI=EXD.TN_GetTN(impuls_busi, pWay->Stan()->Dat->filename, pWay->Stan()->Name4Canal(abs(impuls_busi)/1000),false);
-
-
-
-     if ( (IsClrMig(clr))  ) StateChanged=true;
-
-}
-
-void TrNum::Show()
-{
-     bool bs=true;
-     bool bdbl=false;
-
-     int X, Y, Width, Height,direct;
-     TTrainInfo * TI=&pWay->TrainInfo;
-
-
-     String ST;
-     // нет ничего - ничего не рисуем
-     // информацию получаем от компоненты родителя
-     if (wAC->TrainInfo.)
-
-
-     if (TI!=NULL){
-        direct=GetTNDirect(TI->TrainNumber,wAC->AO->TRAINNUM_INVERS);
-        ST=GetNumStr(TI);
-        _SetText(F_DEFAULT,LEFT_TEXT,TOP_TEXT);
-        Width=2*xx+textwidth(ST.c_str());
-        Height=textheight(ST.c_str())+1;
-     }
-     if (TI!=NULL){
-        //if (AC->TrainInfo==NULL)
-        //   AC->TrainInfo=new TTrainInfo;
-        memcpy(&wAC->TrainInfo,TI,sizeof(TTrainInfo));
-
-        GetNumberRct(wAC,X, Y, Width, Height,direct);
-        _MakePoints(X, Y, Width, Height,direct);
-        int clr=GetTNBrushClr(&wAC->TrainInfo);
-        if (rimpb==1) {
-            setfillstyle(SOLID_FILL,clr);
-            PolyColor(clr,_points,_clr,6);
-        } else {
-            setfillstyle(EMPTY_FILL,clr);
-            memset(&_clr2,clr,sizeof(&_clr2));
-            PolyColor(clr,_points,_clr2,6);
-        }
-        clr=GetTNPenClr(&wAC->TrainInfo);
-        setcolor(clr);
-        DrawText(X+xx,Y-1,Width,Height,ST.c_str());
-     }
-
-
-}
-
-*/

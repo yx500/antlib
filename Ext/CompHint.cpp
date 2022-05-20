@@ -91,7 +91,7 @@ void TACOMPHINT::ShowHints(Station* stan)
   String stDestYch = stan->AO->EttReciveName;
   for (items_type::iterator hi = items.begin(); hi != items.end(); ++hi) {
     if (hi->stDest != "*") {
-      if ((stDestYch.Length() != 0) && (hi->stDest.Pos(stDestYch) >0)) {
+      if ((stDestYch.Length() != 0) && (hi->stDest.Pos(stDestYch) > 0)) {
         items.erase(hi);
         hi--;
       }
@@ -100,12 +100,12 @@ void TACOMPHINT::ShowHints(Station* stan)
 
   if (items.size() > 0) {
     AComp* ac;
-    for (int i = Units_Size - 1; i >= 1; i--) {
-      for (int i = 0; i < Units_Size; i++) {
+    for (int i = stan->POLE.size() - 1; i >= 1; i--) {
+      for (int i = 0; i < stan->POLE.size(); ++i) {
         for (int j = 0; j < stan->POLE[i]->GetArraySize(); j++) {
           ac = stan->POLE[i]->GetObjPtr(j);
-          if (((ac->ExtPriz.isNoShowYch()== 1) && (CurrentPicture == BG)) ||
-              ((ac->ExtPriz.isNoShowStan()== 1) && (CurrentPicture == LT)))
+          if (((ac->ExtPriz.isNoShowYch() == 1) && (CurrentPicture == BG)) ||
+              ((ac->ExtPriz.isNoShowStan() == 1) && (CurrentPicture == LT)))
             continue;
           for (unsigned int v = 0; v < items.size(); v++) {
             HintItem& hi = items[v];
@@ -121,7 +121,7 @@ void TACOMPHINT::ShowHints(Station* stan)
   }
 }
 
-const char *PN[3] = {"IMCH", "IMLH", "IMRH"};
+const char* PN[3] = {"IMCH", "IMLH", "IMRH"};
 void TACOMPHINT::_ShowHint(AComp* ac, HintItem& hi, bool bFON)
 {
   // начальная установка

@@ -8,11 +8,11 @@
 #include "Stan.h"
 #include "Vatempl.h"
 #include "aheaders_cpp.h"
+#include "bgi.h"
 #include "col.h"
 #include "common.h"
 
 #include <math.h>
-#include "bgi.h"
 
 bool IsClrMig(int Clr);
 void ShowPictXY(int PictNumber, int x, int y, int WP, int HP);
@@ -24,7 +24,7 @@ int GetGorWayNum(Station* stan, int olegwaynum)
 {
   // ищем все тп3 кзп2
   AComp* ac;
-  for (int i = 0; i < Units_Size; i++) {
+  for (int i = 0; i < stan->POLE.size(); ++i) {
     for (int j = 0; j < stan->POLE[i]->GetArraySize(); j++) {
       ac = stan->POLE[i]->GetObjPtr(j);
       if (ac->GetType() == G_ZAMP) {
@@ -2187,7 +2187,7 @@ void tG_TPLABEL::GetPropMap(TPropMap& m)
   int i = 0;
 
   m.put(_G_TPLABEL_PropName[i++], VesBukv, 0);
-  m.putEx(_G_TPLABEL_PropName[i++], OldImpToNewStr(imp_krasn, this), GetRealImp(imp_krasn),  OldImpToNewStr(0, this));
+  m.putEx(_G_TPLABEL_PropName[i++], OldImpToNewStr(imp_krasn, this), GetRealImp(imp_krasn), OldImpToNewStr(0, this));
   m.putEx(_G_TPLABEL_PropName[i++], OldImpToNewStr(imp_krasn_mig, this), GetRealImp(imp_krasn_mig), OldImpToNewStr(0, this));
   m.put(_G_TPLABEL_PropName[i++], ZKR_N, 0);
   m.put(_G_TPLABEL_PropName[i++], NoShowVout, 0);

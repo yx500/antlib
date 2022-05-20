@@ -7,6 +7,7 @@
 #include "Vatempl.h"
 
 #include <cstring>
+#include <vector>
 
 class AComp;
 class Poligon;
@@ -29,6 +30,8 @@ struct St_Dat
   int8 MUL_Y[2];        /*���������� ���������   �� Y */
   short int X_begin[2]; /*�������� ��  X  */
   short int Y_begin[2]; /*�������� ��  Y  */
+
+  St_Dat() { memset(this, 0, sizeof(*this)); }
 };
 
 #pragma pack(pop)
@@ -37,27 +40,30 @@ struct TUseChanelName
 {
   int type;
   char name[12];
+
+  TUseChanelName() { memset(this, 0, sizeof(*this)); }
 };
-typedef std::vector<TUseChanelName> TvUseChanelNames;
 
 class TETTList;
 
 class Station
 {
+  St_Dat TheData;
+
 protected:
   TETTList* ETTList;
   bool bETTListNotFound;
 
 public:
   St_Dat* Dat;
-  VisibleArray* POLE[Units_Size + 1]; 
+  std::vector<VisibleArray*> POLE;
   Poligon* pPoligon;
-  int ChanelOffset[255];    
-  char ChanelNames[255][12]; 
-  TvUseChanelNames vUseChanelNames;
+  int ChanelOffset[255];
+  char ChanelNames[255][12];
+  std::vector<TUseChanelName> vUseChanelNames;
   int ID_RP;                       /*   */
-  String filename;              /*��� �����     */
-  String name;                  /*���      */
+  String filename;                 /*��� �����     */
+  String name;                     /*���      */
   TEnergStanLamps* EnergStanLamps; // ����� �����������
   TMarshList MARSHLIST;
   TAntOpt* AO;
@@ -115,8 +121,8 @@ public:
     if (name.Length() > 0)
       return name;
     static char n_name[256];
-    memset(n_name,0,sizeof(n_name));
-    cp866_to_cp1251_buff( Dat->descriptor, n_name, strlen(Dat->descriptor) );
+    memset(n_name, 0, sizeof(n_name));
+    cp866_to_cp1251_buff(Dat->descriptor, n_name, strlen(Dat->descriptor));
     return n_name;
   }
 

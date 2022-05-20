@@ -152,23 +152,12 @@ void Station::Show()
 {
   Adapter();
   GoEachACompStanPreFun();
-  for (int i = Units_Size - 1; i >= 0; i--) {
+  for (int i = POLE.size() - 1; i >= 0; i--) {
     POLE[i]->ShowAll();
   }
   GoEachACompStanPostFun();
   ShowElemsSost();
 }
-
-/*
-void Station::Hide()
-{
-    Adapter();
-    for (int i = Units_Size - 1; i >= 0; i--)
-    {
-        POLE[i]->HideAll();
-    }
-}
-*/
 
 int Station::TstXY(int _x, int _y)
 {
@@ -199,12 +188,12 @@ void Station::Go()
   POLE[0]->GoAll();
   /* Выводим всё ! */
   ShowTextMode = 1;
-  for (int i = Units_Size - 1; i >= 1; i--)
+  for (int i = POLE.size() - 1; i >= 1; i--)
     POLE[i]->ShowLayer(-1);
-  for (int i = Units_Size - 1; i >= 1; i--) {
+  for (int i = POLE.size() - 1; i >= 1; i--) {
     POLE[i]->GoAll();
   }
-  for (int i = Units_Size - 1; i >= 1; i--)
+  for (int i = POLE.size() - 1; i >= 1; i--)
     POLE[i]->ShowLayer(+1);
   ShowTextMode = 0;
   MARSHLIST.UpdateState();
@@ -259,7 +248,7 @@ void Station::ShowActives()
 
 void Station::Clear()
 {
-  for (int i = Units_Size - 1; i >= 0; i--)
+  for (int i = POLE.size() - 1; i >= 0; i--)
     if (POLE[i])
       POLE[i]->ClearAll();
 }
@@ -292,7 +281,7 @@ void Station::Close()
   ID_RP = 0;
   memset(Dat->descriptor, 0, sizeof(Dat->descriptor));
   memset(Dat->filename, 0, sizeof(Dat->filename));
-  for (int i = 0; i < Units_Size; i++) {
+  for (int i = 0; i < POLE.size(); ++i) {
     if (POLE[i])
       delete POLE[i];
     POLE[i] = NULL;
@@ -423,7 +412,7 @@ int Station::SaveSTA()
   if (!file.is_open())
     return -1;
   file.write((char*)Dat, sizeof(St_Dat));
-  for (int i = 0; i < Units_Size; i++) {
+  for (int i = 0; i < POLE.size(); ++i) {
     NALL = POLE[i]->GetArraySize();
     if ((NALL >= 2) && (i == GORE))
       NALL = NALL - POLE[i]->RTGorlCnt;
@@ -465,24 +454,18 @@ Station::Station(const char* ifilename)
   filename = "";
   name = "";
 
-  Dat = new St_Dat;
+  Dat = &TheData;
   AO = &AntOpt0;
-  memset(Dat, 0, sizeof(St_Dat));
-  for (int i = 0; i < Units_Size; i++)
-    POLE[i] = NULL;
+  POLE.clear();
+  POLE.resize(Units_Size, NULL);
 
-  // EnergStanLamps=NULL;
-  // if (ENERG2) {
   EnergStanLamps = new TEnergStanLamps;
   memset(EnergStanLamps, 0, sizeof(TEnergStanLamps));
-  //}
   Close();
 
   pPoligon = NULL;
   name = "";
   ID_RP = 0;
-  //  memset(Dat->descriptor,0,sizeof(Dat->descriptor));
-  //  memset(Dat->filename,0,sizeof(Dat->filename));
   if (ifilename)
     strncpy(Dat->filename, ifilename, 12);
   ETTList = NULL;
@@ -492,17 +475,13 @@ Station::Station(const char* ifilename)
 Station::~Station()
 {
   Close();
-  if (Dat) {
-    delete Dat;
-    Dat = NULL;
-  }
   if (EnergStanLamps != NULL)
     delete EnergStanLamps;
 }
 
 AComp* Station::GetObjByID(unsigned int ObjID)
 {
-  for (int i = 0; i < Units_Size; i++) {
+  for (int i = 0; i < POLE.size(); ++i) {
     for (int j = 0; j < POLE[i]->GetArraySize(); j++)
       if (POLE[i]->GetObjPtr(j)->GetID() == ObjID)
         return POLE[i]->GetObjPtr(j);
@@ -513,7 +492,7 @@ AComp* Station::GetObjByID_Imp(unsigned int ObjID, int Imp)
 {
   AComp* ac;
   int ii = Imp % 1000;
-  for (int i = 0; i < Units_Size; i++) {
+  for (int i = 0; i < POLE.size(); ++i) {
     for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
       ac = POLE[i]->GetObjPtr(j);
       if ((ObjID != 0) && (ac->GetID() == ObjID))
@@ -616,7 +595,7 @@ int Station::UpdateState()
   /* Сначала считаем горловины  */
   POLE[0]->GoAll();
 
-  for (int i = 1; i < Units_Size; i++) {
+  for (int i = 1; i < POLE.size(); ++i) {
     for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
       ac = POLE[i]->GetObjPtr(j);
       ac->StateChanged = false;
@@ -634,7 +613,7 @@ AComp* Station::GetObjByName_Unit(const char* CompName, int unit)
     return NULL;
   AComp* ac;
   const char* cn;
-  for (int i = 0; i < Units_Size; i++) {
+  for (int i = 0; i < POLE.size(); ++i) {
     if ((unit == -1) || (unit == i)) {
       for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
         ac = POLE[i]->GetObjPtr(j);
@@ -652,7 +631,7 @@ AComp* Station::GetObjByName_InTypes(const char* CompName, TYP* Types, int Types
   AComp* ac;
   TYP t;
   const char* cn;
-  for (int i = 0; i < Units_Size; i++) {
+  for (int i = 0; i < POLE.size(); ++i) {
     for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
       ac = POLE[i]->GetObjPtr(j);
       cn = ac->GetName();
@@ -677,7 +656,7 @@ void Station::ShowTrainNumbers(bool bHide)
     EXD.TN_PrepareDoublTNFilter();
 
     AComp* ac;
-    for (int i = 1; i < Units_Size; i++) {
+    for (int i = 1; i < POLE.size(); ++i) {
       for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
         ac = POLE[i]->GetObjPtr(j);
         if (bHide)
@@ -712,7 +691,7 @@ void Station::GetPropMap(TPropMap& m)
 {
   int NALL = 0;
   int cnt = 0;
-  for (int i = 0; i < Units_Size; i++) {
+  for (int i = 0; i < POLE.size(); ++i) {
     NALL = POLE[i]->GetArraySize();
     if ((NALL >= 2) && (i == GORE))
       NALL = NALL - POLE[i]->RTGorlCnt;
@@ -790,7 +769,7 @@ int Station::SaveSTE()
   // пишем обьекты
   int NALL = 0;
   String SectName;
-  for (int i = 0; i < Units_Size; i++) {
+  for (int i = 0; i < POLE.size(); ++i) {
     NALL = POLE[i]->GetArraySize();
     if ((NALL >= 2) && (i == GORE))
       NALL = NALL - POLE[i]->RTGorlCnt;
@@ -901,7 +880,7 @@ int Station::LoadSTE()
   // читаем обьекты
   // cnt=pm.geti(_StanPropName[11]);
   // создаем ватеры
-  for (int i = 0; i < Units_Size; i++)
+  for (int i = 0; i < POLE.size(); ++i)
     POLE[i] = new VisibleArray(0, this);
 
   FI->ReadSections(SLsect);
@@ -958,7 +937,7 @@ void Station::Connect_stNext()
 {
   AComp* ac;
   tGRC0* rc;
-  for (int i = 0; i < Units_Size; i++) {
+  for (int i = 0; i < POLE.size(); ++i) {
     for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
       ac = POLE[i]->GetObjPtr(j);
       Ways* w = dynamic_cast<Ways*>(ac);
@@ -995,7 +974,7 @@ void Station::GoEachACompStanPreFun()
   if (!EachACompStanPreFun)
     return;
   AComp* ac;
-  for (int i = 0; i < Units_Size; i++) {
+  for (int i = 0; i < POLE.size(); ++i) {
     for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
       ac = POLE[i]->GetObjPtr(j);
       EachACompStanPreFun(ac);
@@ -1009,7 +988,7 @@ void Station::GoEachACompStanPostFun()
   if (!EachACompStanPostFun)
     return;
   AComp* ac;
-  for (int i = 0; i < Units_Size; i++) {
+  for (int i = 0; i < POLE.size(); ++i) {
     for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
       ac = POLE[i]->GetObjPtr(j);
       EachACompStanPostFun(ac);
@@ -1026,7 +1005,7 @@ void Station::ShowElemsSost()
   char* packetname = Dat->filename;
   if (strlen(ElemsSostPacketName) != 0)
     packetname = ElemsSostPacketName;
-  for (int i = 0; i < Units_Size; i++) {
+  for (int i = 0; i < POLE.size(); ++i) {
     for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
       ac = POLE[i]->GetObjPtr(j);
       if (ac->GetType() == LED)
@@ -1059,7 +1038,7 @@ void Station::ShowElemsTagStr()
 {
   AComp* ac;
 
-  for (int i = 0; i < Units_Size; i++) {
+  for (int i = 0; i < POLE.size(); ++i) {
     for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
       ac = POLE[i]->GetObjPtr(j);
       if (ac->GetType() == LED)
@@ -1083,7 +1062,7 @@ uint16 Station::SetUnicalID(uint16 ID)
   // уже уникум?
   AComp* ac;
   bool unic = true;
-  for (int i = 0; i < Units_Size; i++) {
+  for (int i = 0; i < POLE.size(); ++i) {
     for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
       ac = POLE[i]->GetObjPtr(j);
       if (ac->GetID() == ID) {
@@ -1096,7 +1075,7 @@ uint16 Station::SetUnicalID(uint16 ID)
     return ID;
   // Ищем макс за стартом
   uint16 maxID = 0;
-  for (int i = 0; i < Units_Size; i++) {
+  for (int i = 0; i < POLE.size(); ++i) {
     for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
       ac = POLE[i]->GetObjPtr(j);
       if (ac->GetID() > maxID)
@@ -1157,7 +1136,7 @@ int Station::GetStrelkiCount()
 {
   int count = 0;
   AComp* ac;
-  for (int i = 0; i < Units_Size; i++) {
+  for (int i = 0; i < POLE.size(); ++i) {
     for (int j = 0; j < POLE[i]->GetArraySize(); j++) {
       ac = POLE[i]->GetObjPtr(j);
       switch (ac->GetType()) {
@@ -1342,7 +1321,7 @@ void SubStation::SetPropMap(TPropMap& m)
 
   int ChanelN;
   int ChanelOffset;
-  for (int i = 0; i < Units_Size; i++) {
+  for (int i = 0; i < substan->POLE.size(); ++i) {
     for (int j = 0; j < substan->POLE[i]->GetArraySize(); j++) {
       ac = substan->POLE[i]->GetObjPtr(j);
       Replaceacprop(ac, mrpl);
@@ -1372,7 +1351,7 @@ void SubStation::SetPropMap(TPropMap& m)
   if ((!bNoEmbeddSubStations) && (AO->bEmbeddedSubStation)) {
     bAlreadyEmbedded = true;
     ac = NULL;
-    for (int i = 0; i < Units_Size; i++) {
+    for (int i = 0; i < substan->POLE.size(); ++i) {
       for (int j = 0; j < substan->POLE[i]->GetArraySize(); j++) {
         ac = substan->POLE[i]->GetObjPtr(j);
         boundRCT.left = ac->X;
@@ -1382,7 +1361,7 @@ void SubStation::SetPropMap(TPropMap& m)
         break;
       }
     }
-    for (int i = 0; i < Units_Size; i++) {
+    for (int i = 0; i < substan->POLE.size(); ++i) {
       for (int j = 0; j < substan->POLE[i]->GetArraySize(); j++) {
         ac = substan->POLE[i]->GetObjPtr(j);
         if (boundRCT.left < ac->X)
@@ -1404,7 +1383,7 @@ void SubStation::SetPropMap(TPropMap& m)
         ac->pVisibleArray = Stan()->POLE[i];
       }
     }
-    for (int i = 0; i < Units_Size; i++) {
+    for (int i = 0; i < substan->POLE.size(); ++i) {
       substan->POLE[i]->data.clear();
     }
     delete substan;
@@ -1429,7 +1408,7 @@ void SubStation::LoadSTE()
   substan->AO = Stan()->AO;
   // пересчитываемммммм
   AComp* ac;
-  for (int i = 0; i < Units_Size; i++) {
+  for (int i = 0; i < substan->POLE.size(); ++i) {
     for (int j = 0; j < substan->POLE[i]->GetArraySize(); j++) {
       ac = substan->POLE[i]->GetObjPtr(j);
       break;
@@ -1439,7 +1418,7 @@ void SubStation::LoadSTE()
   int y0 = ac->Y;
   // сводим к 0
   TPropMap m;
-  for (int i = 0; i < Units_Size; i++) {
+  for (int i = 0; i < substan->POLE.size(); ++i) {
     for (int j = 0; j < substan->POLE[i]->GetArraySize(); j++) {
       ac = substan->POLE[i]->GetObjPtr(j);
       ac->X -= x0;
@@ -1483,8 +1462,8 @@ void SubStation::Show()
 
       substan->GoEachACompStanPreFun();
       /* Выводим всё ! */
-      for (int i = Units_Size - 1; i >= 1; i--) {
-        for (int i = 0; i < Units_Size; i++) {
+      for (int i = substan->POLE.size() - 1; i >= 1; i--) {
+        for (int i = 0; i < substan->POLE.size(); ++i) {
           for (int j = 0; j < substan->POLE[i]->GetArraySize(); j++) {
             ac = substan->POLE[i]->GetObjPtr(j);
             if (((ac->ExtPriz.isNoShowYch() == 1) && (CurrentPicture == BG)) ||

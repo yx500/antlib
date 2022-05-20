@@ -63,7 +63,7 @@ public:
   virtual void Set();
   virtual void Get();
   virtual void Show() = 0;
-  virtual void ShowLayer(int ) {};
+  virtual void ShowLayer(int){};
   virtual const char* GetName();
   virtual void Go();
   virtual unsigned int GetID();
@@ -94,9 +94,9 @@ public:
   Poligon* Polig();
 
   virtual int GetMarkerAtXY(int X, int Y);
-  virtual void ChangeMarkerXY(int /*iMarker*/, int /*aX*/, int /*aY*/){}
+  virtual void ChangeMarkerXY(int /*iMarker*/, int /*aX*/, int /*aY*/) {}
   virtual int GetMarkerCount() { return 0; }
-  virtual void GetMarkerPoint(int /*iMarker*/, int& /*aX*/, int& /*aY*/){}
+  virtual void GetMarkerPoint(int /*iMarker*/, int& /*aX*/, int& /*aY*/) {}
 
   void ShowPads();
 };

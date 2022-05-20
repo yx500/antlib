@@ -1279,7 +1279,7 @@ void CommLmp::CollectComps()
   AComp* ac;
   vComps.clear();
   Station* S = pVisibleArray->pStation;
-  for (int i = 1; i < Units_Size; i++) {
+  for (int i = 1; i < S->POLE.size(); ++i) {
     for (int j = 0; j < S->POLE[i]->GetArraySize(); j++) {
       ac = S->POLE[i]->GetObjPtr(j);
       if (ac->ExtPriz.isUseInCommLmp())
