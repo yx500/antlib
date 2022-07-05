@@ -6,26 +6,25 @@
 #include "Strel.h"
 struct TFPoint
 {
-  double x, y;
+  double x{0};
+  double y{0};
   void S(double ax, double ay)
   {
     x = ax;
     y = ay;
   }
+
   void S(TPoint P)
   {
     x = P.x;
     y = P.y;
   }
+
   TPoint ToPoint()
   {
-    int X = (int)(x + 0.5);
-    if (x < 0)
-      X = (int)(x - 0.5);
-    int Y = (int)(y + 0.5);
-    if (y < 0)
-      Y = (int)(y - 0.5);
-    return TPoint(X, Y);
+    int X = (x < 0) ? (x - 0.5) : (x + 0.5);
+    int Y = (y < 0) ? (y - 0.5) : (y + 0.5);
+    return {X, Y};
   }
 };
 struct tStrelYParams

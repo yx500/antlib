@@ -4,7 +4,7 @@
 
 struct TPoint : public POINT
 {
-  TPoint() {}
+  TPoint() { x = y = 0; }
   TPoint(int _x, int _y)
   {
     x = _x;
@@ -21,7 +21,7 @@ typedef TPoint tagPoint;
 
 struct TRect : public RECT
 {
-  TRect() {}
+  TRect() { left = top = right = bottom = 0;}
   TRect(const TPoint& TL, const TPoint& BR)
   {
     left = TL.x;
