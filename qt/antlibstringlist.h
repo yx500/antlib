@@ -1,7 +1,5 @@
 #pragma once
 
-// #include "antlibstring.h"
-
 #include "antlibqstring.h"
 #include <QStringList>
 
