@@ -36,6 +36,8 @@ struct tStrelYParams
   int prSTIK[3]; // стыки
   int CurrentPicture;
   int tpriz;
+
+  tStrelYParams() { memset(this, 0, sizeof(*this) ); }
 };
 /*
 void  CalcStrelY(tStrelYParams & YP,
