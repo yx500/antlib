@@ -5,10 +5,14 @@
     #include <system.hpp>
 #else
 
-    //#include "antlibstring.h"
-    //typedef AString String;
-    #include "antlibqstring.h"
-    typedef AQString String;
+  #ifdef _VX_
+              #include "antlibstring.h"
+              typedef AntString String;
+  #else
+              #include "antlibqstring.h"
+              typedef AQString String;
+  #endif
+
 
 #endif //__BORLANDC__
 

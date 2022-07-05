@@ -9,12 +9,12 @@
 #include <memory>
 #include <cstdio>
 
-class AString : public std::string
+class AntString : public std::string
 {
 public:
-  AString() : std::string() {}
-  AString(const char* s) : std::string(s) {}
-  AString(const std::string& s) : std::string(s) {}
+  AntString() : std::string() {}
+  AntString(const char* s) : std::string(s) {}
+  AntString(const std::string& s) : std::string(s) {}
 
   int Pos(const std::string& subStr) const;
   int Pos(char ch) const;
@@ -33,10 +33,10 @@ public:
     return defaultValue;
   }
 
-  AString UpperCase() const { return alib::to_upper(*this); }
-  AString Trim() const { return alib::trim(*this); }
-  AString SubString(int b, int n) const;
-  AString Delete(int b, int n);
+  AntString UpperCase() const { return alib::to_upper(*this); }
+  AntString Trim() const { return alib::trim(*this); }
+  AntString SubString(int b, int n) const;
+  AntString Delete(int b, int n);
 
   template<typename ... Args>
   void printf( const char* format, Args ... args ) {
@@ -48,6 +48,6 @@ public:
 
 };
 
-inline AString IntToStr(int Value) { return std::to_string(Value); }
-inline int StrToInt(const AString& s) { return s.ToInt(); }
-inline int StrToIntDef(const AString& s, int Default) { return s.ToIntDef(Default); }
+inline AntString IntToStr(int Value) { return std::to_string(Value); }
+inline int StrToInt(const AntString& s) { return s.ToInt(); }
+inline int StrToIntDef(const AntString& s, int Default) { return s.ToIntDef(Default); }
