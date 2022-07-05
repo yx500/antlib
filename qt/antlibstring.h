@@ -21,8 +21,9 @@ public:
   bool IsEmpty() const { return this->empty(); }
   int Length() const { return size(); }
   int ToInt() const  {
-    try { return std::stoi(*this); } catch (const std::invalid_argument& e) {
-      std::cerr << __FUNCTION__ << e.what() << std::endl;
+    try { return std::stoi(*this); }
+    catch (const std::invalid_argument& e) {
+      std::cerr << __PRETTY_FUNCTION__ << e.what() << std::endl;
     }
     return 0;
   }

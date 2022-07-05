@@ -246,7 +246,7 @@ bool ExShowLamp(int x, int y, Lamp* AL, int YS)
   TLampType LTYP;
   //* Находим тип лампочки *
   LTYP = lt_kl;
-  if (stName.Length() > 0) {
+  if (stName.Length() > 1) {
     if (stName[1] == '!') {
       stName.Delete(1, 1);
       LTYP = lt_r_kl;
