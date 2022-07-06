@@ -1,10 +1,6 @@
 #include "antlibinifile.h"
-#include <QTextCodec>
+#include "win1251.h"
 
-static QTextCodec* codec1251(){
-  static auto codec = QTextCodec::codecForName("Windows-1251");
-  return codec;
-}
 
 auto ToStdStr(const QString& qstr){
   QByteArray ba;
@@ -12,9 +8,10 @@ auto ToStdStr(const QString& qstr){
   return ba.toStdString();
 }
 
-AIniFile::AIniFile(const String& FileName) : QSettings(FileName.c_str(), QSettings::IniFormat)
+AIniFile::AIniFile(const String& path)
+    : QSettings(path.c_str(), QSettings::IniFormat)
+    //, FileName(path)
 {
-//todo  this->setIniCodec("Windows-1251");
 }
 
 bool AIniFile::SectionExists(const String& c)
@@ -27,16 +24,16 @@ bool AIniFile::SectionExists(const String& c)
 String AIniFile::ReadString(const String& Section, const String& Ident, const String& Default)
 {
   QString s = QString("%1/%2").arg(Section).arg(Ident);
-  QString ss = QString().fromLatin1( codec1251()->fromUnicode(s) );
+  QString ss = QString().fromLatin1( win1251::codec()->fromUnicode(s) );
   QString v=this->value(ss, Default).toString();
-  v=codec1251()->toUnicode(v.toLatin1().data());
+  v=win1251::codec()->toUnicode(v.toLatin1().data());
   return v;
 }
 
 void AIniFile::WriteString(const String& Section, const String& Ident, const String& Value)
 {
   QString s = QString("%1/%2").arg(Section.c_str()).arg(Ident.c_str());
-  QString ss = QString().fromLatin1(codec1251()->fromUnicode(s));
+  QString ss = QString().fromLatin1(win1251::codec()->fromUnicode(s));
   QString v = Value;
   this->setValue(ss, v);
 }
@@ -44,28 +41,28 @@ void AIniFile::WriteString(const String& Section, const String& Ident, const Str
 int AIniFile::ReadInteger(const String& Section, const String& Ident, int Default)
 {
   QString s = QString("%1/%2").arg(Section.c_str()).arg(Ident.c_str());
-  QString ss = QString().fromLatin1(codec1251()->fromUnicode(s));
+  QString ss = QString().fromLatin1(win1251::codec()->fromUnicode(s));
   return this->value(ss, Default).toInt();
 }
 
 void AIniFile::WriteInteger(const String& Section, const String& Ident, int Value)
 {
   QString s = QString("%1/%2").arg(Section.c_str()).arg(Ident.c_str());
-  QString ss = QString().fromLatin1(codec1251()->fromUnicode(s));
+  QString ss = QString().fromLatin1(win1251::codec()->fromUnicode(s));
   this->setValue(ss, Value);
 }
 
 bool AIniFile::ReadBool(const String& Section, const String& Ident, bool Default)
 {
   QString s = QString("%1/%2").arg(Section.c_str()).arg(Ident.c_str());
-  QString ss = QString().fromLatin1(codec1251()->fromUnicode(s));
+  QString ss = QString().fromLatin1(win1251::codec()->fromUnicode(s));
   return this->value(ss, Default).toBool();
 }
 
 void AIniFile::WriteBool(const String& Section, const String& Ident, bool Value)
 {
   QString s = QString("%1/%2").arg(Section.c_str()).arg(Ident.c_str());
-  QString ss = QString().fromLatin1(codec1251()->fromUnicode(s));
+  QString ss = QString().fromLatin1(win1251::codec()->fromUnicode(s));
   this->setValue(ss, Value);
 }
 

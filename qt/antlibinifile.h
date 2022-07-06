@@ -4,12 +4,12 @@
 #include "astring.h"
 
 #include <QSettings>
-class AIniFile : public QSettings
+class AIniFile : private QSettings
 {
 public:
-  String FileName;
+  //String FileName;
 
-  AIniFile(const String& FileName);
+  AIniFile(const String& path);
 
   bool SectionExists(const String& Section);
   String ReadString(const String& Section, const String& Ident, const String& Default);
