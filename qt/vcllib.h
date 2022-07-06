@@ -63,4 +63,7 @@ extern String ExtractFileName(const String& filename);
 extern String ExtractFileDir(const String& filename);
 extern bool FileExists(const String& filename);
 
+String IntToStr(int Value);
+int StrToInt(const String& s);
+int StrToIntDef(const String& s, int Default);
 

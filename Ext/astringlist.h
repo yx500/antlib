@@ -18,8 +18,10 @@ public:
 
 #else
 
-#include "antlibstringlist.h"
-//#include "antlibstringlist2.h"
+  #ifdef _VX_
+  #else
+              #include "antlibstringlist.h"
+  #endif
 
 #endif
 

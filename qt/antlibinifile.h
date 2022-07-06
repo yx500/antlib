@@ -1,28 +1,28 @@
 #pragma once
 
 #include "antlibstringlist.h"
-#include "astring.h"
+#include "antlibqstring.h"
 
 #include <QSettings>
 class AIniFile : private QSettings
 {
 public:
-  //String FileName;
+  //AQString FileName;
 
-  AIniFile(const String& path);
+  AIniFile(const AQString& path);
 
-  bool SectionExists(const String& Section);
-  String ReadString(const String& Section, const String& Ident, const String& Default);
-  void WriteString(const String& Section, const String& Ident, const String& Value);
-  int ReadInteger(const String& Section, const String& Ident, int Default);
-  void WriteInteger(const String& Section, const String& Ident, int Value);
-  bool ReadBool(const String& Section, const String& Ident, bool Default);
-  void WriteBool(const String& Section, const String& Ident, bool Value);
-  void ReadSection(const String& Section, AStringList* Strings);
+  bool SectionExists(const AQString& Section);
+  AQString ReadString(const AQString& Section, const AQString& Ident, const AQString& Default);
+  void WriteString(const AQString& Section, const AQString& Ident, const AQString& Value);
+  int ReadInteger(const AQString& Section, const AQString& Ident, int Default);
+  void WriteInteger(const AQString& Section, const AQString& Ident, int Value);
+  bool ReadBool(const AQString& Section, const AQString& Ident, bool Default);
+  void WriteBool(const AQString& Section, const AQString& Ident, bool Value);
+  void ReadSection(const AQString& Section, AStringList* Strings);
   void ReadSections(AStringList* Strings);
-  void ReadSectionValues(const String& Section, AStringList* Strings);
-  void EraseSection(const String& Section);
+  void ReadSectionValues(const AQString& Section, AStringList* Strings);
+  void EraseSection(const AQString& Section);
   void UpdateFile(void) {;}
-  //  bool ValueExists(const String &Section, const String &Ident);
+  //  bool ValueExists(const AQString &Section, const AQString &Ident);
 
 };

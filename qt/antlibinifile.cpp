@@ -8,20 +8,20 @@ auto ToStdStr(const QString& qstr){
   return ba.toStdString();
 }
 
-AIniFile::AIniFile(const String& path)
+AIniFile::AIniFile(const AQString& path)
     : QSettings(path.c_str(), QSettings::IniFormat)
     //, FileName(path)
 {
 }
 
-bool AIniFile::SectionExists(const String& c)
+bool AIniFile::SectionExists(const AQString& c)
 {
   if (this->childGroups().indexOf(c.c_str()) >= 0)
     return true;
   return false;
 }
 
-String AIniFile::ReadString(const String& Section, const String& Ident, const String& Default)
+AQString AIniFile::ReadString(const AQString& Section, const AQString& Ident, const AQString& Default)
 {
   QString s = QString("%1/%2").arg(Section).arg(Ident);
   QString ss = QString().fromLatin1( win1251::codec()->fromUnicode(s) );
@@ -30,7 +30,7 @@ String AIniFile::ReadString(const String& Section, const String& Ident, const St
   return v;
 }
 
-void AIniFile::WriteString(const String& Section, const String& Ident, const String& Value)
+void AIniFile::WriteString(const AQString& Section, const AQString& Ident, const AQString& Value)
 {
   QString s = QString("%1/%2").arg(Section.c_str()).arg(Ident.c_str());
   QString ss = QString().fromLatin1(win1251::codec()->fromUnicode(s));
@@ -38,35 +38,35 @@ void AIniFile::WriteString(const String& Section, const String& Ident, const Str
   this->setValue(ss, v);
 }
 
-int AIniFile::ReadInteger(const String& Section, const String& Ident, int Default)
+int AIniFile::ReadInteger(const AQString& Section, const AQString& Ident, int Default)
 {
   QString s = QString("%1/%2").arg(Section.c_str()).arg(Ident.c_str());
   QString ss = QString().fromLatin1(win1251::codec()->fromUnicode(s));
   return this->value(ss, Default).toInt();
 }
 
-void AIniFile::WriteInteger(const String& Section, const String& Ident, int Value)
+void AIniFile::WriteInteger(const AQString& Section, const AQString& Ident, int Value)
 {
   QString s = QString("%1/%2").arg(Section.c_str()).arg(Ident.c_str());
   QString ss = QString().fromLatin1(win1251::codec()->fromUnicode(s));
   this->setValue(ss, Value);
 }
 
-bool AIniFile::ReadBool(const String& Section, const String& Ident, bool Default)
+bool AIniFile::ReadBool(const AQString& Section, const AQString& Ident, bool Default)
 {
   QString s = QString("%1/%2").arg(Section.c_str()).arg(Ident.c_str());
   QString ss = QString().fromLatin1(win1251::codec()->fromUnicode(s));
   return this->value(ss, Default).toBool();
 }
 
-void AIniFile::WriteBool(const String& Section, const String& Ident, bool Value)
+void AIniFile::WriteBool(const AQString& Section, const AQString& Ident, bool Value)
 {
   QString s = QString("%1/%2").arg(Section.c_str()).arg(Ident.c_str());
   QString ss = QString().fromLatin1(win1251::codec()->fromUnicode(s));
   this->setValue(ss, Value);
 }
 
-void AIniFile::ReadSection(const String& Section, AStringList* Strings)
+void AIniFile::ReadSection(const AQString& Section, AStringList* Strings)
 {
   this->beginGroup(Section.c_str());
   auto l = this->childKeys();
@@ -84,7 +84,7 @@ void AIniFile::ReadSections(AStringList* Strings)
   }
 }
 
-void AIniFile::ReadSectionValues(const String& Section, AStringList* Strings)
+void AIniFile::ReadSectionValues(const AQString& Section, AStringList* Strings)
 {
   this->beginGroup(Section.c_str());
   auto l = this->childKeys();
@@ -96,7 +96,7 @@ void AIniFile::ReadSectionValues(const String& Section, AStringList* Strings)
   this->endGroup();
 }
 
-void AIniFile::EraseSection(const String& Section)
+void AIniFile::EraseSection(const AQString& Section)
 {
   this->remove(Section.c_str());
 }

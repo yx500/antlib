@@ -49,6 +49,3 @@ public:
 
 };
 
-inline AQString IntToStr(int Value) { return QString::number(Value); }
-inline int StrToInt(const AQString& s) { return s.toInt(); }
-inline int StrToIntDef(const AQString& s, int Default) { return s.ToIntDef(Default); }

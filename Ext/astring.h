@@ -6,8 +6,12 @@
 #else
 
   #ifdef _VX_
-              #include "antlibstring.h"
+              #include "antlib_string_vx.h"
               typedef AntString String;
+              #include "antlib_stringlist_vx.h"
+              typedef AntStringList AStringList;
+              #include "antlib_inifile_vx.h"
+              typedef AntIniFile AIniFile;
   #else
               #include "antlibqstring.h"
               typedef AQString String;
@@ -15,11 +19,6 @@
 
 
 #endif //__BORLANDC__
-
-
-void cp866_to_cp1251_buff(const char* in, char* out, size_t sz);
-void cp1251_to_cp866_buff(const char* in, char* out, size_t sz);
-
 
 
 #endif // ASTRING_H

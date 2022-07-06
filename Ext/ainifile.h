@@ -15,7 +15,12 @@ public:
 
 #else
 
-#include "antlibinifile.h"
+
+  #ifdef _VX_
+  #else
+    #include "antlibinifile.h"
+  #endif
+
 
 #endif
 

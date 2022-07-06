@@ -51,4 +51,10 @@ public:
 
 } // namespace alib
 
+
+void cp866_to_cp1251_buff(const char* in, char* out, size_t sz);
+void cp1251_to_cp866_buff(const char* in, char* out, size_t sz);
+
+
+
 #endif

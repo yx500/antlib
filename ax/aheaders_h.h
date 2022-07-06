@@ -7,22 +7,24 @@
 #include <systypes.h>
 
 #else // QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT QT
+
+#include <cstring>
+#include <unistd.h>
 //#define QT_ANTLIB
 #define __fastcall
 #include "systypes.h"
 #include "win/w32defs.h"
-//  #include "antlibstring.h"
-//  #include "antlibstringlist.h"
 #include "antlibgraphics.h"
 #include "vcllib.h"
 
-#include <cstring>
-#include <unistd.h>
+#endif  //__BORLANDC__
 
-#endif
+
 
 #include "astring.h"
 #include "astringlist.h"
 #include "utils.h"
+
+
 
 #endif // AHEADERS_H_H

@@ -27,3 +27,19 @@ bool FileExists(const String &filename)
 {
   return QFileInfo::exists( QString::fromLocal8Bit(filename.c_str(), filename.size()) );
 }
+
+int StrToIntDef(const String &s, int Default)
+{
+  return s.ToIntDef(Default);
+}
+
+int StrToInt(const String &s)
+{
+  return s.ToInt();
+}
+
+String IntToStr(int Value)
+{
+  return std::to_string(Value);
+}
+
