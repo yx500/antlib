@@ -9,6 +9,8 @@
 #include <memory>
 #include <cstdio>
 
+#include <QString>
+
 class AntString : public std::string
 {
 public:
@@ -39,6 +41,8 @@ public:
     std::snprintf( buf.get(), size, format, args ... );
     this->assign( std::string( buf.get(), buf.get() + size - 1 ) ); // We don't want the '\0' inside
   }
+
+  QString asQString() const;
 
 };
 

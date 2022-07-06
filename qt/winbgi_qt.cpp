@@ -301,16 +301,27 @@ void _SetTextSize(int charsize)
   select_font();
 }
 
-int textheight(const String& __textstring)
+int textheight(const String& txt)
 {
   QFontMetrics fm(font);
   return fm.height();
 }
 
-int textwidth(const String& __textstring)
+
+#ifdef _VX_
+inline QString  __adopt_String(const String& txt){
+  return txt.asQString();
+}
+#else
+inline QString __adopt_String(const String& txt){
+  return txt;
+}
+#endif
+
+int textwidth(const String& txt)
 {
   QFontMetrics fm(font);
-  return fm.horizontalAdvance(__textstring);
+  return fm.horizontalAdvance( __adopt_String(txt) );
   //    return fm.width(__textstring);
 }
 
@@ -447,12 +458,12 @@ void roundrect(int nLeftRect, int nTopRect, int nRightRect, int nBottomRect, int
     Painter->drawRoundedRect(r, nWidth, nHeight);
 }
 
-void OutTextXY(int x, int y, const String& str)
+void OutTextXY(int x, int y, const String& txt)
 {
-  if (str.Length() == 0)
+  if (txt.size() == 0)
     return;
-  int tw = textwidth(str);
-  int th = textheight(str);
+  int tw = textwidth(txt);
+  int th = textheight(txt);
   QRect r(x, y, tw, th);
   int dy = 0; // ptm->tmInternalLeading;
   int dx = 0;
@@ -484,17 +495,15 @@ void OutTextXY(int x, int y, const String& str)
     return;
   }
   if (Painter) {
-    int uF = Qt::AlignLeft;
-    Painter->drawText(r, uF, str);
+    Painter->drawText(r, Qt::AlignLeft, __adopt_String(txt) );
     //        QRect r(x - dx, y - dy, tw,   th);
     //        Painter->drawRect(r);
   }
 }
 
-void DrawText(int x, int y, int tw, int th, const String& str)
+void DrawText(int x, int y, int tw, int th, const String& txt )
 {
-  //    if (strlen(str) == 0)
-  if (str.Length() == 0)
+  if (txt.size() == 0)
     return;
   QRect r(x, y, tw, th);
   if (bgi_tracking) {
@@ -526,7 +535,7 @@ void DrawText(int x, int y, int tw, int th, const String& str)
   }
 
   if (Painter)
-    Painter->drawText(r, uF, str);
+    Painter->drawText(r, uF, __adopt_String(txt) );
 }
 
 void PolyColor(int iBrushColor, const TPoint* Points, const int* iColors, const int Points_Count, int PenW)

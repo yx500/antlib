@@ -1,4 +1,5 @@
 #include "antlib_string_vx.h"
+#include "win1251.h"
 
 int AntString::Pos(const std::string &subStr) const
 {
@@ -20,4 +21,9 @@ AntString AntString::SubString(int b, int n) const
 AntString AntString::Delete(int b, int n)
 {
   return this->erase(b-1, n);
+}
+
+QString AntString::asQString() const
+{
+  return win1251::codec()->toUnicode( this->c_str() );
 }

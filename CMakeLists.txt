@@ -40,7 +40,7 @@ target_include_directories ( ${TARGET_NAME} PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/ax
 )
 
-target_compile_definitions( ${TARGET_NAME} PUBLIC QT_ANTLIB)
+target_compile_definitions( ${TARGET_NAME} PUBLIC QT_ANTLIB )
 #target_compile_definitions(desktop PRIVATE
 #    $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
 #    )
