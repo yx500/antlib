@@ -1,53 +1,28 @@
 #include "antlibqstring.h"
-#include <QTextCodec>
 #include <QDebug>
+#include "win1251.h"
 
-static QTextCodec *codec1251=nullptr;
-
-const char *AQString::c_str() const
+AQString::AQString(const QString &s)
+    : QString(s)
 {
-  if (codec1251==nullptr) codec1251=QTextCodec::codecForName("Windows-1251");
-  if (codec1251!=nullptr) {
-    this->cstr = codec1251->fromUnicode(*this).toStdString();
-  } else {
-    qDebug()<<__PRETTY_FUNCTION__<<" BAD!!!";
-    cstr = this->toStdString();
-  }
+  this->cstr = win1251::codec()->fromUnicode(*this).toStdString();
+}
+
+AQString::AQString(const char* s)
+    : QString( win1251::codec()->toUnicode(s) )
+{
+  this->cstr = std::string( s );
+}
+
+AQString::AQString(const char s)
+    : QString( win1251::codec()->toUnicode(&s, 1) )
+{
+  this->cstr = std::string( 1, s );
+}
+
+
+const char *AQString::c_str() const {
+  this->cstr = win1251::codec()->fromUnicode(*this).toStdString();
   return cstr.c_str();
 }
 
-AQString::AQString(const char* s) : QString()
-{
-  if (codec1251==nullptr) codec1251=QTextCodec::codecForName("Windows-1251");
-  if (codec1251!=nullptr) {
-    *this=codec1251->toUnicode(s);
-  } else {
-    qDebug()<<__PRETTY_FUNCTION__<<" BAD!!!";
-    *this=QString::fromLocal8Bit(s);
-  }
-  cstr=std::string( s );
-}
-
-AQString::AQString(const char s) : QString()
-{
-  if (codec1251==nullptr) codec1251=QTextCodec::codecForName("Windows-1251");
-  if (codec1251!=nullptr) {
-    *this=codec1251->toUnicode(&s);
-  } else {
-    qDebug()<<__PRETTY_FUNCTION__<<" BAD!!!";
-    *this=QString::fromLocal8Bit(&s);
-  }
-  cstr = std::string( 1, s );
-}
-
-AQString::AQString(const QString &s) : QString(s)
-{
-  if (codec1251==nullptr)
-      codec1251=QTextCodec::codecForName("Windows-1251");
-  if (codec1251!=nullptr) {
-    this->cstr = codec1251->fromUnicode(*this).toStdString();
-  } else {
-    qDebug()<<__PRETTY_FUNCTION__<<" BAD!!!";
-    cstr = this->toStdString();
-  }
-}
