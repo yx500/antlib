@@ -1,10 +1,13 @@
 #include "antlib_inifile_vx.h"
 #include "win1251.h"
+#include "atools.h"
 
 
 using namespace  mINI;
 
-AntIniFile::AntIniFile(const AntString& path){
+AntIniFile::AntIniFile(const AntString& path)
+{
+  alib::tools::ProfilerTimer t(__PRETTY_FUNCTION__);
   mINI::INIFile file(path);
   file.read(ini);
 }

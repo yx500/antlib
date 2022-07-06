@@ -13,6 +13,8 @@
 
 class AntString : public std::string
 {
+  mutable QString qstr;
+
 public:
   AntString() : std::string() {}
   AntString(const char* s) : std::string(s) {}
@@ -42,7 +44,7 @@ public:
     this->assign( std::string( buf.get(), buf.get() + size - 1 ) ); // We don't want the '\0' inside
   }
 
-  QString asQString() const;
+  const QString& asQString() const;
 
 };
 

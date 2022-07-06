@@ -23,7 +23,9 @@ AntString AntString::Delete(int b, int n)
   return this->erase(b-1, n);
 }
 
-QString AntString::asQString() const
+const QString &AntString::asQString() const
 {
-  return win1251::codec()->toUnicode( this->c_str() );
+  if( qstr.isEmpty() )
+    qstr = win1251::codec()->toUnicode( this->c_str() );
+  return qstr;
 }

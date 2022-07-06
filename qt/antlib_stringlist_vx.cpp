@@ -1,6 +1,7 @@
 #include "antlib_stringlist_vx.h"
 
 #include "utils.h"
+#include "atools.h"
 
 #include <algorithm>
 #include <cctype>
@@ -11,11 +12,12 @@
 
 int AntStringList::LoadFromFile(const std::string& filename)
 {
+  alib::tools::ProfilerTimer t(__PRETTY_FUNCTION__);
   this->clear();
 
   std::ifstream ifs(filename.c_str());
   if (!ifs.is_open()) {
-    std::cerr << "AntStringList::LoadFromFile bad!!!" << filename << std::endl;
+    std::cerr << __PRETTY_FUNCTION__<<" BAD!!!" << filename << std::endl;
     return 0;
   }
 
@@ -23,7 +25,7 @@ int AntStringList::LoadFromFile(const std::string& filename)
   while (getline(ifs, line)) {
     if (line.size())
       continue;
-    this->push_back(alib::right_trim(line));
+    this->emplace_back( alib::right_trim(line) );
   }
 
   return this->size();
