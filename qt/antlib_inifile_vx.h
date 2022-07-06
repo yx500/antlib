@@ -4,6 +4,8 @@
 #include "antlib_stringlist_vx.h"
 
 #include <QStringList>
+
+#define MINI_CASE_SENSITIVE
 #include "mini/ini.h"
 
 class AntIniFile
