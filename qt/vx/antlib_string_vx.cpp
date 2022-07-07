@@ -27,16 +27,17 @@ const QString &AntString::asQString() const
 {
   if( cache.txt.isNull() ){
     cache.txt = win1251::codec()->toUnicode( this->c_str() ) ;
-    cache.stat_txt.setText(cache.txt);
+//    cache.stat_txt.setText(cache.txt);
   }
   return cache.txt;
 }
 
+/*
 const QStaticText &AntString::asQStaticText() const
 {
-  if( cache.txt.isNull() ){
-    cache.txt = win1251::codec()->toUnicode( this->c_str() ) ;
-    cache.stat_txt.setText(cache.txt);
+  if( cache.stat_txt.text().isNull() ){
+    cache.stat_txt.setText(asQString());
   }
   return cache.stat_txt;
 }
+*/

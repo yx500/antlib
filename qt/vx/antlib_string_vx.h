@@ -44,14 +44,14 @@ public:
     this->assign( std::string( buf.get(), buf.get() + size - 1 ) ); // We don't want the '\0' inside
   }
 
-  //
-  const QString& asQString() const;
-  const QStaticText& asQStaticText() const;
+  //cache cache cache cache cache
   mutable struct {
     QString txt;
-    QStaticText stat_txt;
+    //QStaticText stat_txt;
     int width{0};
   } cache;
+  const QString& asQString() const;
+  //const QStaticText& asQStaticText() const;
 
 
 };
