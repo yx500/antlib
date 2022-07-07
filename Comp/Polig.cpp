@@ -1,10 +1,8 @@
-
 #include "Polig.h"
 
 #include "APch.h"
 #include "Stan.h"
 #include "aheaders_cpp.h"
-#include "ainifile.h"
 
 #include <map>
 #include <math.h>

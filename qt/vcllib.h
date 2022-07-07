@@ -56,7 +56,7 @@ typedef tagSIZE TSize;
 
 
 //**********************************************************************************************
-#include "astring.h"
+#include "aaa.h"
 extern bool FileExists(const String& fn);
 extern String ChangeFileExt(const String& filename, const char* ext);
 extern String ExtractFileName(const String& filename);

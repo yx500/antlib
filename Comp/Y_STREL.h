@@ -1,13 +1,14 @@
-
-
 #ifndef Y_STRELH
 #define Y_STRELH
 
 #include "Strel.h"
 struct TFPoint
 {
-  double x{0};
-  double y{0};
+  double x;
+  double y;
+
+  TFPoint() : x(0), y(0) {}
+
   void S(double ax, double ay)
   {
     x = ax;
@@ -24,7 +25,7 @@ struct TFPoint
   {
     int X = (x < 0) ? (x - 0.5) : (x + 0.5);
     int Y = (y < 0) ? (y - 0.5) : (y + 0.5);
-    return {X, Y};
+    return TPoint(X, Y);
   }
 };
 struct tStrelYParams

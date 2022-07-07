@@ -15,7 +15,6 @@
 #include "Vatempl.h"
 #include "YchParams.h"
 #include "aheaders_cpp.h"
-#include "ainifile.h"
 #include "uEXD.h"
 #include "uFormula.h"
 #include "uImgContainer.h"

@@ -10,11 +10,11 @@
 #include <cstdio>
 
 #include <QString>
+#include <QStaticText>
+
 
 class AntString : public std::string
 {
-  mutable QString qstr;
-
 public:
   AntString() : std::string() {}
   AntString(const char* s) : std::string(s) {}
@@ -44,7 +44,15 @@ public:
     this->assign( std::string( buf.get(), buf.get() + size - 1 ) ); // We don't want the '\0' inside
   }
 
+  //
   const QString& asQString() const;
+  const QStaticText& asQStaticText() const;
+  mutable struct {
+    QString txt;
+    QStaticText stat_txt;
+    int width{0};
+  } cache;
+
 
 };
 

@@ -1,7 +1,6 @@
 #include "col.h"
 
 #include "aheaders_cpp.h"
-#include "ainifile.h"
 #include "winpalet.h"
 #include "utils.h"
 

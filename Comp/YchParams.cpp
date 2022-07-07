@@ -3,7 +3,6 @@
 #include "APch.h"
 #include "CompHint.h"
 #include "aheaders_cpp.h"
-#include "ainifile.h"
 
 bool bLoadYchParams = true;
 

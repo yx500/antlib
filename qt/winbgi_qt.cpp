@@ -16,6 +16,26 @@ static QRect traceRect;
 static QRect qt_traceRect;
 static int bgi_tracking = 0;
 
+
+//text bgi draw adapters 
+#ifndef _VX_
+inline QString __bgi_adopt_String(const String& txt){
+  return txt;
+}
+inline int __bgi_adopt_WidthTxt(const QFont& fnt, const String& txt){
+  QFontMetrics fm(fnt);
+  return fm.horizontalAdvance( __bgi_adopt_String(txt) );
+}
+inline void __bgi_adopt_DrawTxt(QPainter *painter, const QRectF &rectangle, int flags, const String &text){
+  painter->drawText(rectangle, flags, __bgi_adopt_String(text) );
+}
+#else
+QString __bgi_adopt_String(const String& txt);
+int     __bgi_adopt_WidthTxt(const QFont& font, const String& txt);
+void    __bgi_adopt_DrawTxt(QPainter *painter, const QRectF &rectangle, int flags, const String &text);
+#endif
+
+
 QPainter* BgiCanvas(void) { return Painter; }
 
 QPainter* getAntLibPainter() { return BgiCanvas(); }
@@ -308,21 +328,9 @@ int textheight(const String& txt)
 }
 
 
-#ifdef _VX_
-inline QString  __adopt_String(const String& txt){
-  return txt.asQString();
-}
-#else
-inline QString __adopt_String(const String& txt){
-  return txt;
-}
-#endif
-
 int textwidth(const String& txt)
 {
-  QFontMetrics fm(font);
-  return fm.horizontalAdvance( __adopt_String(txt) );
-  //    return fm.width(__textstring);
+  return __bgi_adopt_WidthTxt(font, txt);
 }
 
 // =============   DRAW  ==========
@@ -495,7 +503,7 @@ void OutTextXY(int x, int y, const String& txt)
     return;
   }
   if (Painter) {
-    Painter->drawText(r, Qt::AlignLeft, __adopt_String(txt) );
+    __bgi_adopt_DrawTxt(Painter, r, Qt::AlignLeft, txt );
     //        QRect r(x - dx, y - dy, tw,   th);
     //        Painter->drawRect(r);
   }
@@ -535,7 +543,7 @@ void DrawText(int x, int y, int tw, int th, const String& txt )
   }
 
   if (Painter)
-    Painter->drawText(r, uF, __adopt_String(txt) );
+    __bgi_adopt_DrawTxt(Painter, r, uF, txt );
 }
 
 void PolyColor(int iBrushColor, const TPoint* Points, const int* iColors, const int Points_Count, int PenW)

@@ -25,7 +25,18 @@ AntString AntString::Delete(int b, int n)
 
 const QString &AntString::asQString() const
 {
-  if( qstr.isEmpty() )
-    qstr = win1251::codec()->toUnicode( this->c_str() );
-  return qstr;
+  if( cache.txt.isNull() ){
+    cache.txt = win1251::codec()->toUnicode( this->c_str() ) ;
+    cache.stat_txt.setText(cache.txt);
+  }
+  return cache.txt;
+}
+
+const QStaticText &AntString::asQStaticText() const
+{
+  if( cache.txt.isNull() ){
+    cache.txt = win1251::codec()->toUnicode( this->c_str() ) ;
+    cache.stat_txt.setText(cache.txt);
+  }
+  return cache.stat_txt;
 }

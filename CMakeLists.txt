@@ -14,6 +14,8 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Gui REQUIRED)
 
 file(GLOB SOURCES
     # "${CMAKE_CURRENT_SOURCE_DIR}/BGI/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/ax/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/ax/*.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/BGI/bgi.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/BGI/winpalet.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/BGI/winpalet.h"
@@ -25,8 +27,8 @@ file(GLOB SOURCES
     "${CMAKE_CURRENT_SOURCE_DIR}/Gora/*.h"
     "${CMAKE_CURRENT_SOURCE_DIR}/qt/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/qt/*.h"
-    "${CMAKE_CURRENT_SOURCE_DIR}/ax/*.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/ax/*.h"
+    "${CMAKE_CURRENT_SOURCE_DIR}/qt/vx/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/qt/vx/*.h"
 )
 add_library ( ${TARGET_NAME} ${SOURCES} )
 
