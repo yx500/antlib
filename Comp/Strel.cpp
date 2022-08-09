@@ -370,7 +370,7 @@ void Strel0::UpdateState()
         clr = Clr_SetK(fimpuls_kzm);
       // Доп замыкание
       if ((impuls_kzm) && (fimpuls_kzm == 0) && (impuls_kmu2) && (fimpuls_mu2 != 1)) {
-        clr = Clr_SetK(impuls_kmu2);
+        clr = Clr_SetK(fimpuls_kmu2);
       }
 
       if ((clr != COLOR_SET) && (bShowInSpyMarsh))
