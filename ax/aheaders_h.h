@@ -11,7 +11,9 @@
     #include <cstring>
     #include <unistd.h>
     //#define QT_ANTLIB
-    #define __fastcall
+    #ifndef _WIN32
+      #define __fastcall
+    #endif
     #include "systypes.h"
     #include "win/w32defs.h"
     #include "antlibgraphics.h"
