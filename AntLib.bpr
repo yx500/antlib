@@ -14,7 +14,7 @@
       obj.tmp\LampExtDraw.obj obj.tmp\Impuls.obj obj.tmp\Marshrut.obj 
       obj.tmp\propmap.obj obj.tmp\uParString.obj obj.tmp\Gor_Elem.obj 
       obj.tmp\Gor_Logic.obj obj.tmp\uFormula.obj obj.tmp\EnergUnit.obj 
-      obj.tmp\CompHint.obj obj.tmp\utils.obj obj.tmp\astring.obj"/>
+      obj.tmp\CompHint.obj obj.tmp\utils.obj obj.tmp\astring_coder.obj"/>
     <RESFILES value=""/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -91,7 +91,7 @@
       <FILE FILENAME="Comp\EnergUnit.cpp" FORMNAME="" UNITNAME="EnergUnit" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="Ext\CompHint.cpp" FORMNAME="" UNITNAME="CompHint" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="ax\utils.cpp" FORMNAME="" UNITNAME="utils" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
-      <FILE FILENAME="Ext\astring.cpp" FORMNAME="" UNITNAME="astring" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ax\astring_coder.cpp" FORMNAME="" UNITNAME="astring_coder" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>
